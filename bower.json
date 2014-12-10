@@ -1,0 +1,25 @@
+{
+  "name": "raonic",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.13",
+    "angular-mocks": "~1.3.3",
+    "mockfirebase": "~0.5.0"
+  },
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "angular-ui-router": "~0.2.13",
+    "angularfire": "~0.9.0",
+    "firebase": "~2.0.4",
+    "jdataview": "~2.5.0",
+    "bacon": "~0.7.37",
+    "angular": "~1.3.6",
+    "firebase-util.min": "https://cdn.firebase.com/libs/firebase-util/0.1.0/firebase-util.min.js",
+    "ng-cordova": "~0.0.3",
+    "ngCordova": "~0.1.7-alpha"
+  },
+  "resolutions": {
+    "angular": "1.2.x || 1.3.x",
+    "angular-ui-router": "~0.2.13"
+  }
+}

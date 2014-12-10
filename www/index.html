@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="css/ionic.app.css" rel="stylesheet">   
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+  
+    <!-- bower:js -->
+    <script src="lib/lodash/dist/lodash.compat.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="lib/firebase/firebase.js"></script>
+    <script src="lib/angularfire/dist/angularfire.js"></script>
+    <script src="lib/jdataview/dist/browser/jdataview.js"></script>
+    <script src="lib/bacon/dist/Bacon.js"></script>
+    <script src="lib/firebase-util.min/index.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <!-- endbower -->
+
+    <!-- vendor:js -->
+    <script src="lib/vendor/facebook.js"></script>
+    <!-- endinject -->
+
+    <!-- inject:js --> 
+    <script src="lib/templates/templates.js"></script> 
+    <script src="js/app.js"></script> 
+    <script src="js/utils/utils.service.js"></script> 
+    <script src="js/user/user.service.js"></script> 
+    <script src="js/thread/thread.service.js"></script> 
+    <script src="js/login/login.controller.js"></script> 
+    <script src="js/login/localLogin.directive.js"></script> 
+    <script src="js/iteration/iteration.service.js"></script> 
+    <script src="js/image/image.service.js"></script> 
+    <script src="js/fb/fb.js"></script> 
+    <script src="js/facebook/facebookConnectPlugin.service.js"></script> 
+    <script src="js/facebook/facebook.service.js"></script> 
+    <script src="js/collaboration/newcollaboration.controller.js"></script> 
+    <script src="js/collaboration/myCollaborations.controller.js"></script> 
+    <script src="js/collaboration/collaboration.service.js"></script> 
+    <script src="js/Auth/Auth.service.js"></script> 
+    <!-- endinject -->
+     
+  </head>
+  <body ng-app="goodMood">
+  <div ui-view=''></div>
+  <div id="fb-root"></div>
+  </body>
+</html>
