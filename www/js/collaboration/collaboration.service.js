@@ -113,8 +113,8 @@ angular.module('goodMood')
       $getNewMessages: function(){
         var newMessages = {};
         var deferred = $q.defer();
-
-        Collaboration.getNewMessagesAsStream(this.$id).onValue(function(val){
+        var stream = Collaboration.getNewMessagesAsStream(this.$id)
+        stream.onValue(function(val){
           deferred.resolve(newMessages)
           _.forEach(newMessages, function(val, key, col){
             delete col[key]
@@ -122,6 +122,9 @@ angular.module('goodMood')
           _.forEach(val, function(message){
             newMessages[message.$id] = message
           })
+        })
+        stream.onError(function(err){
+          deferred.reject(err)
         }) 
         // Hack so that it isn't discarded as an empty object,
         // but still looks empty / has _.size of 0 
@@ -149,14 +152,16 @@ angular.module('goodMood')
 
     // Helper function that returns a populated Collaboration object
     var populate = function(obj){
+      
     	return obj.$populate();
     }
 
-    Collaboration.create = function(){
+    Collaboration.create = function(name){
       var data = {};
       data.users = {};
       data.users[Auth.currentUser.$id] = true;
       data.createdAt = Firebase.ServerValue.TIMESTAMP;
+      data.name = name;
       // Create firebase object
     	var ref = Collaboration.ref.push(data);
     	var obj = $firebase(ref, {objectFactory: CollaborationFactory})
@@ -165,17 +170,17 @@ angular.module('goodMood')
     }
 
 		Collaboration.findById = function(id){
-			return $firebase(Collaboration.ref.child(id), {objectFactory: RenditionFactory})
+			return $firebase(Collaboration.ref.child(id), {objectFactory: CollaborationFactory})
         .$asObject().$loaded().then(populate)
 		}
 
     Collaboration.getThreadsAsStream = function(id){
       var ref = fb.threads.startAt(id).endAt(id)
       var bus = new Bacon.Bus()
-      ref.on('value', function(snap){
-        bus.push(_.pluck(snap.val(), '$id'))
-      })
-      return bus
+      return Bacon.fromEventTarget(ref, 'value')
+        .map(function(snap){
+          return _.pluck(snap.val(), '$id')
+        })
     }
 
     Collaboration.getNewMessagesAsStream = function(id){

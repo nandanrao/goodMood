@@ -34,9 +34,36 @@ angular.module('goodMood', [
     })
     .state('newCollaboration', {
       url: '/newcollaboration',
-      controller: 'NewCollaborationCtrl',
-      templateUrl: 'collaboration/newcollaboration.html'
+      controller: 'NewCollaborationCtrl as newCollaboration',
+      templateUrl: 'collaboration/newcollaboration.html',
+      resolve: {
+        user: ['User', function (User){
+          return User.getCurrentUser()
+        }]
+      }
     })
+    .state('newIteration', {
+      url: '/collaboration/:c_id/iteration',
+      controller: 'NewIterationCtrl as newIteration',
+      templateUrl: 'iteration/newiteration.html',
+      resolve: {
+        collaboration: ['Collaboration', '$stateParams', function (Collaboration, $stateParams){
+          return Collaboration.findById($stateParams.c_id).then(function(collaboration){
+            console.log('holla')
+            return collaboration
+          }, function(err){
+            console.log('err', err)
+          })
+          // return Collaboration.findById($stateParams.c_id)
+        }]
+      }
+    })
+    .state('iteration', {
+      url: '/collaboration/:c_id/iteration/:i_id',
+      controller: 'IterationCtrl as iteration',
+      templateUrl: 'iteration/iteration.html'
+    })
+
     
 })
 .config(function($cordovaFacebookProvider) {
@@ -57,7 +84,7 @@ angular.module('goodMood', [
   });
 
   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams){
-    console.log('state change success', toState.name)
+    // console.log('state change success', toState.name)
     if (!Auth.$getAuth()){
       event.preventDefault()
       var href = $state.href(toState, toParams)
@@ -67,9 +94,13 @@ angular.module('goodMood', [
       href = encodeURIComponent(href)
       $location.path('login/' + href)
     }
+    else if (Auth.$getAuth() && toState.name === 'login'){
+      event.preventDefault()
+      $location.path('/')
+    }
   })
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
-    console.log('state change error', toState)
+    // console.log('state change error', toState)
     $state.go("login", {notify: false});
   });
 

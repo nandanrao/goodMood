@@ -3,7 +3,8 @@ describe('Factory: User', function(){
 			authObj,
 			fb,
 			$timeout,
-			$q
+			$q,
+			$firebase
 
 	var Collaboration = {
 		create: undefined,
@@ -36,7 +37,8 @@ describe('Factory: User', function(){
 		module('authMock');
 	})
 
-	beforeEach(inject(function (_User_, _fb_, _$timeout_, _$q_, _Facebook_){
+	beforeEach(inject(function (_User_, _fb_, _$timeout_, _$q_, _Facebook_, _$firebase_){
+		$firebase = _$firebase_;
 		$q = _$q_;
 		$timeout = _$timeout_;
 		User = _User_;
@@ -95,51 +97,67 @@ describe('Factory: User', function(){
 
 	describe(':: Instance Methods', function(){
 		var user;
+		var collaboration;
 
 		beforeEach(function(done){
+			var ref = fb.collaborations.push({$id: 'id'})
+			collaboration = $firebase(ref).$asObject()
+
 			User.create('facebook', authObj).then(function(obj){
 				user = obj
 				done()
 			})
+
 			flushAll()
 			flushAll()
 		})
 
-		describe(':: addCollaboration', function(){
-
-			it('creates a new Collaboration via the Collaboration.create method', function(){
-				user.$addCollaboration()
-				Collaboration.create.should.have.been.called
-			})
+		describe(':: $addCollaboration', function(){
 
 			it('resolves to the collaboration object', function(){
-				var test = {
-					$id: 'id'
-				}
-				Collaboration.create.returns($q.when(test))
-				user.$addCollaboration().then(function(obj){
-					obj.should.include(test)
+				user.$addCollaboration(collaboration).then(function(obj){
+					obj.should.equal(collaboration)
 				})
 				flushAll()
 				flushAll()
 			})
 
 			it('adds the $id of the new collaboration to its collaborations property', function(){
+				user.$addCollaboration(collaboration)
+				flushAll()
+				flushAll()
+				user.collaborations.should.have.property(collaboration.$id)
+			})
+		})
+
+		describe(':: $removeCollaboration', function(){
+			var collaboration;
+
+			beforeEach(function(done){
 				Collaboration.create.returns($q.when({
 					$id: 'id'
 				}))
-				user.$addCollaboration()
+				user.$addCollaboration('name').then(function(obj){
+					collaboration = obj
+					done()
+				})
 				flushAll()
 				flushAll()
-				user.collaborations.should.have.property('id')
+			})
+
+			it('removes the collaboration from the users collaborations property', function(){
+				flushAll()
+				_.size(user.collaborations).should.equal(1)
+				user.$removeCollaboration(collaboration.$id)
+				flushAll()
+				_.size(user.collaborations).should.equal(0)
 			})
 		})
 
 		describe(':: $getCollaborations', function(){
-			var collaboration; 
 
 			beforeEach(function(){
-				user.$addCollaboration()
+				user.$addCollaboration(collaboration)
 				flushAll()
 				flushAll()
 			})

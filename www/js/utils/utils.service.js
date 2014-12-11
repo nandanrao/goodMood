@@ -11,6 +11,7 @@ angular.module('goodMood')
     */
     utils.gatherMessageStreams = function(stream, fn){
       return stream.flatMap(function(val){
+        console.log('mappn', val)
         return Bacon.combineAsArray(_.map(val, function(id){
         	if (typeof id !== 'string'){
         		throw new Error('We need to be mapping over ids!')

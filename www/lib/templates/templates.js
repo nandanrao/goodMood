@@ -19,7 +19,33 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("collaboration/newcollaboration.html",
-    "");
+    "<div class=\"newCollaboration\">\n" +
+    "	<form class=\"newCollaborationForm\" name=\"newCollaborationForm\" novalidate ng-submit=\"newCollaboration.submit()\">\n" +
+    "		<div class=\"iwant\">\n" +
+    "			<span>I want a</span>\n" +
+    "			<input required class=\"newcollaboration\" ng-model=\"name\"></input>\n" +
+    "		</div>\n" +
+    "		<button class=\"check\">&#10003;</button>\n" +
+    "	</form>\n" +
+    "</div>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("iteration/iteration.html",
+    "<div></div>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("iteration/newiteration.html",
+    "<div>new iteration</div>");
 }]);
 })();
 

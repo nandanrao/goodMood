@@ -93,7 +93,7 @@ describe('Factory: Collaboration', function(){
 		describe('create', function(){
 
 			it('asynchronously adds a collaboration to the db', function(){
-				Collaboration.create(user1)
+				Collaboration.create('name')
 				fb.collaborations.on('value', function(snap){
 					_.size(snap.val()).should.equal(1)
 					fb.collaborations.off('value')
@@ -102,7 +102,7 @@ describe('Factory: Collaboration', function(){
 			})
 
 			it('resolves to an instance with the original data', function(done){
-				Collaboration.create().then(function(obj){
+				Collaboration.create('name').then(function(obj){
 					obj.users.should.have.property(Auth.currentUser.$id)
 					done()
 				}, done)
@@ -124,7 +124,7 @@ describe('Factory: Collaboration', function(){
 			})
 			flushAll()
 
-			Collaboration.create(user1).then(function(obj){
+			Collaboration.create('name').then(function(obj){
 				collaboration = obj
 				done()
 			})

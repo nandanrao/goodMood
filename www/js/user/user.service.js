@@ -22,15 +22,16 @@ angular.module('goodMood')
     	  )
     	}, 
 
-      $addCollaboration: function(){
-        var self = this;
-        return Collaboration.create().then(function(collaboration){
-          var obj = {}
-          obj[collaboration.$id] = true;
-          return self.$inst().$update('collaborations', obj).then(function(ref){
-            return collaboration
-          })
+      $addCollaboration: function(collaboration){        
+        var obj = {}
+        obj[collaboration.$id] = true;
+        return this.$inst().$update('collaborations', obj).then(function(ref){
+          return collaboration
         })
+      },
+
+      $removeCollaboration: function(id){
+        delete this.collaborations[id]
       },
 
       $getCollaborations: function(){
@@ -86,6 +87,8 @@ angular.module('goodMood')
     	var deferred = $q.defer();
       var dataReady = $q.defer();
       var data = {};
+      // this is disgusting, should be split up into multiple helper functions 
+      // ie createbyauth and createwithpass!
       if (authProvider){
         if (! authObj || !authObj[authProvider]){
           throw new TypeError('authObj is not a proper authObj!')

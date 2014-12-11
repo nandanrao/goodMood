@@ -5,7 +5,7 @@
  */
 
  angular.module('goodMood')
-    .run(function ($window){
+    .run(function ($window, $log){
         /* global FB */
 
         /*
@@ -168,11 +168,14 @@
             // Bake in the JS SDK
             (function () {
                 if (!window.FB) {
-                    console.log("launching FB SDK");
+                    $log.debug("launching FB SDK");
+                    var div = document.createElement('div');
+                    div.id = 'fb-root';
                     var e = document.createElement('script');
                     e.src = document.location.protocol + '//connect.facebook.net/en_US/sdk.js';
                     e.async = true;
-                    document.getElementById('fb-root').appendChild(e);
+                    div.appendChild(e);
+                    document.body.appendChild(div)
                 }
             }());
 
