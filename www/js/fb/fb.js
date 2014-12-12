@@ -9,7 +9,8 @@ angular.module('goodMood')
 		fb.threads = fb.ref.child('threads');
 		fb.iterations = fb.ref.child('iterations');
 		fb.collaborations = fb.ref.child('collaborations');
-		fb.messages = fb.ref.child('messages')
+		fb.messages = fb.ref.child('messages');
+		fb.images = fb.ref.child('images');
 		
 		return fb
 	})

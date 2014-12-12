@@ -152,7 +152,6 @@ angular.module('goodMood')
 
     // Helper function that returns a populated Collaboration object
     var populate = function(obj){
-      
     	return obj.$populate();
     }
 

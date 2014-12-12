@@ -63,13 +63,14 @@ angular.module('goodMood', [
       controller: 'IterationCtrl as iteration',
       templateUrl: 'iteration/iteration.html'
     })
-
-    
 })
 .config(function($cordovaFacebookProvider) {
   var appID = 759883230731625;
   var version = "v2.0"; // or leave blank and default is v2.0
   $cordovaFacebookProvider.setAppID(appID, version);
+})
+.config(function($compileProvider){
+  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|data):/);
 })
 .run(function($ionicPlatform, $state, $location, $rootScope, Auth) {
   $ionicPlatform.ready(function() {

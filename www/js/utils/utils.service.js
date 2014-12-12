@@ -6,12 +6,10 @@ angular.module('goodMood')
 		/** 
      * Gathers messages from multiple streams, starting from a Ref
      * @param {object} stream A Bacon Stream that represents the og sources
-     * @param {function} the comb
-     ining function (class method)
+     * @param {function} the combining function (class method)
     */
     utils.gatherMessageStreams = function(stream, fn){
       return stream.flatMap(function(val){
-        console.log('mappn', val)
         return Bacon.combineAsArray(_.map(val, function(id){
         	if (typeof id !== 'string'){
         		throw new Error('We need to be mapping over ids!')
