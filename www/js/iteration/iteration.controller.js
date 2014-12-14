@@ -1,22 +1,23 @@
 angular.module('goodMood')
-	.controller('IterationCtrl', function ($scope, $window, $log, $timeout, $state, collaboration, iteration, threads, Thread, image, $ionicGesture){
+	.controller('IterationCtrl', function ($scope, $window, $log, $timeout, $state, $ionicLoading, collaboration, iteration, threads, Thread, image, $ionicGesture){
 		var vm = this;
+		$scope.collaboration = collaboration;
+		$scope.iterationArray = _.keys(collaboration.iterations).sort()
 		$scope.drawing;
 		$scope.threads = threads
 		$scope.imgURI = "data:image/jpeg;base64," + image.$value
-		$scope.last = _.last(_.keys(collaboration.iterations)) === iteration.$id
+		// TODO: try these, will probably error before it hits null!
+		$scope.currentIndex = $scope.iterationArray.indexOf(iteration.$id)
+		$scope.previous = $scope.iterationArray[$scope.currentIndex - 1] || null
+		$scope.next = $scope.iterationArray[$scope.currentIndex + 1] || null 
+		$scope.last = _.last($scope.iterationArray) === iteration.$id
 
-		// TODO: way to check that this is the last iteration! So we can add new!
-		this.addIteration = function(){
-			$state.go('newIteration', {c_id: collaboration.$id})
-		}
-
-		this.createDrawing = function(){
-			// create and update $scope.drawing
-			// return promise for easy chaining and creation of thread after? 
+		this.hasThreads = function(){
+			return _.size(threads) > 0
 		}
 
 		this.addThread = function(coords){
+			$ionicLoading.show();
 			Thread.create(coords, iteration, collaboration)
 				.then(_.partialRight(iteration.$addThread.bind(iteration)))
 				.then(function(thread){
@@ -31,6 +32,10 @@ angular.module('goodMood')
 			var y = e.gesture.center.pageY
 			vm.addThread({x:x, y:y})
 		}, bg)
+
+		this.addIteration = function(){
+			$state.go('^.newIteration')
+		}
 
 		// Get a reference to the canvas object
 		var canvas = document.getElementById('myCanvas');

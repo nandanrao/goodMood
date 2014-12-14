@@ -63,7 +63,7 @@ angular.module('goodMood')
       $getMessages: function(){
         // var ref = fb.messages.orderByChild('thread').equalTo(this.id);
         var ref = fb.messages.startAt(this.$id).endAt(this.$id)
-        return $firebase(ref).$asObject().$loaded();
+        return $firebase(ref).$asArray().$loaded();
       },
 
       $populate: function(){

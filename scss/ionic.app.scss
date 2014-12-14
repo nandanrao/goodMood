@@ -39,6 +39,15 @@ canvas {
     height: 100%;
 }
 
-ion-nav-view {
+ion-view {
     background-color: #fff;
+    padding-top: 4em;
+}
+
+canvas#myCanvas {
+    position: fixed;
+    z-index: -1;
+}
+button.addIteration {
+    z-index: 2;
 }

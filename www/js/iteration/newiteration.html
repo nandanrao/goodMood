@@ -1,4 +1,13 @@
-<div id="pg-newIteration">
-	<button class="button button-block button-energized button-outline" ng-click="newIteration.fromDevice()" class="fromDevice">Get a Picture from your Camera Roll</button>
-	<button class="button button-block button-energized button-outline" ng-click="newIteration.takePicture()" class="takePicture">Take a new picture</button>
-</div>
+<ion-view title="Add Iteration">
+	<div id="pg-newIteration">
+		<div class="mobile" ng-if="!newIteration.isDesktop()">
+			<button class="button button-block button-energized button-outline" ng-click="newIteration.fromDevice()" class="fromDevice">Get a Picture from your Camera Roll</button>
+			<button class="button button-block button-energized button-outline" ng-click="newIteration.takePicture()" class="takePicture">Take a new picture</button>
+		</div>
+		<div class="desktop" ng-if="newIteration.isDesktop()">
+			<button class="skip button button-block button-energized button-outline" ng-click="newIteration.fromDevice()">
+				Skip
+			</button>
+		</div>
+	</div>
+</ion-view>

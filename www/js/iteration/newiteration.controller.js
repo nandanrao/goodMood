@@ -1,13 +1,17 @@
 angular.module('goodMood')
-	.controller('NewIterationCtrl', function($scope, $window, $log, $state, collaboration, $cordovaCamera, Iteration, Image){
+	.controller('NewIterationCtrl', function($scope, $window, $log, $state, collaboration, $cordovaCamera, $ionicLoading, Iteration, Image){
 
 		var pictureOptions = {
 			destinationType: 0
 		}
 
-		if (!window.cordova){
-			console.log('notta device')
+		this.isDesktop = function(){
+			if (!window.cordova){
+				return true
+			}
+			return false	
 		}
+		
 
 		this.fromDevice = function(){
 			pictureOptions.sourceType = 0
@@ -20,8 +24,10 @@ angular.module('goodMood')
 
 		function getPicture (options){
 			$cordovaCamera.getPicture(pictureOptions)
-				// Start a loading screen here? 
-				.then(Image.create)
+				.then(function(datURI){
+					$ionicLoading.show();
+					return Image.create(datURI)
+				})
 				.then(function(image){
 					return Iteration.create({
 						image: image,

@@ -19,7 +19,7 @@ angular.module('goodMood')
 				el.append(shape.exportSVG())
 				// console.log(ctrl)
 				shape.onClick = function(event){
-					$state.go('thread', {t_id: attrs.id})
+					$state.go('^.thread', {t_id: attrs.id})
 				}
 				// TODO: test this cleanup function!
 				el.on('$destroy', function(){

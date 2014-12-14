@@ -1,16 +1,28 @@
 angular.module('goodMood')
-	.controller('ThreadCtrl', function ($scope, thread, messages, Auth){
+	.controller('ThreadCtrl', function ($scope, $ionicLoading, thread, messages, Auth){
 		$scope.thread = thread;
 		$scope.messages = messages;
-
+		$scope.writeMessage;
+		$scope.recordNote;
 		$scope.text;
 
-		this.sendMessage = function(){
+		this.getTitle = function(){
+			if (_.size(messages) > 0){
+				return _.first(messages).content
+			}
+			else {
+				return 'New Thread'
+			}
+		}
+ 
+		this.sendMessage = function(type, content){
+			$ionicLoading.show()
 			thread.$addMessage({
-				content: $scope.text,
-				user: Auth.currentUser
+				content: content,
+				user: Auth.currentUser,
+				type: type,
 			}).then(function(message){
-				console.log('message sent')
+				$ionicLoading.hide()
 			})
 			$scope.text = null;
 		}

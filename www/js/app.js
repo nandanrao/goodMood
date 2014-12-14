@@ -115,7 +115,7 @@ angular.module('goodMood', [
 .config(function($compileProvider){
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|data):/);
 })
-.run(function($ionicPlatform, $state, $location, $rootScope, Auth) {
+.run(function($ionicPlatform, $state, $location, $rootScope, Auth, $ionicLoading) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -129,6 +129,7 @@ angular.module('goodMood', [
 
   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams){
     // console.log('state change success', toState.name)
+    $ionicLoading.hide()
     if (!Auth.$getAuth()){
       event.preventDefault()
       var href = $state.href(toState, toParams)
@@ -144,7 +145,7 @@ angular.module('goodMood', [
     }
   })
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
-    console.log('state change error', toState.name, error.message)
+    // console.log('state change error', toState.name, error.message)
     $state.go("login", {notify: false});
   });
 
