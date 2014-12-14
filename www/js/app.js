@@ -42,26 +42,69 @@ angular.module('goodMood', [
         }]
       }
     })
-    .state('newIteration', {
-      url: '/collaboration/:c_id/iteration',
-      controller: 'NewIterationCtrl as newIteration',
-      templateUrl: 'iteration/newiteration.html',
+    .state('collaboration', {
+      abstract: true,
+      url: 'collaboration/:c_id',
+      templateUrl: 'collaboration/collaboration.html',
       resolve: {
         collaboration: ['Collaboration', '$stateParams', function (Collaboration, $stateParams){
-          return Collaboration.findById($stateParams.c_id).then(function(collaboration){
-            console.log('holla')
-            return collaboration
-          }, function(err){
-            console.log('err', err)
-          })
-          // return Collaboration.findById($stateParams.c_id)
+          return Collaboration.findById($stateParams.c_id)
+        }],
+      }
+    })
+    // .state('collaboration.timeline', {
+    //   url: '/timeline',
+    //   controller: 'TimelineCtrl as timeline',
+    //   templateUrl: 'collaboration/timeline.html',
+    //   resolve: {
+    //     iterations: ['collaboration', function (collaboration){
+    //       return collaboration.$getIterations()
+    //     }]
+    //   }
+    // })
+    .state('collaboration.threads', {
+      url: '/threads',
+      controller: 'CollaborationThreadsCtrl as collaborationThreads',
+      templateUrl: 'collaboration/threads.html',
+      resolve: {
+        threads: ['collaboration', function (collaboration){
+          return collaboration.$getThreads()
         }]
       }
     })
-    .state('iteration', {
-      url: '/collaboration/:c_id/iteration/:i_id',
+    .state('collaboration.thread', {
+      url: '/thread/:t_id',
+      controller: 'ThreadCtrl as thread',
+      templateUrl: 'thread/thread.html',
+      resolve: {
+        thread: ['Thread', '$stateParams', function (Thread, $stateParams){
+          return Thread.findById($stateParams.t_id)
+        }],
+        messages: ['thread', function (thread){
+          return thread.$getMessages()
+        }]
+      }
+    })
+    .state('collaboration.newIteration', {
+      url: '/newiteration',
+      controller: 'NewIterationCtrl as newIteration',
+      templateUrl: 'iteration/newiteration.html',
+    })
+    .state('collaboration.iteration', {
+      url: '/iteration/:i_id',
       controller: 'IterationCtrl as iteration',
-      templateUrl: 'iteration/iteration.html'
+      templateUrl: 'iteration/iteration.html',
+      resolve: {
+        iteration: ['Iteration', '$stateParams', function (Iteration, $stateParams){
+          return Iteration.findById($stateParams.i_id)
+        }],
+        threads: ['iteration', function (iteration){
+          return iteration.$getThreads()
+        }],
+        image: ['Image', 'iteration', function (Image, iteration){
+          return Image.findById(iteration.image)
+        }] 
+      }
     })
 })
 .config(function($cordovaFacebookProvider) {
@@ -101,7 +144,7 @@ angular.module('goodMood', [
     }
   })
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
-    // console.log('state change error', toState)
+    console.log('state change error', toState.name, error.message)
     $state.go("login", {notify: false});
   });
 

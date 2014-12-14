@@ -9,6 +9,7 @@ angular.module('goodMood')
      * @param {function} the combining function (class method)
     */
     utils.gatherMessageStreams = function(stream, fn){
+      console.log('in utils nothing here')
       return stream.flatMap(function(val){
         return Bacon.combineAsArray(_.map(val, function(id){
         	if (typeof id !== 'string'){

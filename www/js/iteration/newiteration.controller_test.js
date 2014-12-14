@@ -1,6 +1,6 @@
 describe('Controller: newIteration', function(){
 
-		var newCollaboration,
+		var newIteration,
 		    Auth,
 		    $q,
 		    $window,
@@ -8,8 +8,11 @@ describe('Controller: newIteration', function(){
 		    $state,
 		    $scope,
 		    collaboration,
+		    Iteration,
 		    iteration,
-		    fb
+		    Image,
+		    fb,
+		    $cordovaCamera
 
 		function flushAll(){
 			fb.ref.flush();
@@ -46,36 +49,74 @@ describe('Controller: newIteration', function(){
 		  }
 		  $q = _$q_;
 
-		  collaboration = {
-		  	$id: 'id'
-		  };
-
 		  iteration = {
 		  	$id: 'id'
 		  };
+
+		  collaboration = {
+		  	$id: 'id',
+		  	$addIteration: sinon.stub().returns($q.when(iteration))
+		  };
+
+		  Iteration = {
+		  	create: sinon.stub().returns($q.when(iteration))
+		  }
 
 		  user = {
 		    $addCollaboration: sinon.stub().returns($q.when(collaboration))
 		  }
 
-		  Collaboration = {
-		  	create: sinon.stub().returns($q.when(collaboration))
+		  $cordovaCamera = {
+		  	getPicture: sinon.stub().returns($q.when())
 		  }
 
-		  newCollaboration = $controller('NewCollaborationCtrl', {
+		  Image = {
+		  	create: sinon.stub().returns($q.when({
+		  		$id: 'id'
+		  	}))
+		  }
+
+		  newIteration = $controller('NewIterationCtrl', {
 		    $window: $window,
 		    $log: $log,
 		    $scope: $scope,
 		    user: user, 
-		    Collaboration: Collaboration
+		    collaboration: collaboration,
+		    Iteration: Iteration,
+		    $cordovaCamera: $cordovaCamera,
+		    Image: Image,
 		  })
 
 		}))
 
-		describe('', function(){
+		describe('takePicture', function(){
 
-			it('', function(){
-				
+			beforeEach(function(){
+				$state.expectTransitionTo('^.iteration')
+			})
+
+			it('takes a picture', function(){
+				newIteration.takePicture()
+				flushAll()
+				$cordovaCamera.getPicture.should.have.been.called
+			})
+
+			it('creates a new image object and saves it to the db', function(){
+				newIteration.takePicture()
+				flushAll()
+				Image.create.should.have.been.called
+			})
+
+			it('creates a new iteration object and save it to the db', function(){
+				newIteration.takePicture()
+				flushAll()
+				Iteration.create.should.have.been.called
+			})
+
+			it('adds that iteration to the current collaboration', function(){
+				newIteration.takePicture()
+				flushAll()
+				collaboration.$addIteration.should.have.been.called
 			})
 		})
 

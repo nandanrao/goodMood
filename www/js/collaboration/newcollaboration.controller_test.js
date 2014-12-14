@@ -83,7 +83,7 @@ describe('Controller: NewCollaboration', function(){
 		})
 
 		it('adds that collaboration to the user', function(){
-			$state.expectTransitionTo('newIteration')
+			$state.expectTransitionTo('collaboration.newIteration')
 			newCollaboration.submit();
 			flushAll()
 			user.$addCollaboration.should.have.been.calledWith(collaboration)
@@ -91,9 +91,10 @@ describe('Controller: NewCollaboration', function(){
 
 		// TODO: Fix this dumb state mock to actually be useful!
 		it('transitions to newIterations state with the id of the created collaboration', function(){
-			$state.expectTransitionTo('newIteration')
+			$state.expectTransitionTo('collaboration.newIteration')
 			newCollaboration.submit();
 			flushAll()
+			$state.ensureAllTransitionsHappened()
 		})
 	})
 

@@ -8,7 +8,7 @@ angular.module('goodMood')
 				Collaboration.create($scope.name)
 					.then(_.partialRight(user.$addCollaboration.bind(user)))
 					.then(function(collaboration){
-						$state.go('newIteration', {c_id: collaboration.$id})
+						$state.go('collaboration.newIteration', {c_id: collaboration.$id})
 					})
 					.catch(function(err){
 						$log('Error submitting a new collaboration', err)

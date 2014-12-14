@@ -8,7 +8,6 @@
     <link href="css/ionic.app.css" rel="stylesheet">   
 
     <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -41,14 +40,18 @@
     <script src="js/utils/utils.service.js"></script> 
     <script src="js/user/user.service.js"></script> 
     <script src="js/thread/thread.service.js"></script> 
+    <script src="js/thread/thread.controller.js"></script> 
+    <script src="js/thread/drawing.directive.js"></script> 
     <script src="js/login/login.controller.js"></script> 
     <script src="js/login/localLogin.directive.js"></script> 
     <script src="js/iteration/newiteration.controller.js"></script> 
     <script src="js/iteration/iteration.service.js"></script> 
+    <script src="js/iteration/iteration.controller.js"></script> 
     <script src="js/image/image.service.js"></script> 
     <script src="js/fb/fb.js"></script> 
     <script src="js/facebook/facebookConnectPlugin.service.js"></script> 
     <script src="js/facebook/facebook.service.js"></script> 
+    <script src="js/collaboration/timeline.controller.js"></script> 
     <script src="js/collaboration/newcollaboration.controller.js"></script> 
     <script src="js/collaboration/myCollaborations.controller.js"></script> 
     <script src="js/collaboration/collaboration.service.js"></script> 
@@ -57,7 +60,7 @@
      
   </head>
   <body ng-app="goodMood">
-  <div ui-view=''></div>
+  <ion-nav-view animation="slide-in-up"></ion-nav-view>
   <div id="fb-root"></div>
   </body>
 </html>

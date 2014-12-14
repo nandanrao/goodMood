@@ -1,0 +1,11 @@
+<div>this is thread view</div>
+<div class="messages">
+	<div class="message" ng-repeat="message in messages">
+		<p>
+			{{ message.content }}
+		</p>
+	</div>
+</div>
+<form ng-submit="thread.sendMessage()">
+	<input required type="text" class="text" placeholder="write here" />
+</form>

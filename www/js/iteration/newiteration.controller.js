@@ -1,74 +1,43 @@
 angular.module('goodMood')
-	.controller('NewIterationCtrl', function($scope, $window, $log, $state, collaboration, $cordovaCamera, Iteration, Image, $ionicGesture){
+	.controller('NewIterationCtrl', function($scope, $window, $log, $state, collaboration, $cordovaCamera, Iteration, Image){
 
-		$scope.imgURI;
+		var pictureOptions = {
+			destinationType: 0
+		}
 
-		// this.fromDevice = function(){
-		// 	$cordovaCamera.getPicture({
-		// 		sourceType: 0
-		// 	}).then(function(fileURI){
-		// 		console.log(fileURI)
-		// 		$scope.imgURI = fileURI
-		// 	})
-		// }
+		if (!window.cordova){
+			console.log('notta device')
+		}
 
-		// this.takePicture = function(){
-		// 	$cordovaCamera.getPicture().then(function(fileURI){
-		// 		console.log(fileURI)
-		// 		$scope.imgURI = fileURI
-		// 	})
-		// }
+		this.fromDevice = function(){
+			pictureOptions.sourceType = 0
+			getPicture(pictureOptions)
+		}
 
-			$cordovaCamera.getPicture({
-				destinationType: 0
-			})
-				.then(function(dataURI){
-					$scope.imgURI = "data:image/jpeg;base64," + dataURI
-				})
+		this.takePicture = function(){
+			getPicture(pictureOptions)
+		}
+
+		function getPicture (options){
+			$cordovaCamera.getPicture(pictureOptions)
+				// Start a loading screen here? 
 				.then(Image.create)
 				.then(function(image){
-					$window.alert('circle a region on the image to begin a conversation about it!')
+					return Iteration.create({
+						image: image,
+						collaboration: collaboration
+					})
 				})
-
-		// Get a reference to the canvas object
-				var canvas = document.getElementById('myCanvas');
-				// Create an empty project and a view for the canvas:
-				paper.setup(canvas);
-
-				var bg = angular.element(document.getElementById('iterationBg'))
-				var path;
-
-				paper.view.draw();
-				
-				$ionicGesture.on('dragstart', function(e){
-					console.log('drag start')
-					// If we produced a path before, deselect it:
-					if (path) {
-						path.selected = false;
-					}
-					path = new paper.Path();
-					path.strokeColor = 'white';
-					// Select the path, so we can see its segment points:
-					path.fullySelected = true;
-				}, bg)
-
-				$ionicGesture.on('drag', function(e){
-					console.log('dragging')
-					path.add(e.point);
-				}, bg)
-
-				$ionicGesture.on('dragend', function(e){
-					console.log('drag end')
-					// When the mouse is released, simplify it:
-					path.simplify();
-					// Select the path, so we can see its segments:
-					path.selected = true;
-
-				}, bg)
-
-			
-
-			
-
-
+				.then(_.partialRight(collaboration.$addIteration.bind(collaboration)))
+				.then(function(iteration){16
+					$state.go('^.iteration', {
+						i_id: iteration.$id,
+						c_id: collaboration.$id
+					})
+				})
+				.catch(function(err){
+					$log.error('Error creating a picture for a new iteration')
+					$window.alert('Sorry we had a problem! Try again?')
+				})
+		}
 	})

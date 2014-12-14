@@ -198,8 +198,18 @@ describe('Factory: Collaboration', function(){
 				collaboration.$addIteration.bind(collaboration, notIteration).should.Throw(TypeError)
 			})
 
+			it('resolves to the iteration instance it was passed', function(done){
+				collaboration.$addIteration(iteration).then(function(obj){
+					obj.should.equal(iteration)
+					done()
+				})
+				flushAll()
+				flushAll()
+			})
+
 			it('adds the iterations $id to its own iterations property', function(){
 				collaboration.$addIteration(iteration)
+				flushAll()
 				flushAll()
 				collaboration.iterations.should.have.property(iteration.$id)
 			})
@@ -293,6 +303,29 @@ describe('Factory: Collaboration', function(){
 				collaboration.$removeIteration(iteration)
 				flushAll()
 				_.size(iterations).should.equal(0)
+			})
+		})
+
+		describe('$getThreads', function(){
+
+			it('returns a promise that resolves to an object', function(){
+				collaboration.$getThreads().then(function(obj){
+					obj.should.be.instanceof(Object)
+				})
+				flushAll()
+			})
+
+			xit('resolves to an object that reacts to added threads', function(){
+				var threads;
+				collaboration.$getThreads().then(function(obj){
+					threads = obj
+				})
+				flushAll()
+				_.size(threads).should.equal(0)
+				var ref = fb.threads.push({obj: 'obj'})
+				ref.setPriority(collaboration.$id)
+				flushAll()
+				_.size(threads).should.equal(1)
 			})
 		})
 

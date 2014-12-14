@@ -42,9 +42,10 @@ angular.module('goodMood')
            delete users[snap.key()] 
           }
         })
+        // TODO: this isn't correct, it resolves before the child objects are loaded!
         // This just resolves when the first set of data is available.
         ref.once('value', function(snap){
-          deferred.resolve(users)
+          deferred.resolve(users) 
         })
         // Hack so that it isn't discarded as an empty object,
         // but still looks empty / has _.size of 0 
@@ -55,13 +56,20 @@ angular.module('goodMood')
         return deferred.promise
       },
 
+      /**
+       * Adds a current iteration instance to this collaboration
+       * @param {object} iteration An iteration instance
+       * @returns The iteration instance passed into it.
+       */
       $addIteration: function(iteration){
         if (!iteration || !iteration.$id){
           throw new TypeError('we need an iteration object')
         }
         var obj = {}
         obj[iteration.$id] = true;
-        return this.$inst().$update('iterations', obj)
+        return this.$inst().$update('iterations', obj).then(function(obj){
+          return iteration
+        })
       },
 
       $removeIteration: function(iteration){
@@ -105,9 +113,17 @@ angular.module('goodMood')
       },
 
       $getThreads: function(){
-        // var ref = fb.threads.orderByChild('collaboration').equalTo(this.$id)
+        var threads = {};
         var ref = fb.threads.startAt(this.$id).endAt(this.$id)
-        return $firebase(ref).$asObject().$loaded()
+        ref.on('child_added', function(snap){
+          $firebase(snap.ref()).$asObject().$loaded().then(function(obj){
+            threads[obj.$id] = obj
+          })
+        })
+        ref.on('child_removed', function(snap){
+          delete threads[snap.key()]
+        })
+        return $q.when(threads)
       },
 
       $getNewMessages: function(){

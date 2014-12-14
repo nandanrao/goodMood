@@ -101,7 +101,7 @@ angular.module('goodMood')
       data.lastViewed[Auth.currentUser.$id] = Firebase.ServerValue.TIMESTAMP;
       // add everything else
       data.collaboration = collaboration.$id;
-      data.drawing = drawing.$id;
+      data.drawing = drawing;
       data.createdBy = Auth.currentUser.$id
       data.createdAt = Firebase.ServerValue.TIMESTAMP;
       // Create firebase object
@@ -116,7 +116,7 @@ angular.module('goodMood')
      */
 		Thread.findById = function(id){
 			return $firebase(Thread.ref.child(id), {objectFactory: ThreadFactory})
-        .$asObject().$loaded().then(populate)
+        .$asObject().$loaded()
 		}
 
     /** 

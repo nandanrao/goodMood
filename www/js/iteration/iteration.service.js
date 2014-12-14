@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.factory('Iteration', function(fb, $firebase, $FirebaseObject, $q, Thread){
+	.factory('Iteration', function(fb, $firebase, $FirebaseObject, $q, Thread, $timeout){
 		var Iteration = {};
 
 		Iteration.ref = fb.iterations;
@@ -12,7 +12,9 @@ angular.module('goodMood')
     		}
         var obj = {};
         obj[thread.$id] = true;
-    		return this.$inst().$update('threads', obj)
+    		return this.$inst().$update('threads', obj).then(function(obj){
+          return thread
+        })
     	},
 
     	$removeThread: function(thread){
@@ -42,8 +44,9 @@ angular.module('goodMood')
         var deferred = $q.defer();
         ref.child('threads').on('child_added', function(snap){
           var id = snap.key()
-          Thread.findById(id).then(function(iteration){
-            threads[id] = iteration
+          Thread.findById(id).then(function(thread){
+            console.log('in service', thread)
+            threads[id] = thread
           })
         })
         ref.child('threads').on('child_removed', function(snap){
@@ -80,6 +83,11 @@ angular.module('goodMood')
     	return obj.$populate();
     }
 
+    /**
+     * Creates a new iteration. Requires: IMAGE, COLLABORATION
+     * @param {object} original An object with the necessary ingrediants
+     * @returns Promise that resolves to an instance of the iteration
+     */
     Iteration.create = function(original){
       var image = original.image;
       var collaboration = original.collaboration;
