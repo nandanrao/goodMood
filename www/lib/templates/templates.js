@@ -4,7 +4,7 @@ catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("collaboration/collaboration.html",
     "<ion-view>\n" +
-    "	<ion-nav-view animation=\"slide-in-up\"></ion-nav-view> \n" +
+    "	<ion-nav-view></ion-nav-view> \n" +
     "</ion-view>");
 }]);
 })();
