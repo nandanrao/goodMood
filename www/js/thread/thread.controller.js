@@ -20,7 +20,7 @@ angular.module('goodMood')
 		this.recordNote = function(){
 			$scope.recordNote = true;
 			// cordovarecordmedia here
-			// get as DATA URI 
+			// google cloud upload? 
 			vm.sendMessage('voice', dataURI)
 		}
 

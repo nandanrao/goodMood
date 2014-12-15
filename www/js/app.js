@@ -128,7 +128,7 @@ angular.module('goodMood', [
   });
 
   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams){
-    // console.log('state change success', toState.name)
+    console.log('state change success', toState.name)
     $ionicLoading.hide()
     if (!Auth.$getAuth()){
       event.preventDefault()

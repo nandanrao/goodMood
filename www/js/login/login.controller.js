@@ -1,5 +1,5 @@
 angular.module('goodMood')
-  .controller('LoginCtrl', function ($scope, Auth, User, utils, $q, $window, $log, $state){
+  .controller('LoginCtrl', function ($scope, $ionicLoading, Auth, User, utils, $q, $window, $log, $state){
     $scope.local = false;
     $scope.register = false;
     $scope.form = {};
@@ -9,6 +9,8 @@ angular.module('goodMood')
       var options = {};
       return Auth.viaOAuth(authProvider)
         .then(function(_authObj){
+          $ionicLoading.show()
+          console.log("back from authing")
           authObj = _authObj;
           return User.findByAuth(authProvider, authObj)
         })

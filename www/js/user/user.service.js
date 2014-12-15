@@ -44,9 +44,7 @@ angular.module('goodMood')
             var id = snap.key()
             promises[id] = Collaboration.findById(id)
           })
-          console.log(_.size(promises))
           $q.all(promises).then(function(results){
-            console.log('promises resolved')
             _.forEach(results, function(collaboration){
               collaborations[collaboration.$id] = collaboration
             })
@@ -64,9 +62,7 @@ angular.module('goodMood')
                delete collaborations[snap.key()] 
               }
             })
-          }, function (err){
-            console.log('err', err)
-          })
+          }, deferred.reject)
         })
         Object.defineProperty(collaborations, '_notEmpty', {
           value: true,

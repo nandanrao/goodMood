@@ -30,23 +30,35 @@ angular.module('goodMood')
         var users = {};
         var ref = this.$inst().$ref();
         var deferred = $q.defer();
-        ref.child('users').on('child_added', function(snap){
-          var id = snap.key()
-          var ref = fb.users.child(id)
-          $firebase(ref).$asObject().$loaded().then(function(obj){
-            users[obj.$id] = obj
-          })
-        })
-        ref.child('users').on('child_removed', function(snap){
-          if (users[snap.key()]){
-           delete users[snap.key()] 
-          }
-        })
-        // TODO: this isn't correct, it resolves before the child objects are loaded!
-        // This just resolves when the first set of data is available.
         ref.once('value', function(snap){
-          deferred.resolve(users) 
+          var promises = {};
+          snap.forEach(function(snap){
+            var id = snap.key();
+            var ref = fb.users.child(id);
+            promises[id] = $firebase(ref).$asObject().$loaded()
+          })
+          $q.all(promises).then(function(results){
+            _.forEach(results, function(user){
+              users[user.$id] = user
+            })
+            deferred.resolve(users)
+            ref.child('users').on('child_added', function(snap){
+              var id = snap.key()
+              if(!users[id]){
+                var ref = fb.users.child(id)
+                $firebase(ref).$asObject().$loaded().then(function(obj){
+                  users[obj.$id] = obj
+                })  
+              }
+            })
+            ref.child('users').on('child_removed', function(snap){
+              if (users[snap.key()]){
+               delete users[snap.key()] 
+              }
+            })    
+          }, deferred.reject)
         })
+
         // Hack so that it isn't discarded as an empty object,
         // but still looks empty / has _.size of 0 
         Object.defineProperty(users, '_notEmpty', {
