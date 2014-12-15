@@ -156,11 +156,11 @@ angular.module('goodMood')
         var self = this;
         return $q.all({
             users: self.$getUsers(),
-            newMessages: self.$getNewMessages()
+            // newMessages: self.$getNewMessages()
           })
           .then(function(results){
             self._users = results.users;
-            self._newMessages = results.newMessages;
+            // self._newMessages = results.newMessages;
           	return self;
           })
       }

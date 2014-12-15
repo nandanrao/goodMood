@@ -145,9 +145,12 @@ angular.module('goodMood', [
     }
   })
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
-    // console.log('state change error', toState.name, error.message)
+    console.log('state change error', toState.name, error.message)
     $state.go("login", {notify: false});
   });
+  $rootScope.$on('$stateChangeStart', function(event, toState){
+    console.log('statechange start', toState.name)
+  })
 
 })
 .filter('orderObjectBy', function() {

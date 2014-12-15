@@ -42,10 +42,12 @@ angular.module('goodMood')
         var threads = {}
         var ref = this.$inst().$ref();
         var deferred = $q.defer();
+        ref.once('value', function(snap){
+          deferred.resolve(threads)
+        })
         ref.child('threads').on('child_added', function(snap){
           var id = snap.key()
           Thread.findById(id).then(function(thread){
-            console.log('in service', thread)
             threads[id] = thread
           })
         })
@@ -53,9 +55,6 @@ angular.module('goodMood')
           if (threads[snap.key()]){
            delete threads[snap.key()] 
           }
-        })
-        ref.once('value', function(snap){
-          deferred.resolve(threads)
         })
         // Hack so that it isn't discarded as an empty object,
         // but still looks empty / has _.size of 0 

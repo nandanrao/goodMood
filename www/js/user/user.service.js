@@ -38,28 +38,41 @@ angular.module('goodMood')
         var collaborations = {};
         var ref = this.$inst().$ref().child('collaborations');
         var deferred = $q.defer();
-        ref.on('child_added', function(snap){
-          var id = snap.key()
-          Collaboration.findById(id).then(function(collaboration){
-            collaborations[id] = collaboration
+        ref.once('value', function(snap){
+          var promises = {};
+          snap.forEach(function(snap){
+            var id = snap.key()
+            promises[id] = Collaboration.findById(id)
+          })
+          console.log(_.size(promises))
+          $q.all(promises).then(function(results){
+            console.log('promises resolved')
+            _.forEach(results, function(collaboration){
+              collaborations[collaboration.$id] = collaboration
+            })
+            deferred.resolve(collaborations)
+            ref.on('child_added', function(snap){
+              var id = snap.key()
+              if (!collaborations[id]){
+                Collaboration.findById(id).then(function(collaboration){
+                  collaborations[id] = collaboration
+                })
+              }
+            })
+            ref.on('child_removed', function(snap){
+              if (collaborations[snap.key()]){
+               delete collaborations[snap.key()] 
+              }
+            })
+          }, function (err){
+            console.log('err', err)
           })
         })
-        ref.on('child_removed', function(snap){
-          if (collaborations[snap.key()]){
-           delete collaborations[snap.key()] 
-          }
-        })
-        // This just resolves when the first set of data is available.
-        ref.once('value', function(snap){
-          deferred.resolve(collaborations)
-        })
-        // Hack so that it isn't discarded as an empty object,
-        // but still looks empty / has _.size of 0 
         Object.defineProperty(collaborations, '_notEmpty', {
           value: true,
           enumerable: false
         })
-        return deferred.promise 
+        return deferred.promise
       }
 
     })

@@ -6,6 +6,8 @@ angular.module('goodMood')
 		$scope.recordNote;
 		$scope.text;
 
+		var vm = this;
+
 		this.getTitle = function(){
 			if (_.size(messages) > 0){
 				return _.first(messages).content
@@ -14,11 +16,22 @@ angular.module('goodMood')
 				return 'New Thread'
 			}
 		}
+
+		this.recordNote = function(){
+			$scope.recordNote = true;
+			// cordovarecordmedia here
+			// get as DATA URI 
+			vm.sendMessage('voice', dataURI)
+		}
+
+		this.writeText = function(){
+			$scope.writeMessage = true;
+		}
  
 		this.sendMessage = function(type, content){
 			$ionicLoading.show()
 			thread.$addMessage({
-				content: content,
+				content: $scope.text,
 				user: Auth.currentUser,
 				type: type,
 			}).then(function(message){

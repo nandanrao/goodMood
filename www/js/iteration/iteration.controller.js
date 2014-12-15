@@ -25,6 +25,12 @@ angular.module('goodMood')
 				})
 		}
 
+		this.addIteration = function(){
+			$state.go('^.newIteration')
+		}
+
+		console.log('in iterations controller')
+
 		var bg = angular.element(document.getElementById('iterationBg'))
 
 		$ionicGesture.on('hold', function(e){
@@ -33,13 +39,26 @@ angular.module('goodMood')
 			vm.addThread({x:x, y:y})
 		}, bg)
 
-		this.addIteration = function(){
-			$state.go('^.newIteration')
-		}
+		$ionicGesture.on('swipedown', function(e){
+			console.log('swipedown', $scope.previous)
+			if($scope.previous){
+				$state.go('^.iteration', {i_id: $scope.previous})
+			}
+		}, bg)
 
-		// Get a reference to the canvas object
+		$ionicGesture.on('swipeup', function(e){
+			console.log('swipeup', $scope.mext)
+			if($scope.next){
+				$state.go('^.iteration', {i_id: $scope.next})
+			} 
+		}, bg)
+
+		$ionicGesture.on('swiperight', function(e){
+			console.log('swipe right!')
+			$state.go('home')
+		}, bg)
+
 		var canvas = document.getElementById('myCanvas');
-		// Create an empty project and a view for the canvas:
 		paper.setup(canvas);
 		paper.view.draw();
 		// var path;

@@ -2,12 +2,20 @@
 	<div>this is thread view</div>
 	<div class="messages">
 		<div class="message" ng-repeat="message in messages">
-			<p ng-if="message.type === text">
+			<p ng-if="message.type === 'text'">
 				{{ message.content }}
 			</p>
 		</div>
 	</div>
-	<form ng-if="writeMessage" ng-submit="thread.sendMessage('text', text)">
-		<input required ng-model="text" type="text" class="text" placeholder="write here" />
+	<div class="choose">
+		<button class="voice" ng-click="thread.redcordNote()">
+		voice
+		</button>
+		<button class="text" ng-click="thread.writeText()">		
+		text
+		</button>
+	</div>
+	<form ng-show="writeMessage" ng-submit="thread.sendMessage('text')">
+		<input required ng-model="text" class="text" placeholder="write here" />
 	</form>
 </ion-view>

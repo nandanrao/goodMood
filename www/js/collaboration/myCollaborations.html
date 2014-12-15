@@ -7,7 +7,7 @@ this is my collaborattions
 
 <div ng-repeat="collaboration in collaborations">
 	<div class="collaboration">
-		<button ng-click="myCollaborations.collaboration({{ collaboration.$id }})">{{ collaboration.name }}</button>
+		<button class="button button-block button-balanced button-outline" ng-click="myCollaborations.collaboration(collaboration.$id)">{{ collaboration.name }}</button>
 	</div>
 </div>
 

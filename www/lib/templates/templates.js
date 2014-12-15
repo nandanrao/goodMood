@@ -4,7 +4,7 @@ catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("collaboration/collaboration.html",
     "<ion-view>\n" +
-    "<ion-nav-view animation=\"slide-in-up\"></ion-nav-view> \n" +
+    "	<ion-nav-view animation=\"slide-in-up\"></ion-nav-view> \n" +
     "</ion-view>");
 }]);
 })();
@@ -23,7 +23,7 @@ module.run(["$templateCache", function($templateCache) {
     "\n" +
     "<div ng-repeat=\"collaboration in collaborations\">\n" +
     "	<div class=\"collaboration\">\n" +
-    "		<button ng-click=\"myCollaborations.collaboration({{ collaboration.$id }})\">{{ collaboration.name }}</button>\n" +
+    "		<button class=\"button button-block button-balanced button-outline\" ng-click=\"myCollaborations.collaboration(collaboration.$id)\">{{ collaboration.name }}</button>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -78,10 +78,9 @@ module.run(["$templateCache", function($templateCache) {
     "<ion-view title=\"{{ collaboration.name }} - \">	\n" +
     "	<div id=\"pg-iteration\">\n" +
     "		<div id=\"iterationBg\" style=\"background-image: url('{{ imgURI }}')\">\n" +
-    "\n" +
     "			<canvas id=\"myCanvas\">\n" +
     "			</canvas>\n" +
-    "			<div ng-if=\"iteration.hasThreads()\">\n" +
+    "			<div ng-if=\"!next\">\n" +
     "				<button class=\"addIteration\" ng-click=\"iteration.addIteration()\">+ iteration</button>\n" +
     "			</div>\n" +
     "			<div ng-if=\"!iteration.hasThreads()\" class=\"instructions\">\n" +
@@ -90,7 +89,6 @@ module.run(["$templateCache", function($templateCache) {
     "					</p>\n" +
     "			</div>\n" +
     "			<drawing ng-repeat=\"thread in threads\" id=\"{{ thread.$id }}\" x=\"{{ thread.drawing.x }}\" y=\"{{ thread.drawing.y }}\"></drawing>\n" +
-    "			\n" +
     "		</div>\n" +
     "	</div>\n" +
     "</ion-view>");
@@ -179,13 +177,21 @@ module.run(["$templateCache", function($templateCache) {
     "	<div>this is thread view</div>\n" +
     "	<div class=\"messages\">\n" +
     "		<div class=\"message\" ng-repeat=\"message in messages\">\n" +
-    "			<p ng-if=\"message.type === text\">\n" +
+    "			<p ng-if=\"message.type === 'text'\">\n" +
     "				{{ message.content }}\n" +
     "			</p>\n" +
     "		</div>\n" +
     "	</div>\n" +
-    "	<form ng-if=\"writeMessage\" ng-submit=\"thread.sendMessage('text', text)\">\n" +
-    "		<input required ng-model=\"text\" type=\"text\" class=\"text\" placeholder=\"write here\" />\n" +
+    "	<div class=\"choose\">\n" +
+    "		<button class=\"voice\" ng-click=\"thread.redcordNote()\">\n" +
+    "		voice\n" +
+    "		</button>\n" +
+    "		<button class=\"text\" ng-click=\"thread.writeText()\">		\n" +
+    "		text\n" +
+    "		</button>\n" +
+    "	</div>\n" +
+    "	<form ng-show=\"writeMessage\" ng-submit=\"thread.sendMessage('text')\">\n" +
+    "		<input required ng-model=\"text\" class=\"text\" placeholder=\"write here\" />\n" +
     "	</form>\n" +
     "</ion-view>");
 }]);

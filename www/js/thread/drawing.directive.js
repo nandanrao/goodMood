@@ -16,11 +16,13 @@ angular.module('goodMood')
 					radius: 25,
 					opacity: 0.5
 				});
-				el.append(shape.exportSVG())
-				// console.log(ctrl)
+				// Needed to update the view immediately!
+				paper.view.update()
 				shape.onClick = function(event){
+					console.log('clicked!')
 					$state.go('^.thread', {t_id: attrs.id})
 				}
+
 				// TODO: test this cleanup function!
 				el.on('$destroy', function(){
 					shape.remove()

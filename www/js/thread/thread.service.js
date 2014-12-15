@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.factory('Thread', function(fb, $firebase, $FirebaseObject, $q, Auth){
+	.factory('Thread', function(fb, $firebase, $FirebaseObject, $q, $timeout, Auth){
 		var Thread = {};
 
     var ThreadFactory = $FirebaseObject.$extendFactory({
@@ -45,6 +45,7 @@ angular.module('goodMood')
         data.sentAt = Date.now();
         var ref = fb.messages.push(data)
         ref.setPriority(this.$id)
+        // $timeout(angular.noop)
         return $firebase(ref).$asObject().$loaded()
       },
 
@@ -63,6 +64,9 @@ angular.module('goodMood')
       $getMessages: function(){
         // var ref = fb.messages.orderByChild('thread').equalTo(this.id);
         var ref = fb.messages.startAt(this.$id).endAt(this.$id)
+        ref.on('value', function(snap){
+          console.log(Date.now(), snap.val())
+        })
         return $firebase(ref).$asArray().$loaded();
       },
 
