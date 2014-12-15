@@ -1,16 +1,17 @@
 angular.module('goodMood')
 	.controller('IterationCtrl', function ($scope, $window, $log, $timeout, $state, $ionicLoading, collaboration, iteration, threads, Thread, image, $ionicGesture){
-		var vm = this;
+		
 		$scope.collaboration = collaboration;
-		$scope.iterationArray = _.keys(collaboration.iterations).sort()
+		$scope.iterationArray = _.keys(collaboration.iterations).sort();
 		$scope.drawing;
-		$scope.threads = threads
-		$scope.imgURI = "data:image/jpeg;base64," + image.$value
-		// TODO: try these, will probably error before it hits null!
-		$scope.currentIndex = $scope.iterationArray.indexOf(iteration.$id)
-		$scope.previous = $scope.iterationArray[$scope.currentIndex - 1] || null
-		$scope.next = $scope.iterationArray[$scope.currentIndex + 1] || null 
-		$scope.last = _.last($scope.iterationArray) === iteration.$id
+		$scope.threads = threads;
+		$scope.imgURI = "data:image/jpeg;base64," + image.$value;
+		$scope.currentIndex = $scope.iterationArray.indexOf(iteration.$id);
+		$scope.previous = $scope.iterationArray[$scope.currentIndex - 1];
+		$scope.next = $scope.iterationArray[$scope.currentIndex + 1];
+		$scope.last = _.last($scope.iterationArray) === iteration.$id;
+
+		var vm = this;
 
 		this.hasThreads = function(){
 			return _.size(threads) > 0
@@ -29,9 +30,10 @@ angular.module('goodMood')
 			$state.go('^.newIteration')
 		}
 
-		console.log('in iterations controller')
-
 		var bg = angular.element(document.getElementById('iterationBg'))
+		var canvas = document.getElementById('myCanvas');
+		paper.setup(canvas);
+		paper.view.draw();
 
 		$ionicGesture.on('hold', function(e){
 			var x = e.gesture.center.pageX
@@ -58,33 +60,4 @@ angular.module('goodMood')
 			$state.go('home')
 		}, bg)
 
-		var canvas = document.getElementById('myCanvas');
-		paper.setup(canvas);
-		paper.view.draw();
-		// var path;
-
-		// $ionicGesture.on('dragstart', function(e){
-		// 	console.log('drag start')
-		// 	// If we produced a path before, deselect it:
-		// 	if (path) {
-		// 		path.selected = false;
-		// 	}
-		// 	path = new paper.Path();
-		// 	path.strokeColor = 'white';
-		// 	// Select the path, so we can see its segment points:
-		// 	path.fullySelected = true;
-		// }, bg)
-
-		// $ionicGesture.on('drag', function(e){
-		// 	console.log('dragging')
-		// 	// console.log('this is the e ', e) 
-		// 	path.add(e.point);
-		// }, bg)
-
-		// $ionicGesture.on('dragend', function(e){
-		// 	console.log('drag end')
-		// 	path.simplify();
-		// 	// Select the path, so we can see its segments:
-		// 	path.selected = true;
-		// }, bg)
 	})
