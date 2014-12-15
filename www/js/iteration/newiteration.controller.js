@@ -36,7 +36,7 @@ angular.module('goodMood')
 				})
 				.then(_.partialRight(collaboration.$addIteration.bind(collaboration)))
 				.then(function(iteration){16
-					$state.go('^.iteration', {
+					$state.go('^.iteration.view', {
 						i_id: iteration.$id,
 						c_id: collaboration.$id
 					})

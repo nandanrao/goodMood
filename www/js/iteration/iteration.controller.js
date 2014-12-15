@@ -27,7 +27,7 @@ angular.module('goodMood')
 		}
 
 		this.addIteration = function(){
-			$state.go('^.newIteration')
+			$state.go('^.^.newIteration')
 		}
 
 		this.home = function(){
