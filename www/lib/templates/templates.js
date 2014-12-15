@@ -74,23 +74,72 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("iteration/iteration.html",
-    "<ion-view title=\"{{ collaboration.name }} - \">	\n" +
-    "	<div id=\"pg-iteration\">\n" +
-    "		<div id=\"iterationBg\" style=\"background-image: url('{{ imgURI }}')\">\n" +
-    "			<canvas id=\"myCanvas\">\n" +
-    "			</canvas>\n" +
-    "			<div ng-if=\"!next\">\n" +
-    "				<button class=\"addIteration\" ng-click=\"iteration.addIteration()\">+ iteration</button>\n" +
-    "			</div>\n" +
-    "			<div ng-if=\"!iteration.hasThreads()\" class=\"instructions\">\n" +
-    "					<p>\n" +
-    "						Hey these are the instructions for adding a thread and drawing on this thing\n" +
-    "					</p>\n" +
-    "			</div>\n" +
-    "			<drawing ng-repeat=\"thread in threads\" id=\"{{ thread.$id }}\" x=\"{{ thread.drawing.x }}\" y=\"{{ thread.drawing.y }}\"></drawing>\n" +
+  $templateCache.put("thread/thread.html",
+    "<ion-view>\n" +
+    "<ion-nav-buttons side=\"primary\">\n" +
+    "  <button class=\"button-clear\" ng-click=\"thread.back()\">\n" +
+    "    <i class=\"ion-arrow-left-c\"></i> Back\n" +
+    "  </button>\n" +
+    "</ion-nav-buttons>	\n" +
+    "	<div>this is thread view</div>\n" +
+    "	<div class=\"messages\">\n" +
+    "		<div class=\"message\" ng-repeat=\"message in messages\">\n" +
+    "			<p ng-if=\"message.type === 'text'\">\n" +
+    "				{{ message.content }}\n" +
+    "			</p>\n" +
     "		</div>\n" +
     "	</div>\n" +
+    "	<div class=\"choose\">\n" +
+    "		<button class=\"voice\" ng-click=\"thread.redcordNote()\">\n" +
+    "		voice\n" +
+    "		</button>\n" +
+    "		<button class=\"text\" ng-click=\"thread.writeText()\">		\n" +
+    "		text\n" +
+    "		</button>\n" +
+    "	</div>\n" +
+    "	<form ng-show=\"writeMessage\" ng-submit=\"thread.sendMessage('text')\">\n" +
+    "		<input required ng-model=\"text\" class=\"text\" placeholder=\"write here\" />\n" +
+    "	</form>\n" +
+    "</ion-view>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("iteration/iteration.html",
+    "<ion-view id=\"pg-iteration\" title=\"{{ collaboration.name }} - \">\n" +
+    "	<ion-nav-buttons side=\"primary\">\n" +
+    "	  <button class=\"button-clear\" ng-click=\"iteration.home()\">\n" +
+    "	    <i class=\"ion-arrow-left-c\"></i> Home\n" +
+    "	  </button>\n" +
+    "	</ion-nav-buttons>	\n" +
+    "	<div id=\"iterationBg\" style=\"background-image: url('{{ imgURI }}')\">\n" +
+    "		<canvas id=\"myCanvas\">\n" +
+    "		</canvas>\n" +
+    "		<div ng-if=\"!next\">\n" +
+    "			<button class=\"addIteration\" ng-click=\"iteration.addIteration()\">+ iteration</button>\n" +
+    "		</div>\n" +
+    "		<div ng-if=\"!iteration.hasThreads()\" class=\"instructions\">\n" +
+    "				<p>\n" +
+    "					Hey these are the instructions for adding a thread and drawing on this thing\n" +
+    "				</p>\n" +
+    "		</div>\n" +
+    "		<drawing ng-repeat=\"thread in threads\" id=\"{{ thread.$id }}\" x=\"{{ thread.drawing.x }}\" y=\"{{ thread.drawing.y }}\">\n" +
+    "		</drawing>\n" +
+    "	</div>\n" +
+    "</ion-view>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("iteration/iterationparent.html",
+    "<ion-view>\n" +
+    "	<ion-nav-view animation=\"no-animate\"></ion-nav-view> \n" +
     "</ion-view>");
 }]);
 })();
@@ -165,34 +214,5 @@ module.run(["$templateCache", function($templateCache) {
     "		<button type=\"button\" ng-click=\"login.register()\" class=\"button button-outline button-positive register\">Register</button>\n" +
     "	</form>\n" +
     "</div>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("thread/thread.html",
-    "<ion-view title=\"{{ thread.getTitle() }}\">\n" +
-    "	<div>this is thread view</div>\n" +
-    "	<div class=\"messages\">\n" +
-    "		<div class=\"message\" ng-repeat=\"message in messages\">\n" +
-    "			<p ng-if=\"message.type === 'text'\">\n" +
-    "				{{ message.content }}\n" +
-    "			</p>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "	<div class=\"choose\">\n" +
-    "		<button class=\"voice\" ng-click=\"thread.redcordNote()\">\n" +
-    "		voice\n" +
-    "		</button>\n" +
-    "		<button class=\"text\" ng-click=\"thread.writeText()\">		\n" +
-    "		text\n" +
-    "		</button>\n" +
-    "	</div>\n" +
-    "	<form ng-show=\"writeMessage\" ng-submit=\"thread.sendMessage('text')\">\n" +
-    "		<input required ng-model=\"text\" class=\"text\" placeholder=\"write here\" />\n" +
-    "	</form>\n" +
-    "</ion-view>");
 }]);
 })();

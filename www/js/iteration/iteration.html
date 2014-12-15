@@ -1,17 +1,21 @@
-<ion-view title="{{ collaboration.name }} - ">	
-	<div id="pg-iteration">
-		<div id="iterationBg" style="background-image: url('{{ imgURI }}')">
-			<canvas id="myCanvas">
-			</canvas>
-			<div ng-if="!next">
-				<button class="addIteration" ng-click="iteration.addIteration()">+ iteration</button>
-			</div>
-			<div ng-if="!iteration.hasThreads()" class="instructions">
-					<p>
-						Hey these are the instructions for adding a thread and drawing on this thing
-					</p>
-			</div>
-			<drawing ng-repeat="thread in threads" id="{{ thread.$id }}" x="{{ thread.drawing.x }}" y="{{ thread.drawing.y }}"></drawing>
+<ion-view id="pg-iteration" title="{{ collaboration.name }} - ">
+	<ion-nav-buttons side="primary">
+	  <button class="button-clear" ng-click="iteration.home()">
+	    <i class="ion-arrow-left-c"></i> Home
+	  </button>
+	</ion-nav-buttons>	
+	<div id="iterationBg" style="background-image: url('{{ imgURI }}')">
+		<canvas id="myCanvas">
+		</canvas>
+		<div ng-if="!next">
+			<button class="addIteration" ng-click="iteration.addIteration()">+ iteration</button>
 		</div>
+		<div ng-if="!iteration.hasThreads()" class="instructions">
+				<p>
+					Hey these are the instructions for adding a thread and drawing on this thing
+				</p>
+		</div>
+		<drawing ng-repeat="thread in threads" id="{{ thread.$id }}" x="{{ thread.drawing.x }}" y="{{ thread.drawing.y }}">
+		</drawing>
 	</div>
 </ion-view>

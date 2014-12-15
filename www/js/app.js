@@ -91,7 +91,12 @@ angular.module('goodMood', [
       templateUrl: 'iteration/newiteration.html',
     })
     .state('collaboration.iteration', {
-      url: '/iteration/:i_id',
+      url: '/iteration',
+      abstract: true,
+      templateUrl: 'iteration/iterationparent.html'
+    })
+    .state('collaboration.iteration.view', {
+      url: '/:i_id',
       controller: 'IterationCtrl as iteration',
       templateUrl: 'iteration/iteration.html',
       resolve: {

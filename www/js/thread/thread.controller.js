@@ -1,11 +1,11 @@
 angular.module('goodMood')
-	.controller('ThreadCtrl', function ($scope, $ionicLoading, thread, messages, Auth){
+	.controller('ThreadCtrl', function ($scope, $ionicLoading, $ionicNavBarDelegate, thread, messages, Auth){
 		$scope.thread = thread;
 		$scope.messages = messages;
 		$scope.writeMessage;
 		$scope.recordNote;
 		$scope.text;
-
+		
 		var vm = this;
 
 		this.getTitle = function(){
@@ -26,6 +26,10 @@ angular.module('goodMood')
 
 		this.writeText = function(){
 			$scope.writeMessage = true;
+		}
+
+		this.back = function(){
+			$ionicNavBarDelegate.back()
 		}
  
 		this.sendMessage = function(type, content){

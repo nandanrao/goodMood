@@ -22,12 +22,16 @@ angular.module('goodMood')
 			Thread.create(coords, iteration, collaboration)
 				.then(_.partialRight(iteration.$addThread.bind(iteration)))
 				.then(function(thread){
-					$state.go('^.thread', {t_id: thread.$id})
+					$state.go('^.^.thread', {t_id: thread.$id})
 				})
 		}
 
 		this.addIteration = function(){
 			$state.go('^.newIteration')
+		}
+
+		this.home = function(){
+			$state.go('home')
 		}
 
 		var bg = angular.element(document.getElementById('iterationBg'))
@@ -44,14 +48,14 @@ angular.module('goodMood')
 		$ionicGesture.on('swipedown', function(e){
 			console.log('swipedown', $scope.previous)
 			if($scope.previous){
-				$state.go('^.iteration', {i_id: $scope.previous})
+				$state.go('^.view', {i_id: $scope.previous})
 			}
 		}, bg)
 
 		$ionicGesture.on('swipeup', function(e){
 			console.log('swipeup', $scope.mext)
 			if($scope.next){
-				$state.go('^.iteration', {i_id: $scope.next})
+				$state.go('^.view', {i_id: $scope.next})
 			} 
 		}, bg)
 

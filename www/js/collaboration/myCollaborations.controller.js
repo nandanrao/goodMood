@@ -15,6 +15,6 @@ angular.module('goodMood')
 		this.collaboration = function(id){
 			var collaboration = collaborations[id]
 			var i_id = _.last(_.keys(collaboration.iterations))
-			$state.go('collaboration.iteration', {c_id: id, i_id: i_id})
+			$state.go('collaboration.iteration.view', {c_id: id, i_id: i_id})
 		}
 	})
