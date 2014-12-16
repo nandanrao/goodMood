@@ -97,7 +97,7 @@ describe('Controller: Iteration', function(){
 		describe('addThread', function(){
 
 			beforeEach(function(){
-				$state.expectTransitionTo('^.thread')
+				$state.expectTransitionTo('^.^.thread')
 			})
 
 			it('creates a new thread', function(){

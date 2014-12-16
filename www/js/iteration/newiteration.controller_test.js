@@ -92,7 +92,7 @@ describe('Controller: newIteration', function(){
 		describe('takePicture', function(){
 
 			beforeEach(function(){
-				$state.expectTransitionTo('^.iteration')
+				$state.expectTransitionTo('^.iteration.view')
 			})
 
 			it('takes a picture', function(){

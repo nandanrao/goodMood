@@ -76,14 +76,8 @@ catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/iteration.html",
     "<ion-view id=\"pg-iteration\" title=\"{{ collaboration.name }} - \">\n" +
-    "	<ion-nav-buttons side=\"primary\">\n" +
-    "	  <button class=\"button-clear\" ng-click=\"iteration.home()\">\n" +
-    "	    <i class=\"ion-arrow-left-c\"></i> Home\n" +
-    "	  </button>\n" +
-    "	</ion-nav-buttons>	\n" +
-    "	<div id=\"iterationBg\" style=\"background-image: url('{{ imgURI }}')\">\n" +
-    "		<canvas id=\"myCanvas\">\n" +
-    "		</canvas>\n" +
+    "	<div style=\"background-image: url('{{ imgURI }}')\">\n" +
+    "		<canvas iteration-canvas></canvas>\n" +
     "		<div ng-if=\"!next\">\n" +
     "			<button class=\"addIteration\" ng-click=\"iteration.addIteration()\">+ iteration</button>\n" +
     "		</div>\n" +
@@ -105,7 +99,7 @@ catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/iterationparent.html",
     "<ion-view>\n" +
-    "	<ion-nav-view animation=\"no-animate\"></ion-nav-view> \n" +
+    "	<ion-nav-view animation=\"no-animate\" id=\"iterationView\"></ion-nav-view> \n" +
     "</ion-view>");
 }]);
 })();
@@ -189,11 +183,6 @@ catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/thread.html",
     "<ion-view>\n" +
-    "<ion-nav-buttons side=\"primary\">\n" +
-    "  <button class=\"button-clear\" ng-click=\"thread.back()\">\n" +
-    "    <i class=\"ion-arrow-left-c\"></i> Back\n" +
-    "  </button>\n" +
-    "</ion-nav-buttons>	\n" +
     "	<div>this is thread view</div>\n" +
     "	<div class=\"messages\">\n" +
     "		<div class=\"message\" ng-repeat=\"message in messages\">\n" +

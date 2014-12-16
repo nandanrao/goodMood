@@ -1,12 +1,6 @@
 <ion-view id="pg-iteration" title="{{ collaboration.name }} - ">
-	<ion-nav-buttons side="primary">
-	  <button class="button-clear" ng-click="iteration.home()">
-	    <i class="ion-arrow-left-c"></i> Home
-	  </button>
-	</ion-nav-buttons>	
-	<div id="iterationBg" style="background-image: url('{{ imgURI }}')">
-		<canvas id="myCanvas">
-		</canvas>
+	<div style="background-image: url('{{ imgURI }}')">
+		<canvas iteration-canvas></canvas>
 		<div ng-if="!next">
 			<button class="addIteration" ng-click="iteration.addIteration()">+ iteration</button>
 		</div>

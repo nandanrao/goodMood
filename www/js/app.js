@@ -133,7 +133,7 @@ angular.module('goodMood', [
   });
 
   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams){
-    console.log('state change success', toState.name)
+    // console.log('state change success', toState.name)
     $ionicLoading.hide()
     if (!Auth.$getAuth()){
       event.preventDefault()
@@ -150,11 +150,11 @@ angular.module('goodMood', [
     }
   })
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
-    console.log('state change error', toState.name, error.message)
+    // console.log('state change error', toState.name, error.message)
     $state.go("login", {notify: false});
   });
   $rootScope.$on('$stateChangeStart', function(event, toState){
-    console.log('statechange start', toState.name)
+    // console.log('statechange start', toState.name)
   })
 
 })

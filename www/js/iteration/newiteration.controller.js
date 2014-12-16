@@ -23,7 +23,9 @@ angular.module('goodMood')
 		}
 
 		function getPicture (options){
-			$cordovaCamera.getPicture(pictureOptions)
+			var pictureRecieved = $cordovaCamera.getPicture(pictureOptions)
+			$ionicLoading.show();
+			pictureRecieved
 				.then(function(datURI){
 					$ionicLoading.show();
 					return Image.create(datURI)

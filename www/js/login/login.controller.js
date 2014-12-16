@@ -7,10 +7,9 @@ angular.module('goodMood')
     this.authLogin = function(authProvider){
       var authObj;
       var options = {};
+      $ionicLoading.show()
       return Auth.viaOAuth(authProvider)
         .then(function(_authObj){
-          $ionicLoading.show()
-          console.log("back from authing")
           authObj = _authObj;
           return User.findByAuth(authProvider, authObj)
         })

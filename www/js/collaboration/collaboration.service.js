@@ -28,7 +28,7 @@ angular.module('goodMood')
 
       $getUsers: function(){
         var users = {};
-        var ref = this.$inst().$ref();
+        var ref = this.$inst().$ref().child('users');
         var deferred = $q.defer();
         ref.once('value', function(snap){
           var promises = {};
@@ -42,7 +42,7 @@ angular.module('goodMood')
               users[user.$id] = user
             })
             deferred.resolve(users)
-            ref.child('users').on('child_added', function(snap){
+            ref.on('child_added', function(snap){
               var id = snap.key()
               if(!users[id]){
                 var ref = fb.users.child(id)
@@ -50,8 +50,9 @@ angular.module('goodMood')
                   users[obj.$id] = obj
                 })  
               }
+              
             })
-            ref.child('users').on('child_removed', function(snap){
+            ref.on('child_removed', function(snap){
               if (users[snap.key()]){
                delete users[snap.key()] 
               }
