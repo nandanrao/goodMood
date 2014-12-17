@@ -37,8 +37,10 @@ angular.module('goodMood')
 				// Remove the shape, with its listeners, on dom removal,
 				// this allows the elements to react to server-side data events
 				el.on('$destroy', function(){
-					shape.remove()
-					paper.view.update()
+					if (shape.view){
+						shape.remove()	
+						paper.view.update()
+					}
 				})
 			}
 		}

@@ -3,7 +3,9 @@ angular.module('goodMood')
 		return {
 			restrict: 'A',
 			link: function (scope, el, attrs){
+
 				paper.setup(el[0]);
+				var project = paper.project
 				paper.view.draw();
 
 				var tool = new paper.Tool();
@@ -12,7 +14,13 @@ angular.module('goodMood')
 				var position;
 
 				// TODO: Fix numbers/math on animation. CLEAN UP!
-				tool.onMouseDown = function(e){	
+				tool.onMouseDown = function(e){
+					console.log("mousedown and view:", paper.view)
+					console.log("projects", paper.projects)
+					console.log('this views project', project)
+					console.log('the currently active project', paper.project)
+					console.log('all tools', paper.tools)
+					console.log('currently active tool', paper.tool)
 					position = e.point;
 					var i = 0;
 					counting = $interval(function(){
@@ -62,22 +70,42 @@ angular.module('goodMood')
 					}
 				}
 
-				$ionicGesture.on('swipedown', function(e){
-					console.log('swipedown')
-					scope.$emit('swipedown')
-				}, el)
+				// Helper function to create ionicgesture listener -- move to utils?
+				function createListener(gesture, el){
+					var fn = function(e){
+						scope.$emit(gesture)
+					}
+					var instance = $ionicGesture.on(gesture, fn, el)
+					var remove = $ionicGesture.off(instance, gesture, fn).bind(null)
+					return remove
+				}
 
-				$ionicGesture.on('swipeup', function(e){
-					console.log('swipeup')
-					scope.$emit('swipeup')
-				}, el)
+				var createListenerHere = _.partial(createListener, el)
 
-				$ionicGesture.on('swiperight', function(e){
-					console.log('swipe right!')
-					scope.$emit('swipeup')
-				}, el)
+				var listenerArray = [
+					'swipedown', 
+					'swipeup', 
+					'swiperight'
+				];
 
+				var removers;
+				scope.$on('$ionicView.enter', function(){
+					removers = _.forEach(listenerArray, createListener.bind(null, el))
+				})
 
+				scope.$on('$ionicView.leave', function(){
+					_.forEach(removers, Function.prototype.call)
+				})
+				
+				scope.$on('$ionicView.beforeEnter', function(){
+					project.activate()
+					tool.activate()
+				})
+
+				scope.$on('$ionicView.unloaded', function(){
+					tool.remove();
+					project.remove();
+				})
 			}
 		}
 	}) 

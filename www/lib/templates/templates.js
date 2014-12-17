@@ -75,7 +75,7 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/iteration.html",
-    "<ion-view id=\"pg-iteration\" title=\"{{ collaboration.name }} - \">\n" +
+    "<ion-view cache-view=\"true\" title=\"{{ collaboration.name }} - \">\n" +
     "	<div id=\"iterationBg\">\n" +
     "		<img iteration-image src=\"{{ imgURI }}\" />\n" +
     "		<canvas iteration-canvas></canvas>\n" +
