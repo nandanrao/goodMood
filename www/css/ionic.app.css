@@ -7015,12 +7015,14 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
-#iterationBg {
+div#iterationBg {
   position: fixed;
   height: 100%;
-  width: 100%;
-  background-position: center center;
-  background-size: cover; }
+  width: 100%; }
+
+iteration-image {
+  position: absolute;
+  width: 100%; }
 
 canvas {
   position: absolute;

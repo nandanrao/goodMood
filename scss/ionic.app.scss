@@ -21,12 +21,17 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-#iterationBg {
+div#iterationBg {
 	position: fixed;
 	height: 100%;
 	width: 100%; 
-	background-position: center center;
-	background-size: cover;
+	// display: flex;
+    // align-items: center;
+}
+
+iteration-image {
+    position: absolute;
+    width: 100%; 
 }
 
 canvas {

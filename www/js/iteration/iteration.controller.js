@@ -1,11 +1,12 @@
 angular.module('goodMood')
-	.controller('IterationCtrl', function ($scope, $window, $log, $timeout, $state, $ionicLoading, collaboration, iteration, threads, Thread, image, $ionicGesture){
+	.controller('IterationCtrl', function ($scope, $window, $log, $timeout, $state, $ionicLoading, collaboration, iteration, threads, Thread, image){
 		
 		$scope.currentIteration = iteration;
 		$scope.collaboration = collaboration;
 		$scope.iterationArray = _.keys(collaboration.iterations).sort();
 		$scope.drawing;
-		$scope.threads = threads;
+		$scope.colabits = collaboration.iterations
+		$scope.threads = threads;	
 		$scope.imgURI = "data:image/jpeg;base64," + image.$value;
 		$scope.currentIndex = $scope.iterationArray.indexOf(iteration.$id);
 		$scope.previous = $scope.iterationArray[$scope.currentIndex - 1];
@@ -25,6 +26,11 @@ angular.module('goodMood')
 		this.home = function(){
 			$state.go('home')
 		}
+
+		$scope.$on('$ionicView.enter', function(){
+			console.log('view entered')
+			$scope.$apply()
+		})
 
 		$scope.$on('addThread', function(event, coords){
 			console.log(coords)

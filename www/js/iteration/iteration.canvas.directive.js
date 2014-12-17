@@ -62,12 +62,6 @@ angular.module('goodMood')
 					}
 				}
 
-				// $ionicGesture.on('hold', function(e){
-				// 	var x = e.gesture.center.pageX
-				// 	var y = e.gesture.center.pageY
-				// 	scope.$emit('addThread', {x:x, y:y})
-				// }, el)
-
 				$ionicGesture.on('swipedown', function(e){
 					console.log('swipedown')
 					scope.$emit('swipedown')

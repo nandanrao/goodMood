@@ -2,7 +2,7 @@ angular.module('goodMood')
 	.directive('drawing', function ($state, Thread){
 		return {
 			restrict: 'E',
-			link: function(scope, el, attrs, ctrl){
+			link: function(scope, el, attrs){
 
 				// Created shape automatically appended to paperjs 'view'
 				var shape = new paper.Path.Circle({
@@ -21,6 +21,8 @@ angular.module('goodMood')
 					console.log('clicked!')
 					$state.go('^.^.thread', {t_id: attrs.id})
 				}
+
+				console.log(scope.imageSize)
 
 				Thread.getNewMessagesAsStream(attrs.id).onValue(function(val){
 					var num = _.size(val)

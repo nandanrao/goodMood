@@ -1,9 +1,11 @@
 <ion-view id="pg-iteration" title="{{ collaboration.name }} - ">
-	<div style="background-image: url('{{ imgURI }}')">
+	<div id="iterationBg">
+		<img iteration-image src="{{ imgURI }}" />
 		<canvas iteration-canvas></canvas>
 		<div ng-if="!next">
 			<button class="addIteration" ng-click="iteration.addIteration()">+ iteration</button>
 		</div>
+		<p>{{ colabits }} </p>
 		<div ng-if="!iteration.hasThreads()" class="instructions">
 				<p>
 					Hey these are the instructions for adding a thread and drawing on this thing

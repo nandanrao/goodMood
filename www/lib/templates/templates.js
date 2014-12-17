@@ -76,11 +76,13 @@ catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/iteration.html",
     "<ion-view id=\"pg-iteration\" title=\"{{ collaboration.name }} - \">\n" +
-    "	<div style=\"background-image: url('{{ imgURI }}')\">\n" +
+    "	<div id=\"iterationBg\">\n" +
+    "		<img iteration-image src=\"{{ imgURI }}\" />\n" +
     "		<canvas iteration-canvas></canvas>\n" +
     "		<div ng-if=\"!next\">\n" +
     "			<button class=\"addIteration\" ng-click=\"iteration.addIteration()\">+ iteration</button>\n" +
     "		</div>\n" +
+    "		<p>{{ colabits }} </p>\n" +
     "		<div ng-if=\"!iteration.hasThreads()\" class=\"instructions\">\n" +
     "				<p>\n" +
     "					Hey these are the instructions for adding a thread and drawing on this thing\n" +
