@@ -15,12 +15,6 @@ angular.module('goodMood')
 
 				// TODO: Fix numbers/math on animation. CLEAN UP!
 				tool.onMouseDown = function(e){
-					console.log("mousedown and view:", paper.view)
-					console.log("projects", paper.projects)
-					console.log('this views project', project)
-					console.log('the currently active project', paper.project)
-					console.log('all tools', paper.tools)
-					console.log('currently active tool', paper.tool)
 					position = e.point;
 					var i = 0;
 					counting = $interval(function(){
@@ -34,7 +28,7 @@ angular.module('goodMood')
 						}
 						if (i === 8){
 							paper.view.onFrame = angular.noop	
-							console.log(paper.view.bounds)
+							// console.log(paper.view.bounds)
 							// TODO: store bounds to deal with different frame size? 
 							scope.$emit('addThread', {x: position.x, y: position.y})
 						}
@@ -71,16 +65,14 @@ angular.module('goodMood')
 				}
 
 				// Helper function to create ionicgesture listener -- move to utils?
-				function createListener(gesture, el){
+				function createListener(gesture){
 					var fn = function(e){
 						scope.$emit(gesture)
 					}
 					var instance = $ionicGesture.on(gesture, fn, el)
-					var remove = $ionicGesture.off(instance, gesture, fn).bind(null)
+					var remove = $ionicGesture.off.bind(null, instance, gesture, fn)
 					return remove
 				}
-
-				var createListenerHere = _.partial(createListener, el)
 
 				var listenerArray = [
 					'swipedown', 
@@ -90,11 +82,13 @@ angular.module('goodMood')
 
 				var removers;
 				scope.$on('$ionicView.enter', function(){
-					removers = _.forEach(listenerArray, createListener.bind(null, el))
+					removers = _.map(listenerArray, createListener)
 				})
 
 				scope.$on('$ionicView.leave', function(){
-					_.forEach(removers, Function.prototype.call)
+					_.forEach(removers, function(fn){
+						fn()
+					})
 				})
 				
 				scope.$on('$ionicView.beforeEnter', function(){

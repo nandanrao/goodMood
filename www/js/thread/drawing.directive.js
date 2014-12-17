@@ -12,7 +12,7 @@ angular.module('goodMood')
 					opacity: .75
 				});
 
-				console.log(paper.view.bounds)
+				// console.log(paper.view.bounds)
 				// This is needed to update the view immediately!
 				paper.view.update()
 
@@ -22,7 +22,7 @@ angular.module('goodMood')
 					$state.go('^.^.thread', {t_id: attrs.id})
 				}
 
-				console.log(scope.imageSize)
+				// console.log(scope.imageSize)
 
 				Thread.getNewMessagesAsStream(attrs.id).onValue(function(val){
 					var num = _.size(val)
