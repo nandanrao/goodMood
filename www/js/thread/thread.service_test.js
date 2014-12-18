@@ -21,7 +21,7 @@ describe('Factory: Thread', function(){
     try { 
     	$timeout.flush() 
     }
-    // Catch all digest errors! Throw all others!
+    // Catch all digest errors! Throw all others (i.e. assertions)!
     catch (e) {
     	if(!/digest/ig.test(e.message) && !/deferred/ig.test(e.message)){
     		throw e
@@ -68,7 +68,6 @@ describe('Factory: Thread', function(){
 		drawing = {
 			$id: '5' 
 		}
-
 	})
 
 
@@ -103,7 +102,6 @@ describe('Factory: Thread', function(){
 			})
 
 		})
-
 	})
 
 	describe('Instance Methods', function(){
@@ -144,8 +142,8 @@ describe('Factory: Thread', function(){
 				flushAll()
 			})
 
-			// TODO: this only works when loaded asObject, not asArray - 
-			// figuer out which it should be... 
+			// TODO: this test breaks when loaded asArray, instead of asObject - 
+			// but works fine in production, #mockbug?
 			xit('adds a message to its own $getMessages object', function(){
 				var messages;
 				thread.$getMessages().then(function(obj){
@@ -158,7 +156,7 @@ describe('Factory: Thread', function(){
 				thread.$addMessage(messageData)
 				thread.$addMessage(messageData)
 				flushAll()
-				// Last transaction never goes through... #mockbug
+				// 3 messages added - last transaction never goes through... #mockbug
 				_.size(_.filter(messages, function(val, key){
 					return /^[^\$]/ig.test(key)
 				})).should.equal(3)
@@ -187,7 +185,6 @@ describe('Factory: Thread', function(){
 				})
 				flushAll()
 			})
-
 
 			it('throws a typeError if not given a message object', function(){
 				var notMessage = {};
@@ -241,12 +238,12 @@ describe('Factory: Thread', function(){
 				flushAll()
 			})
 
-			it('returns a bacon event stream', function(){
+			it('returns a Bacon event stream', function(){
 				var stream = Thread.getNewMessagesAsStream(thread.$id)
 				stream.should.be.instanceof(Bacon.EventStream)
 			})
 
-			it('The stream contains messages not seen by the user', function(){
+			it('returns a stream of messages not seen by the user', function(){
 				// Messages that should not be contained in stream
 				thread.$addMessage(messageData)
 				thread.$addMessage(messageData)
@@ -263,7 +260,7 @@ describe('Factory: Thread', function(){
 				})
 				flushAll()
 				flushAll()
-				// Add 2 more messages (last transaction doesn't go through - mockbug)
+				// Add 2 more messages (last transaction doesn't go through - #mockbug)
 				thread.$addMessage(messageData)
 				thread.$addMessage(messageData)
 				thread.$addMessage(messageData)

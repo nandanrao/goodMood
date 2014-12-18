@@ -10362,6 +10362,7 @@ var View = Base.extend(Emitter, {
 		this._viewSize = size;
 		(this._matrix = new Matrix())._owner = this;
 		this._zoom = 1;
+		console.log('initializing', View._focused)
 		if (!View._focused)
 			View._focused = this;
 		this._frameItems = {};

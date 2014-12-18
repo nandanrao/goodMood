@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.controller('IterationCtrl', function ($scope, $window, $log, $timeout, $state, $ionicLoading, collaboration, iteration, threads, Thread, image){
+	.controller('IterationCtrl', function ($scope, $window, $log, $timeout, $state, $ionicLoading, $ionicHistory, collaboration, iteration, threads, Thread, image){
 		
 		$scope.currentIteration = iteration;
 		$scope.collaboration = collaboration;
@@ -27,13 +27,30 @@ angular.module('goodMood')
 			$state.go('home')
 		}
 
+		this.previous = function(){
+			if($scope.previous){
+				$ionicHistory.nextViewOptions({
+					disableAnimate: true
+				})
+				$state.go('^.view', {i_id: $scope.previous})
+			}
+		}
+
+		this.next = function(){
+			if($scope.next){
+				$ionicHistory.nextViewOptions({
+					disableAnimate: true
+				})
+				$state.go('^.view', {i_id: $scope.next})
+			} 
+		}
+
 		$scope.$on('$ionicView.enter', function(){
-			console.log('view entered')
+			console.log('view entered', collaboration)
 			$scope.$apply()
 		})
 
 		$scope.$on('addThread', function(event, coords){
-			console.log(coords)
 			$ionicLoading.show();
 			Thread.create(coords, iteration, collaboration)
 				.then(_.partialRight(iteration.$addThread.bind(iteration)))
@@ -44,16 +61,12 @@ angular.module('goodMood')
 		
 		$scope.$on('swipedown', function(){
 			console.log('previous: ', $scope.previous)
-			if($scope.previous){
-				$state.go('^.view', {i_id: $scope.previous})
-			}
+			vm.previous()
 		})
 
 		$scope.$on('swipeup', function(){
-			console.log('next: ', $scope.mext)
-			if($scope.next){
-				$state.go('^.view', {i_id: $scope.next})
-			} 
+			console.log('next: ', $scope.next)
+			vm.next()
 		})
 
 		$scope.$on('swiperight', function(){

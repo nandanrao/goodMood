@@ -1,10 +1,10 @@
-<ion-view cache-view="true" title="{{ collaboration.name }} - ">
+<ion-view title="{{ collaboration.name }} - ">
 	<div id="iterationBg">
 		<img iteration-image src="{{ imgURI }}" />
 		<canvas iteration-canvas></canvas>
-		<div ng-if="!next">
-			<button class="addIteration" ng-click="iteration.addIteration()">+ iteration</button>
-		</div>
+		<button class="addIteration" ng-if="!next" ng-click="iteration.addIteration()">+ iteration</button>
+		<button class="previous" ng-if="previous" ng-click="iteration.previous()"> previous iteration </button>
+		<button class="next" ng-if="next" ng-click="iteration.next()"> next iteration </button>
 		<p>{{ colabits }} </p>
 		<div ng-if="!iteration.hasThreads()" class="instructions">
 				<p>

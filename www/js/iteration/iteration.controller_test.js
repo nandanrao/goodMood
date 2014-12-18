@@ -94,26 +94,26 @@ describe('Controller: Iteration', function(){
 
 		}))
 
-		describe('addThread', function(){
+		describe('on addThread event', function(){
 
 			beforeEach(function(){
 				$state.expectTransitionTo('^.^.thread')
 			})
 
 			it('creates a new thread', function(){
-				IterationCtrl.addThread()
+				$scope.$emit('addThread')
 				flushAll()
 				Thread.create.should.have.been.called
 			})
 
 			it('adds that thread to itself', function(){
-				IterationCtrl.addThread()
+				$scope.$emit('addThread')
 				flushAll()
 				iteration.$addThread.should.have.been.calledWith(thread)
 			})
 
 			it('transitions to state thread', function(){
-				IterationCtrl.addThread()
+				$scope.$emit('addThread')
 				flushAll()
 				$state.ensureAllTransitionsHappened()
 			})

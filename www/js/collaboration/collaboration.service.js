@@ -204,7 +204,6 @@ angular.module('goodMood')
 
     Collaboration.getThreadsAsStream = function(id){
       var ref = fb.threads.startAt(id).endAt(id)
-      var bus = new Bacon.Bus()
       return Bacon.fromEventTarget(ref, 'value')
         .map(function(snap){
           return _.pluck(snap.val(), '$id')

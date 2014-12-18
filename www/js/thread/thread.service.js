@@ -62,30 +62,14 @@ angular.module('goodMood')
       },
 
       $getMessages: function(){
+        // Firebase2.0 --> transition to orderbychild!
         // var ref = fb.messages.orderByChild('thread').equalTo(this.id);
         var ref = fb.messages.startAt(this.$id).endAt(this.$id)
-        ref.on('value', function(snap){
-          console.log(Date.now(), snap.val())
-        })
         return $firebase(ref).$asArray().$loaded();
-      },
-
-      $populate: function(){
-        var self = this;
-        return $q.all({
-          })
-          .then(function(results){
-            return self;
-          })
       }
     })
 
 		Thread.ref = fb.threads;
-    
-    // Helper function that returns a populated Thread object
-    var populate = function(obj){
-    	return obj.$populate();
-    }
 
     /**
      * Creates a new thread on a particular iteration
@@ -112,7 +96,7 @@ angular.module('goodMood')
     	var ref = Thread.ref.push(data);
       ref.setPriority(collaboration.$id)
     	var obj = $firebase(ref, {objectFactory: ThreadFactory})
-    	return obj.$asObject().$loaded().then(populate)
+    	return obj.$asObject().$loaded()
     }
 
     /**
