@@ -33,5 +33,18 @@ angular.module('goodMood')
       return email;
     }
 
+    utils.formatDate = function(str){
+      var options = {
+        month: 'short',  
+        day: 'numeric',
+        year: 'numeric', 
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      } 
+      var date = new Date(str);
+      return date.toLocaleString('es-US', options);
+    }
+
     return utils;
 	})

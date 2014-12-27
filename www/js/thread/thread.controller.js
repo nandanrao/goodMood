@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.controller('ThreadCtrl', function ($scope, $ionicLoading, $ionicNavBarDelegate, thread, messages, Auth){
+	.controller('ThreadCtrl', function ($scope, $ionicLoading, $ionicHistory, thread, messages, Auth, utils){
 		$scope.thread = thread;
 		$scope.messages = messages;
 		$scope.writeMessage;
@@ -7,6 +7,8 @@ angular.module('goodMood')
 		$scope.text;
 		
 		var vm = this;
+
+		this.formatDate = utils.formatDate;
 
 		this.getTitle = function(){
 			if (_.size(messages) > 0){
@@ -28,8 +30,8 @@ angular.module('goodMood')
 			$scope.writeMessage = true;
 		}
 
-		this.back = function(){
-			$ionicNavBarDelegate.back()
+		this.goBack = function(){
+			$ionicHistory.goBack()
 		}
  
 		this.sendMessage = function(type, content){

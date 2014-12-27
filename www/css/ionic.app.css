@@ -7075,6 +7075,11 @@ ion-view {
 ion-header-bar .buttons {
   display: flex;
   align-items: center; }
+  ion-header-bar .buttons button {
+    color: #FFF; }
+    ion-header-bar .buttons button::before {
+      font-size: 28px;
+      line-height: 28px; }
 
 .gm-nav-bar {
   color: #FFF;
@@ -7084,3 +7089,39 @@ ion-header-bar .buttons {
   .gm-nav-bar .ion-navicon::before {
     font-size: 50px !important;
     line-height: 50px !important; }
+
+#pg_myCollaborations div.collaborations {
+  display: flex; }
+#pg_myCollaborations div.collaboration {
+  display: inline-block;
+  cursor: pointer; }
+  #pg_myCollaborations div.collaboration img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border-width: 5px;
+    border-color: #277FE9; }
+
+#pg_newCollaboration form {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center; }
+#pg_newCollaboration div.iwant {
+  width: 100%;
+  max-width: 800px;
+  margin: auto auto;
+  text-align: center;
+  color: #277FE9;
+  font-family: 'Futura-Bold';
+  font-size: 2em; }
+  #pg_newCollaboration div.iwant input {
+    font-size: 1em;
+    color: #277FE9;
+    font-family: 'Futura-Bold';
+    border: none;
+    border-bottom: 4px solid #277FE9;
+    display: inline-block;
+    width: 50%;
+    margin-left: 0.5em; }

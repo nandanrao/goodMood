@@ -23,7 +23,10 @@ angular.module('goodMood')
 			$state.go('^.^.newIteration')
 		}
 
-		this.home = function(){
+		this.goBack = function(){
+			$ionicHistory.nextViewOptions({
+			  historyRoot: true
+			});
 			$state.go('home')
 		}
 

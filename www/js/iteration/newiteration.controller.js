@@ -5,6 +5,15 @@ angular.module('goodMood')
 			destinationType: 0
 		}
 
+		this.getViewTitle = function(){
+			if (collaboration.iterations.length > 1){
+				return 'nueva iteracion'
+			}
+			else {
+				return 'agrega una imagen'
+			}
+		}
+
 		this.isDesktop = function(){
 			if (!window.cordova){
 				return true

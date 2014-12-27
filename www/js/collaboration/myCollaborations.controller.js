@@ -1,16 +1,24 @@
 angular.module('goodMood')
-	.controller('MyCollaborationsCtrl', function ($scope, Auth, $state, user, collaborations, Collaboration){
+	.controller('MyCollaborationsCtrl', function ($scope, Auth, $state, user, collaborations, Collaboration, collaborationDefaultBg){
 		
 		$scope.user = user;
 		$scope.collaborations = collaborations;
 
-		this.logout = function(){
-		  Auth.logout();
-		}
+		console.log(collaborations)
+
+		// "data:image/jpeg;base64," + image.$value
 
 		this.newCollaboration = function(){
 			$state.go('newCollaboration')
 		}
+
+		this.getCollaborationImage = function(collaboration){
+			var imgURI;
+			imgURI = "data:image/jpeg;base64," + collaboration._lastImage.$value || collaborationDefaultBg
+			return imgURI
+		}
+
+		// http://upload.wikimedia.org/wikipedia/commons/c/cd/Panda_Cub_from_Wolong,_Sichuan,_China.JPG
 
 		this.collaboration = function(id){
 			var collaboration = collaborations[id]

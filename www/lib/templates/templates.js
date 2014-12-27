@@ -14,20 +14,20 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("collaboration/myCollaborations.html",
-    "<ion-view view-title=\"mis collaboraciones\">\n" +
-    "	<ion-nav-buttons side=\"left\">\n" +
+    "<ion-view id=\"pg_myCollaborations\" view-title=\"mis collaboraciones\">\n" +
+    "	<ion-nav-buttons side=\"primary\">\n" +
     "	 <button menu-toggle=\"left\" class=\"button button-icon icon ion-navicon\"></button>\n" +
     "	</ion-nav-buttons>\n" +
     "	<ion-content>\n" +
-    "	<button class=\"button button-block button-energized button-outline\" ng-click=\"myCollaborations.logout()\">Logout</button>\n" +
-    "\n" +
-    "	<div ng-repeat=\"collaboration in collaborations\">\n" +
-    "		<div class=\"collaboration\">\n" +
-    "			<button class=\"button button-block button-balanced button-outline\" ng-click=\"myCollaborations.collaboration(collaboration.$id)\">{{ collaboration.name }}</button>\n" +
+    "		<div class=\"collaborations\">\n" +
+    "			<div ng-repeat=\"collaboration in collaborations\" class=\"collaboration\" ng-click=\"myCollaborations.collaboration(collaboration.$id)\">\n" +
+    "			<img src=\"{{ myCollaborations.getCollaborationImage(collaboration) }}\">\n" +
+    "			<p class=\"title\">\n" +
+    "				{{ collaboration.title }}\n" +
+    "			</p>\n" +
+    "			</div>  \n" +
     "		</div>\n" +
-    "	</div>\n" +
-    "\n" +
-    "	<button class=\"newCollaboration\" ng-click=\"myCollaborations.newCollaboration()\">+</button>\n" +
+    "		<button class=\"newCollaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">+</button>\n" +
     "	</ion-content>\n" +
     "</ion-view>");
 }]);
@@ -38,14 +38,18 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("collaboration/newcollaboration.html",
-    "<ion-view title=\"New Collaboration\">\n" +
+    "<ion-view id=\"pg_newCollaboration\" view-title=\"que deseas?\">\n" +
+    "	<ion-nav-buttons side=\"secondary\">\n" +
+    "		<button ng-click=\"newCollaboration.cancel()\" class=\"ion-close\" nav-direction=\"back\">\n" +
+    "		</button>\n" +
+    "	</ion-nav-buttons>\n" +
     "	<div class=\"newCollaboration\">\n" +
     "		<form class=\"newCollaborationForm\" name=\"newCollaborationForm\" novalidate ng-submit=\"newCollaboration.submit()\">\n" +
     "			<div class=\"iwant\">\n" +
-    "				<span>I want a</span>\n" +
+    "				<span>Yo quiero</span>\n" +
     "				<input required class=\"newcollaboration\" ng-model=\"name\"></input>\n" +
     "			</div>\n" +
-    "			<button class=\"check\">&#10003;</button>\n" +
+    "			<!-- <button class=\"check\">&#10003;</button> -->\n" +
     "		</form>\n" +
     "	</div>\n" +
     "</ion-view>");
@@ -76,6 +80,10 @@ catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/iteration.html",
     "<ion-view title=\"{{ collaboration.name }} - \">\n" +
+    "	<ion-nav-buttons side=\"primary\">\n" +
+    "	 <button ng-click=\"iteration.goBack()\" nav-direction=\"back\" class=\"ion-chevron-left\">\n" +
+    "	 </button>\n" +
+    "	</ion-nav-buttons>\n" +
     "	<div id=\"iterationBg\">\n" +
     "		<img iteration-image src=\"{{ imgURI }}\" />\n" +
     "		<canvas iteration-canvas></canvas>\n" +
@@ -111,7 +119,7 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/newiteration.html",
-    "<ion-view title=\"Add Iteration\">\n" +
+    "<ion-view view-title=\"newIteration.getViewTitle()\">\n" +
     "	<div id=\"pg-newIteration\">\n" +
     "		<div class=\"mobile\" ng-if=\"!newIteration.isDesktop()\">\n" +
     "			<button class=\"button button-block button-energized button-outline\" ng-click=\"newIteration.fromDevice()\" class=\"fromDevice\">Get a Picture from your Camera Roll</button>\n" +
@@ -184,12 +192,15 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/thread.html",
-    "<ion-view>\n" +
-    "	<div>this is thread view</div>\n" +
+    "<ion-view id=\"pg_thread\" view-title=\"comentario\">\n" +
+    "	<ion-nav-buttons side=\"primary\">\n" +
+    "	 <button ng-click=\"thread.goBack()\" class=\"ion-chevron-left\">\n" +
+    "	 </button>\n" +
+    "	</ion-nav-buttons>\n" +
     "	<div class=\"messages\">\n" +
     "		<div class=\"message\" ng-repeat=\"message in messages\">\n" +
     "			<p ng-if=\"message.type === 'text'\">\n" +
-    "				{{ message.content }}\n" +
+    "				{{ thread.formatDate(message.sentAt) }} || {{ message.content }}\n" +
     "			</p>\n" +
     "		</div>\n" +
     "	</div>\n" +

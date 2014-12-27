@@ -164,15 +164,31 @@ angular.module('goodMood')
         // Wrap in $q when so that its a promise!
         return deferred.promise
       },
+
+      $getLastImage: function(){
+        var i_id = _.last(_.keys(this.iterations))
+        if (i_id){
+          return Iteration.findById(i_id)
+                  .then(function(iteration){
+                    return iteration.$getImage()
+                  })  
+        }
+        else {
+          return $q.when(null)
+        }
+        
+      },
   	
       $populate: function(){
         var self = this;
         return $q.all({
             users: self.$getUsers(),
+            lastImage: self.$getLastImage()
             // newMessages: self.$getNewMessages()
           })
           .then(function(results){
             self._users = results.users;
+            self._lastImage = results.lastImage;
             // self._newMessages = results.newMessages;
           	return self;
           })
