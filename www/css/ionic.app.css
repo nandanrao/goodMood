@@ -14,6 +14,22 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
+@font-face {
+  font-family: 'Gotham';
+  src: url('../fonts/Gotham-Book/gotham-book.eot');
+  /* IE9 Compat Modes */
+  src: url('../fonts/Gotham-Book/gotham-book.eot?#iefix') format('embedded-opentype'), url('../fonts/Gotham-Book/gotham-book.woff2') format('woff2'), url('../fonts/Gotham-Book/gotham-book.woff') format('woff'), url('../fonts/Gotham-Book/gotham-book.ttf') format('truetype'), url('../fonts/Gotham-Book/gotham-book.svg#Gotham') format('svg');
+  /* Legacy iOS */
+  font-weight: normal; }
+
+@font-face {
+  font-family: 'Futura-Bold';
+  src: url('../fonts/Futura-Bold/futurabold.eot');
+  /* IE9 Compat Modes */
+  src: url('../fonts/Futura-Bold/futurabold.eot?#iefix') format('embedded-opentype'), url('../fonts/Futura-Bold/futurabold.woff2') format('woff2'), url('../fonts/Futura-Bold/futurabold.woff') format('woff'), url('../fonts/Futura-Bold/futurabold.ttf') format('truetype'), url('../fonts/Futura-Bold/futurabold.svg#Futura-Bold') format('svg');
+  /* Legacy iOS */
+  font-weight: bold; }
+
 /*!
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
@@ -2210,7 +2226,7 @@ body, .ionic-body {
   color: #000;
   word-wrap: break-word;
   font-size: 14px;
-  font-family: "Helvetica Neue", "Roboto", sans-serif;
+  font-family: "Gotham", "Helvetica Neue", "Roboto", sans-serif;
   line-height: 20px;
   text-rendering: optimizeLegibility;
   -webkit-backface-visibility: hidden;
@@ -2447,31 +2463,31 @@ ion-infinite-scroll {
 
 /* If you change these, change platform.scss as well */
 .has-header {
-  top: 44px; }
+  top: 100px; }
 
 .no-header {
   top: 0; }
 
 .has-subheader {
-  top: 88px; }
+  top: 200px; }
 
 .has-tabs-top {
-  top: 93px; }
+  top: 149px; }
 
 .has-header.has-subheader.has-tabs-top {
-  top: 137px; }
+  top: 249px; }
 
 .has-footer {
-  bottom: 44px; }
+  bottom: 100px; }
 
 .has-subfooter {
-  bottom: 88px; }
+  bottom: 200px; }
 
 .has-tabs, .bar-footer.has-tabs {
   bottom: 49px; }
 
 .has-footer.has-tabs {
-  bottom: 93px; }
+  bottom: 149px; }
 
 .pane {
   -webkit-transform: translate3d(0, 0, 0);
@@ -2525,7 +2541,7 @@ cite {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   color: #000;
   font-weight: 500;
-  font-family: "Helvetica Neue", "Roboto", sans-serif;
+  font-family: "Gotham", "Helvetica Neue", "Roboto", sans-serif;
   line-height: 1.2; }
   h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small {
     font-weight: normal;
@@ -2727,7 +2743,7 @@ a.subdued {
   box-sizing: border-box;
   padding: 5px;
   width: 100%;
-  height: 44px;
+  height: 100px;
   border-width: 0;
   border-style: solid;
   border-top: 1px solid transparent;
@@ -2848,13 +2864,13 @@ a.subdued {
     overflow: hidden;
     margin: 0 10px;
     min-width: 30px;
-    height: 43px;
+    height: 99px;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 17px;
     font-weight: 500;
-    line-height: 44px; }
+    line-height: 100px; }
     .bar .title.title-left {
       text-align: left; }
     .bar .title.title-right {
@@ -3117,7 +3133,7 @@ a.subdued {
   border-top-width: 1px;
   border-bottom-width: 0;
   background-position: top;
-  height: 44px; }
+  height: 100px; }
   .bar-footer.item-input-inset {
     position: absolute; }
 
@@ -3125,14 +3141,14 @@ a.subdued {
   padding: 0; }
 
 .bar-subheader {
-  top: 44px;
+  top: 100px;
   display: block;
-  height: 44px; }
+  height: 100px; }
 
 .bar-subfooter {
-  bottom: 44px;
+  bottom: 100px;
   display: block;
-  height: 44px; }
+  height: 100px; }
 
 .nav-bar-block {
   position: absolute;
@@ -3775,7 +3791,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
 /* Allow parent element to have tabs-top */
 /* If you change this, change platform.scss as well */
 .tabs-top > .tabs, .tabs.tabs-top {
-  top: 44px;
+  top: 100px;
   padding-top: 0;
   background-position: bottom;
   border-top-width: 0;
@@ -3804,7 +3820,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   white-space: nowrap;
   font-weight: 400;
   font-size: 14px;
-  font-family: "Helvetica Neue", "Roboto", sans-serif;
+  font-family: "Gotham", "Helvetica Neue", "Roboto", sans-serif;
   opacity: 0.7; }
   .tab-item:hover {
     cursor: pointer; }
@@ -3986,19 +4002,19 @@ ion-tabs.tabs-color-active-dark .tab-item {
   .modal.ng-leave-active {
     bottom: 0; }
   .platform-ios.platform-cordova .modal-wrapper .modal .bar-header:not(.bar-subheader) {
-    height: 44px; }
+    height: 100px; }
     .platform-ios.platform-cordova .modal-wrapper .modal .bar-header:not(.bar-subheader) > * {
       margin-top: 0; }
   .platform-ios.platform-cordova .modal-wrapper .modal .tabs-top > .tabs, .platform-ios.platform-cordova .modal-wrapper .modal .tabs.tabs-top {
-    top: 44px; }
+    top: 100px; }
   .platform-ios.platform-cordova .modal-wrapper .modal .has-header, .platform-ios.platform-cordova .modal-wrapper .modal .bar-subheader {
-    top: 44px; }
+    top: 100px; }
   .platform-ios.platform-cordova .modal-wrapper .modal .has-subheader {
-    top: 88px; }
+    top: 200px; }
   .platform-ios.platform-cordova .modal-wrapper .modal .has-tabs-top {
-    top: 93px; }
+    top: 149px; }
   .platform-ios.platform-cordova .modal-wrapper .modal .has-header.has-subheader.has-tabs-top {
-    top: 137px; } }
+    top: 249px; } }
 
 .modal-open {
   pointer-events: none; }
@@ -5146,7 +5162,7 @@ label, input, button, select, textarea {
   line-height: 1.42857; }
 
 input, button, select, textarea {
-  font-family: "Helvetica Neue", "Roboto", sans-serif; }
+  font-family: "Gotham", "Helvetica Neue", "Roboto", sans-serif; }
 
 .item-input {
   display: -webkit-box;
@@ -6865,21 +6881,21 @@ a.button {
  * Platform specific tweaks
  */
 .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) {
-  height: 64px; }
+  height: 120px; }
   .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader).item-input-inset .item-input-wrapper {
     margin-top: 19px !important; }
   .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
     margin-top: 20px; }
 .platform-ios.platform-cordova:not(.fullscreen) .tabs-top > .tabs, .platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top {
-  top: 64px; }
+  top: 120px; }
 .platform-ios.platform-cordova:not(.fullscreen) .has-header, .platform-ios.platform-cordova:not(.fullscreen) .bar-subheader {
-  top: 64px; }
+  top: 120px; }
 .platform-ios.platform-cordova:not(.fullscreen) .has-subheader {
-  top: 108px; }
+  top: 220px; }
 .platform-ios.platform-cordova:not(.fullscreen) .has-tabs-top {
-  top: 113px; }
+  top: 169px; }
 .platform-ios.platform-cordova:not(.fullscreen) .has-header.has-subheader.has-tabs-top {
-  top: 157px; }
+  top: 269px; }
 .platform-ios.platform-cordova.status-bar-hide {
   margin-bottom: 20px; }
 
@@ -7020,9 +7036,28 @@ div#iterationBg {
   height: 100%;
   width: 100%; }
 
+button {
+  border: none;
+  background: none; }
+
+button.newCollaboration {
+  width: 100px;
+  height: 100px;
+  color: #FFF;
+  background: #277FE9;
+  border-style: solid;
+  border-radius: 50%;
+  border-width: 20px;
+  border-color: #1289FF;
+  font-size: 20px; }
+
 iteration-image {
   position: absolute;
   width: 100%; }
+
+.bar .title {
+  font-family: 'Futura-Bold';
+  font-size: 22px; }
 
 canvas {
   position: absolute;
@@ -7036,3 +7071,16 @@ canvas {
 
 ion-view {
   background-color: #fff; }
+
+ion-header-bar .buttons {
+  display: flex;
+  align-items: center; }
+
+.gm-nav-bar {
+  color: #FFF;
+  background-color: #277FE9; }
+  .gm-nav-bar .icon {
+    color: #FFF; }
+  .gm-nav-bar .ion-navicon::before {
+    font-size: 50px !important;
+    line-height: 50px !important; }

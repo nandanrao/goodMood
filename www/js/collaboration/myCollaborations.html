@@ -1,16 +1,16 @@
-<ion-view>
-<ion-content>
-this is my collaborattions
-<button class="button button-block button-energized button-outline" ng-click="myCollaborations.logout()">Logout</button>
-<p>{{ user.email }}</p>
-<p>{{ user.displayName }}</p>
+<ion-view view-title="mis collaboraciones">
+	<ion-nav-buttons side="left">
+	 <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+	</ion-nav-buttons>
+	<ion-content>
+	<button class="button button-block button-energized button-outline" ng-click="myCollaborations.logout()">Logout</button>
 
-<div ng-repeat="collaboration in collaborations">
-	<div class="collaboration">
-		<button class="button button-block button-balanced button-outline" ng-click="myCollaborations.collaboration(collaboration.$id)">{{ collaboration.name }}</button>
+	<div ng-repeat="collaboration in collaborations">
+		<div class="collaboration">
+			<button class="button button-block button-balanced button-outline" ng-click="myCollaborations.collaboration(collaboration.$id)">{{ collaboration.name }}</button>
+		</div>
 	</div>
-</div>
 
-<button ng-click="myCollaborations.newCollaboration()">new collaboration</button>
-</ion-content>
+	<button class="newCollaboration" ng-click="myCollaborations.newCollaboration()">+</button>
+	</ion-content>
 </ion-view>
