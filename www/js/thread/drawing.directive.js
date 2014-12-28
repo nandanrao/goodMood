@@ -40,6 +40,7 @@ angular.module('goodMood')
 					else {
 						textItem.content = ''
 					}
+					paper.view.update()
 				})
 
 				// Remove the shape, with its listeners, on dom removal,
