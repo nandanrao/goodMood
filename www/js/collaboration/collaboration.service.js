@@ -143,7 +143,9 @@ angular.module('goodMood')
         var newMessages = {};
         var deferred = $q.defer();
         var stream = Collaboration.getNewMessagesAsStream(this.$id)
+        console.log('getting new messages')
         stream.onValue(function(val){
+          console.log('resolving')
           deferred.resolve(newMessages)
           _.forEach(newMessages, function(val, key, col){
             delete col[key]
@@ -161,7 +163,6 @@ angular.module('goodMood')
           value: true,
           enumerable: false
         })
-        // Wrap in $q when so that its a promise!
         return deferred.promise
       },
 
@@ -183,13 +184,13 @@ angular.module('goodMood')
         var self = this;
         return $q.all({
             users: self.$getUsers(),
-            lastImage: self.$getLastImage()
-            // newMessages: self.$getNewMessages()
+            lastImage: self.$getLastImage(),
+            newMessages: self.$getNewMessages()
           })
           .then(function(results){
             self._users = results.users;
             self._lastImage = results.lastImage;
-            // self._newMessages = results.newMessages;
+            self._newMessages = results.newMessages;
           	return self;
           })
       }
@@ -222,7 +223,7 @@ angular.module('goodMood')
       var ref = fb.threads.startAt(id).endAt(id)
       return Bacon.fromEventTarget(ref, 'value')
         .map(function(snap){
-          return _.pluck(snap.val(), '$id')
+          return _.keys(snap.val())
         })
     }
 

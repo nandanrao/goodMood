@@ -36,12 +36,13 @@ describe('Factory: utils', function(){
 			var spy = sinon.spy()
 			var stream = utils.gatherMessageStreams(stream1, notificationFn)
 			stream.onValue(function(val){
+				console.log('val', val)
 				spy(val)
 			})
 
 			setTimeout(function(){
-				spy.firstCall.calledWith([msg1, msg2a, msg2b]).should.be.true
-				spy.secondCall.calledWith([msg10, msg2a, msg2b, msg3]).should.be.true
+				spy.firstCall.should.be.calledWith([msg1, msg2a, msg2b])
+				spy.secondCall.should.be.calledWith([msg10, msg2a, msg2b, msg3])
 				done()
 			}, 100)
 

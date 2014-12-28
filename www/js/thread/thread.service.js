@@ -127,6 +127,7 @@ angular.module('goodMood')
             promises.push($firebase(ref).$asObject().$loaded())
           })
           $q.all(promises).then(function(results){
+            // console.log('promise resolves', id, results)
             bus.push(results)
           })
         })
@@ -135,9 +136,7 @@ angular.module('goodMood')
         return _.filter(arr, function(obj){
           return obj.sentAt > thread.lastViewed[Auth.currentUser.$id]
         })
-      }).filter(function(arr){
-          return arr.length > 0
-        })
+      })
     }
 
 		return Thread

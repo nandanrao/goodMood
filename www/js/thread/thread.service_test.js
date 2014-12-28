@@ -256,7 +256,7 @@ describe('Factory: Thread', function(){
 				var spy = sinon.spy()
 				var stream = Thread.getNewMessagesAsStream(thread.$id)
 				stream.onValue(function(val){
-					spy(val)
+					spy(val)	
 				})
 				flushAll()
 				flushAll()
@@ -266,9 +266,11 @@ describe('Factory: Thread', function(){
 				thread.$addMessage(messageData)
 				flushAll()
 				flushAll()
-				// Spy should be called twice, last time it should have the 2 messages
-				spy.should.have.been.calledTwice
-				spy.secondCall.args[0].length.should.equal(2)
+				// Spy should be called three times, first with 0 messages
+				// and lastly with 2 messages
+				spy.should.have.been.calledThrice
+				spy.firstCall.args[0].length.should.equal(0)
+				spy.thirdCall.args[0].length.should.equal(2)
 			})
 		})
 
