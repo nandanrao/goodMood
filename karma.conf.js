@@ -37,6 +37,7 @@ module.exports = function ( karma ) {
       'www/js/app.js',
       'www/js/utils/utils.service.js',
       'www/js/user/user.service.js',
+      'www/js/cloud/cloud.service.js',
       'www/js/thread/thread.service.js',
       'www/js/thread/thread.controller.js',
       'www/js/thread/drawing.directive.js',
@@ -57,10 +58,8 @@ module.exports = function ( karma ) {
       'www/js/collaboration/myCollaborations.controller.js',
       'www/js/collaboration/collaboration.service.js',
       'www/js/collaboration/collaboration.defaultbackground.service.js',
-      'www/js/cloud/cloud.service.js',
       'www/js/Auth/Auth.service.js',
       'www/js/Auth/Auth.service_test.js',
-      'www/js/cloud/cloud.service_test.js',
       'www/js/collaboration/collaboration.service_test.js',
       'www/js/collaboration/myCollaborations.controller_test.js',
       'www/js/collaboration/newcollaboration.controller_test.js',
@@ -72,6 +71,7 @@ module.exports = function ( karma ) {
       'www/js/login/localLogin.directive_test.js',
       'www/js/login/login.controller_test.js',
       'www/js/thread/thread.service_test.js',
+      'www/js/cloud/cloud.service_test.js',
       'www/js/user/user.service_test.js',
       'www/js/utils/utils.service_test.js'
       // endinject

@@ -5,6 +5,13 @@ angular.module('goodMood')
 		$scope.writeMessage;
 		$scope.recordNote;
 		$scope.text;
+
+		$scope.$on('$ionicView.enter', function(){
+			thread.$open()
+		})
+		$scope.$on('$ionicView.leave', function(){
+			thread.$close()
+		})
 		
 		var vm = this;
 

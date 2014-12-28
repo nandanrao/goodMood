@@ -4,9 +4,11 @@ angular.module('goodMood')
 			restrict: 'E',
 			link: function(scope, el, attrs){
 
+				var point = new paper.Point(Number(attrs.x), Number(attrs.y))
+
 				// Created shape automatically appended to paperjs 'view'
 				var shape = new paper.Path.Circle({
-					center: new paper.Point(Number(attrs.x), Number(attrs.y)),
+					center: point,
 					fillColor: '#b6ff29',
 					radius: 30,
 					opacity: .75
@@ -24,13 +26,19 @@ angular.module('goodMood')
 
 				// console.log(scope.imageSize)
 
+				var textItem = new paper.PointText(point);
+				textItem.fillColor = '#277FE9';
+				textItem.justification = 'center';
+				textItem.fontFamily = 'Futura-Bold';
+				textItem.fontSize = '22px';
+
 				Thread.getNewMessagesAsStream(attrs.id).onValue(function(val){
 					var num = _.size(val)
 					if (num > 0){
-						// set val
+						textItem.content = num
 					}
 					else {
-						// clear val
+						textItem.content = ''
 					}
 				})
 

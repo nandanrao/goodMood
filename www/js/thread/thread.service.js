@@ -8,14 +8,18 @@ angular.module('goodMood')
        */
       $open: function(){
         var obj = {};
-        obj[Auth.currentUser.$id] = Infinity;
-        this.$inst().$update('lastViewed', obj);
+        obj[Auth.currentUser.$id] = 9999999999999;
+        this.$inst().$ref()
+          .child('lastViewed')
+          .child(Auth.currentUser.$id)
+          .set(99999999999999)
         // On connection close, timestamp the lastViewed
         // TODO: Create process for multi-device!
-        // this.$inst().$ref().onDisconnect()
-        //   .update('lastViewed', {
-        //     UserId: Firebase.ServerValue.TIMESTAMP
-        //   })
+        this.$inst().$ref()
+          .child('lastViewed')
+          .child(Auth.currentUser.$id)
+          .onDisconnect()
+          .set(Firebase.ServerValue.TIMESTAMP)
       },
 
       /**
@@ -24,11 +28,16 @@ angular.module('goodMood')
        * keep track of this...? 
        */
       $close: function(){
-        var obj = {};
-        obj[Auth.currentUser.$id] = Firebase.ServerValue.TIMESTAMP;
-        this.$inst().$update('lastViewed', obj);
+        this.$inst().$ref()
+          .child('lastViewed')
+          .child(Auth.currentUser.$id)
+          .set(Firebase.ServerValue.TIMESTAMP)
         // Cancel the onDisconnect listener for this data
-        // this.$inst().$ref().onDisconnect().cancel()
+        this.$inst().$ref()
+          .child('lastViewed')
+          .child(Auth.currentUser.$id)
+          .onDisconnect()
+          .cancel()
       },
 
       /**
@@ -127,7 +136,6 @@ angular.module('goodMood')
             promises.push($firebase(ref).$asObject().$loaded())
           })
           $q.all(promises).then(function(results){
-            // console.log('promise resolves', id, results)
             bus.push(results)
           })
         })
