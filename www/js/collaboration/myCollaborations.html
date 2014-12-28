@@ -7,7 +7,10 @@
 			<div ng-repeat="collaboration in collaborations" class="collaboration" ng-click="myCollaborations.collaboration(collaboration.$id)">
 			<img src="{{ myCollaborations.getCollaborationImage(collaboration) }}">
 			<p class="title">
-				{{ collaboration.title }}
+				{{ collaboration.name }}
+			</p>
+			<p class="unreadMessages">
+				{{ myCollaborations.getNewMessages(collaboration) }}
 			</p>
 			</div>  
 		</div>

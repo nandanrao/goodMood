@@ -4,8 +4,13 @@ angular.module('goodMood')
 		$scope.user = user;
 		$scope.collaborations = collaborations;
 
-		console.log(collaborations)
-
+		_.forEach(collaborations, function(obj){
+			console.log(obj._newMessages)	
+		})
+		
+		this.getNewMessages = function(collaboration){
+			return _.size(collaboration._newMessages)
+		}
 		// "data:image/jpeg;base64," + image.$value
 
 		this.newCollaboration = function(){

@@ -23,7 +23,10 @@ module.run(["$templateCache", function($templateCache) {
     "			<div ng-repeat=\"collaboration in collaborations\" class=\"collaboration\" ng-click=\"myCollaborations.collaboration(collaboration.$id)\">\n" +
     "			<img src=\"{{ myCollaborations.getCollaborationImage(collaboration) }}\">\n" +
     "			<p class=\"title\">\n" +
-    "				{{ collaboration.title }}\n" +
+    "				{{ collaboration.name }}\n" +
+    "			</p>\n" +
+    "			<p class=\"unreadMessages\">\n" +
+    "				{{ myCollaborations.getNewMessages(collaboration) }}\n" +
     "			</p>\n" +
     "			</div>  \n" +
     "		</div>\n" +
