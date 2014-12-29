@@ -19,27 +19,7 @@ $dark:                            #444 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 
-@font-face {
-    font-family: 'Gotham';
-    src: url('../fonts/Gotham-Book/gotham-book.eot'); /* IE9 Compat Modes */
-    src: url('../fonts/Gotham-Book/gotham-book.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('../fonts/Gotham-Book/gotham-book.woff2') format('woff2'), /* Super Modern Browsers */
-         url('../fonts/Gotham-Book/gotham-book.woff') format('woff'), /* Pretty Modern Browsers */
-         url('../fonts/Gotham-Book/gotham-book.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('../fonts/Gotham-Book/gotham-book.svg#Gotham') format('svg'); /* Legacy iOS */
-    font-weight: normal;
-}
 
-@font-face {
-    font-family: 'Futura-Bold';
-    src: url('../fonts/Futura-Bold/futurabold.eot'); /* IE9 Compat Modes */
-    src: url('../fonts/Futura-Bold/futurabold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('../fonts/Futura-Bold/futurabold.woff2') format('woff2'), /* Super Modern Browsers */
-         url('../fonts/Futura-Bold/futurabold.woff') format('woff'), /* Pretty Modern Browsers */
-         url('../fonts/Futura-Bold/futurabold.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('../fonts/Futura-Bold/futurabold.svg#Futura-Bold') format('svg'); /* Legacy iOS */
-    font-weight: bold;
-}
 
 @import "typography";
 @import "colors";
@@ -62,15 +42,9 @@ button {
 }
 
 button.newCollaboration {
-    width: 100px;
-    height: 100px;
-    color: $color-type-c;
-    background: $color-a;
-    border-style: solid;
-    border-radius: 50%;
-    border-width: 20px;
-    border-color: $color-b;
-    font-size: 20px;
+    width: 35%;
+    margin: auto auto;
+    display: block;
 }
 
 iteration-image {
@@ -78,8 +52,6 @@ iteration-image {
     width: 100%; 
 }
 
-$title-font-family: 'Futura-Bold';
-$title-font-size: 22px;
 
 .bar .title {
     font-family: $title-font-family;

@@ -52,6 +52,7 @@ module.exports = function ( karma ) {
       'www/js/fb/fb.js',
       'www/js/facebook/facebookConnectPlugin.service.js',
       'www/js/facebook/facebook.service.js',
+      'www/js/components/addbutton.directive.js',
       'www/js/collaboration/timeline.controller.js',
       'www/js/collaboration/newcollaboration.controller.js',
       'www/js/collaboration/myCollaborations.controller.js',

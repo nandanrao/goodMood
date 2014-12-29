@@ -30,7 +30,13 @@ module.run(["$templateCache", function($templateCache) {
     "			</p>\n" +
     "			</div>  \n" +
     "		</div>\n" +
-    "		<button class=\"newCollaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">+</button>\n" +
+    "		<!-- <button class=\"newCollaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
+    "			<i class=\"ion-plus\"></i>\n" +
+    "		</button> -->\n" +
+    "		<button class=\"newCollaboration\">\n" +
+    "			<!-- <img src=\"img/add-button.svg\" style=\"width: 100px\"> -->\n" +
+    "			<add-button></add-button>\n" +
+    "		</button>\n" +
     "	</ion-content>\n" +
     "</ion-view>");
 }]);

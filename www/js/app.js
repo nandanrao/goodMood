@@ -62,16 +62,16 @@ angular.module('goodMood', [
     //     }]
     //   }
     // })
-    .state('collaboration.threads', {
-      url: '/threads',
-      controller: 'CollaborationThreadsCtrl as collaborationThreads',
-      templateUrl: 'collaboration/threads.html',
-      resolve: {
-        threads: ['collaboration', function (collaboration){
-          return collaboration.$getThreads()
-        }]
-      }
-    })
+    // .state('collaboration.threads', {
+    //   url: '/threads',
+    //   controller: 'CollaborationThreadsCtrl as collaborationThreads',
+    //   templateUrl: 'collaboration/threads.html',
+    //   resolve: {
+    //     threads: ['collaboration', function (collaboration){
+    //       return collaboration.$getThreads()
+    //     }]
+    //   }
+    // })
     .state('collaboration.thread', {
       url: '/thread/:t_id',
       controller: 'ThreadCtrl as thread',
