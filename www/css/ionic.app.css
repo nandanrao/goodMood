@@ -7119,3 +7119,17 @@ ion-header-bar .buttons {
     display: inline-block;
     width: 50%;
     margin-left: 0.5em; }
+
+#pg--new-iteration .mobile button {
+  width: 100%;
+  display: block; }
+#pg--new-iteration .mobile .image {
+  width: 25%;
+  margin: auto auto;
+  display: block; }
+#pg--new-iteration .mobile p {
+  font-family: 'Futura-Bold';
+  color: #277FE9;
+  font-size: 2em;
+  width: 100%;
+  text-align: center; }

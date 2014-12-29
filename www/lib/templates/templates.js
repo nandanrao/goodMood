@@ -124,18 +124,30 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/newiteration.html",
-    "<ion-view view-title=\"{{ newIteration.getViewTitle() }}\">\n" +
-    "	<div id=\"pg-newIteration\">\n" +
-    "		<div class=\"mobile\" ng-if=\"!newIteration.isDesktop()\">\n" +
-    "			<button class=\"button button-block button-energized button-outline\" ng-click=\"newIteration.fromDevice()\" class=\"fromDevice\">Get a Picture from your Camera Roll</button>\n" +
-    "			<button class=\"button button-block button-energized button-outline\" ng-click=\"newIteration.takePicture()\" class=\"takePicture\">Take a new picture</button>\n" +
-    "		</div>\n" +
-    "		<div class=\"desktop\" ng-if=\"newIteration.isDesktop()\">\n" +
-    "			<button class=\"skip button button-block button-energized button-outline\" ng-click=\"newIteration.fromDevice()\">\n" +
-    "				Skip\n" +
-    "			</button>\n" +
-    "		</div>\n" +
+    "<ion-view id=\"pg--new-iteration\" view-title=\"{{ newIteration.getViewTitle() }}\">\n" +
+    "	<ion-nav-buttons side=\"secondary\">\n" +
+    "		<button ng-click=\"newCollaboration.cancel()\" class=\"ion-close\" nav-direction=\"back\">\n" +
+    "		</button>\n" +
+    "	</ion-nav-buttons>\n" +
+    "	<div class=\"mobile\">\n" +
+    "		<button ng-click=\"newIteration.fromDevice()\" class=\"fromDevice\">\n" +
+    "			<div class=\"image\">\n" +
+    "				<img src=\"img/picture-file.svg\">\n" +
+    "			</div>\n" +
+    "			<p>elije una foto</p>\n" +
+    "		</button>\n" +
+    "		<button ng-click=\"newIteration.takePicture()\" class=\"takePicture\">\n" +
+    "			<div class=\"image\">\n" +
+    "				<img src=\"img/camera.svg\">\n" +
+    "			</div>\n" +
+    "			<p>toma una foto</p>\n" +
+    "		</button>\n" +
     "	</div>\n" +
+    "<!-- 		<div class=\"desktop\" ng-if=\"newIteration.isDesktop()\">\n" +
+    "		<button class=\"skip button button-block button-energized button-outline\" ng-click=\"newIteration.fromDevice()\">\n" +
+    "			Skip\n" +
+    "		</button>\n" +
+    "	</div> -->\n" +
     "</ion-view>");
 }]);
 })();

@@ -151,5 +151,25 @@ ion-header-bar {
   }
 }
 
-
+#pg--new-iteration {
+  .mobile {
+    // display: flex;
+    button {
+      width: 100%;
+      display: block;  
+    }
+    .image {
+      width: 25%;
+      margin: auto auto;
+      display: block;
+    }
+    p {
+      font-family: $title-font-family;
+      color: $color-a;
+      font-size: 2em;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
 

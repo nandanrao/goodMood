@@ -21,7 +21,6 @@ angular.module('goodMood')
 			return false	
 		}
 		
-
 		this.fromDevice = function(){
 			pictureOptions.sourceType = 0
 			getPicture(pictureOptions)
@@ -53,8 +52,10 @@ angular.module('goodMood')
 					})
 				})
 				.catch(function(err){
+					// TODO: this error message is silly when user cancels the action!
 					$log.error('Error creating a picture for a new iteration')
 					$window.alert('Sorry we had a problem! Try again?')
+					$state.reload()
 				})
 		}
 	})
