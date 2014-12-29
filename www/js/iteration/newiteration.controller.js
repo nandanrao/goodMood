@@ -6,7 +6,7 @@ angular.module('goodMood')
 		}
 
 		this.getViewTitle = function(){
-			if (collaboration.iterations.length > 1){
+			if (collaboration.iterations && collaboration.iterations.length > 1){
 				return 'nueva iteracion'
 			}
 			else {

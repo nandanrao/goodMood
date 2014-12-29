@@ -30,11 +30,7 @@ module.run(["$templateCache", function($templateCache) {
     "			</p>\n" +
     "			</div>  \n" +
     "		</div>\n" +
-    "		<!-- <button class=\"newCollaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
-    "			<i class=\"ion-plus\"></i>\n" +
-    "		</button> -->\n" +
-    "		<button class=\"newCollaboration\">\n" +
-    "			<!-- <img src=\"img/add-button.svg\" style=\"width: 100px\"> -->\n" +
+    "		<button class=\"newCollaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
     "			<add-button></add-button>\n" +
     "		</button>\n" +
     "	</ion-content>\n" +
@@ -128,7 +124,7 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/newiteration.html",
-    "<ion-view view-title=\"newIteration.getViewTitle()\">\n" +
+    "<ion-view view-title=\"{{ newIteration.getViewTitle() }}\">\n" +
     "	<div id=\"pg-newIteration\">\n" +
     "		<div class=\"mobile\" ng-if=\"!newIteration.isDesktop()\">\n" +
     "			<button class=\"button button-block button-energized button-outline\" ng-click=\"newIteration.fromDevice()\" class=\"fromDevice\">Get a Picture from your Camera Roll</button>\n" +
