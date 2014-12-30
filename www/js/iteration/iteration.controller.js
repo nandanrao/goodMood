@@ -22,7 +22,7 @@ angular.module('goodMood')
 
 		this.readInstructions = function(){
 			$scope.instructionsRead = true
-		}
+		} 
 
 		this.addIteration = function(){
 			$state.go('^.^.newIteration')
