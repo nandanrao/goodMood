@@ -56,7 +56,7 @@ module.run(["$templateCache", function($templateCache) {
     "			<!-- <button class=\"check\">&#10003;</button> -->\n" +
     "		</form>\n" +
     "	</div>\n" +
-    "</ion-view>");
+    "</ion-view>	");
 }]);
 })();
 
@@ -247,8 +247,7 @@ module.run(["$templateCache", function($templateCache) {
     "		</div>\n" +
     "	</div>\n" +
     "	<div class=\"choose\">\n" +
-    "		<button class=\"voice\" ng-click=\"thread.redcordNote()\">\n" +
-    "		voice\n" +
+    "		<button voice-message-record class=\"voice\" ng-click=\"thread.redcordNote()\">\n" +
     "		</button>\n" +
     "		<button class=\"text\" ng-click=\"thread.writeText()\">		\n" +
     "		text\n" +
@@ -259,5 +258,14 @@ module.run(["$templateCache", function($templateCache) {
     "	</form>\n" +
     "</ion-view>\n" +
     "");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("thread/voicemessagerecord.html",
+    "<i class=\"ion-mic-a\"></i>");
 }]);
 })();

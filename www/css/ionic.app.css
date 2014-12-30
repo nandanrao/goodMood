@@ -7189,3 +7189,7 @@ ion-header-bar .buttons {
   .gm-nav-bar .ion-navicon::before {
     font-size: 50px !important;
     line-height: 50px !important; }
+
+button[voice-message-record] {
+  color: #277FE9;
+  font-size: 3em; }

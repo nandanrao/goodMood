@@ -76,3 +76,8 @@ ion-header-bar {
   }
 }
 
+button[voice-message-record] {
+  color: $color-a;
+  font-size: 3em; 
+}
+

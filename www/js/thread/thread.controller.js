@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.controller('ThreadCtrl', function ($scope, $ionicLoading, $ionicHistory, thread, messages, Auth){
+	.controller('ThreadCtrl', function ($scope, $ionicLoading, $ionicHistory, thread, messages, Auth, $cordovaMedia){
 		$scope.thread = thread;
 		$scope.messages = messages;
 		$scope.writeMessage;
@@ -14,6 +14,8 @@ angular.module('goodMood')
 		})
 		
 		var vm = this;
+
+		console.log('this is cordovamedia in controller', $cordovaMedia, JSON.stringify($cordovaMedia))
 
 		this.getTitle = function(){
 			if (_.size(messages) > 0){
