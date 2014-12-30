@@ -11,7 +11,7 @@ angular.module('goodMood')
 
 
 				// test for platform and create file based on that?
-				var src = 'goodmood.amr'
+				var src = cordova.file.applicationDirectory + "media/sound.amr"
 				console.log(_.keys($cordovaMedia.newMedia(src)))
 
 			
