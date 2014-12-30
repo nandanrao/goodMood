@@ -2,14 +2,11 @@ angular.module('goodMood')
 	.directive('iterationCanvas', function ($ionicGesture, $interval){
 		return {
 			restrict: 'A',
-			controller: function ($scope){
-				console.log('controllering')
-			},
 			link: function (scope, el, attrs){
 				paper.setup(el[0]);
-				var project = paper.project
 				paper.view.draw();
-				console.log('linking', paper.view._id, scope.imageSize)
+				
+				var project = paper.project
 				var tool = new paper.Tool();
 				var counting;
 				var circle;
@@ -95,13 +92,13 @@ angular.module('goodMood')
 				})
 				
 				scope.$on('$ionicView.beforeEnter', function(){
-					console.log('beforeenter', project, tool)
+					// console.log('beforeenter', project, tool)
 					project.activate()
 					tool.activate()
 				})
 
 				scope.$on('$ionicView.unloaded', function(){
-					console.log("unloaded", project._view._id, project, tool)
+					// console.log("unloaded", project._view._id, project, tool)
 					tool.remove();
 					project.remove();
 				})

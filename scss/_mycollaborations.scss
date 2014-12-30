@@ -1,0 +1,25 @@
+#pg--my-collaborations {
+  div.collaborations {
+    display: flex;
+  }
+  button.new-collaboration {
+      // position: fixed;
+      // bottom: 10em;
+      // left: 50%;
+      // margin-left: -75px;
+      width: 150px;
+      margin: auto auto;
+      display: block;
+  }
+  div.collaboration {
+    display: inline-block;
+    cursor: pointer; 
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border-width: 5px;
+      border-color: $color-a;  
+    }
+  }
+}

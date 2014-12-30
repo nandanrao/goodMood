@@ -3,6 +3,7 @@ angular.module('goodMood')
 		return {
 			restrict: 'A',
 			// TODO: deal with image optimization!
-			templateUrl: 'img/add-button.svg'
+			// TODO
+			templateUrl: 'img/add-button2.svg'
 		}
 	})	

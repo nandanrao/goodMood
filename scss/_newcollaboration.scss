@@ -1,0 +1,36 @@
+
+#pg--new-collaboration {
+  form {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  div.iwant {
+    width: 100%;
+    max-width: 800px;
+    margin: auto auto;
+    text-align: center;
+    color: $color-a;
+    font-family: $title-font-family;
+    font-size:  2em;
+    span {
+      
+    }
+    input {
+      font-size: 1em;
+      color: $color-a;
+      font-family: $title-font-family;
+      border: none;
+      border-bottom: 4px solid $color-a;
+      display: inline-block;
+      width: 50%;
+      margin-left: .5em;
+
+    }
+  }
+}
+
+
+

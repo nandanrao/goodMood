@@ -1,0 +1,38 @@
+text-message {
+  & > div {
+    position: relative;
+    margin: auto 10px auto 10px;
+    padding: 10px 15px;
+  }
+  div.arrow-holder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  div.arrow {
+    width: 1em;
+  }
+  div.sender {
+    background-color: #DDD;
+    div.arrow {
+      align-self: flex-end;
+    }
+  }
+  div.reciever {
+    background-color: #CCC;
+    div.arrow {
+      align-self: flex-start;
+    }
+  }
+  p.date {
+    text-transform: uppercase;
+    font-size: .66em;
+    color: #333;
+    line-height: 0.75;
+  }
+}

@@ -20,70 +20,28 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 
 
-
-@import "typography";
-@import "colors";
-@import "base";
+// Import default overrides
+@import "typography",
+        "colors",
+        "base"
+;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-div#iterationBg {
-	// position: absolute;
-	// height: 100%;
-	// width: 100%; 
-	// display: flex;
- //  align-items: center;
- //  justify-content: center;
-}
-
-
-// reset!
-p {
-  margin: 0
-}
-
-button {
-    border: none;
-    background: none;
-}
-
-button.newCollaboration {
-    width: 35%;
-    margin: auto auto;
-    display: block;
-}
-
-button.addIteration {
-  position: fixed;
-  bottom: 10em;
-  left: 50%;
-  margin-left: -75px;
-  width: 150px;
-}
-
-img.iteration-image {
-    // position: absolute;
-    max-width: 100%;
-    max-height: 100%;
-    margin: auto auto;
-}
+// Import modules
+@import "reset",
+        "iteration",
+        "textmessage",
+        "newiteration",
+        "newcollaboration",
+        "mycollaborations"
+;
 
 
 .bar .title {
     font-family: $title-font-family;
     font-size: $title-font-size;
-}
-
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
 }
 
 ion-view {
@@ -118,143 +76,3 @@ ion-header-bar {
   }
 }
 
-#pg_myCollaborations {
-  div.collaborations {
-    display: flex;
-  }
-  div.collaboration {
-    display: inline-block;
-    cursor: pointer; 
-    img {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      border-width: 5px;
-      border-color: $color-a;  
-    }
-  }
-}
-
-#pg_newCollaboration {
-  form {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-  }
-  div.iwant {
-    width: 100%;
-    max-width: 800px;
-    margin: auto auto;
-    text-align: center;
-    color: $color-a;
-    font-family: $title-font-family;
-    font-size:  2em;
-    span {
-      
-    }
-    input {
-      font-size: 1em;
-      color: $color-a;
-      font-family: $title-font-family;
-      border: none;
-      border-bottom: 4px solid $color-a;
-      display: inline-block;
-      width: 50%;
-      margin-left: .5em;
-
-    }
-  }
-}
-
-#pg--new-iteration {
-  .mobile {
-    // display: flex;
-    button {
-      width: 100%;
-      display: block;  
-    }
-    .image {
-      width: 25%;
-      margin: auto auto;
-      display: block;
-    }
-    p {
-      font-family: $title-font-family;
-      color: $color-a;
-      font-size: 2em;
-      width: 100%;
-      text-align: center;
-    }
-  }
-}
-
-text-message {
-  & > div {
-    position: relative;
-    margin: auto 10px auto 10px;
-    padding: 10px 15px;
-  }
-  div.arrow-holder {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  div.arrow {
-    width: 1em;
-  }
-  div.sender {
-    background-color: #DDD;
-    div.arrow {
-      align-self: flex-end;
-    }
-  }
-  div.reciever {
-    background-color: #CCC;
-    div.arrow {
-      align-self: flex-start;
-    }
-  }
-  p.date {
-    text-transform: uppercase;
-    font-size: .66em;
-    color: #333;
-    line-height: 0.75;
-  }
-}
-
-#pg--iteration {
-  div.instructions {
-    position: fixed;
-    width: 90%;
-    left: 5%;
-    top: 10%;
-    color: $color-a;
-    font-size: 1.33em;
-    padding: 20px 10px;
-    background-color: rgba(255, 255, 255, .80);
-    h2 {
-      color: $color-a;
-      font-family: $title-font-family;
-    }
-    button.ion-close {
-      position: absolute;
-      right: 20px;
-      top: 10px;
-      font-size: 2em;
-      color: $color-d;
-    }
-    p {
-      border-top: 5px solid $color-a;
-      border-bottom: 5px solid $color-a;
-      padding: 25px 20px;
-      line-height: normal;
-    }
-  }
-}

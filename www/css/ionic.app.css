@@ -7038,28 +7038,11 @@ button {
   border: none;
   background: none; }
 
-button.newCollaboration {
-  width: 35%;
-  margin: auto auto;
-  display: block; }
-
-button.addIteration {
-  position: fixed;
-  bottom: 10em;
-  left: 50%;
-  margin-left: -75px;
-  width: 150px; }
-
-img.iteration-image {
+#pg--iteration img.iteration-image {
   max-width: 100%;
   max-height: 100%;
   margin: auto auto; }
-
-.bar .title {
-  font-family: 'Futura-Bold';
-  font-size: 22px; }
-
-canvas {
+#pg--iteration canvas {
   position: absolute;
   top: 0;
   left: 0;
@@ -7068,77 +7051,36 @@ canvas {
   width: 100%;
   height: 100%;
   z-index: 1; }
-
-ion-view {
-  background-color: #fff; }
-
-ion-header-bar .buttons {
-  display: flex;
-  align-items: center; }
-  ion-header-bar .buttons button {
-    color: #FFF; }
-    ion-header-bar .buttons button::before {
-      font-size: 28px;
-      line-height: 28px; }
-
-.gm-nav-bar {
-  color: #FFF;
-  background-color: #277FE9; }
-  .gm-nav-bar .icon {
-    color: #FFF; }
-  .gm-nav-bar .ion-navicon::before {
-    font-size: 50px !important;
-    line-height: 50px !important; }
-
-#pg_myCollaborations div.collaborations {
-  display: flex; }
-#pg_myCollaborations div.collaboration {
-  display: inline-block;
-  cursor: pointer; }
-  #pg_myCollaborations div.collaboration img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    border-width: 5px;
-    border-color: #277FE9; }
-
-#pg_newCollaboration form {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center; }
-#pg_newCollaboration div.iwant {
-  width: 100%;
-  max-width: 800px;
-  margin: auto auto;
-  text-align: center;
+#pg--iteration button.addIteration {
+  position: fixed;
+  bottom: 10em;
+  left: 50%;
+  margin-left: -75px;
+  width: 150px;
+  z-index: 2; }
+#pg--iteration div.instructions {
+  position: fixed;
+  width: 90%;
+  left: 5%;
+  top: 10%;
   color: #277FE9;
-  font-family: 'Futura-Bold';
-  font-size: 2em; }
-  #pg_newCollaboration div.iwant input {
-    font-size: 1em;
+  font-size: 1.33em;
+  padding: 20px 10px;
+  background-color: rgba(255, 255, 255, 0.8); }
+  #pg--iteration div.instructions h2 {
     color: #277FE9;
-    font-family: 'Futura-Bold';
-    border: none;
-    border-bottom: 4px solid #277FE9;
-    display: inline-block;
-    width: 50%;
-    margin-left: 0.5em; }
-
-#pg--new-iteration .mobile button {
-  width: 100%;
-  display: block; }
-#pg--new-iteration .mobile .image {
-  width: 25%;
-  margin: auto auto;
-  display: block; }
-#pg--new-iteration .mobile p {
-  font-family: 'Futura-Bold';
-  color: #277FE9;
-  font-size: 2em;
-  width: 100%;
-  text-align: center; }
+    font-family: 'Futura-Bold'; }
+  #pg--iteration div.instructions button.ion-close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 2em;
+    color: #E96246; }
+  #pg--iteration div.instructions p {
+    border-top: 5px solid #277FE9;
+    border-bottom: 5px solid #277FE9;
+    padding: 25px 20px;
+    line-height: normal; }
 
 text-message > div {
   position: relative;
@@ -7169,26 +7111,81 @@ text-message p.date {
   color: #333;
   line-height: 0.75; }
 
-#pg--iteration div.instructions {
-  position: fixed;
-  width: 90%;
-  left: 5%;
-  top: 10%;
+#pg--new-iteration .mobile button {
+  width: 100%;
+  display: block; }
+#pg--new-iteration .mobile .image {
+  width: 25%;
+  margin: auto auto;
+  display: block; }
+#pg--new-iteration .mobile p {
+  font-family: 'Futura-Bold';
   color: #277FE9;
-  font-size: 1.33em;
-  padding: 20px 10px;
-  background-color: rgba(255, 255, 255, 0.8); }
-  #pg--iteration div.instructions h2 {
+  font-size: 2em;
+  width: 100%;
+  text-align: center; }
+
+#pg--new-collaboration form {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center; }
+#pg--new-collaboration div.iwant {
+  width: 100%;
+  max-width: 800px;
+  margin: auto auto;
+  text-align: center;
+  color: #277FE9;
+  font-family: 'Futura-Bold';
+  font-size: 2em; }
+  #pg--new-collaboration div.iwant input {
+    font-size: 1em;
     color: #277FE9;
-    font-family: 'Futura-Bold'; }
-  #pg--iteration div.instructions button.ion-close {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    font-size: 2em;
-    color: #E96246; }
-  #pg--iteration div.instructions p {
-    border-top: 5px solid #277FE9;
-    border-bottom: 5px solid #277FE9;
-    padding: 25px 20px;
-    line-height: normal; }
+    font-family: 'Futura-Bold';
+    border: none;
+    border-bottom: 4px solid #277FE9;
+    display: inline-block;
+    width: 50%;
+    margin-left: 0.5em; }
+
+#pg--my-collaborations div.collaborations {
+  display: flex; }
+#pg--my-collaborations button.new-collaboration {
+  width: 150px;
+  margin: auto auto;
+  display: block; }
+#pg--my-collaborations div.collaboration {
+  display: inline-block;
+  cursor: pointer; }
+  #pg--my-collaborations div.collaboration img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border-width: 5px;
+    border-color: #277FE9; }
+
+.bar .title {
+  font-family: 'Futura-Bold';
+  font-size: 22px; }
+
+ion-view {
+  background-color: #fff; }
+
+ion-header-bar .buttons {
+  display: flex;
+  align-items: center; }
+  ion-header-bar .buttons button {
+    color: #FFF; }
+    ion-header-bar .buttons button::before {
+      font-size: 28px;
+      line-height: 28px; }
+
+.gm-nav-bar {
+  color: #FFF;
+  background-color: #277FE9; }
+  .gm-nav-bar .icon {
+    color: #FFF; }
+  .gm-nav-bar .ion-navicon::before {
+    font-size: 50px !important;
+    line-height: 50px !important; }

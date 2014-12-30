@@ -14,7 +14,7 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("collaboration/myCollaborations.html",
-    "<ion-view id=\"pg_myCollaborations\" view-title=\"mis collaboraciones\">\n" +
+    "<ion-view id=\"pg--my-collaborations\" view-title=\"mis collaboraciones\">\n" +
     "	<ion-nav-buttons side=\"primary\">\n" +
     "	 <button menu-toggle=\"left\" class=\"button button-icon icon ion-navicon\"></button>\n" +
     "	</ion-nav-buttons>\n" +
@@ -30,10 +30,10 @@ module.run(["$templateCache", function($templateCache) {
     "			</p>\n" +
     "			</div>  \n" +
     "		</div>\n" +
-    "		<button add-button class=\"newCollaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
+    "		<button add-button class=\"new-collaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
     "		</button>\n" +
     "	</ion-content>\n" +
-    "</ion-view>");
+    "</ion-view> ");
 }]);
 })();
 
@@ -42,7 +42,7 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("collaboration/newcollaboration.html",
-    "<ion-view id=\"pg_newCollaboration\" view-title=\"que deseas?\">\n" +
+    "<ion-view id=\"pg--new-collaboration\" view-title=\"que deseas?\">\n" +
     "	<ion-nav-buttons side=\"secondary\">\n" +
     "		<button ng-click=\"newCollaboration.cancel()\" class=\"ion-close\" nav-direction=\"back\">\n" +
     "		</button>\n" +
