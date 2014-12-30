@@ -147,7 +147,6 @@ describe('Factory: Thread', function(){
 			xit('adds a message to its own $getMessages object', function(){
 				var messages;
 				thread.$getMessages().then(function(obj){
-					// console.log(obj)
 					messages = obj
 				})
 				flushAll()

@@ -143,9 +143,7 @@ angular.module('goodMood')
         var newMessages = {};
         var deferred = $q.defer();
         var stream = Collaboration.getNewMessagesAsStream(this.$id)
-        console.log('getting new messages')
         stream.onValue(function(val){
-          console.log('resolving')
           deferred.resolve(newMessages)
           _.forEach(newMessages, function(val, key, col){
             delete col[key]

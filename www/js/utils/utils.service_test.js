@@ -36,7 +36,6 @@ describe('Factory: utils', function(){
 			var spy = sinon.spy()
 			var stream = utils.gatherMessageStreams(stream1, notificationFn)
 			stream.onValue(function(val){
-				console.log('val', val)
 				spy(val)
 			})
 

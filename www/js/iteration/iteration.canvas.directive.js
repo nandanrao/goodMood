@@ -9,7 +9,7 @@ angular.module('goodMood')
 				paper.setup(el[0]);
 				var project = paper.project
 				paper.view.draw();
-				console.log('linking', paper.view._id)
+				console.log('linking', paper.view._id, scope.imageSize)
 				var tool = new paper.Tool();
 				var counting;
 				var circle;
@@ -17,6 +17,7 @@ angular.module('goodMood')
 
 				// TODO: Fix numbers/math on animation. CLEAN UP!
 				tool.onMouseDown = function(e){
+					console.log('mousedown ')
 					position = e.point;
 					var i = 0;
 					counting = $interval(function(){

@@ -1,21 +1,23 @@
-<ion-view title="{{ collaboration.name }} - ">
+<ion-view id="pg--iteration" title="{{ collaboration.name }} - ">
 	<ion-nav-buttons side="primary">
 	 <button ng-click="iteration.goBack()" nav-direction="back" class="ion-chevron-left">
 	 </button>
 	</ion-nav-buttons>
 	<div id="iterationBg">
-		<img iteration-image src="{{ imgURI }}" />
 		<canvas iteration-canvas></canvas>
-		<button class="addIteration" ng-if="!next" ng-click="iteration.addIteration()">+ iteration</button>
+		<img class="iteration-image" iteration-image src="{{ imgURI }}" />
+		<button add-button class="addIteration" ng-if="!next" ng-click="iteration.addIteration()"></button>
 		<button class="previous" ng-if="previous" ng-click="iteration.previous()"> previous iteration </button>
 		<button class="next" ng-if="next" ng-click="iteration.next()"> next iteration </button>
-		<p>{{ colabits }} </p>
-		<div ng-if="!iteration.hasThreads()" class="instructions">
+		<!-- <p>{{ colabits }} </p> -->
+		<div ng-if="!iteration.hasThreads() && !instructionsRead" class="instructions">
+				<h2>instrucciones</h2>
+				<button class="ion-close" ng-click="iteration.readInstructions()"></button>
 				<p>
-					Hey these are the instructions for adding a thread and drawing on this thing
+					Toca sobre la imagen para agregar un comentario, puedes agregar multiples comentarios a tu imagen tocando los diferentes puntos donde quieras agregarlos.
 				</p>
 		</div>
 		<drawing ng-repeat="thread in threads" id="{{ thread.$id }}" x="{{ thread.drawing.x }}" y="{{ thread.drawing.y }}">
 		</drawing>
 	</div>
-</ion-view>
+</ion-view> 

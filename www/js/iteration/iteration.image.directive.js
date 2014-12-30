@@ -3,10 +3,11 @@ angular.module('goodMood')
 		return {
 			restrict: 'EA',
 			controller: function ($scope, $element){
-				$scope.imageSize = {
-					width: $element.width,
-					height: $element.height
-				}
+				// $scope.imageSize = {
+				// 	width: $element.width,
+				// 	height: $element.height
+				// }
+				// console.log($scope, $element[0].width)
 			},
 			link: function (scope, el, attrs){
 					

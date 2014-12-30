@@ -5,9 +5,8 @@
 	</ion-nav-buttons>
 	<div class="messages">
 		<div class="message" ng-repeat="message in messages">
-			<p ng-if="message.type === 'text'">
-				{{ thread.formatDate(message.sentAt) }} || {{ message.content }}
-			</p>
+			<text-message ng-if="message.type === 'text'" message="{{ message }}">
+			</text-message>
 		</div>
 	</div>
 	<div class="choose">

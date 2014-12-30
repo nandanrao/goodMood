@@ -1,6 +1,7 @@
 angular.module('goodMood')
 	.controller('IterationCtrl', function ($scope, $window, $log, $timeout, $state, $ionicLoading, $ionicHistory, collaboration, iteration, threads, Thread, image){
-		
+		var vm = this;
+
 		$scope.currentIteration = iteration;
 		$scope.collaboration = collaboration;
 		$scope.iterationArray = _.keys(collaboration.iterations).sort();
@@ -12,11 +13,15 @@ angular.module('goodMood')
 		$scope.previous = $scope.iterationArray[$scope.currentIndex - 1];
 		$scope.next = $scope.iterationArray[$scope.currentIndex + 1];
 		$scope.last = _.last($scope.iterationArray) === iteration.$id;
+		$scope.instructionsRead = false;
 		
-		var vm = this;
 
 		this.hasThreads = function(){
 			return _.size(threads) > 0
+		}
+
+		this.readInstructions = function(){
+			$scope.instructionsRead = true
 		}
 
 		this.addIteration = function(){
@@ -30,7 +35,7 @@ angular.module('goodMood')
 			$state.go('home')
 		}
 
-		this.previous = function(){
+		this.previous = function(){ 
 			if($scope.previous){
 				$ionicHistory.nextViewOptions({
 					disableAnimate: true

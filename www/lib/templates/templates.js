@@ -30,8 +30,7 @@ module.run(["$templateCache", function($templateCache) {
     "			</p>\n" +
     "			</div>  \n" +
     "		</div>\n" +
-    "		<button class=\"newCollaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
-    "			<add-button></add-button>\n" +
+    "		<button add-button class=\"newCollaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
     "		</button>\n" +
     "	</ion-content>\n" +
     "</ion-view>");
@@ -84,27 +83,29 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/iteration.html",
-    "<ion-view title=\"{{ collaboration.name }} - \">\n" +
+    "<ion-view id=\"pg--iteration\" title=\"{{ collaboration.name }} - \">\n" +
     "	<ion-nav-buttons side=\"primary\">\n" +
     "	 <button ng-click=\"iteration.goBack()\" nav-direction=\"back\" class=\"ion-chevron-left\">\n" +
     "	 </button>\n" +
     "	</ion-nav-buttons>\n" +
     "	<div id=\"iterationBg\">\n" +
-    "		<img iteration-image src=\"{{ imgURI }}\" />\n" +
     "		<canvas iteration-canvas></canvas>\n" +
-    "		<button class=\"addIteration\" ng-if=\"!next\" ng-click=\"iteration.addIteration()\">+ iteration</button>\n" +
+    "		<img class=\"iteration-image\" iteration-image src=\"{{ imgURI }}\" />\n" +
+    "		<button add-button class=\"addIteration\" ng-if=\"!next\" ng-click=\"iteration.addIteration()\"></button>\n" +
     "		<button class=\"previous\" ng-if=\"previous\" ng-click=\"iteration.previous()\"> previous iteration </button>\n" +
     "		<button class=\"next\" ng-if=\"next\" ng-click=\"iteration.next()\"> next iteration </button>\n" +
-    "		<p>{{ colabits }} </p>\n" +
-    "		<div ng-if=\"!iteration.hasThreads()\" class=\"instructions\">\n" +
+    "		<!-- <p>{{ colabits }} </p> -->\n" +
+    "		<div ng-if=\"!iteration.hasThreads() && !instructionsRead\" class=\"instructions\">\n" +
+    "				<h2>instrucciones</h2>\n" +
+    "				<button class=\"ion-close\" ng-click=\"iteration.readInstructions()\"></button>\n" +
     "				<p>\n" +
-    "					Hey these are the instructions for adding a thread and drawing on this thing\n" +
+    "					Toca sobre la imagen para agregar un comentario, puedes agregar multiples comentarios a tu imagen tocando los diferentes puntos donde quieras agregarlos.\n" +
     "				</p>\n" +
     "		</div>\n" +
     "		<drawing ng-repeat=\"thread in threads\" id=\"{{ thread.$id }}\" x=\"{{ thread.drawing.x }}\" y=\"{{ thread.drawing.y }}\">\n" +
     "		</drawing>\n" +
     "	</div>\n" +
-    "</ion-view>");
+    "</ion-view> ");
 }]);
 })();
 
@@ -126,7 +127,7 @@ module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/newiteration.html",
     "<ion-view id=\"pg--new-iteration\" view-title=\"{{ newIteration.getViewTitle() }}\">\n" +
     "	<ion-nav-buttons side=\"secondary\">\n" +
-    "		<button ng-click=\"newCollaboration.cancel()\" class=\"ion-close\" nav-direction=\"back\">\n" +
+    "		<button ng-click=\"newIteration.cancel()\" class=\"ion-close\" nav-direction=\"back\">\n" +
     "		</button>\n" +
     "	</ion-nav-buttons>\n" +
     "	<div class=\"mobile\">\n" +
@@ -208,6 +209,31 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("thread/textmessage.html",
+    "<div class=\"{{ sender ? 'sender' : 'reciever' }}\">\n" +
+    "	<p class=\"date\">\n" +
+    "		{{ formatDate(message.sentAt) }}\n" +
+    "	</p>	\n" +
+    "	<p class=\"content\">\n" +
+    "		{{ message.content }}\n" +
+    "	</p>\n" +
+    "	<div class=\"arrow-holder\">\n" +
+    "		<div class=\"arrow\">\n" +
+    "			<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
+    "				 viewBox=\"0 0 22.1 43.3\" enable-background=\"new 0 0 22.1 43.3\" xml:space=\"preserve\">\n" +
+    "			<polygon fill=\"#FFF\" points=\"{{ points }}\">\n" +
+    "			</svg>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/thread.html",
     "<ion-view id=\"pg_thread\" view-title=\"comentario\">\n" +
     "	<ion-nav-buttons side=\"primary\">\n" +
@@ -216,9 +242,8 @@ module.run(["$templateCache", function($templateCache) {
     "	</ion-nav-buttons>\n" +
     "	<div class=\"messages\">\n" +
     "		<div class=\"message\" ng-repeat=\"message in messages\">\n" +
-    "			<p ng-if=\"message.type === 'text'\">\n" +
-    "				{{ thread.formatDate(message.sentAt) }} || {{ message.content }}\n" +
-    "			</p>\n" +
+    "			<text-message ng-if=\"message.type === 'text'\" message=\"{{ message }}\">\n" +
+    "			</text-message>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "	<div class=\"choose\">\n" +
@@ -232,6 +257,7 @@ module.run(["$templateCache", function($templateCache) {
     "	<form ng-show=\"writeMessage\" ng-submit=\"thread.sendMessage('text')\">\n" +
     "		<input required ng-model=\"text\" class=\"text\" placeholder=\"write here\" />\n" +
     "	</form>\n" +
-    "</ion-view>");
+    "</ion-view>\n" +
+    "");
 }]);
 })();

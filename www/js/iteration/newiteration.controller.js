@@ -1,8 +1,12 @@
 angular.module('goodMood')
-	.controller('NewIterationCtrl', function($scope, $window, $log, $state, collaboration, $cordovaCamera, $ionicLoading, Iteration, Image){
+	.controller('NewIterationCtrl', function($scope, $window, $log, $state, collaboration, $cordovaCamera, $ionicLoading, $ionicHistory, Iteration, Image){
 
 		var pictureOptions = {
 			destinationType: 0
+		}
+
+		this.cancel = function(){
+			$ionicHistory.goBack()
 		}
 
 		this.getViewTitle = function(){
