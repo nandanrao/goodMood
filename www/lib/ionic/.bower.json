@@ -33,11 +33,11 @@
     "angular-sanitize": "1.3.6",
     "angular-ui-router": "0.2.13"
   },
-  "_release": "e353b98c5b",
+  "_release": "0ad8d1e4c6",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "e353b98c5bee8f70c6393d105facbbe7c12cfc82"
+    "commit": "0ad8d1e4c6a91d22600646e45e87e892c505589d"
   },
   "_source": "git://github.com/driftyco/ionic-bower.git",
   "_target": "master",

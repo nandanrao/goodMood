@@ -115,7 +115,7 @@ angular.module('goodMood', [
 .config(function($cordovaFacebookProvider) {
   var appID = 759883230731625;
   var version = "v2.0"; // or leave blank and default is v2.0
-  $cordovaFacebookProvider.setAppID(appID, version);
+  $cordovaFacebookProvider.browserInit(appID, version);
 })
 .config(function($compileProvider){
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|data):/);

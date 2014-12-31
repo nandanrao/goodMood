@@ -9,34 +9,41 @@ angular.module('goodMood')
 
 				$scope.recording = false;
 
-
 				// test for platform and create file based on that?
-				var src = cordova.file.applicationDirectory + "media/sound.amr"
-				console.log(_.keys($cordovaMedia.newMedia(src)))
-
-			
-				var media = $cordovaMedia.newMedia(src).then(function(){
-					console.log('media created succesfully')
-				}, function(err){
-					console.log('media creating erred', err)
-				})
 				
-				
-
+				var media;
 				// TODO: error handling/checking for start/stop recording???
 				$element.on('click', function (){
 					console.log('mic clicked')
+					
 					if (!$scope.recording){
+						var fileName = "sound2.amr"
+						var src = cordova.file.externalDataDirectory + fileName
+						media = $cordovaMedia.newMedia(src)
+
+						console.log(cordova.file.externalDataDirectory)
+						
+						media.then(function(){
+							console.log('media creation succes')
+							var fileSrc = src.replace('file:///storage/sdcard0/', '')
+							$cordovaFile.checkFile(fileSrc)
+								.then(function(results){
+									console.log('this tha results', _.keys(results), _.values(results))
+								}, function(err){ 
+									console.log('errrrraaa', err)
+								})
+							
+						}, function(err){
+							console.log('err', err)
+						})
+
 						media.startRecord()
 						$scope.recording = true;	
 					}
 					else {
 						media.stopRecord()
+						media.release()
 						$scope.recording = false;
-						console.log(window.LocalFileSystem.TEMPORARY)
-						console.log(media)
-						// find file and upload? LocalFileSystem.TEMPORARY
-						// window.LocalFileSystem.TEMPORARY?
 					}
 				})
 
