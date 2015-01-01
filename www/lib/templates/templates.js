@@ -271,6 +271,7 @@ catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/voicemessage.html",
     "<div class=\"{{ sender ? 'sender' : 'reciever' }}\">\n" +
+    "<p>blah</p>\n" +
     "	<p class=\"date\">\n" +
     "		{{ formatDate(message.sentAt) }}\n" +
     "	</p>\n" +
