@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.directive('voiceMessageRecord', function ($cordovaMedia, $cordovaFile){
+	.directive('voiceMessageRecord', function ($cordovaMedia, $cordovaFile, Audio, Auth){
 		return {
 			restrict: 'EA',
 			templateUrl: 'thread/voicemessagerecord.html',
@@ -9,10 +9,13 @@ angular.module('goodMood')
 
 				$scope.recording = false;
 
-				// test for platform and create file based on that?
+				// add filesystemnormalization to create the filepath for this!!
 				
 				var media;
-				// TODO: error handling/checking for start/stop recording???
+
+
+				
+				
 				$element.on('click', function (){
 					console.log('mic clicked')
 					
@@ -26,9 +29,21 @@ angular.module('goodMood')
 						media.then(function(){
 							console.log('media creation succes')
 							var fileSrc = src.replace('file:///storage/sdcard0/', '')
-							$cordovaFile.checkFile(fileSrc)
-								.then(function(results){
-									console.log('this tha results', _.keys(results), _.values(results))
+							$cordovaFile.readAsDataURL(fileSrc)
+								.then(function(dataURI){
+									Audio.create(dataURI).then(function(audio){
+										// console.log('created audio instance', audio)
+										var voiceMsg = {}
+										voiceMsg.content = audio.$id;
+										voiceMsg.type = 'audio';
+										voiceMsg.user = Auth.currentUser
+										console.log(_.values(voiceMsg))
+										$scope.threadInstance.$addMessage(voiceMsg).then(function(){
+											console.log('added message')
+										})
+									}, function(err){
+										console.log('error creating audio instance', err)
+									})
 								}, function(err){ 
 									console.log('errrrraaa', err)
 								})

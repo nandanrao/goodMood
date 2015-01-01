@@ -11,6 +11,7 @@ angular.module('goodMood')
 		fb.collaborations = fb.ref.child('collaborations');
 		fb.messages = fb.ref.child('messages');
 		fb.images = fb.ref.child('images');
+		fb.audio = fb.ref.child('audio');
 		
 		return fb
 	})

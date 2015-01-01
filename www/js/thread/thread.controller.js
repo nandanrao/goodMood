@@ -1,6 +1,6 @@
 angular.module('goodMood')
 	.controller('ThreadCtrl', function ($scope, $ionicLoading, $ionicHistory, thread, messages, Auth){
-		$scope.thread = thread;
+		$scope.threadInstance = thread;
 		$scope.messages = messages;
 		$scope.writeMessage;
 		$scope.recordNote;
