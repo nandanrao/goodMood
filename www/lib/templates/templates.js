@@ -240,24 +240,26 @@ module.run(["$templateCache", function($templateCache) {
     "	 <button ng-click=\"thread.goBack()\" class=\"ion-chevron-left\">\n" +
     "	 </button>\n" +
     "	</ion-nav-buttons>\n" +
-    "	<div class=\"messages\">\n" +
-    "		<div class=\"message\" ng-repeat=\"message in messages\">\n" +
-    "			<text-message ng-if=\"message.type === 'text'\" message=\"{{ message }}\">\n" +
-    "			</text-message>\n" +
-    "			<voice-message ng-if=\"message.type === 'audio'\">\n" +
-    "			</voice-message>\n" +
+    "	<ion-content>\n" +
+    "		<div class=\"messages\">\n" +
+    "			<div class=\"message\" ng-repeat=\"message in messages\">\n" +
+    "				<text-message ng-if=\"message.type === 'text'\" message=\"{{ message }}\">\n" +
+    "				</text-message>\n" +
+    "				<voice-message ng-if=\"message.type === 'audio'\">\n" +
+    "				</voice-message>\n" +
+    "			</div>\n" +
     "		</div>\n" +
-    "	</div>\n" +
-    "	<div class=\"choose\">\n" +
-    "		<button voice-message-record class=\"voice\" ng-click=\"thread.redcordNote()\">\n" +
-    "		</button>\n" +
-    "		<button class=\"text\" ng-click=\"thread.writeText()\">		\n" +
-    "		text\n" +
-    "		</button>\n" +
-    "	</div>\n" +
-    "	<form ng-show=\"writeMessage\" ng-submit=\"thread.sendMessage('text')\">\n" +
-    "		<input required ng-model=\"text\" class=\"text\" placeholder=\"write here\" />\n" +
-    "	</form>\n" +
+    "		<div class=\"choose\">\n" +
+    "			<button voice-message-record class=\"voice\" ng-click=\"thread.redcordNote()\">\n" +
+    "			</button>\n" +
+    "			<button class=\"text\" ng-click=\"thread.writeText()\">		\n" +
+    "			text\n" +
+    "			</button>\n" +
+    "		</div>\n" +
+    "		<form ng-show=\"writeMessage\" ng-submit=\"thread.sendMessage('text')\">\n" +
+    "			<input required ng-model=\"text\" class=\"text\" placeholder=\"write here\" />\n" +
+    "		</form>\n" +
+    "	</ion-content>\n" +
     "</ion-view>\n" +
     "");
 }]);

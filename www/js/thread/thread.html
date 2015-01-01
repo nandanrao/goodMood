@@ -3,22 +3,24 @@
 	 <button ng-click="thread.goBack()" class="ion-chevron-left">
 	 </button>
 	</ion-nav-buttons>
-	<div class="messages">
-		<div class="message" ng-repeat="message in messages">
-			<text-message ng-if="message.type === 'text'" message="{{ message }}">
-			</text-message>
-			<voice-message ng-if="message.type === 'audio'">
-			</voice-message>
+	<ion-content>
+		<div class="messages">
+			<div class="message" ng-repeat="message in messages">
+				<text-message ng-if="message.type === 'text'" message="{{ message }}">
+				</text-message>
+				<voice-message ng-if="message.type === 'audio'">
+				</voice-message>
+			</div>
 		</div>
-	</div>
-	<div class="choose">
-		<button voice-message-record class="voice" ng-click="thread.redcordNote()">
-		</button>
-		<button class="text" ng-click="thread.writeText()">		
-		text
-		</button>
-	</div>
-	<form ng-show="writeMessage" ng-submit="thread.sendMessage('text')">
-		<input required ng-model="text" class="text" placeholder="write here" />
-	</form>
+		<div class="choose">
+			<button voice-message-record class="voice" ng-click="thread.redcordNote()">
+			</button>
+			<button class="text" ng-click="thread.writeText()">		
+			text
+			</button>
+		</div>
+		<form ng-show="writeMessage" ng-submit="thread.sendMessage('text')">
+			<input required ng-model="text" class="text" placeholder="write here" />
+		</form>
+	</ion-content>
 </ion-view>

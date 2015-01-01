@@ -7082,11 +7082,11 @@ button {
     padding: 25px 20px;
     line-height: normal; }
 
-text-message > div {
+text-message > div, voice-message > div {
   position: relative;
   margin: auto 10px auto 10px;
   padding: 10px 15px; }
-text-message div.arrow-holder {
+text-message div.arrow-holder, voice-message div.arrow-holder {
   position: absolute;
   top: 0;
   left: 0;
@@ -7095,17 +7095,17 @@ text-message div.arrow-holder {
   display: flex;
   flex-direction: column;
   justify-content: center; }
-text-message div.arrow {
+text-message div.arrow, voice-message div.arrow {
   width: 1em; }
-text-message div.sender {
+text-message div.sender, voice-message div.sender {
   background-color: #DDD; }
-  text-message div.sender div.arrow {
+  text-message div.sender div.arrow, voice-message div.sender div.arrow {
     align-self: flex-end; }
-text-message div.reciever {
+text-message div.reciever, voice-message div.reciever {
   background-color: #CCC; }
-  text-message div.reciever div.arrow {
+  text-message div.reciever div.arrow, voice-message div.reciever div.arrow {
     align-self: flex-start; }
-text-message p.date {
+text-message p.date, voice-message p.date {
   text-transform: uppercase;
   font-size: 0.66em;
   color: #333;
