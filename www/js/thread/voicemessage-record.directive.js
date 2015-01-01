@@ -32,7 +32,6 @@ angular.module('goodMood')
 							$cordovaFile.readAsDataURL(fileSrc)
 								.then(function(dataURI){
 									Audio.create(dataURI).then(function(audio){
-										// console.log('created audio instance', audio)
 										var voiceMsg = {}
 										voiceMsg.content = audio.$id;
 										voiceMsg.type = 'audio';
