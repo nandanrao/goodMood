@@ -221,8 +221,7 @@ module.run(["$templateCache", function($templateCache) {
     "		<div class=\"arrow\">\n" +
     "			<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
     "				 viewBox=\"0 0 22.1 43.3\" enable-background=\"new 0 0 22.1 43.3\" xml:space=\"preserve\">\n" +
-    "			<polygon ng-if=\"sender\" fill=\"#FFF\" points=\"22.1,43.3 0,21.7 22.1,0\">	 \n" +
-    "			<polygon ng-if=\"!sender\" fill=\"#FFF\" points=\"0,0 22.1,21.7 0,43.3\">\n" +
+    "			<polygon fill=\"#FFF\" ng-attr-points=\"{{ points }}\">\n" +
     "			</svg>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -271,7 +270,7 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/voicemessage-audio.html",
-    "<audio ng-src=\"{{ audioURI }}\" autoplay=\"true\" loop=\"true\"></audio>");
+    "<audio ng-src=\"{{ audioURI }}\" controls autoplay loop></audio>");
 }]);
 })();
 
@@ -285,8 +284,8 @@ module.run(["$templateCache", function($templateCache) {
     "	<p class=\"date\">\n" +
     "		{{ formatDate(message.sentAt) }}\n" +
     "	</p>\n" +
-    "	<svg ng-click=\"voicemessage.play()\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 543.5 87.9\" enable-background=\"new 0 0 543.5 87.9\" xml:space=\"preserve\">\n" +
-    "		<circle fill=\"#277FE9\" cx=\"43.9\" cy=\"43.9\" r=\"43.9\"/>\n" +
+    "	<svg ng-mousedown=\"voiceMessage.mousedown($event)\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 543.5 87.9\" enable-background=\"new 0 0 543.5 87.9\" xml:space=\"preserve\">\n" +
+    "		<circle ng-click=\"voiceMessage.play()\" fill=\"#277FE9\" cx=\"43.9\" cy=\"43.9\" r=\"43.9\"/>\n" +
     "		<g>\n" +
     "			<path fill=\"#FFFFFF\" d=\"M44.1,54c5,0,9-4,9-9V27c0-5-4-9-9-9c-5,0-9,4-9,9V45C35.2,50,39.2,54,44.1,54z\"/>\n" +
     "			<path fill=\"#FFFFFF\" d=\"M57.3,41.4v3.7c0,7.3-5.9,13.2-13.2,13.2c-7.3,0-13.2-5.9-13.2-13.2v-3.7h-3.6v3.7c0,8.6,6.6,15.8,15,16.7\n" +
@@ -301,8 +300,7 @@ module.run(["$templateCache", function($templateCache) {
     "		<div class=\"arrow\">\n" +
     "			<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
     "				 viewBox=\"0 0 22.1 43.3\" enable-background=\"new 0 0 22.1 43.3\" xml:space=\"preserve\">\n" +
-    "			<polygon ng-if=\"sender\" fill=\"#FFF\" points=\"22.1,43.3 0,21.7 22.1,0\">	 \n" +
-    "			<polygon ng-if=\"!sender\" fill=\"#FFF\" points=\"0,0 22.1,21.7 0,43.3\">\n" +
+    "			<polygon fill=\"#FFF\" ng-attr-points=\"{{ points }}\">\n" +
     "			</svg>\n" +
     "		</div>\n" +
     "	</div>\n" +

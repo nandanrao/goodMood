@@ -7087,6 +7087,7 @@ text-message > div, voice-message > div {
   margin: auto 10px auto 10px;
   padding: 10px 15px; }
 text-message div.arrow-holder, voice-message div.arrow-holder {
+  z-index: -1;
   position: absolute;
   top: 0;
   left: 0;
