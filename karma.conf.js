@@ -39,6 +39,7 @@ module.exports = function ( karma ) {
       'www/js/user/user.service.js',
       'www/js/thread/voicemessage.directive.js',
       'www/js/thread/voicemessage-record.directive.js',
+      'www/js/thread/voicemessage-audio.directive.js',
       'www/js/thread/thread.service.js',
       'www/js/thread/thread.controller.js',
       'www/js/thread/textmessage.directive.js',

@@ -269,6 +269,15 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("thread/voicemessage-audio.html",
+    "");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/voicemessage.html",
     "<div class=\"{{ sender ? 'sender' : 'reciever' }}\">\n" +
     "	<p class=\"date\">\n" +
