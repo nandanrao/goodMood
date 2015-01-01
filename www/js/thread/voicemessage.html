@@ -1,8 +1,9 @@
 <div class="{{ sender ? 'sender' : 'reciever' }}">
+	<voice-message-audio></voice-message-audio>
 	<p class="date">
 		{{ formatDate(message.sentAt) }}
 	</p>
-	<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 543.5 87.9" enable-background="new 0 0 543.5 87.9" xml:space="preserve">
+	<svg ng-click="voicemessage.play()" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 543.5 87.9" enable-background="new 0 0 543.5 87.9" xml:space="preserve">
 		<circle fill="#277FE9" cx="43.9" cy="43.9" r="43.9"/>
 		<g>
 			<path fill="#FFFFFF" d="M44.1,54c5,0,9-4,9-9V27c0-5-4-9-9-9c-5,0-9,4-9,9V45C35.2,50,39.2,54,44.1,54z"/>
@@ -18,7 +19,8 @@
 		<div class="arrow">
 			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 				 viewBox="0 0 22.1 43.3" enable-background="new 0 0 22.1 43.3" xml:space="preserve">
-			<polygon fill="#FFF" points="{{ points }}">
+			<polygon ng-if="sender" fill="#FFF" points="22.1,43.3 0,21.7 22.1,0">	 
+			<polygon ng-if="!sender" fill="#FFF" points="0,0 22.1,21.7 0,43.3">
 			</svg>
 		</div>
 	</div>

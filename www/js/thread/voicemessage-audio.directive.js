@@ -1,17 +1,18 @@
 angular.module('goodMood')
-	.directive('voiceMessageAudio', function (Audio){
+	.directive('voiceMessageAudio', function ($sce, Audio){
 		return {
 			restrict: 'E', 
-			template: '<audio src="{{ audioURI }}" autoplay="true" loop="true"></audio>',
+			templateUrl: 'thread/voicemessage-audio.html',
+			replace: true,
 			controllerAs: 'voiceMessageAudio',
-			link: function (scope, el, attrs){
-				var audioId = attrs[audio-id] 
-				console.log('audioId', audioId)
-				scope.audioURI;
-				Audio.findById(audioId).then(function(audio){
-					scope.audioURI = audio.$value
-					console.log('audio value', audio.$value)
+			controller: function ($scope, $attrs){
+				$scope.audioURI;
+				Audio.findById($scope.message.content).then(function(audio){
+					$scope.audioURI = $sce.trustAsResourceUrl(audio.$value)
 				})
+			},
+			link: function (scope, el, attrs){
+				scope.media = el[0]
 			}
 		}
 	})
