@@ -62,6 +62,10 @@ ion-header-bar {
   }
 }
 
+ion-content.has-header {
+  top: 0;
+}
+
 .gm-nav-bar {
   color: $color-type-c;
   background-color: $color-a;

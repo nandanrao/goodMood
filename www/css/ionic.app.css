@@ -7181,6 +7181,9 @@ ion-header-bar .buttons {
       font-size: 28px;
       line-height: 28px; }
 
+ion-content.has-header {
+  top: 0; }
+
 .gm-nav-bar {
   color: #FFF;
   background-color: #277FE9; }
