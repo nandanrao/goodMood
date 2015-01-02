@@ -22,12 +22,9 @@ module.run(["$templateCache", function($templateCache) {
     "		<div class=\"collaborations\">\n" +
     "			<div ng-repeat=\"collaboration in collaborations\" class=\"collaboration\" ng-click=\"myCollaborations.collaboration(collaboration.$id)\">\n" +
     "			<img src=\"{{ myCollaborations.getCollaborationImage(collaboration) }}\">\n" +
-    "			<p class=\"title\">\n" +
-    "				{{ collaboration.name }}\n" +
-    "			</p>\n" +
-    "			<p class=\"unreadMessages\">\n" +
-    "				{{ myCollaborations.getNewMessages(collaboration) }}\n" +
-    "			</p>\n" +
+    "			<h2>\n" +
+    "				{{ collaboration.name }} <span> ({{ myCollaborations.getNewMessages(collaboration) }})</span>\n" +
+    "			</h2>\n" +
     "			</div>  \n" +
     "		</div>\n" +
     "		<button add-button class=\"new-collaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
@@ -75,58 +72,6 @@ catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("collaboration/timeline.html",
     "");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("login/localLogin.html",
-    "<div class=\"list\">\n" +
-    "<form name=\"loginForm\" no-validate class=\"localLoginForm\" ng-submit=\"localLogin.login()\">\n" +
-    "	<label class=\"item item-input\">\n" +
-    "		<input required type=\"text\" ng-model=\"form.email\" class=\"email\" name=\"email\" placeholder=\"Email\"></input>\n" +
-    "	</label>\n" +
-    "	<label class=\"item item-input\">\n" +
-    "		<input required type=\"text\" ng-model=\"form.password\" class=\"password\" name=\"password\" placeholder=\"Password\"></input>\n" +
-    "	</label>\n" +
-    "	<label ng-if=\"register\" class=\"item item-input\">\n" +
-    "		<input type=\"text\" ng-model=\"form.passRepeat\" class=\"repeatPass\" name=\"repeatPass\" placeholder=\"Repeat Password\"></input>\n" +
-    "	</label>\n" +
-    "	<button required ng-if=\"!register\" class=\"button button-outline button-positive login\" type=\"submit\" >Login</button>\n" +
-    "	<button type=\"button\" ng-click=\"localLogin.register()\" class=\"button button-outline button-positive register\">Register</button>\n" +
-    "</form>\n" +
-    "</div>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("login/login.html",
-    "<ion-content>\n" +
-    "	<button class=\"button button-block button-positive button-outline\" ng-click=\"login.authLogin('facebook')\">Facebook</button>\n" +
-    "	<button class=\"button button-block button-assertive button-outline\" ng-click=\"login.authLogin('google')\">Googllle</button>\n" +
-    "	<button class=\"button button-block button-assertive button-outline\" ng-if=\"!local\" ng-click=\"login.showLocalLogin()\">Email</button>\n" +
-    "	<form name=\"blah\"></form>\n" +
-    "	<div ng-show=\"local\" class=\"list\">\n" +
-    "		<form name=\"loginForm\" no-validate class=\"localLoginForm\" ng-submit=\"login.login()\">\n" +
-    "			<label class=\"item item-input\">\n" +
-    "				<input required type=\"text\" ng-model=\"form.email\" class=\"email\" name=\"email\" placeholder=\"Email\"></input>\n" +
-    "			</label>\n" +
-    "			<label class=\"item item-input\">\n" +
-    "				<input required type=\"text\" ng-model=\"form.password\" class=\"password\" name=\"password\" placeholder=\"Password\"></input>\n" +
-    "			</label>\n" +
-    "			<label ng-if=\"register\" class=\"item item-input\">\n" +
-    "				<input type=\"text\" ng-model=\"form.passRepeat\" class=\"repeatPass\" name=\"repeatPass\" placeholder=\"Repeat Password\"></input>\n" +
-    "			</label>\n" +
-    "			<button required ng-if=\"!register\" class=\"button button-outline button-positive login\" type=\"submit\" >Login</button>\n" +
-    "			<button type=\"button\" ng-click=\"login.register()\" class=\"button button-outline button-positive register\">Register</button>\n" +
-    "		</form>\n" +
-    "	</div>\n" +
-    "</ion-content>");
 }]);
 })();
 
@@ -202,6 +147,58 @@ module.run(["$templateCache", function($templateCache) {
     "		</button>\n" +
     "	</div> -->\n" +
     "</ion-view>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("login/localLogin.html",
+    "<div class=\"list\">\n" +
+    "<form name=\"loginForm\" no-validate class=\"localLoginForm\" ng-submit=\"localLogin.login()\">\n" +
+    "	<label class=\"item item-input\">\n" +
+    "		<input required type=\"text\" ng-model=\"form.email\" class=\"email\" name=\"email\" placeholder=\"Email\"></input>\n" +
+    "	</label>\n" +
+    "	<label class=\"item item-input\">\n" +
+    "		<input required type=\"text\" ng-model=\"form.password\" class=\"password\" name=\"password\" placeholder=\"Password\"></input>\n" +
+    "	</label>\n" +
+    "	<label ng-if=\"register\" class=\"item item-input\">\n" +
+    "		<input type=\"text\" ng-model=\"form.passRepeat\" class=\"repeatPass\" name=\"repeatPass\" placeholder=\"Repeat Password\"></input>\n" +
+    "	</label>\n" +
+    "	<button required ng-if=\"!register\" class=\"button button-outline button-positive login\" type=\"submit\" >Login</button>\n" +
+    "	<button type=\"button\" ng-click=\"localLogin.register()\" class=\"button button-outline button-positive register\">Register</button>\n" +
+    "</form>\n" +
+    "</div>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("login/login.html",
+    "<ion-content>\n" +
+    "	<button class=\"button button-block button-positive button-outline\" ng-click=\"login.authLogin('facebook')\">Facebook</button>\n" +
+    "	<button class=\"button button-block button-assertive button-outline\" ng-click=\"login.authLogin('google')\">Googllle</button>\n" +
+    "	<button class=\"button button-block button-assertive button-outline\" ng-if=\"!local\" ng-click=\"login.showLocalLogin()\">Email</button>\n" +
+    "	<form name=\"blah\"></form>\n" +
+    "	<div ng-show=\"local\" class=\"list\">\n" +
+    "		<form name=\"loginForm\" no-validate class=\"localLoginForm\" ng-submit=\"login.login()\">\n" +
+    "			<label class=\"item item-input\">\n" +
+    "				<input required type=\"text\" ng-model=\"form.email\" class=\"email\" name=\"email\" placeholder=\"Email\"></input>\n" +
+    "			</label>\n" +
+    "			<label class=\"item item-input\">\n" +
+    "				<input required type=\"text\" ng-model=\"form.password\" class=\"password\" name=\"password\" placeholder=\"Password\"></input>\n" +
+    "			</label>\n" +
+    "			<label ng-if=\"register\" class=\"item item-input\">\n" +
+    "				<input type=\"text\" ng-model=\"form.passRepeat\" class=\"repeatPass\" name=\"repeatPass\" placeholder=\"Repeat Password\"></input>\n" +
+    "			</label>\n" +
+    "			<button required ng-if=\"!register\" class=\"button button-outline button-positive login\" type=\"submit\" >Login</button>\n" +
+    "			<button type=\"button\" ng-click=\"login.register()\" class=\"button button-outline button-positive register\">Register</button>\n" +
+    "		</form>\n" +
+    "	</div>\n" +
+    "</ion-content>");
 }]);
 })();
 

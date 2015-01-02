@@ -6,12 +6,9 @@
 		<div class="collaborations">
 			<div ng-repeat="collaboration in collaborations" class="collaboration" ng-click="myCollaborations.collaboration(collaboration.$id)">
 			<img src="{{ myCollaborations.getCollaborationImage(collaboration) }}">
-			<p class="title">
-				{{ collaboration.name }}
-			</p>
-			<p class="unreadMessages">
-				{{ myCollaborations.getNewMessages(collaboration) }}
-			</p>
+			<h2>
+				{{ collaboration.name }} <span> ({{ myCollaborations.getNewMessages(collaboration) }})</span>
+			</h2>
 			</div>  
 		</div>
 		<button add-button class="new-collaboration" ng-click="myCollaborations.newCollaboration()" nav-direction="forward">

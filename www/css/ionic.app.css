@@ -7183,6 +7183,10 @@ text-message p.date, voice-message p.date {
     border-radius: 50%;
     border-width: 5px;
     border-color: #277FE9; }
+  #pg--my-collaborations div.collaboration h2 {
+    font-family: 'Futura-Bold';
+    color: #277FE9;
+    text-align: center; }
 #pg--my-collaborations ion-content {
   margin-bottom: 10em; }
 
