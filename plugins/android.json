@@ -9,11 +9,19 @@
                 "parents": {
                     "/*": [
                         {
+                            "xml": "<feature name=\"Cookies\"><param name=\"android-package\" value=\"com.bez4pieci.cookies.Cookies\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"com.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
                             "xml": "<feature name=\"SpinnerDialog\"><param name=\"android-package\" value=\"hu.dpal.phonegap.plugins.SpinnerDialog\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
                             "count": 1
                         },
                         {
@@ -33,15 +41,7 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Media\"><param name=\"android-package\" value=\"org.apache.cordova.media.AudioHandler\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Cookies\"><param name=\"android-package\" value=\"com.bez4pieci.cookies.Cookies\" /></feature>",
                             "count": 1
                         },
                         {
@@ -120,10 +120,16 @@
         }
     },
     "installed_plugins": {
+        "com.bez4pieci.cookies": {
+            "PACKAGE_NAME": "com.ionicframework.goodmood362235"
+        },
         "com.ionic.keyboard": {
             "PACKAGE_NAME": "com.ionicframework.goodmood362235"
         },
         "hu.dpal.phonegap.plugins.SpinnerDialog": {
+            "PACKAGE_NAME": "com.ionicframework.goodmood362235"
+        },
+        "org.apache.cordova.camera": {
             "PACKAGE_NAME": "com.ionicframework.goodmood362235"
         },
         "org.apache.cordova.console": {
@@ -141,13 +147,7 @@
         "org.apache.cordova.inappbrowser": {
             "PACKAGE_NAME": "com.ionicframework.goodmood362235"
         },
-        "org.apache.cordova.camera": {
-            "PACKAGE_NAME": "com.ionicframework.goodmood362235"
-        },
         "org.apache.cordova.media": {
-            "PACKAGE_NAME": "com.ionicframework.goodmood362235"
-        },
-        "com.bez4pieci.cookies": {
             "PACKAGE_NAME": "com.ionicframework.goodmood362235"
         },
         "com.phonegap.plugins.facebookconnect": {

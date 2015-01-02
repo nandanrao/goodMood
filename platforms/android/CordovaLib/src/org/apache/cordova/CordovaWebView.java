@@ -31,7 +31,6 @@ import org.apache.cordova.LOG;
 import org.apache.cordova.PluginManager;
 import org.apache.cordova.PluginResult;
 
-import android.app.Activity;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
@@ -52,18 +51,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-//import android.webkit.WebBackForwardList;
-//import android.webkit.WebHistoryItem;
-//import android.webkit.WebChromeClient;
-//import android.webkit.WebSettings;
-//import android.webkit.WebView;
-//import android.webkit.WebSettings.LayoutAlgorithm;
+import android.webkit.WebBackForwardList;
+import android.webkit.WebHistoryItem;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.widget.FrameLayout;
-
-import org.xwalk.core.XWalkNavigationHistory;
-import org.xwalk.core.XWalkNavigationItem;
-import org.xwalk.core.XWalkPreferences;
-import org.xwalk.core.XWalkView;
 
 /*
  * This class is our web view.
@@ -71,10 +65,10 @@ import org.xwalk.core.XWalkView;
  * @see <a href="http://developer.android.com/guide/webapps/webview.html">WebView guide</a>
  * @see <a href="http://developer.android.com/reference/android/webkit/WebView.html">WebView</a>
  */
-public class CordovaWebView extends XWalkView {
+public class CordovaWebView extends WebView {
 
     public static final String TAG = "CordovaWebView";
-    public static final String CORDOVA_VERSION = "3.5.0";
+    public static final String CORDOVA_VERSION = "3.5.1";
 
     private ArrayList<Integer> keyDownCodes = new ArrayList<Integer>();
     private ArrayList<Integer> keyUpCodes = new ArrayList<Integer>();
@@ -104,6 +98,10 @@ public class CordovaWebView extends XWalkView {
 
     NativeToJsMessageQueue jsMessageQueue;
     ExposedJsApi exposedJsApi;
+
+    /** custom view created by the browser (a video player for example) */
+    private View mCustomView;
+    private WebChromeClient.CustomViewCallback mCustomViewCallback;
 
     private ActivityResult mResult = null;
 
@@ -136,7 +134,7 @@ public class CordovaWebView extends XWalkView {
      * @param context
      */
     public CordovaWebView(Context context) {
-        super(context, (Activity)null);
+        super(context);
         if (CordovaInterface.class.isInstance(context))
         {
             this.cordova = (CordovaInterface) context;
@@ -180,7 +178,7 @@ public class CordovaWebView extends XWalkView {
      *
      */
     public CordovaWebView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs);
+        super(context, attrs, defStyle);
         if (CordovaInterface.class.isInstance(context))
         {
             this.cordova = (CordovaInterface) context;
@@ -204,7 +202,7 @@ public class CordovaWebView extends XWalkView {
      */
     @TargetApi(11)
     public CordovaWebView(Context context, AttributeSet attrs, int defStyle, boolean privateBrowsing) {
-        super(context, attrs);
+        super(context, attrs, defStyle, privateBrowsing);
         if (CordovaInterface.class.isInstance(context))
         {
             this.cordova = (CordovaInterface) context;
@@ -240,34 +238,51 @@ public class CordovaWebView extends XWalkView {
     @SuppressWarnings("deprecation")
     @SuppressLint("NewApi")
     private void setup() {
-        // this.setInitialScale(0);
+        this.setInitialScale(0);
         this.setVerticalScrollBarEnabled(false);
         if (shouldRequestFocusOnInit()) {
-            this.requestFocusFromTouch();
+			this.requestFocusFromTouch();
+		}
+		// Enable JavaScript
+        WebSettings settings = this.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        settings.setLayoutAlgorithm(LayoutAlgorithm.NORMAL);
+        
+        // Set the nav dump for HTC 2.x devices (disabling for ICS, deprecated entirely for Jellybean 4.2)
+        try {
+            Method gingerbread_getMethod =  WebSettings.class.getMethod("setNavDump", new Class[] { boolean.class });
+            
+            String manufacturer = android.os.Build.MANUFACTURER;
+            Log.d(TAG, "CordovaWebView is running on device made by: " + manufacturer);
+            if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB &&
+                    android.os.Build.MANUFACTURER.contains("HTC"))
+            {
+                gingerbread_getMethod.invoke(settings, true);
+            }
+        } catch (NoSuchMethodException e) {
+            Log.d(TAG, "We are on a modern version of Android, we will deprecate HTC 2.3 devices in 2.8");
+        } catch (IllegalArgumentException e) {
+            Log.d(TAG, "Doing the NavDump failed with bad arguments");
+        } catch (IllegalAccessException e) {
+            Log.d(TAG, "This should never happen: IllegalAccessException means this isn't Android anymore");
+        } catch (InvocationTargetException e) {
+            Log.d(TAG, "This should never happen: InvocationTargetException means this isn't Android anymore.");
         }
 
-        // Enable JavaScript
-        //XWalkSettings settings = this.getSettings();
-        //if (settings == null) return;
-        // wang16: covered by XWalkPreferences setting in static code.
-        //settings.setJavaScriptEnabled(true);
-        //settings.setJavaScriptCanOpenWindowsAutomatically(true);
-        // nhu: N/A
-        //settings.setLayoutAlgorithm(LayoutAlgorithm.NORMAL);
-
         //We don't save any form data in the application
-        // nhu: N/A
-        //settings.setSaveFormData(false);
-        //settings.setSavePassword(false);
+        settings.setSaveFormData(false);
+        settings.setSavePassword(false);
         
-        // wang16: covered by XWalkPreferences setting in static code.
-        //settings.setAllowUniversalAccessFromFileURLs(true);
+        // Jellybean rightfully tried to lock this down. Too bad they didn't give us a whitelist
+        // while we do this
+        if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
+            Level16Apis.enableUniversalAccess(settings);
         // Enable database
         // We keep this disabled because we use or shim to get around DOM_EXCEPTION_ERROR_16
         String databasePath = this.cordova.getActivity().getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath();
-        //settings.setDatabaseEnabled(true);
-        //TODO: bring it back when it's ready in the XWalk.
-        //settings.setDatabasePath(databasePath);
+        settings.setDatabaseEnabled(true);
+        settings.setDatabasePath(databasePath);
         
         
         //Determine whether we're in debug or release mode, and turn on Debugging!
@@ -278,8 +293,10 @@ public class CordovaWebView extends XWalkView {
             
             appInfo = pm.getApplicationInfo(packageName, PackageManager.GET_META_DATA);
             
-            if((appInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0) {
-                enableRemoteDebugging();
+            if((appInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0 &&  
+                android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT)
+            {
+                setWebContentsDebuggingEnabled(true);
             }
         } catch (IllegalArgumentException e) {
             Log.d(TAG, "You have one job! To turn on Remote Web Debugging! YOU HAVE FAILED! ");
@@ -289,35 +306,43 @@ public class CordovaWebView extends XWalkView {
             e.printStackTrace();
         }  
         
-        //settings.setGeolocationDatabasePath(databasePath);
+        settings.setGeolocationDatabasePath(databasePath);
 
         // Enable DOM storage
-        // wang16: default value in xwalk is true.
-        //settings.setDomStorageEnabled(true);
+        settings.setDomStorageEnabled(true);
 
         // Enable built-in geolocation
-        // wang16: default value in xwalk is true.
-        //settings.setGeolocationEnabled(true);
+        settings.setGeolocationEnabled(true);
         
         // Enable AppCache
         // Fix for CB-2282
-        // nhu: N/A
-        //settings.setAppCacheMaxSize(5 * 1048576);
+        settings.setAppCacheMaxSize(5 * 1048576);
         String pathToCache = this.cordova.getActivity().getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath();
-        // wang16: setAppCachePath is not implemented in xwalk indeed.
-        //settings.setAppCachePath(pathToCache);
-        // wang16: default value in xwalk is true.
-        //settings.setAppCacheEnabled(true);
+        settings.setAppCachePath(pathToCache);
+        settings.setAppCacheEnabled(true);
+        
+        // Fix for CB-1405
+        // Google issue 4641
+        this.updateUserAgentString();
+        
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
+        if (this.receiver == null) {
+            this.receiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    updateUserAgentString();
+                }
+            };
+            this.cordova.getActivity().registerReceiver(this.receiver, intentFilter);
+        }
+        // end CB-1405
 
         pluginManager = new PluginManager(this, this.cordova);
         jsMessageQueue = new NativeToJsMessageQueue(this, cordova);
         exposedJsApi = new ExposedJsApi(pluginManager, jsMessageQueue);
         resourceApi = new CordovaResourceApi(this.getContext(), pluginManager);
         exposeJsInterface();
-    }
-    
-    public void enableRemoteDebugging() {
-        XWalkPreferences.setValue(XWalkPreferences.REMOTE_DEBUGGING, true);
     }
 
 	/**
@@ -329,6 +354,10 @@ public class CordovaWebView extends XWalkView {
     protected boolean shouldRequestFocusOnInit() {
 		return true;
 	}
+
+	private void updateUserAgentString() {
+        this.getSettings().getUserAgentString();
+    }
 
     private void exposeJsInterface() {
         int SDK_INT = Build.VERSION.SDK_INT;
@@ -349,7 +378,7 @@ public class CordovaWebView extends XWalkView {
      */
     public void setWebViewClient(CordovaWebViewClient client) {
         this.viewClient = client;
-        super.setResourceClient(client);
+        super.setWebViewClient(client);
     }
 
     /**
@@ -359,7 +388,7 @@ public class CordovaWebView extends XWalkView {
      */
     public void setWebChromeClient(CordovaChromeClient client) {
         this.chromeClient = client;
-        super.setUIClient(client);
+        super.setWebChromeClient(client);
     }
     
     public CordovaChromeClient getWebChromeClient() {
@@ -372,27 +401,13 @@ public class CordovaWebView extends XWalkView {
      * @param url
      */
     @Override
-    public void load(String url, String content) {
+    public void loadUrl(String url) {
         if (url.equals("about:blank") || url.startsWith("javascript:")) {
             this.loadUrlNow(url);
         }
         else {
-
-            String initUrl = this.getProperty("url", null);
-
-            // If first page of app, then set URL to load to be the one passed in
-            if (initUrl == null) {
-                this.loadUrlIntoView(url);
-            }
-            // Otherwise use the URL specified in the activity's extras bundle
-            else {
-                this.loadUrlIntoView(initUrl);
-            }
+            this.loadUrlIntoView(url);
         }
-    }
-
-    public void loadUrl(String url) {
-        load(url, null);
     }
 
     /**
@@ -402,16 +417,15 @@ public class CordovaWebView extends XWalkView {
      * @param url
      * @param time              The number of ms to wait before loading webview
      */
+    @Deprecated
     public void loadUrl(final String url, int time) {
-        String initUrl = this.getProperty("url", null);
-
-        // If first page of app, then set URL to load to be the one passed in
-        if (initUrl == null) {
-            this.loadUrlIntoView(url, time);
+        if(url == null)
+        {
+            this.loadUrlIntoView(Config.getStartUrl());
         }
-        // Otherwise use the URL specified in the activity's extras bundle
-        else {
-            this.loadUrlIntoView(initUrl);
+        else
+        {
+            this.loadUrlIntoView(url);
         }
     }
 
@@ -429,9 +443,7 @@ public class CordovaWebView extends XWalkView {
 
         if (recreatePlugins) {
             this.url = url;
-            if (this.pluginManager != null) {
-                this.pluginManager.init();
-            }
+            this.pluginManager.init();
         }
 
         // Create a timeout timer for loadUrl
@@ -445,7 +457,7 @@ public class CordovaWebView extends XWalkView {
                 me.stopLoading();
                 LOG.e(TAG, "CordovaWebView: TIMEOUT ERROR!");
                 if (viewClient != null) {
-                    viewClient.onReceivedLoadError(me, -6, "The connection to the server was unsuccessful.", url);
+                    viewClient.onReceivedError(me, -6, "The connection to the server was unsuccessful.", url);
                 }
             }
         };
@@ -487,7 +499,7 @@ public class CordovaWebView extends XWalkView {
             LOG.d(TAG, ">>> loadUrlNow()");
         }
         if (url.startsWith("file://") || url.startsWith("javascript:") || Config.isUrlWhiteListed(url)) {
-            super.load(url, null);
+            super.loadUrl(url);
         }
     }
 
@@ -502,7 +514,7 @@ public class CordovaWebView extends XWalkView {
 
         // If not first page of app, then load immediately
         // Add support for browser history if we use it.
-        if ((url.startsWith("javascript:")) || this.getNavigationHistory().canGoBack()) {
+        if ((url.startsWith("javascript:")) || this.canGoBack()) {
         }
 
         // If first page, then show splashscreen
@@ -520,7 +532,7 @@ public class CordovaWebView extends XWalkView {
     
     @Override
     public void stopLoading() {
-        chromeClient.isCurrentlyLoading = false;
+        viewClient.isCurrentlyLoading = false;
         super.stopLoading();
     }
     
@@ -575,10 +587,10 @@ public class CordovaWebView extends XWalkView {
 
         // Check webview first to see if there is a history
         // This is needed to support curPage#diffLink, since they are added to appView's history, but not our history url array (JQMobile behavior)
-        if (super.getNavigationHistory().canGoBack()) {
+        if (super.canGoBack()) {
             printBackForwardList();
+            super.goBack();
             
-            super.getNavigationHistory().navigate(XWalkNavigationHistory.Direction.BACKWARD, 1);
             return true;
         }
         return false;
@@ -600,7 +612,7 @@ public class CordovaWebView extends XWalkView {
 
         // If clearing history
         if (clearHistory) {
-            this.getNavigationHistory().clear();
+            this.clearHistory();
         }
 
         // If loading into our webview
@@ -717,18 +729,13 @@ public class CordovaWebView extends XWalkView {
     
 
     @Override
-    public boolean dispatchKeyEvent(KeyEvent event)
+    public boolean onKeyUp(int keyCode, KeyEvent event)
     {
-        if (event.getAction() != KeyEvent.ACTION_UP) {
-            return super.dispatchKeyEvent(event);
-        }
-        int keyCode = event.getKeyCode();
         // If back key
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             // A custom view is currently displayed  (e.g. playing a video)
-            if (this.hasEnteredFullscreen()) {
-                this.leaveFullscreen();
-                return true;
+            if(mCustomView != null) {
+                this.hideCustomView();
             } else {
                 // The webview is currently displayed
                 // If back key is bound, then send event to JavaScript
@@ -747,7 +754,6 @@ public class CordovaWebView extends XWalkView {
                     	//return false;
                     	// If they hit back button when app is initializing, app should exit instead of hang until initialization (CB2-458)
                     	this.cordova.getActivity().finish();
-                    	return false;
                     }
                 }
             }
@@ -758,7 +764,7 @@ public class CordovaWebView extends XWalkView {
                 this.loadUrl("javascript:cordova.fireDocumentEvent('menubutton');");
             }
             this.lastMenuEventTime = event.getEventTime();
-            return super.dispatchKeyEvent(event);
+            return super.onKeyUp(keyCode, event);
         }
         // If search key
         else if (keyCode == KeyEvent.KEYCODE_SEARCH) {
@@ -768,23 +774,14 @@ public class CordovaWebView extends XWalkView {
         else if(keyUpCodes.contains(keyCode))
         {
             //What the hell should this do?
-            return super.dispatchKeyEvent(event);
+            return super.onKeyUp(keyCode, event);
         }
 
         //Does webkit change this behavior?
-        return super.dispatchKeyEvent(event);
+        return super.onKeyUp(keyCode, event);
     }
 
-    @Override
-    public void pauseTimers() {
-        // This is called by XWalkViewInternal.onActivityStateChange().
-        // We don't want them paused by default though.
-    }
-
-    public void pauseTimersForReal() {
-        super.pauseTimers();
-    }
-
+    
     public void bindButton(boolean override)
     {
         this.bound = override;
@@ -830,7 +827,7 @@ public class CordovaWebView extends XWalkView {
         // If app doesn't want to run in background
         if (!keepRunning) {
             // Pause JavaScript timers (including setInterval)
-            this.pauseTimersForReal();
+            this.pauseTimers();
         }
         paused = true;
    
@@ -863,7 +860,7 @@ public class CordovaWebView extends XWalkView {
         if (this.pluginManager != null) {
             this.pluginManager.onDestroy();
         }
-
+        
         // unregister the receiver
         if (this.receiver != null) {
             try {
@@ -872,18 +869,14 @@ public class CordovaWebView extends XWalkView {
                 Log.e(TAG, "Error unregistering configuration receiver: " + e.getMessage(), e);
             }
         }
-        this.onDestroy();
     }
     
-    @Override
-    public boolean onNewIntent(Intent intent)
+    public void onNewIntent(Intent intent)
     {
-        if (super.onNewIntent(intent)) return true;
         //Forward to plugins
         if (this.pluginManager != null) {
             this.pluginManager.onNewIntent(intent);
         }
-        return false;
     }
     
     public boolean isPaused()
@@ -895,12 +888,21 @@ public class CordovaWebView extends XWalkView {
         return handleButton;
     }
 
+    // Wrapping these functions in their own class prevents warnings in adb like:
+    // VFY: unable to resolve virtual method 285: Landroid/webkit/WebSettings;.setAllowUniversalAccessFromFileURLs
+    @TargetApi(16)
+    private static class Level16Apis {
+        static void enableUniversalAccess(WebSettings settings) {
+            settings.setAllowUniversalAccessFromFileURLs(true);
+        }
+    }
+    
     public void printBackForwardList() {
-        XWalkNavigationHistory currentList = this.getNavigationHistory();
-        int currentSize = currentList.size();
+        WebBackForwardList currentList = this.copyBackForwardList();
+        int currentSize = currentList.getSize();
         for(int i = 0; i < currentSize; ++i)
         {
-            XWalkNavigationItem item = currentList.getItemAt(i);
+            WebHistoryItem item = currentList.getItemAtIndex(i);
             String url = item.getUrl();
             LOG.d(TAG, "The URL at index: " + Integer.toString(i) + " is " + url );
         }
@@ -910,8 +912,8 @@ public class CordovaWebView extends XWalkView {
     //Can Go Back is BROKEN!
     public boolean startOfHistory()
     {
-        XWalkNavigationHistory currentList = this.getNavigationHistory();
-        XWalkNavigationItem item = currentList.getItemAt(0);
+        WebBackForwardList currentList = this.copyBackForwardList();
+        WebHistoryItem item = currentList.getItemAtIndex(0);
         if( item!=null){	// Null-fence in case they haven't called loadUrl yet (CB-2458)
 	        String url = item.getUrl();
 	        String currentUrl = this.getUrl();
@@ -922,16 +924,66 @@ public class CordovaWebView extends XWalkView {
         return false;
     }
 
-    @Override
-    public boolean restoreState(Bundle savedInstanceState)
+    public void showCustomView(View view, WebChromeClient.CustomViewCallback callback) {
+        // This code is adapted from the original Android Browser code, licensed under the Apache License, Version 2.0
+        Log.d(TAG, "showing Custom View");
+        // if a view already exists then immediately terminate the new one
+        if (mCustomView != null) {
+            callback.onCustomViewHidden();
+            return;
+        }
+        
+        // Store the view and its callback for later (to kill it properly)
+        mCustomView = view;
+        mCustomViewCallback = callback;
+        
+        // Add the custom view to its container.
+        ViewGroup parent = (ViewGroup) this.getParent();
+        parent.addView(view, COVER_SCREEN_GRAVITY_CENTER);
+        
+        // Hide the content view.
+        this.setVisibility(View.GONE);
+        
+        // Finally show the custom view container.
+        parent.setVisibility(View.VISIBLE);
+        parent.bringToFront();
+    }
+
+    public void hideCustomView() {
+        // This code is adapted from the original Android Browser code, licensed under the Apache License, Version 2.0
+        Log.d(TAG, "Hiding Custom View");
+        if (mCustomView == null) return;
+
+        // Hide the custom view.
+        mCustomView.setVisibility(View.GONE);
+        
+        // Remove the custom view from its container.
+        ViewGroup parent = (ViewGroup) this.getParent();
+        parent.removeView(mCustomView);
+        mCustomView = null;
+        mCustomViewCallback.onCustomViewHidden();
+        
+        // Show the content view.
+        this.setVisibility(View.VISIBLE);
+    }
+    
+    /**
+     * if the video overlay is showing then we need to know 
+     * as it effects back button handling
+     * 
+     * @return true if custom view is showing
+     */
+    public boolean isCustomViewShowing() {
+        return mCustomView != null;
+    }
+    
+    public WebBackForwardList restoreState(Bundle savedInstanceState)
     {
-        boolean result = super.restoreState(savedInstanceState);
+        WebBackForwardList myList = super.restoreState(savedInstanceState);
         Log.d(TAG, "WebView restoration crew now restoring!");
         //Initialize the plugin manager once more
-        if (this.pluginManager != null) {
-            this.pluginManager.init();
-        }
-        return result;
+        this.pluginManager.init();
+        return myList;
     }
 
     public void storeResult(int requestCode, int resultCode, Intent intent) {
@@ -940,16 +992,5 @@ public class CordovaWebView extends XWalkView {
     
     public CordovaResourceApi getResourceApi() {
         return resourceApi;
-    }
-
-    static {
-        // XWalkPreferencesInternal.ENABLE_JAVASCRIPT
-        XWalkPreferences.setValue("enable-javascript", true);
-        // XWalkPreferencesInternal.JAVASCRIPT_CAN_OPEN_WINDOW
-        XWalkPreferences.setValue("javascript-can-open-window", true);
-        // XWalkPreferencesInternal.ALLOW_UNIVERSAL_ACCESS_FROM_FILE
-        XWalkPreferences.setValue("allow-universal-access-from-file", true);
-        // XWalkPreferencesInternal.SUPPORT_MULTIPLE_WINDOWS
-        XWalkPreferences.setValue("support-multiple-windows", false);
     }
 }
