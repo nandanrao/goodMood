@@ -8,6 +8,10 @@ angular.module('goodMood')
 			controller: function ($scope, $attrs, $element){
 				$scope.playing = false;
 
+				$document.on('mousedown', function(e){
+					console.log('clicked on ', e.target.tagName)
+				})
+
 				this.play = function(){
 					if (!$scope.playing) {
 						console.log('playing')
@@ -21,9 +25,9 @@ angular.module('goodMood')
 				}
 
 				this.mousedown = function(e){
-					console.log('mousedown')
 					var x = e.offsetX
 					var timecode = getTimecode(x)
+					console.log('mousedown', timecode, x)
 					if (timecode > 0){
 						console.log('on line')
 						$scope.media.currentTime = timecode
@@ -36,6 +40,8 @@ angular.module('goodMood')
 					var lineOffset = 88/543.5
 					var svgWidth = $element[0].width.baseVal.value
 					var pixelOffset = lineOffset * svgWidth
+					console.log('pixel off, svgwidth', pixelOffset, svgWidth)
+					console.log('media duration', $scope.media.duration)
 					var audioPercentage = (x - pixelOffset)/(svgWidth - pixelOffset)
 					var timecode = audioPercentage*$scope.media.duration
 					return timecode

@@ -257,6 +257,7 @@ module.run(["$templateCache", function($templateCache) {
     "			</button>\n" +
     "		</div>\n" +
     "		<form ng-show=\"writeMessage\" ng-submit=\"thread.sendMessage('text')\">\n" +
+    "		<p>{{ text }}</p>\n" +
     "			<input required ng-model=\"text\" class=\"text\" placeholder=\"write here\" />\n" +
     "		</form>\n" +
     "	</ion-content>\n" +

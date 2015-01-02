@@ -45,6 +45,7 @@ angular.module('goodMood')
        * and adds it to the database
        */
       $addMessage: function(data){
+        console.log(data.user.$id, data.content)
         if(!data.content || !data.user || !data.user.$id){
           throw new TypeError('bad data!')
         }

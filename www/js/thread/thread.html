@@ -20,6 +20,7 @@
 			</button>
 		</div>
 		<form ng-show="writeMessage" ng-submit="thread.sendMessage('text')">
+		<p>{{ text }}</p>
 			<input required ng-model="text" class="text" placeholder="write here" />
 		</form>
 	</ion-content>

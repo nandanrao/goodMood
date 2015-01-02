@@ -26,8 +26,6 @@ angular.module('goodMood')
 
 		this.recordNote = function(){
 			$scope.recordNote = true;
-			// cordovarecordmedia here
-			// google cloud upload? 
 			vm.sendMessage('voice', dataURI)
 		}
 
@@ -40,6 +38,7 @@ angular.module('goodMood')
 		}
  
 		this.sendMessage = function(type, content){
+			console.log('at time of send', $scope.text)
 			$ionicLoading.show()
 			thread.$addMessage({
 				content: $scope.text,
@@ -47,8 +46,9 @@ angular.module('goodMood')
 				type: type,
 			}).then(function(message){
 				$ionicLoading.hide()
+				$scope.text = null;
 			})
-			$scope.text = null;
+			
 		}
 
 	})
