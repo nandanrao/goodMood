@@ -53,8 +53,8 @@ ion-view {
 
 ion-header-bar {
   .buttons {
-    display: flex;
-    align-items: center;
+    @include display(flex);
+    @include align-items(center);
     button {
       color: $color-type-c;
       &::before {
@@ -66,8 +66,8 @@ ion-header-bar {
 }
 
 ion-nav-view ion-content.has-header {
-  top: 0;
-  bottom: $bar-height
+  top: 0 !important;
+  bottom: $bar-height !important;
 }
 
 ion-nav-view .pane {

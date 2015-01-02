@@ -31,6 +31,7 @@ angular.module('goodMood')
         .catch(function(err){
           $log.error('Login Error: ', err)
           $window.alert('Sorry, we could not log you in, try again?')
+          $ionicLoading.hide()
         })
     }
 

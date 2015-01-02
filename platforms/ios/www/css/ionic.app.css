@@ -7039,6 +7039,7 @@ button {
   background: none; }
 
 #pg--iteration img.iteration-image {
+  position: absolute;
   max-width: 100%;
   max-height: 100%;
   margin: auto auto; }
@@ -7053,10 +7054,10 @@ button {
   z-index: 1; }
 #pg--iteration button.addIteration {
   position: fixed;
-  bottom: 10em;
+  bottom: 115px;
   left: 50%;
-  margin-left: -75px;
-  width: 150px;
+  margin-left: -50px;
+  width: 100px;
   z-index: 2; }
 #pg--iteration div.instructions {
   position: fixed;
@@ -7112,25 +7113,66 @@ text-message p.date, voice-message p.date {
   color: #333;
   line-height: 0.75; }
 
-#pg--new-iteration .mobile button {
-  width: 100%;
-  display: block; }
-#pg--new-iteration .mobile .image {
-  width: 25%;
-  margin: auto auto;
-  display: block; }
-#pg--new-iteration .mobile p {
-  font-family: 'Futura-Bold';
-  color: #277FE9;
-  font-size: 2em;
-  width: 100%;
-  text-align: center; }
+#pg--new-iteration .mobile {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: space-around;
+  -ms-flex-pack: space-around;
+  -webkit-justify-content: space-around;
+  -moz-justify-content: space-around;
+  justify-content: space-around;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0; }
+  #pg--new-iteration .mobile button {
+    width: 100%;
+    display: block; }
+    #pg--new-iteration .mobile button.take-picture {
+      padding-top: 0px; }
+  #pg--new-iteration .mobile .image {
+    width: 20%;
+    margin: auto auto;
+    display: block; }
+  #pg--new-iteration .mobile p {
+    font-family: 'Futura-Bold';
+    color: #277FE9;
+    font-size: 1.75em;
+    width: 100%;
+    text-align: center;
+    margin-top: 0.5em; }
+  #pg--new-iteration .mobile div.line {
+    border-top: 3px dotted #277FE9;
+    margin: 0 7%;
+    height: 0px; }
 
 #pg--new-collaboration form {
   position: absolute;
   height: 100%;
   width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
   align-items: center; }
 #pg--new-collaboration div.iwant {
   width: 100%;
@@ -7139,7 +7181,7 @@ text-message p.date, voice-message p.date {
   text-align: center;
   color: #277FE9;
   font-family: 'Futura-Bold';
-  font-size: 2em; }
+  font-size: 1.33em; }
   #pg--new-collaboration div.iwant input {
     font-size: 1em;
     color: #277FE9;
@@ -7170,15 +7212,15 @@ text-message p.date, voice-message p.date {
   height: 100%;
   width: 100%; }
 #pg--my-collaborations button.new-collaboration {
-  width: 150px;
-  margin: auto auto;
+  width: 100px;
+  margin: 2em auto 2em auto;
   display: block; }
 #pg--my-collaborations div.collaboration {
   display: inline-block;
   cursor: pointer;
   flex-grow: 1;
   width: 50%;
-  padding: 5%; }
+  padding: 3%; }
   #pg--my-collaborations div.collaboration img {
     width: 100%;
     border-radius: 50%;
@@ -7187,9 +7229,8 @@ text-message p.date, voice-message p.date {
   #pg--my-collaborations div.collaboration h2 {
     font-family: 'Futura-Bold';
     color: #277FE9;
-    text-align: center; }
-#pg--my-collaborations ion-content {
-  margin-bottom: 10em; }
+    text-align: center;
+    font-size: 1em; }
 
 .bar .title {
   font-family: 'Futura-Bold';
@@ -7199,7 +7240,17 @@ ion-view {
   background-color: #fff; }
 
 ion-header-bar .buttons {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
   align-items: center; }
   ion-header-bar .buttons button {
     color: #FFF; }
@@ -7208,7 +7259,8 @@ ion-header-bar .buttons {
       line-height: 28px; }
 
 ion-nav-view ion-content.has-header {
-  top: 0; }
+  top: 0 !important;
+  bottom: 100px !important; }
 
 .gm-nav-bar {
   color: #FFF;

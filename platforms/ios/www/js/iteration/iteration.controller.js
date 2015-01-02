@@ -21,6 +21,7 @@ angular.module('goodMood')
 		}
 
 		this.readInstructions = function(){
+			console.log('clicked close')
 			$scope.instructionsRead = true
 		} 
 
