@@ -4,35 +4,8 @@ angular.module('goodMood')
 			restrict: 'E',
 			templateUrl: 'thread/voicemessage.html',
 			controllerAs: 'voiceMessage',
-			controller: function ($scope){
-				$scope.playing = false;
-				this.play = function(){
-					if (!$scope.playing) {
-						console.log('playing')
-						$scope.media.play()
-					}
-					else {
-						$scope.media.pause()
-						console.log('pausing')
-					}
-					$scope.playing = !$scope.playing
-				}
-
-				this.mousedown = function(e){
-					console.log(e)
-					var x = e.offsetX
-					$document.on('mousemove', mousemove);
-					$document.on('mouseup', mouseup);
-				}
-
-				function mousemove(event) {
-					  
-				}
-
-				function mouseup() {
-				  $document.off('mousemove', mousemove);
-				  $document.off('mouseup', mouseup);
-				}
+			controller: function ($scope, $element){
+				
 
 			},
 			link: function (scope, el, attrs){
@@ -44,15 +17,7 @@ angular.module('goodMood')
 				}
 				else {
 					scope.points = "0,0 22.1,21.7 0,43.3"
-				}
-
-				el.on('mousedown', function(event) {
-				    startX = event.pageX - x;
-				    startY = event.pageY - y;
-				    
-				  });
-
-				  
+				} 
 			}
 		}
 	})
