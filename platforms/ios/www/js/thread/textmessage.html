@@ -1,0 +1,16 @@
+<div class="{{ sender ? 'sender' : 'reciever' }}">
+	<p class="date">
+		{{ formatDate(message.sentAt) }}
+	</p>	
+	<p class="content">
+		{{ message.content }}
+	</p>
+	<div class="arrow-holder">
+		<div class="arrow">
+			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				 viewBox="0 0 22.1 43.3" enable-background="new 0 0 22.1 43.3" xml:space="preserve">
+			<polygon fill="#FFF" points="{{ points }}">
+			</svg>
+		</div>
+	</div>
+</div>

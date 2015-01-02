@@ -1,0 +1,20 @@
+<ion-view id="pg--my-collaborations" view-title="mis collaboraciones">
+	<ion-nav-buttons side="primary">
+	 <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+	</ion-nav-buttons>
+	<ion-content>
+		<div class="collaborations">
+			<div ng-repeat="collaboration in collaborations" class="collaboration" ng-click="myCollaborations.collaboration(collaboration.$id)">
+			<img src="{{ myCollaborations.getCollaborationImage(collaboration) }}">
+			<p class="title">
+				{{ collaboration.name }}
+			</p>
+			<p class="unreadMessages">
+				{{ myCollaborations.getNewMessages(collaboration) }}
+			</p>
+			</div>  
+		</div>
+		<button add-button class="new-collaboration" ng-click="myCollaborations.newCollaboration()" nav-direction="forward">
+		</button>
+	</ion-content>
+</ion-view> 
