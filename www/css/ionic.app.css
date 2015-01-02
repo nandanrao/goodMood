@@ -2755,7 +2755,7 @@ a.subdued {
   @media (min--moz-device-pixel-ratio: 1.5), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
     .bar {
       border: none;
-      background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+      background-image: linear, 0deg, #ddd, #ddd 50%, transparent 50%;
       background-position: bottom;
       background-size: 100% 1px;
       background-repeat: no-repeat; } }
@@ -2777,84 +2777,84 @@ a.subdued {
   .bar.bar-light {
     border-color: #ddd;
     background-color: white;
-    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear, 0deg, #ddd, #ddd 50%, transparent 50%;
     color: #444; }
     .bar.bar-light .title {
       color: #444; }
     .bar.bar-light.bar-footer {
-      background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%); }
+      background-image: linear, 180deg, #ddd, #ddd 50%, transparent 50%; }
   .bar.bar-stable {
     border-color: #b2b2b2;
     background-color: #f8f8f8;
-    background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
+    background-image: linear, 0deg, #b2b2b2, #b2b2b2 50%, transparent 50%;
     color: #444; }
     .bar.bar-stable .title {
       color: #444; }
     .bar.bar-stable.bar-footer {
-      background-image: linear-gradient(180deg, #b2b2b2, #b2b2b2 50%, transparent 50%); }
+      background-image: linear, 180deg, #b2b2b2, #b2b2b2 50%, transparent 50%; }
   .bar.bar-positive {
     border-color: #0c63ee;
     background-color: #387ef5;
-    background-image: linear-gradient(0deg, #0c63ee, #0c63ee 50%, transparent 50%);
+    background-image: linear, 0deg, #0c63ee, #0c63ee 50%, transparent 50%;
     color: #fff; }
     .bar.bar-positive .title {
       color: #fff; }
     .bar.bar-positive.bar-footer {
-      background-image: linear-gradient(180deg, #0c63ee, #0c63ee 50%, transparent 50%); }
+      background-image: linear, 180deg, #0c63ee, #0c63ee 50%, transparent 50%; }
   .bar.bar-calm {
     border-color: #0a9ec7;
     background-color: #11c1f3;
-    background-image: linear-gradient(0deg, #0a9ec7, #0a9ec7 50%, transparent 50%);
+    background-image: linear, 0deg, #0a9ec7, #0a9ec7 50%, transparent 50%;
     color: #fff; }
     .bar.bar-calm .title {
       color: #fff; }
     .bar.bar-calm.bar-footer {
-      background-image: linear-gradient(180deg, #0a9ec7, #0a9ec7 50%, transparent 50%); }
+      background-image: linear, 180deg, #0a9ec7, #0a9ec7 50%, transparent 50%; }
   .bar.bar-assertive {
     border-color: #e42012;
     background-color: #ef473a;
-    background-image: linear-gradient(0deg, #e42012, #e42012 50%, transparent 50%);
+    background-image: linear, 0deg, #e42012, #e42012 50%, transparent 50%;
     color: #fff; }
     .bar.bar-assertive .title {
       color: #fff; }
     .bar.bar-assertive.bar-footer {
-      background-image: linear-gradient(180deg, #e42012, #e42012 50%, transparent 50%); }
+      background-image: linear, 180deg, #e42012, #e42012 50%, transparent 50%; }
   .bar.bar-balanced {
     border-color: #28a54c;
     background-color: #33cd5f;
-    background-image: linear-gradient(0deg, #28a54c, #28a54c 50%, transparent 50%);
+    background-image: linear, 0deg, #28a54c, #28a54c 50%, transparent 50%;
     color: #fff; }
     .bar.bar-balanced .title {
       color: #fff; }
     .bar.bar-balanced.bar-footer {
-      background-image: linear-gradient(180deg, #28a54c, #0c63ee 50%, transparent 50%); }
+      background-image: linear, 180deg, #28a54c, #0c63ee 50%, transparent 50%; }
   .bar.bar-energized {
     border-color: #e6b400;
     background-color: #ffc900;
-    background-image: linear-gradient(0deg, #e6b400, #e6b400 50%, transparent 50%);
+    background-image: linear, 0deg, #e6b400, #e6b400 50%, transparent 50%;
     color: #fff; }
     .bar.bar-energized .title {
       color: #fff; }
     .bar.bar-energized.bar-footer {
-      background-image: linear-gradient(180deg, #e6b400, #e6b400 50%, transparent 50%); }
+      background-image: linear, 180deg, #e6b400, #e6b400 50%, transparent 50%; }
   .bar.bar-royal {
     border-color: #6b46e5;
     background-color: #886aea;
-    background-image: linear-gradient(0deg, #6b46e5, #6b46e5 50%, transparent 50%);
+    background-image: linear, 0deg, #6b46e5, #6b46e5 50%, transparent 50%;
     color: #fff; }
     .bar.bar-royal .title {
       color: #fff; }
     .bar.bar-royal.bar-footer {
-      background-image: linear-gradient(180deg, #6b46e5, #6b46e5 50%, transparent 50%); }
+      background-image: linear, 180deg, #6b46e5, #6b46e5 50%, transparent 50%; }
   .bar.bar-dark {
     border-color: #111;
     background-color: #444444;
-    background-image: linear-gradient(0deg, #111, #111 50%, transparent 50%);
+    background-image: linear, 0deg, #111, #111 50%, transparent 50%;
     color: #fff; }
     .bar.bar-dark .title {
       color: #fff; }
     .bar.bar-dark.bar-footer {
-      background-image: linear-gradient(180deg, #111, #111 50%, transparent 50%); }
+      background-image: linear, 180deg, #111, #111 50%, transparent 50%; }
   .bar .title {
     position: absolute;
     top: 0;
@@ -3187,7 +3187,7 @@ a.subdued {
   transform: translate3d(0, 0, 0);
   border-color: #b2b2b2;
   background-color: #f8f8f8;
-  background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
+  background-image: linear, 0deg, #b2b2b2, #b2b2b2 50%, transparent 50%;
   color: #444;
   position: absolute;
   bottom: 0;
@@ -3214,7 +3214,7 @@ a.subdued {
 .tabs-light > .tabs, .tabs.tabs-light {
   border-color: #ddd;
   background-color: #fff;
-  background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+  background-image: linear, 0deg, #ddd, #ddd 50%, transparent 50%;
   color: #444; }
   .tabs-light > .tabs .tab-item .badge, .tabs.tabs-light .tab-item .badge {
     background-color: #444;
@@ -3223,7 +3223,7 @@ a.subdued {
 .tabs-stable > .tabs, .tabs.tabs-stable {
   border-color: #b2b2b2;
   background-color: #f8f8f8;
-  background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
+  background-image: linear, 0deg, #b2b2b2, #b2b2b2 50%, transparent 50%;
   color: #444; }
   .tabs-stable > .tabs .tab-item .badge, .tabs.tabs-stable .tab-item .badge {
     background-color: #444;
@@ -3232,7 +3232,7 @@ a.subdued {
 .tabs-positive > .tabs, .tabs.tabs-positive {
   border-color: #0c63ee;
   background-color: #387ef5;
-  background-image: linear-gradient(0deg, #0c63ee, #0c63ee 50%, transparent 50%);
+  background-image: linear, 0deg, #0c63ee, #0c63ee 50%, transparent 50%;
   color: #fff; }
   .tabs-positive > .tabs .tab-item .badge, .tabs.tabs-positive .tab-item .badge {
     background-color: #fff;
@@ -3241,7 +3241,7 @@ a.subdued {
 .tabs-calm > .tabs, .tabs.tabs-calm {
   border-color: #0a9ec7;
   background-color: #11c1f3;
-  background-image: linear-gradient(0deg, #0a9ec7, #0a9ec7 50%, transparent 50%);
+  background-image: linear, 0deg, #0a9ec7, #0a9ec7 50%, transparent 50%;
   color: #fff; }
   .tabs-calm > .tabs .tab-item .badge, .tabs.tabs-calm .tab-item .badge {
     background-color: #fff;
@@ -3250,7 +3250,7 @@ a.subdued {
 .tabs-assertive > .tabs, .tabs.tabs-assertive {
   border-color: #e42012;
   background-color: #ef473a;
-  background-image: linear-gradient(0deg, #e42012, #e42012 50%, transparent 50%);
+  background-image: linear, 0deg, #e42012, #e42012 50%, transparent 50%;
   color: #fff; }
   .tabs-assertive > .tabs .tab-item .badge, .tabs.tabs-assertive .tab-item .badge {
     background-color: #fff;
@@ -3259,7 +3259,7 @@ a.subdued {
 .tabs-balanced > .tabs, .tabs.tabs-balanced {
   border-color: #28a54c;
   background-color: #33cd5f;
-  background-image: linear-gradient(0deg, #28a54c, #28a54c 50%, transparent 50%);
+  background-image: linear, 0deg, #28a54c, #28a54c 50%, transparent 50%;
   color: #fff; }
   .tabs-balanced > .tabs .tab-item .badge, .tabs.tabs-balanced .tab-item .badge {
     background-color: #fff;
@@ -3268,7 +3268,7 @@ a.subdued {
 .tabs-energized > .tabs, .tabs.tabs-energized {
   border-color: #e6b400;
   background-color: #ffc900;
-  background-image: linear-gradient(0deg, #e6b400, #e6b400 50%, transparent 50%);
+  background-image: linear, 0deg, #e6b400, #e6b400 50%, transparent 50%;
   color: #fff; }
   .tabs-energized > .tabs .tab-item .badge, .tabs.tabs-energized .tab-item .badge {
     background-color: #fff;
@@ -3277,7 +3277,7 @@ a.subdued {
 .tabs-royal > .tabs, .tabs.tabs-royal {
   border-color: #6b46e5;
   background-color: #886aea;
-  background-image: linear-gradient(0deg, #6b46e5, #6b46e5 50%, transparent 50%);
+  background-image: linear, 0deg, #6b46e5, #6b46e5 50%, transparent 50%;
   color: #fff; }
   .tabs-royal > .tabs .tab-item .badge, .tabs.tabs-royal .tab-item .badge {
     background-color: #fff;
@@ -3286,7 +3286,7 @@ a.subdued {
 .tabs-dark > .tabs, .tabs.tabs-dark {
   border-color: #111;
   background-color: #444;
-  background-image: linear-gradient(0deg, #111, #111 50%, transparent 50%);
+  background-image: linear, 0deg, #111, #111 50%, transparent 50%;
   color: #fff; }
   .tabs-dark > .tabs .tab-item .badge, .tabs.tabs-dark .tab-item .badge {
     background-color: #fff;
@@ -3588,47 +3588,47 @@ a.subdued {
 
 .tabs-background-light .tabs, .tabs-background-light > .tabs {
   background-color: #fff;
-  background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+  background-image: linear, 0deg, #ddd, #ddd 50%, transparent 50%;
   border-color: #ddd; }
 
 .tabs-background-stable .tabs, .tabs-background-stable > .tabs {
   background-color: #f8f8f8;
-  background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
+  background-image: linear, 0deg, #b2b2b2, #b2b2b2 50%, transparent 50%;
   border-color: #b2b2b2; }
 
 .tabs-background-positive .tabs, .tabs-background-positive > .tabs {
   background-color: #387ef5;
-  background-image: linear-gradient(0deg, #0c63ee, #0c63ee 50%, transparent 50%);
+  background-image: linear, 0deg, #0c63ee, #0c63ee 50%, transparent 50%;
   border-color: #0c63ee; }
 
 .tabs-background-calm .tabs, .tabs-background-calm > .tabs {
   background-color: #11c1f3;
-  background-image: linear-gradient(0deg, #0a9ec7, #0a9ec7 50%, transparent 50%);
+  background-image: linear, 0deg, #0a9ec7, #0a9ec7 50%, transparent 50%;
   border-color: #0a9ec7; }
 
 .tabs-background-assertive .tabs, .tabs-background-assertive > .tabs {
   background-color: #ef473a;
-  background-image: linear-gradient(0deg, #e42012, #e42012 50%, transparent 50%);
+  background-image: linear, 0deg, #e42012, #e42012 50%, transparent 50%;
   border-color: #e42012; }
 
 .tabs-background-balanced .tabs, .tabs-background-balanced > .tabs {
   background-color: #33cd5f;
-  background-image: linear-gradient(0deg, #28a54c, #28a54c 50%, transparent 50%);
+  background-image: linear, 0deg, #28a54c, #28a54c 50%, transparent 50%;
   border-color: #28a54c; }
 
 .tabs-background-energized .tabs, .tabs-background-energized > .tabs {
   background-color: #ffc900;
-  background-image: linear-gradient(0deg, #e6b400, #e6b400 50%, transparent 50%);
+  background-image: linear, 0deg, #e6b400, #e6b400 50%, transparent 50%;
   border-color: #e6b400; }
 
 .tabs-background-royal .tabs, .tabs-background-royal > .tabs {
   background-color: #886aea;
-  background-image: linear-gradient(0deg, #6b46e5, #6b46e5 50%, transparent 50%);
+  background-image: linear, 0deg, #6b46e5, #6b46e5 50%, transparent 50%;
   border-color: #6b46e5; }
 
 .tabs-background-dark .tabs, .tabs-background-dark > .tabs {
   background-color: #444;
-  background-image: linear-gradient(0deg, #111, #111 50%, transparent 50%);
+  background-image: linear, 0deg, #111, #111 50%, transparent 50%;
   border-color: #111; }
 
 .tabs-color-light .tab-item {
@@ -5734,7 +5734,7 @@ input[type="range"] {
   height: 43px;
   outline: none;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ccc), color-stop(100%, #ccc));
-  background: linear-gradient(to right, #ccc 0%, #ccc 100%);
+  background: linear, to right, #ccc 0%, #ccc 100%;
   background-position: center;
   background-size: 99% 2px;
   background-repeat: no-repeat;
@@ -7151,20 +7151,45 @@ text-message p.date, voice-message p.date {
     margin-left: 0.5em; }
 
 #pg--my-collaborations div.collaborations {
-  display: flex; }
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-content: space-between;
+  -moz-align-content: space-between;
+  -ms-flex-line-pack: space-between;
+  align-content: space-between;
+  width: 100%;
+  height: 100%;
+  width: 100%; }
 #pg--my-collaborations button.new-collaboration {
   width: 150px;
   margin: auto auto;
   display: block; }
 #pg--my-collaborations div.collaboration {
   display: inline-block;
-  cursor: pointer; }
+  cursor: pointer;
+  flex-grow: 1;
+  width: 50%;
+  padding: 5%; }
   #pg--my-collaborations div.collaboration img {
-    width: 200px;
-    height: 200px;
+    width: 100%;
     border-radius: 50%;
     border-width: 5px;
     border-color: #277FE9; }
+  #pg--my-collaborations div.collaboration h2 {
+    font-family: 'Futura-Bold';
+    color: #277FE9;
+    text-align: center; }
+#pg--my-collaborations ion-content {
+  margin-bottom: 10em; }
 
 .bar .title {
   font-family: 'Futura-Bold';

@@ -22,16 +22,13 @@ module.run(["$templateCache", function($templateCache) {
     "		<div class=\"collaborations\">\n" +
     "			<div ng-repeat=\"collaboration in collaborations\" class=\"collaboration\" ng-click=\"myCollaborations.collaboration(collaboration.$id)\">\n" +
     "			<img src=\"{{ myCollaborations.getCollaborationImage(collaboration) }}\">\n" +
-    "			<p class=\"title\">\n" +
-    "				{{ collaboration.name }}\n" +
-    "			</p>\n" +
-    "			<p class=\"unreadMessages\">\n" +
-    "				{{ myCollaborations.getNewMessages(collaboration) }}\n" +
-    "			</p>\n" +
+    "			<h2>\n" +
+    "				{{ collaboration.name }} <span> ({{ myCollaborations.getNewMessages(collaboration) }})</span>\n" +
+    "			</h2>\n" +
     "			</div>  \n" +
     "		</div>\n" +
     "		<button add-button class=\"new-collaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
-    "		</button>\n" +
+    "		</button> \n" +
     "	</ion-content>\n" +
     "</ion-view> ");
 }]);

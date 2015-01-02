@@ -20,6 +20,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 
 
+// Import bourbon
+@import "bourbon/bourbon";
+
 // Import default overrides
 @import "typography",
         "colors",
