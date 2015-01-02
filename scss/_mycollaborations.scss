@@ -8,8 +8,8 @@
     width: 100%;
   }
   button.new-collaboration {
-      width: 120px;
-      margin: 2em auto;
+      width: 100px;
+      margin: 2em auto 2em auto;
       display: block;
   }
   div.collaboration {
@@ -31,8 +31,5 @@
       text-align: center;
       font-size: 1em;
     }
-  }
-  ion-content {
-    margin-bottom: 10em;
   }
 }

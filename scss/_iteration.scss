@@ -2,7 +2,7 @@
 #pg--iteration {
 
   img.iteration-image {
-      // position: absolute;
+      position: absolute;
       max-width: 100%;
       max-height: 100%;
       margin: auto auto;
@@ -30,10 +30,10 @@
   }
   button.addIteration {
     position: fixed;
-    bottom: 10em;
+    bottom: $bar-height + 15px;
     left: 50%;
-    margin-left: -75px;
-    width: 150px;
+    margin-left: -50px;
+    width: 100px;
     z-index: 2;
   }
   div.instructions {

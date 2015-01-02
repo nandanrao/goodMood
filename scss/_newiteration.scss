@@ -1,22 +1,38 @@
 
 #pg--new-iteration {
   .mobile {
-    // display: flex;
+    @include display(flex);
+    @include flex-direction(column);
+    @include justify-content(space-around);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
     button {
       width: 100%;
       display: block;  
+      &.take-picture {
+        padding-top: 0px;
+      }
     }
     .image {
-      width: 25%;
+      width: 20%;
       margin: auto auto;
       display: block;
     }
     p {
       font-family: $title-font-family;
       color: $color-a;
-      font-size: 2em;
+      font-size: 1.75em;
       width: 100%;
       text-align: center;
+      margin-top: .5em;
+    }
+    div.line {
+      border-top: 3px dotted $color-a;
+      margin: 0 7%;
+      height: 0px;
     }
   }
 }

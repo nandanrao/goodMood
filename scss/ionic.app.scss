@@ -67,6 +67,11 @@ ion-header-bar {
 
 ion-nav-view ion-content.has-header {
   top: 0;
+  bottom: $bar-height
+}
+
+ion-nav-view .pane {
+  // bottom: $bar-height;
 }
 
 .gm-nav-bar {

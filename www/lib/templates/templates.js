@@ -44,16 +44,16 @@ module.run(["$templateCache", function($templateCache) {
     "		<button ng-click=\"newCollaboration.cancel()\" class=\"ion-close\" nav-direction=\"back\">\n" +
     "		</button>\n" +
     "	</ion-nav-buttons>\n" +
-    "	<div class=\"newCollaboration\">\n" +
+    "	<ion-content scroll=\"false\">\n" +
     "		<form class=\"newCollaborationForm\" name=\"newCollaborationForm\" novalidate ng-submit=\"newCollaboration.submit()\">\n" +
     "			<div class=\"iwant\">\n" +
     "				<span>Yo quiero</span>\n" +
     "				<input required class=\"newcollaboration\" ng-model=\"name\"></input>\n" +
     "			</div>\n" +
     "			<!-- <button class=\"check\">&#10003;</button> -->\n" +
-    "		</form>\n" +
-    "	</div>\n" +
-    "</ion-view>	");
+    "		</form> \n" +
+    "	</ion-content>\n" +
+    "</ion-view>");
 }]);
 })();
 
@@ -123,29 +123,33 @@ catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/newiteration.html",
     "<ion-view id=\"pg--new-iteration\" view-title=\"{{ newIteration.getViewTitle() }}\">\n" +
+    "\n" +
     "	<ion-nav-buttons side=\"secondary\">\n" +
     "		<button ng-click=\"newIteration.cancel()\" class=\"ion-close\" nav-direction=\"back\">\n" +
     "		</button>\n" +
     "	</ion-nav-buttons>\n" +
+    "	<ion-content scroll=\"false\">\n" +
     "	<div class=\"mobile\">\n" +
-    "		<button ng-click=\"newIteration.fromDevice()\" class=\"fromDevice\">\n" +
-    "			<div class=\"image\">\n" +
-    "				<img src=\"img/picture-file.svg\">\n" +
-    "			</div>\n" +
-    "			<p>elije una foto</p>\n" +
-    "		</button>\n" +
-    "		<button ng-click=\"newIteration.takePicture()\" class=\"takePicture\">\n" +
+    "		<button ng-click=\"newIteration.takePicture()\" class=\"take-picture\">\n" +
     "			<div class=\"image\">\n" +
     "				<img src=\"img/camera.svg\">\n" +
     "			</div>\n" +
     "			<p>toma una foto</p>\n" +
     "		</button>\n" +
+    "		<div class=\"line\"></div>\n" +
+    "		<button ng-click=\"newIteration.fromDevice()\" class=\"from-device\">\n" +
+    "			<div class=\"image\">\n" +
+    "				<img src=\"img/picture-file.svg\">\n" +
+    "			</div>\n" +
+    "			<p>elije una foto</p>\n" +
+    "		</button>\n" +
     "	</div>\n" +
     "<!-- 		<div class=\"desktop\" ng-if=\"newIteration.isDesktop()\">\n" +
-    "		<button class=\"skip button button-block button-energized button-outline\" ng-click=\"newIteration.fromDevice()\">\n" +
+    "		<button class=\"skip button button-block button-energized button-outline\" ng-click=\"newIteration.fromDevice()\"> \n" +
     "			Skip\n" +
     "		</button>\n" +
     "	</div> -->\n" +
+    "	</ion-content>\n" +
     "</ion-view>");
 }]);
 })();
