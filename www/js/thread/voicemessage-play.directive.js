@@ -21,6 +21,7 @@ angular.module('goodMood')
 				}
 
 				this.mousedown = function(e){
+					console.log('mousedown')
 					var x = e.offsetX
 					var timecode = getTimecode(x)
 					if (timecode > 0){

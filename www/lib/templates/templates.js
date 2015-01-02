@@ -270,7 +270,7 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/voicemessage-audio.html",
-    "<audio ng-src=\"{{ audioURI }}\" controls autoplay loop></audio>");
+    "<audio ng-src=\"{{ audioURI }}\"></audio>");
 }]);
 })();
 
