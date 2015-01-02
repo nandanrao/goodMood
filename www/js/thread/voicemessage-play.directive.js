@@ -20,20 +20,6 @@ angular.module('goodMood')
 					$scope.playing = !$scope.playing
 				}
 
-				var lineOffset = 88/543.5
-
-				function getTimecode(x){
-					var svgWidth = $element[0].width.baseVal.value
-					var pixelOffset = lineOffset * svgWidth
-					var audioPercentage = (x - pixelOffset)/(svgWidth - pixelOffset)
-					var timecode = audioPercentage*$scope.media.duration
-					return timecode
-				}
-
-				function pointOnLine(x){
-					return getTimecode(x) > 0
-				}
-
 				this.mousedown = function(e){
 					var x = e.offsetX
 					var timecode = getTimecode(x)
@@ -43,6 +29,15 @@ angular.module('goodMood')
 						$document.on('mousemove', mousemove);
 						$document.on('mouseup', mouseup);
 					}
+				}
+
+				function getTimecode(x){
+					var lineOffset = 88/543.5
+					var svgWidth = $element[0].width.baseVal.value
+					var pixelOffset = lineOffset * svgWidth
+					var audioPercentage = (x - pixelOffset)/(svgWidth - pixelOffset)
+					var timecode = audioPercentage*$scope.media.duration
+					return timecode
 				}
 
 				function mousemove(e) {

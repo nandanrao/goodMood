@@ -36,7 +36,6 @@ module.exports = function ( karma ) {
       'www/lib/templates/templates.js',
       'www/js/app.js',
       'www/js/utils/utils.service.js',
-      'www/js/user/user.service.js',
       'www/js/thread/voicemessage.directive.js',
       'www/js/thread/voicemessage-record.directive.js',
       'www/js/thread/voicemessage-play.directive.js',
@@ -46,6 +45,7 @@ module.exports = function ( karma ) {
       'www/js/thread/textmessage.directive.js',
       'www/js/thread/filesystemnormalization.js',
       'www/js/thread/drawing.directive.js',
+      'www/js/user/user.service.js',
       'www/js/sidemenu/sidemenu.controller.js',
       'www/js/login/login.controller.js',
       'www/js/login/localLogin.directive.js',
@@ -81,8 +81,8 @@ module.exports = function ( karma ) {
       'www/js/iteration/newiteration.controller_test.js',
       'www/js/login/localLogin.directive_test.js',
       'www/js/login/login.controller_test.js',
-      'www/js/thread/thread.service_test.js',
       'www/js/user/user.service_test.js',
+      'www/js/thread/thread.service_test.js',
       'www/js/utils/utils.service_test.js'
       // endinject
       ,
