@@ -19,8 +19,8 @@
 			text
 			</button>
 		</div>
-		<form ng-show="writeMessage" ng-submit="thread.sendMessage('text')">
-			<input required ng-model="text" class="text" placeholder="write here" />
+		<form ng-show="writeMessage" ng-submit="thread.sendMessage('text', textField.content)">
+			<input required ng-model="textField.content" class="text" placeholder="write here" />
 		</form>
 	</ion-content>
 </ion-view>

@@ -11,5 +11,14 @@ angular.module('goodMood')
 			return $firebase(ref).$asObject().$loaded()
 		}
 
+		/**
+		 * Find an audio by its $id
+		 * @returns a promise that resolves to an audio instance
+		 */
+		Audio.findById = function(id){
+			var ref = fb.audio.child(id)
+			return $firebase(ref).$asObject().$loaded()
+		}
+
 		return Audio
 	})

@@ -22,16 +22,13 @@ module.run(["$templateCache", function($templateCache) {
     "		<div class=\"collaborations\">\n" +
     "			<div ng-repeat=\"collaboration in collaborations\" class=\"collaboration\" ng-click=\"myCollaborations.collaboration(collaboration.$id)\">\n" +
     "			<img src=\"{{ myCollaborations.getCollaborationImage(collaboration) }}\">\n" +
-    "			<p class=\"title\">\n" +
-    "				{{ collaboration.name }}\n" +
-    "			</p>\n" +
-    "			<p class=\"unreadMessages\">\n" +
-    "				{{ myCollaborations.getNewMessages(collaboration) }}\n" +
-    "			</p>\n" +
+    "			<h2>\n" +
+    "				{{ collaboration.name }} <span> ({{ myCollaborations.getNewMessages(collaboration) }})</span>\n" +
+    "			</h2>\n" +
     "			</div>  \n" +
     "		</div>\n" +
     "		<button add-button class=\"new-collaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
-    "		</button>\n" +
+    "		</button> \n" +
     "	</ion-content>\n" +
     "</ion-view> ");
 }]);
@@ -221,7 +218,7 @@ module.run(["$templateCache", function($templateCache) {
     "		<div class=\"arrow\">\n" +
     "			<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
     "				 viewBox=\"0 0 22.1 43.3\" enable-background=\"new 0 0 22.1 43.3\" xml:space=\"preserve\">\n" +
-    "			<polygon fill=\"#FFF\" points=\"{{ points }}\">\n" +
+    "			<polygon fill=\"#FFF\" ng-attr-points=\"{{ points }}\">\n" +
     "			</svg>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -256,8 +253,8 @@ module.run(["$templateCache", function($templateCache) {
     "			text\n" +
     "			</button>\n" +
     "		</div>\n" +
-    "		<form ng-show=\"writeMessage\" ng-submit=\"thread.sendMessage('text')\">\n" +
-    "			<input required ng-model=\"text\" class=\"text\" placeholder=\"write here\" />\n" +
+    "		<form ng-show=\"writeMessage\" ng-submit=\"thread.sendMessage('text', textField.content)\">\n" +
+    "			<input required ng-model=\"textField.content\" class=\"text\" placeholder=\"write here\" />\n" +
     "		</form>\n" +
     "	</ion-content>\n" +
     "</ion-view>\n" +
@@ -269,28 +266,47 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("thread/voicemessage-audio.html",
+    "<audio ng-src=\"{{ audioURI }}\" preload></audio>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("thread/voicemessage-play.html",
+    "<svg ng-mousedown=\"voiceMessagePlay.mousedown($event)\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 543.5 88\" enable-background=\"new 0 0 543.5 88\" xml:space=\"preserve\">\n" +
+    "	<circle ng-click=\"voiceMessagePlay.play()\" fill=\"#277FE9\" cx=\"44\" cy=\"44\" r=\"44\"/>\n" +
+    "	<g>\n" +
+    "		<path fill=\"#FFFFFF\" d=\"M44.1,54c5,0,9-4,9-9V27c0-5-4-9-9-9c-5,0-9,4-9,9V45C35.2,50,39.2,54,44.1,54z\"/>\n" +
+    "		<path fill=\"#FFFFFF\" d=\"M57.3,41.4v3.7c0,7.3-5.9,13.2-13.2,13.2c-7.3,0-13.2-5.9-13.2-13.2v-3.7h-3.6v3.7c0,8.6,6.6,15.8,15,16.7\n" +
+    "			v6.7h-9.9V72h23.4v-3.6h-9.9v-6.7c8.4-0.9,15-8,15-16.7v-3.7H57.3z\"/>\n" +
+    "	</g>\n" +
+    "	<g>\n" +
+    "		<line fill=\"none\" stroke=\"#277FE9\" stroke-width=\"2\" stroke-miterlimit=\"10\" x1=\"88\" y1=\"44\" x2=\"543.5\" y2=\"44\"/>\n" +
+    "	</g>\n" +
+    "	<!-- <line fill=\"none\" stroke=\"#A2FF00\" stroke-width=\"8\" stroke-miterlimit=\"10\" x1=\"88\" y1=\"44\" x2=\"377.9\" y2=\"44\"/> -->\n" +
+    "</svg>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/voicemessage.html",
     "<div class=\"{{ sender ? 'sender' : 'reciever' }}\">\n" +
+    "	<voice-message-audio></voice-message-audio>\n" +
     "	<p class=\"date\">\n" +
     "		{{ formatDate(message.sentAt) }}\n" +
     "	</p>\n" +
-    "	<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 543.5 87.9\" enable-background=\"new 0 0 543.5 87.9\" xml:space=\"preserve\">\n" +
-    "		<circle fill=\"#277FE9\" cx=\"43.9\" cy=\"43.9\" r=\"43.9\"/>\n" +
-    "		<g>\n" +
-    "			<path fill=\"#FFFFFF\" d=\"M44.1,54c5,0,9-4,9-9V27c0-5-4-9-9-9c-5,0-9,4-9,9V45C35.2,50,39.2,54,44.1,54z\"/>\n" +
-    "			<path fill=\"#FFFFFF\" d=\"M57.3,41.4v3.7c0,7.3-5.9,13.2-13.2,13.2c-7.3,0-13.2-5.9-13.2-13.2v-3.7h-3.6v3.7c0,8.6,6.6,15.8,15,16.7\n" +
-    "				v6.7h-9.9V72h23.4v-3.6h-9.9v-6.7c8.4-0.9,15-8,15-16.7v-3.7H57.3z\"/>\n" +
-    "		</g>\n" +
-    "		<g>\n" +
-    "			<line fill=\"none\" stroke=\"#277FE9\" stroke-width=\"2\" stroke-miterlimit=\"10\" x1=\"87.9\" y1=\"43.9\" x2=\"543.5\" y2=\"43.9\"/>\n" +
-    "		</g>\n" +
-    "		<!-- <line fill=\"none\" stroke=\"#A2FF00\" stroke-width=\"8\" stroke-miterlimit=\"10\" x1=\"87.9\" y1=\"43.9\" x2=\"377.9\" y2=\"43.9\"/> -->\n" +
-    "	</svg>	\n" +
+    "	<voice-message-play></voice-message-play>\n" +
     "	<div class=\"arrow-holder\">\n" +
     "		<div class=\"arrow\">\n" +
     "			<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
     "				 viewBox=\"0 0 22.1 43.3\" enable-background=\"new 0 0 22.1 43.3\" xml:space=\"preserve\">\n" +
-    "			<polygon fill=\"#FFF\" points=\"{{ points }}\">\n" +
+    "			<polygon fill=\"#FFF\" ng-attr-points=\"{{ points }}\">\n" +
     "			</svg>\n" +
     "		</div>\n" +
     "	</div>\n" +

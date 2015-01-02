@@ -20,7 +20,7 @@ angular.module('goodMood')
 					console.log('mic clicked')
 					
 					if (!$scope.recording){
-						var fileName = "sound2.amr"
+						var fileName = "sound2.wav"
 						var src = cordova.file.externalDataDirectory + fileName
 						media = $cordovaMedia.newMedia(src)
 
@@ -32,14 +32,7 @@ angular.module('goodMood')
 							$cordovaFile.readAsDataURL(fileSrc)
 								.then(function(dataURI){
 									Audio.create(dataURI).then(function(audio){
-										var voiceMsg = {}
-										voiceMsg.content = audio.$id;
-										voiceMsg.type = 'audio';
-										voiceMsg.user = Auth.currentUser
-										console.log(_.values(voiceMsg))
-										$scope.threadInstance.$addMessage(voiceMsg).then(function(){
-											console.log('added message')
-										})
+										$scope.thread.sendMessage('audio', audio.$id)
 									}, function(err){
 										console.log('error creating audio instance', err)
 									})

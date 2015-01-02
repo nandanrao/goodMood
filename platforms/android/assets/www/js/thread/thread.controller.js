@@ -4,7 +4,9 @@ angular.module('goodMood')
 		$scope.messages = messages;
 		$scope.writeMessage;
 		$scope.recordNote;
-		$scope.text;
+		$scope.textField = {
+			content: null
+		};
 
 		$scope.$on('$ionicView.enter', function(){
 			thread.$open()
@@ -26,8 +28,6 @@ angular.module('goodMood')
 
 		this.recordNote = function(){
 			$scope.recordNote = true;
-			// cordovarecordmedia here
-			// google cloud upload? 
 			vm.sendMessage('voice', dataURI)
 		}
 
@@ -40,15 +40,17 @@ angular.module('goodMood')
 		}
  
 		this.sendMessage = function(type, content){
+			console.log($scope.textField.content)
 			$ionicLoading.show()
 			thread.$addMessage({
-				content: $scope.text,
+				content: content,
 				user: Auth.currentUser,
 				type: type,
 			}).then(function(message){
 				$ionicLoading.hide()
+				$scope.textField = null;
 			})
-			$scope.text = null;
+			
 		}
 
 	})

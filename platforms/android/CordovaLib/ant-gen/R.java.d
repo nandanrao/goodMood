@@ -201,8 +201,4 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/CordovaLib/res/layout/main.xml \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/CordovaLib/res/values/strings.xml \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/CordovaLib/res/xml/config.xml \
-/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/CordovaLib/ant-build/res/drawable/splash.png \
-/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/CordovaLib/ant-build/res/drawable-hdpi/icon.png \
-/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/CordovaLib/ant-build/res/drawable-ldpi/icon.png \
-/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/CordovaLib/ant-build/res/drawable-mdpi/icon.png \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/CordovaLib/ant-build/AndroidManifest.xml \

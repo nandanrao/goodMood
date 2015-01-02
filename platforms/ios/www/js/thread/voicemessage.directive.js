@@ -1,9 +1,13 @@
 angular.module('goodMood')
-	.directive('voiceMessage', function (utils, Auth){
+	.directive('voiceMessage', function (utils, Auth, Audio, $document){
 		return {
 			restrict: 'E',
 			templateUrl: 'thread/voicemessage.html',
 			controllerAs: 'voiceMessage',
+			controller: function ($scope, $element){
+				
+
+			},
 			link: function (scope, el, attrs){
 				scope.formatDate = utils.formatDate;
 				scope.sender = false;
@@ -13,7 +17,7 @@ angular.module('goodMood')
 				}
 				else {
 					scope.points = "0,0 22.1,21.7 0,43.3"
-				}
+				} 
 			}
 		}
 	})

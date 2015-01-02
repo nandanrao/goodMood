@@ -3102,6 +3102,7 @@ ionic.DomUtil.ready(function() {
             break;
           }
           if (ele.tagName == 'A' || ele.tagName == 'BUTTON' || ele.hasAttribute('ng-click')) {
+            console.log('ele has ng-mousedown?')
             eleToActivate = ele;
             break;
           }
@@ -3111,6 +3112,7 @@ ionic.DomUtil.ready(function() {
           }
           // no sense climbing past these
           if (ele.tagName == 'ION-CONTENT' || ele.classList.contains('pane') || ele.tagName == 'BODY') {
+            console.log('made it up to the top... breaking!')
             break;
           }
           ele = ele.parentElement;
