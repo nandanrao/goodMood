@@ -1,10 +1,11 @@
 angular.module('goodMood')
-	.directive('voiceMessageRecord', function ($log, $window, $ionicLoading, $cordovaMedia, $cordovaFile, Audio, Auth){
+	.directive('voiceMessageRecord', function ($log, $window, $document, $ionicLoading, $cordovaMedia, $cordovaFile, Audio, utils){
 		return {
 			restrict: 'EA',
 			templateUrl: 'thread/voicemessagerecord.html',
 			controllerAs: 'record',
 			controller: function ($scope, $element){
+				console.log('this controller is running')
 				var vm = this;				
 				var media, fileTransferDir, fileDir;
 				$scope.recording = false;
@@ -18,10 +19,10 @@ angular.module('goodMood')
     			fileDir = 'NoCloud/';
     		}
 
-				$element.on('click', function (){
-					console.log('mic clicked')					
+				$element.on('click', function (){			
 					if (!$scope.recording){
-						var fileName = 'test.wav'
+						console.log('mic clicked - start recording')	
+						var fileName = utils.uuid() + '.wav'
 						var src = fileTransferDir + fileName
 						var fileSrc = fileDir + fileName;
 						
@@ -30,6 +31,7 @@ angular.module('goodMood')
 						media = $cordovaMedia.newMedia(src)
 						media
 							.then(function(){
+								media.release()
 								return $cordovaFile.readAsDataURL(fileSrc)
 							})
 							.then(Audio.create)
@@ -45,14 +47,14 @@ angular.module('goodMood')
 								$ionicLoading.hide()
 							})
 
-						media.startRecord()
-						$scope.recording = true;	
+						$scope.recording = true;
+						media.startRecord()	
 					}
-					else {
-						media.stopRecord()
-						media.release()
-						$ionicLoading.show()
+					else {	
+						console.log('mic clicked - stop recording')
 						$scope.recording = false;
+						$ionicLoading.show()
+						media.stopRecord()
 					}
 				})
 
