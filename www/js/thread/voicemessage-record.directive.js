@@ -26,8 +26,6 @@ angular.module('goodMood')
 						var src = fileTransferDir + fileName
 						var fileSrc = fileDir + fileName;
 						
-						console.log('src', src)
-						console.log('filesrc', fileSrc)
 						media = $cordovaMedia.newMedia(src)
 						media
 							.then(function(){
