@@ -1,5 +1,6 @@
 angular.module('goodMood')
 	.controller('NewIterationCtrl', function($scope, $window, $log, $state, collaboration, $cordovaCamera, $ionicLoading, $ionicHistory, Iteration, Image){
+		$scope.collaboration = collaboration;
 
 		var pictureOptions = {
 			destinationType: 0
@@ -44,7 +45,7 @@ angular.module('goodMood')
 			pictureRecieved
 				.then(function(datURI){
 					$ionicLoading.show();
-					return Image.create(datURI)
+					return Image.create("data:image/jpeg;base64," + datURI)
 				})
 				.then(function(image){
 					return Iteration.create({
@@ -53,7 +54,7 @@ angular.module('goodMood')
 					})
 				})
 				.then(_.partialRight(collaboration.$addIteration.bind(collaboration)))
-				.then(function(iteration){16
+				.then(function(iteration){
 					$state.go('^.iteration.view', {
 						i_id: iteration.$id,
 						c_id: collaboration.$id

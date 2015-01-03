@@ -104,6 +104,7 @@ angular.module('goodMood')
       data.image = image.$id
       data.createdAt = Firebase.ServerValue.TIMESTAMP;
 
+      console.log('creating iteration', Date.now())
       // Create $firebase obj and return promise
     	var ref = Iteration.ref.push(data);
       ref.setPriority(data.collaboration)

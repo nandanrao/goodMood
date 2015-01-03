@@ -8,7 +8,7 @@ angular.module('goodMood')
 		$scope.drawing;
 		$scope.colabits = collaboration.iterations
 		$scope.threads = threads;	
-		$scope.imgURI = "data:image/jpeg;base64," + image.$value;
+		$scope.imgURI = image.$value;
 		$scope.currentIndex = $scope.iterationArray.indexOf(iteration.$id);
 		$scope.previous = $scope.iterationArray[$scope.currentIndex - 1];
 		$scope.next = $scope.iterationArray[$scope.currentIndex + 1];
