@@ -7113,7 +7113,7 @@ text-message p.date, voice-message p.date {
   color: #333;
   line-height: 0.75; }
 
-#pg--new-iteration .mobile {
+#pg--new-iteration ion-content > div {
   display: -webkit-box;
   display: -moz-box;
   display: box;
@@ -7137,23 +7137,23 @@ text-message p.date, voice-message p.date {
   bottom: 0;
   right: 0;
   left: 0; }
-  #pg--new-iteration .mobile button {
+  #pg--new-iteration ion-content > div button {
     width: 100%;
     display: block; }
-    #pg--new-iteration .mobile button.take-picture {
-      padding-top: 0px; }
-  #pg--new-iteration .mobile .image {
+  #pg--new-iteration ion-content > div input {
+    display: none; }
+  #pg--new-iteration ion-content > div .image {
     width: 20%;
     margin: auto auto;
     display: block; }
-  #pg--new-iteration .mobile p {
+  #pg--new-iteration ion-content > div p {
     font-family: 'Futura-Bold';
     color: #277FE9;
     font-size: 1.75em;
     width: 100%;
     text-align: center;
     margin-top: 0.5em; }
-  #pg--new-iteration .mobile div.line {
+  #pg--new-iteration ion-content > div div.line {
     border-top: 3px dotted #277FE9;
     margin: 0 7%;
     height: 0px; }

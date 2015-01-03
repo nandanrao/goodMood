@@ -24,6 +24,10 @@ angular.module('goodMood')
 			}
 			return false	
 		}
+
+		this.desktopUpload = function(file){
+			console.log("uploaded file", file[0])
+		}
 		
 		this.fromDevice = function(){
 			pictureOptions.sourceType = 0

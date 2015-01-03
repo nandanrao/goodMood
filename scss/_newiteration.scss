@@ -1,6 +1,6 @@
 
 #pg--new-iteration {
-  .mobile {
+  ion-content > div {
     @include display(flex);
     @include flex-direction(column);
     @include justify-content(space-around);
@@ -11,11 +11,12 @@
     left: 0;
     button {
       width: 100%;
-      display: block;  
-      &.take-picture {
-        padding-top: 0px;
-      }
+      display: block;
     }
+    input {
+      display: none;
+    }
+    
     .image {
       width: 20%;
       margin: auto auto;
