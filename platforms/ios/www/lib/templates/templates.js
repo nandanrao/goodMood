@@ -44,7 +44,6 @@ module.run(["$templateCache", function($templateCache) {
     "		<button ng-click=\"newCollaboration.cancel()\" class=\"ion-close\" nav-direction=\"back\">\n" +
     "		</button>\n" +
     "	</ion-nav-buttons>\n" +
-    "	<ion-content scroll=\"false\">\n" +
     "		<form class=\"newCollaborationForm\" name=\"newCollaborationForm\" novalidate ng-submit=\"newCollaboration.submit()\">\n" +
     "			<div class=\"iwant\">\n" +
     "				<span>Yo quiero</span>\n" +

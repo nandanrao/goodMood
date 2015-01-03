@@ -8,7 +8,7 @@ angular.module('goodMood')
 			  if (response.status === 'connected'){
 			    return response.authResponse.accessToken
 			  }
-			  else if (response.status === ''){
+			  else if (response.status === '' || response.status === 'unknown'){
 					return $cordovaFacebook.login(["public_profile", "email"])
 						.then(function(obj){
 							return obj.authResponse.accessToken
@@ -18,7 +18,7 @@ angular.module('goodMood')
 		}
 		
 		Facebook.getPicture = function(){
-			return $cordovaFacebook.api('/me/picture')
+			return $cordovaFacebook.api('me?fields=picture.type(large)')
 	  }
 
 	  Facebook.getLoginStatus = function(){
@@ -27,7 +27,7 @@ angular.module('goodMood')
 
 	  Facebook.logout = function(){
 	  	return $cordovaFacebook.logout()
-	  }
+	  } 
 
 		return Facebook
 	})

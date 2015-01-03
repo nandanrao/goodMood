@@ -10,6 +10,7 @@ angular.module('goodMood')
       $ionicLoading.show()
       return Auth.viaOAuth(authProvider)
         .then(function(_authObj){
+          console.log('authObj', _.keys(_authObj), authProvider)
           authObj = _authObj;
           return User.findByAuth(authProvider, authObj)
         })
@@ -31,6 +32,7 @@ angular.module('goodMood')
         .catch(function(err){
           $log.error('Login Error: ', err)
           $window.alert('Sorry, we could not log you in, try again?')
+          $ionicLoading.hide()
         })
     }
 

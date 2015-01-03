@@ -1,48 +1,49 @@
 angular.module('goodMood')
-	.directive('voiceMessageRecord', function ($cordovaMedia, $cordovaFile, Audio, Auth){
+	.directive('voiceMessageRecord', function ($log, $window, $ionicLoading, $cordovaMedia, $cordovaFile, Audio, Auth){
 		return {
 			restrict: 'EA',
 			templateUrl: 'thread/voicemessagerecord.html',
 			controllerAs: 'record',
 			controller: function ($scope, $element){
-				var vm = this
-
+				var vm = this;				
+				var media, fileTransferDir, fileDir;
 				$scope.recording = false;
 
-				// add filesystemnormalization to create the filepath for this!!
-				
-				var media;
+				if (ionic.Platform.isAndroid()) {
+    			fileTransferDir = cordova.file.externalDataDirectory
+					fileDir = /Android.*/.exec(fileTransferDir)[0]
+	    	}
+    		if (ionic.Platform.isIOS()) {
+    			fileTransferDir = cordova.file.documentsDirectory.replace('file://', '') + '/NoCloud/';
+    			fileDir = 'NoCloud/';
+    		}
 
-
-				
-				
 				$element.on('click', function (){
-					console.log('mic clicked')
-					
+					console.log('mic clicked')					
 					if (!$scope.recording){
-						var fileName = "sound2.wav"
-						var src = cordova.file.externalDataDirectory + fileName
-						media = $cordovaMedia.newMedia(src)
-
-						console.log(cordova.file.externalDataDirectory)
+						var fileName = 'test.wav'
+						var src = fileTransferDir + fileName
+						var fileSrc = fileDir + fileName;
 						
-						media.then(function(){
-							console.log('media creation succes')
-							var fileSrc = src.replace('file:///storage/sdcard0/', '')
-							$cordovaFile.readAsDataURL(fileSrc)
-								.then(function(dataURI){
-									Audio.create(dataURI).then(function(audio){
-										$scope.thread.sendMessage('audio', audio.$id)
-									}, function(err){
-										console.log('error creating audio instance', err)
-									})
-								}, function(err){ 
-									console.log('errrrraaa', err)
-								})
-							
-						}, function(err){
-							console.log('err', err)
-						})
+						console.log('src', src)
+						console.log('filesrc', fileSrc)
+						media = $cordovaMedia.newMedia(src)
+						media
+							.then(function(){
+								return $cordovaFile.readAsDataURL(fileSrc)
+							})
+							.then(Audio.create)
+							.then(function(audio){
+								return $scope.thread.sendMessage('audio', audio.$id)
+							})
+							.then(function(){
+								$ionicLoading.hide()
+							})
+							.catch(function(err){
+								$log.error('error recording audio', err)
+								$window.alert('sorry but we couldnt record your audio, try again?')
+								$ionicLoading.hide()
+							})
 
 						media.startRecord()
 						$scope.recording = true;	
@@ -50,6 +51,7 @@ angular.module('goodMood')
 					else {
 						media.stopRecord()
 						media.release()
+						$ionicLoading.show()
 						$scope.recording = false;
 					}
 				})

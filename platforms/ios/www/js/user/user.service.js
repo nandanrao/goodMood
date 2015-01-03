@@ -102,10 +102,11 @@ angular.module('goodMood')
         if (! authObj || !authObj[authProvider]){
           throw new TypeError('authObj is not a proper authObj!')
         }
+
         getPictureFromOAuth(authProvider, authObj).then(function(picture){
           data.picture = picture
           dataReady.resolve()
-        })
+        }, deferred.reject)
         data[authProvider] = authObj[authProvider];
         data.displayName = authObj[authProvider].displayName;
         data.email = authObj[authProvider].email;
@@ -116,6 +117,7 @@ angular.module('goodMood')
         deferred.reject(new Error('we need an auth provider to login'))
       }
       dataReady.promise.then(function(){
+
         var key = utils.escapeEmailAddress(authObj[authProvider].email)
         var ref = User.ref.child(key)
         var obj = $firebase(ref, {objectFactory: UserFactory});

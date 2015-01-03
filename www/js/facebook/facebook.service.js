@@ -27,7 +27,7 @@ angular.module('goodMood')
 
 	  Facebook.logout = function(){
 	  	return $cordovaFacebook.logout()
-	  }
+	  } 
 
 		return Facebook
 	})
