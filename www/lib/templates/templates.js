@@ -227,6 +227,17 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("sidemenu/sidemenu.html",
+    "<button ng-click=\"sidemenu.logout()\">logout</button>\n" +
+    "	<p>{{ user.displayName }}</p>\n" +
+    "<img ng-src=\"{{ user.picture }}\">");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/textmessage.html",
     "<div class=\"{{ sender ? 'sender' : 'reciever' }}\">\n" +
     "	<p class=\"date\">\n" +

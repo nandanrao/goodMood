@@ -7272,3 +7272,6 @@ ion-nav-view ion-content.has-header {
 button[voice-message-record] {
   color: #277FE9;
   font-size: 3em; }
+
+gm-side-menu img {
+  border-radius: 50%; }

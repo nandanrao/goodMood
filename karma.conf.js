@@ -46,7 +46,7 @@ module.exports = function ( karma ) {
       'www/js/thread/textmessage.directive.js',
       'www/js/thread/filesystemnormalization.js',
       'www/js/thread/drawing.directive.js',
-      'www/js/sidemenu/sidemenu.controller.js',
+      'www/js/sidemenu/sidemenu.directive.js',
       'www/js/login/login.controller.js',
       'www/js/login/localLogin.directive.js',
       'www/js/iteration/newiteration.controller.js',
