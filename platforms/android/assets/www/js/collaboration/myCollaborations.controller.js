@@ -1,7 +1,11 @@
 angular.module('goodMood')
-	.controller('MyCollaborationsCtrl', function ($scope, Auth, $state, user, collaborations, Collaboration, collaborationDefaultBg){
+	.controller('MyCollaborationsCtrl', function ($scope, $timeout, Auth, $state, user, collaborations, Collaboration, collaborationDefaultBg){
 		
 		$scope.collaborations = collaborations;
+
+		this.digest = function(){
+			$timeout(0)
+		}
 		
 		this.getNewMessages = function(collaboration){
 			return _.size(collaboration._newMessages)
@@ -12,9 +16,7 @@ angular.module('goodMood')
 		}
 
 		this.getCollaborationImage = function(collaboration){
-			var imgURI;
-			var dataURI = collaboration._lastImage ? collaboration._lastImage.$value : collaborationDefaultBg
-			imgURI = "data:image/jpeg;base64," + dataURI
+			var imgURI = _.size(collaboration._lastImage) > 0 ? collaboration._lastImage.image.$value : collaborationDefaultBg
 			return imgURI
 		}
 

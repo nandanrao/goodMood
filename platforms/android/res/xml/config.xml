@@ -1,6 +1,21 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionicframework.goodmood362235" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
+    <name>goodMood</name>
+    <description>
+        An Ionic Framework and Cordova project.
+    </description>
+    <author email="hi@ionicframework" href="http://ionicframework.com/">
+      Ionic Framework Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
+    <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="BackupWebStorage" value="none" />
     <feature name="Cookies">
         <param name="android-package" value="com.bez4pieci.cookies.Cookies" />
     </feature>
@@ -30,21 +45,6 @@
     <feature name="Media">
         <param name="android-package" value="org.apache.cordova.media.AudioHandler" />
     </feature>
-    <name>goodMood</name>
-    <description>
-        An Ionic Framework and Cordova project.
-    </description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
-    </author>
-    <content original-src="index.html" src="http://10.0.1.12:8100" />
-    <access origin="*" />
-    <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
-    <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root" />
-    <preference name="webviewbounce" value="false" />
-    <preference name="UIWebViewBounce" value="false" />
-    <preference name="DisallowOverscroll" value="true" />
-    <preference name="BackupWebStorage" value="none" />
     <feature name="FacebookConnectPlugin">
         <param name="android-package" value="org.apache.cordova.facebook.ConnectPlugin" />
     </feature>

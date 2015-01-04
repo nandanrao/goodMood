@@ -27,7 +27,6 @@ module.run(["$templateCache", function($templateCache) {
     "			</h2>\n" +
     "			</div>  \n" +
     "		</div>\n" +
-    "		<button ng-click=\"myCollaborations.digest()\">digest</button>\n" +
     "		<button add-button class=\"new-collaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
     "		</button> \n" +
     "	</ion-content>\n" +

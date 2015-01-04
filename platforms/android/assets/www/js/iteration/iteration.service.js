@@ -64,23 +64,7 @@ angular.module('goodMood')
         })
         return deferred.promise
   		},
-
-      $populate: function(){
-        var self = this;
-        return $q.all({
-	      		image: self.$getImage()
-	      	})
-	        .then(function(results){
-	        	self._image = results.image;
-	        	return self;
-	        })
-      }
 		})
-
-    // Helper function that returns a populated Iteration object
-    var populate = function(obj){
-    	return obj.$populate();
-    }
 
     /**
      * Creates a new iteration. Requires: IMAGE, COLLABORATION
@@ -104,11 +88,12 @@ angular.module('goodMood')
       data.image = image.$id
       data.createdAt = Firebase.ServerValue.TIMESTAMP;
 
+      console.log('creating iteration', Date.now())
       // Create $firebase obj and return promise
     	var ref = Iteration.ref.push(data);
       ref.setPriority(data.collaboration)
     	var obj = $firebase(ref, {objectFactory: IterationFactory})
-    	return obj.$asObject().$loaded().then(populate)
+    	return obj.$asObject().$loaded()
     }
 
 		Iteration.findById = function(id){
@@ -116,7 +101,7 @@ angular.module('goodMood')
 				throw new TypeError('id needed to findById')
 			}
 			return $firebase(Iteration.ref.child(id), {objectFactory: IterationFactory})
-        .$asObject().$loaded().then(populate)
+        .$asObject().$loaded()
 		}
 
 		return Iteration

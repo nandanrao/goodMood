@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.factory('Collaboration', function(fb, $firebase, $FirebaseObject, $q, Auth, Iteration, Thread, utils, $timeout){
+	.factory('Collaboration', function(fb, $firebase, $FirebaseObject, $q, Auth, Iteration, Thread, Image, utils, $timeout){
 		var Collaboration = {};
 
 		Collaboration.ref = fb.collaborations;
@@ -75,9 +75,10 @@ angular.module('goodMood')
        * @returns The iteration instance passed into it.
        */
       $addIteration: function(iteration){
-        if (!iteration || !iteration.$id){
+        if (!iteration || !iteration.$id || !iteration.image){
           throw new TypeError('we need an iteration object')
         }
+        this.$inst().$set('lastImage', iteration.image)
         var obj = {}
         obj[iteration.$id] = true;
         return this.$inst().$update('iterations', obj).then(function(obj){
@@ -103,6 +104,7 @@ angular.module('goodMood')
         var deferred = $q.defer()
         ref.child('iterations').on('child_added', function(snap){
           var id = snap.key()
+          console.log('iteration added')
           Iteration.findById(id).then(function(iteration){
             iterations[id] = iteration
           })
@@ -139,6 +141,9 @@ angular.module('goodMood')
         return $q.when(threads)
       },
 
+      // Note: this is where we attempt to convert the Bacon/FRP streams
+      // into a POJO that Angular can put on its scope and watch.
+      // TODO: should deferred.resolve here be AFTER the forEach loops? 
       $getNewMessages: function(){
         var newMessages = {};
         var deferred = $q.defer();
@@ -165,28 +170,34 @@ angular.module('goodMood')
       },
 
       $getLastImage: function(){
-        var i_id = _.last(_.keys(this.iterations))
-        if (i_id){
-          return Iteration.findById(i_id)
-                  .then(function(iteration){
-                    return iteration.$getImage()
-                  })  
-        }
-        else {
-          return $q.when(null)
-        }
+        var lastImage = {};
+        var deferred = $q.defer();
         
+        var ref = this.$inst().$ref().child('lastImage')
+        ref.on('value', function(snap){
+          if (!snap.val()){
+            return deferred.resolve(lastImage)
+          }
+          Image.findById(snap.val()).then(function(image){
+            lastImage.image = image;
+            deferred.resolve(lastImage)
+          }, deferred.reject)
+        })
+
+        Object.defineProperty(lastImage, '_notEmpty', {
+          value: true,
+          enumerable: false
+        })
+        return deferred.promise
       },
   	
       $populate: function(){
         var self = this;
         return $q.all({
-            users: self.$getUsers(),
             lastImage: self.$getLastImage(),
             newMessages: self.$getNewMessages()
           })
           .then(function(results){
-            self._users = results.users;
             self._lastImage = results.lastImage;
             self._newMessages = results.newMessages;
           	return self;

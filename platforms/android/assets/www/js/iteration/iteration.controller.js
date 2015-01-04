@@ -1,19 +1,21 @@
 angular.module('goodMood')
-	.controller('IterationCtrl', function ($scope, $window, $log, $timeout, $state, $ionicLoading, $ionicHistory, collaboration, iteration, threads, Thread, image){
+	.controller('IterationCtrl', function ($firebase, $scope, $window, $log, $timeout, $state, $ionicLoading, $ionicHistory, collaboration, iteration, iterations, threads, Thread, image){
 		var vm = this;
 
 		$scope.currentIteration = iteration;
 		$scope.collaboration = collaboration;
-		$scope.iterationArray = _.keys(collaboration.iterations).sort();
-		$scope.drawing;
-		$scope.colabits = collaboration.iterations
+		$scope.iterations = iterations;
+		$scope.$watchCollection('iterations', function(curr, old){
+			var iterationArray = _.keys($scope.iterations).sort();	
+			var currentIndex = iterationArray.indexOf(iteration.$id);	
+			$scope.previous = iterationArray[currentIndex - 1];
+			$scope.next = iterationArray[currentIndex + 1];
+		})
+		
 		$scope.threads = threads;	
-		$scope.imgURI = "data:image/jpeg;base64," + image.$value;
-		$scope.currentIndex = $scope.iterationArray.indexOf(iteration.$id);
-		$scope.previous = $scope.iterationArray[$scope.currentIndex - 1];
-		$scope.next = $scope.iterationArray[$scope.currentIndex + 1];
-		$scope.last = _.last($scope.iterationArray) === iteration.$id;
+		$scope.image = image;
 		$scope.instructionsRead = false;
+		$scope.drawing;
 		
 
 		this.hasThreads = function(){

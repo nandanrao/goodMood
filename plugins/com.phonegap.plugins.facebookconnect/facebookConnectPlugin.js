@@ -148,7 +148,6 @@ if (cordova.platformId == "browser") {
             if (!version) {
                 version = "v2.0";
             }
-            console.log('browser init called', FB)
             FB.init({
                 appId      : appId,
                 cookie     : true,

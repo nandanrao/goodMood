@@ -1,12 +1,8 @@
 angular.module('goodMood')
-	.controller('MyCollaborationsCtrl', function ($scope, $timeout, Auth, $state, user, collaborations, Collaboration, collaborationDefaultBg){
+	.controller('MyCollaborationsCtrl', function ($scope, Auth, $state, user, collaborations, Collaboration, collaborationDefaultBg){
 		
 		$scope.collaborations = collaborations;
 
-		this.digest = function(){
-			$timeout(0)
-		}
-		
 		this.getNewMessages = function(collaboration){
 			return _.size(collaboration._newMessages)
 		}

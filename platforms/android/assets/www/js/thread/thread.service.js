@@ -46,13 +46,13 @@ angular.module('goodMood')
        */
       $addMessage: function(data){
         console.log(data.user.$id, data.content)
-        if(!data.content || !data.user || !data.user.$id){
+        if(!data.content || !data.user){
           throw new TypeError('bad data!')
         }
         data = _.cloneDeep(data)
-        data.user = data.user.$id;
         data.thread = this.$id;
-        data.sentAt = Date.now();
+        data.sentAt = Firebase.ServerValue.TIMESTAMP;
+        console.log('pushing message to server', Date.now())
         var ref = fb.messages.push(data)
         ref.setPriority(this.$id)
         // $timeout(angular.noop)
