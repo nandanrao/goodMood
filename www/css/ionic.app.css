@@ -7054,7 +7054,7 @@ button {
   z-index: 1; }
 #pg--iteration button.addIteration {
   position: fixed;
-  bottom: 115px;
+  bottom: 1rem;
   left: 50%;
   margin-left: -50px;
   width: 100px;
@@ -7202,16 +7202,16 @@ text-message p.date, voice-message p.date {
   -moz-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-align-content: space-between;
-  -moz-align-content: space-between;
-  -ms-flex-line-pack: space-between;
-  align-content: space-between;
+  -webkit-align-content: space-around;
+  -moz-align-content: space-around;
+  -ms-flex-line-pack: space-around;
+  align-content: space-around;
   width: 100%;
   height: 100%;
-  width: 100%; }
+  padding-top: 1rem; }
 #pg--my-collaborations button.new-collaboration {
   width: 100px;
-  margin: 2em auto 2em auto;
+  margin: 2rem auto;
   display: block; }
 #pg--my-collaborations div.collaboration {
   display: inline-block;
@@ -7257,8 +7257,19 @@ ion-header-bar .buttons {
       line-height: 28px; }
 
 ion-nav-view ion-content.has-header {
-  top: 0 !important;
-  bottom: 100px !important; }
+  top: 0 !important; }
+
+.view-container {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: auto; }
+  .view-container.has-header {
+    top: 100px; }
+
+.pane {
+  height: auto; }
 
 .gm-nav-bar {
   color: #FFF;
