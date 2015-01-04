@@ -31,6 +31,18 @@ angular.module('goodMood')
 			$state.go('^.^.newIteration')
 		}
 
+		this.showCheck = function(){
+			return _.size(collaboration.users) < 2 && _.size(threads) > 0
+		}
+
+		this.done = function(){
+			console.log('done!')
+		}
+
+		this.showAddIteration = function(){
+			return !this.showCheck() && !$scope.next && _.size(threads) > 0
+		}
+
 		this.goBack = function(){
 			$ionicHistory.nextViewOptions({
 			  historyRoot: true

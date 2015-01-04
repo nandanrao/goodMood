@@ -62,6 +62,7 @@ module.exports = function ( karma ) {
       'www/js/components/imageresize.service.js',
       'www/js/components/fileuploader.service.js',
       'www/js/components/fileinput.directive.js',
+      'www/js/components/checkbutton.directive.js',
       'www/js/components/addbutton.directive.js',
       'www/js/collaboration/timeline.controller.js',
       'www/js/collaboration/newcollaboration.controller.js',

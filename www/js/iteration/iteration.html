@@ -9,7 +9,8 @@
 		</p>
 		<canvas iteration-canvas></canvas>
 		<img class="iteration-image" iteration-image ng-src="{{ image.$value }}" />
-		<button add-button class="addIteration" ng-if="!next" ng-click="iteration.addIteration()"></button>
+		<button add-button class="addIteration" ng-if="iteration.showAddIteration()" ng-click="iteration.addIteration()"></button>
+		<button check-button class="check" ng-if="iteration.showCheck()" ng-click="iteration.done()"></button>
 		<button class="previous" ng-if="previous" ng-click="iteration.previous()"> previous iteration </button>
 		<button class="next" ng-if="next" ng-click="iteration.next()"> next iteration </button>
 		<!-- <p>{{ colabits }} </p> -->
