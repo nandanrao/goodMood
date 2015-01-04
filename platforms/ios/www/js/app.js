@@ -103,6 +103,9 @@ angular.module('goodMood', [
         iteration: ['Iteration', '$stateParams', function (Iteration, $stateParams){
           return Iteration.findById($stateParams.i_id)
         }],
+        iterations: ['collaboration', function (collaboration){
+          return collaboration.$getIterations()
+        }],
         threads: ['iteration', function (iteration){
           return iteration.$getThreads()
         }],
@@ -111,9 +114,6 @@ angular.module('goodMood', [
         }] 
       }
     })
-})
-.config(function($ionicConfigProvider){
-  $ionicConfigProvider.views.maxCache(0)
 })
 .config(function($cordovaFacebookProvider) {
   var appID = 759883230731625;

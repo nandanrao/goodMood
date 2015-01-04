@@ -4,8 +4,11 @@
 	 </button>
 	</ion-nav-buttons>
 	<div id="iterationBg">
+		<p style="z-index: 999">
+			{{ iterationArray }}
+		</p>
 		<canvas iteration-canvas></canvas>
-		<img class="iteration-image" iteration-image src="{{ imgURI }}" />
+		<img class="iteration-image" iteration-image ng-src="{{ image.$value }}" />
 		<button add-button class="addIteration" ng-if="!next" ng-click="iteration.addIteration()"></button>
 		<button class="previous" ng-if="previous" ng-click="iteration.previous()"> previous iteration </button>
 		<button class="next" ng-if="next" ng-click="iteration.next()"> next iteration </button>

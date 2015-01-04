@@ -58,7 +58,9 @@ angular.module('goodMood')
 		}
 
 		var pictureOptions = {
-			destinationType: 0
+			destinationType: 0,
+			targetWidth: 100,
+			targetHeight: 100
 		}
 		
 		this.fromDevice = function(){
