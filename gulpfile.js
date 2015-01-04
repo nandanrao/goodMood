@@ -47,7 +47,7 @@ gulp.task('wiredep', function(){
  
 gulp.task('inject', function(){
   gulp.src('www/index.html')
-    .pipe(inject(gulp.src('www/lib/vendor/**/*.js'), {relative: true, name: 'vendor', read: false}))
+    .pipe(inject(gulp.src('www/vendor/**/*.js'), {relative: true, name: 'vendor', read: false}))
     .pipe(inject(appFiles(), {relative: true}))
     .pipe(gulp.dest('www'))
 })

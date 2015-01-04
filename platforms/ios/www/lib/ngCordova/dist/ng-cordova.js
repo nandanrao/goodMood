@@ -1571,6 +1571,7 @@ angular.module('ngCordova.plugins.facebook', [])
   .provider('$cordovaFacebook', [function () {
 
     this.browserInit = function (id, version) {
+      console.log('browser initializing FB.init')
       this.appID = id;
       this.appVersion = version || "v2.0";
       if (!this.appID) {
