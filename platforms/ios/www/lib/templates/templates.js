@@ -21,7 +21,7 @@ module.run(["$templateCache", function($templateCache) {
     "	<ion-content>\n" +
     "		<div class=\"collaborations\">\n" +
     "			<div ng-repeat=\"collaboration in collaborations\" class=\"collaboration\" ng-click=\"myCollaborations.collaboration(collaboration.$id)\">\n" +
-    "			<img src=\"{{ myCollaborations.getCollaborationImage(collaboration) }}\">\n" +
+    "			<img ng-src=\"{{ myCollaborations.getCollaborationImage(collaboration) }}\">\n" +
     "			<h2>\n" +
     "				{{ collaboration.name }} <span> ({{ myCollaborations.getNewMessages(collaboration) }})</span>\n" +
     "			</h2>\n" +

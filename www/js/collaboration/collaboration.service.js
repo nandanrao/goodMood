@@ -104,6 +104,7 @@ angular.module('goodMood')
         var deferred = $q.defer()
         ref.child('iterations').on('child_added', function(snap){
           var id = snap.key()
+          console.log('iteration added')
           Iteration.findById(id).then(function(iteration){
             iterations[id] = iteration
           })
@@ -169,23 +170,20 @@ angular.module('goodMood')
       },
 
       $getLastImage: function(){
-        if (!this.lastImage) {
-          return $q.when(null)
-        }
-        
         var lastImage = {};
         var deferred = $q.defer();
         
-        var ref = fb.images.child(this.lastImage)
+        var ref = this.$inst().$ref().child('lastImage')
         ref.on('value', function(snap){
-          Image.findById(snap.key()).then(function(image){
-            lastImage[image.$id] = image;
-            console.log('new last image for colab!', image)
+          if (!snap.val()){
+            return deferred.resolve(lastImage)
+          }
+          Image.findById(snap.val()).then(function(image){
+            lastImage.image = image;
             deferred.resolve(lastImage)
-          }, function(err){
-            deferred.reject(err)
-          })
+          }, deferred.reject)
         })
+
         Object.defineProperty(lastImage, '_notEmpty', {
           value: true,
           enumerable: false
@@ -194,7 +192,6 @@ angular.module('goodMood')
       },
   	
       $populate: function(){
-        console.log(this.$id, 'collaboration populate called')
         var self = this;
         return $q.all({
             lastImage: self.$getLastImage(),
@@ -227,7 +224,6 @@ angular.module('goodMood')
     }
 
 		Collaboration.findById = function(id){
-      console.log(id, 'collaboration find by id called')
 			return $firebase(Collaboration.ref.child(id), {objectFactory: CollaborationFactory})
         .$asObject().$loaded().then(populate)
 		}

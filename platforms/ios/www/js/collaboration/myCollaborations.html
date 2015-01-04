@@ -5,7 +5,7 @@
 	<ion-content>
 		<div class="collaborations">
 			<div ng-repeat="collaboration in collaborations" class="collaboration" ng-click="myCollaborations.collaboration(collaboration.$id)">
-			<img src="{{ myCollaborations.getCollaborationImage(collaboration) }}">
+			<img ng-src="{{ myCollaborations.getCollaborationImage(collaboration) }}">
 			<h2>
 				{{ collaboration.name }} <span> ({{ myCollaborations.getNewMessages(collaboration) }})</span>
 			</h2>

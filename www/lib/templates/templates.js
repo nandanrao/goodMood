@@ -27,6 +27,7 @@ module.run(["$templateCache", function($templateCache) {
     "			</h2>\n" +
     "			</div>  \n" +
     "		</div>\n" +
+    "		<button ng-click=\"myCollaborations.digest()\">digest</button>\n" +
     "		<button add-button class=\"new-collaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
     "		</button> \n" +
     "	</ion-content>\n" +
@@ -102,8 +103,11 @@ module.run(["$templateCache", function($templateCache) {
     "	 </button>\n" +
     "	</ion-nav-buttons>\n" +
     "	<div id=\"iterationBg\">\n" +
+    "		<p style=\"z-index: 999\">\n" +
+    "			{{ iterationArray }}\n" +
+    "		</p>\n" +
     "		<canvas iteration-canvas></canvas>\n" +
-    "		<img class=\"iteration-image\" iteration-image src=\"{{ imgURI }}\" />\n" +
+    "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ image.$value }}\" />\n" +
     "		<button add-button class=\"addIteration\" ng-if=\"!next\" ng-click=\"iteration.addIteration()\"></button>\n" +
     "		<button class=\"previous\" ng-if=\"previous\" ng-click=\"iteration.previous()\"> previous iteration </button>\n" +
     "		<button class=\"next\" ng-if=\"next\" ng-click=\"iteration.next()\"> next iteration </button>\n" +

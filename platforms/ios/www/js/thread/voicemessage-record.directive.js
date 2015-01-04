@@ -24,30 +24,34 @@ angular.module('goodMood')
     				var fileName = utils.uuid() + '.wav'
     				var src = fileTransferDir + fileName
     				var fileSrc = fileDir + fileName;
-
+    				var dataURI;
+    				var audio;
+    				var messageSent;
     				var audioCreated = Audio.create(false)
     				
     				media = $cordovaMedia.newMedia(src)
     				media
     					.then(function(){
+    						console.log('stop', Date.now())
     						media.release()
+    						messageSent = audioCreated.then(function(_audio){
+    							audio = _audio
+    							return $scope.thread.sendMessage('audio', audio.$id)
+    						})
+    						console.log('about to read as dataURI', Date.now())
     						return $cordovaFile.readAsDataURL(fileSrc)
     					})
-    					.then(function(dataURI){
-    						return audioCreated.then(function(audio){
-    							return audio
-    						})
-    					})
-    					.then(function(audio){
-    						return $scope.thread.sendMessage('audio', audio.$id)
-    					})
-    					.then(function(){
+    					.then(function(_dataURI){
+    						console.log('dataURI craeted', Date.now())
+    						dataURI = _dataURI
     						audio.$inst().$set(dataURI).then(function(){
-    							console.log('audio saved to server')
+    							console.log('audio saved to server', Date.now())
     						})
-    						return 
+    						return messageSent
     					})
     					.then(function(){
+    						
+    						console.log('message sent', Date.now())
     						$ionicLoading.hide()
     					})
     					.catch(function(err){
