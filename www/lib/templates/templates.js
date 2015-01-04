@@ -96,7 +96,7 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/iteration.html",
-    "<ion-view id=\"pg--iteration\" title=\"{{ collaboration.name }} - \">\n" +
+    "<ion-view id=\"pg--iteration\" title=\"{{ collaborationName }} - \">\n" +
     "	<ion-nav-buttons side=\"primary\">\n" +
     "	 <button ng-click=\"iteration.goBack()\" nav-direction=\"back\" class=\"ion-chevron-left\">\n" +
     "	 </button>\n" +

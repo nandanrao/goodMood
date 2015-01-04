@@ -1,22 +1,23 @@
 angular.module('goodMood')
-	.controller('IterationCtrl', function ($firebase, $scope, $window, $log, $timeout, $state, $ionicLoading, $ionicHistory, collaboration, iteration, iterations, threads, Thread, image){
+	.controller('IterationCtrl', function ($firebase, $scope, $window, $log, $timeout, $state, $ionicLoading, $ionicHistory, collaboration, iteration, threads, Thread, image){
 		var vm = this;
 
-		$scope.currentIteration = iteration;
-		$scope.collaboration = collaboration;
-		$scope.iterations = iterations;
+		// Create iterations array for inter-iteration navigation
+		$scope.iterations;
+		collaboration.$getIterations().then(function(iterations){
+			$scope.iterations = iterations;
+		})
 		$scope.$watchCollection('iterations', function(curr, old){
 			var iterationArray = _.keys($scope.iterations).sort();	
 			var currentIndex = iterationArray.indexOf(iteration.$id);	
 			$scope.previous = iterationArray[currentIndex - 1];
 			$scope.next = iterationArray[currentIndex + 1];
 		})
-		
+
+		$scope.collaborationName = collaboration.name;		
 		$scope.threads = threads;	
 		$scope.image = image;
 		$scope.instructionsRead = false;
-		$scope.drawing;
-		
 
 		this.hasThreads = function(){
 			return _.size(threads) > 0
@@ -37,28 +38,12 @@ angular.module('goodMood')
 			$state.go('home')
 		}
 
-		this.previous = function(){ 
-			if($scope.previous){
-				$ionicHistory.nextViewOptions({
-					disableAnimate: true
-				})
-				$state.go('iteration', {c_id: collaboration.$id, i_id: $scope.previous})
-			}
+		function goToIteration(id){ 
+			$ionicHistory.nextViewOptions({
+				disableAnimate: true
+			})
+			$state.go('iteration', {c_id: collaboration.$id, i_id: id})
 		}
-
-		this.next = function(){
-			if($scope.next){
-				$ionicHistory.nextViewOptions({
-					disableAnimate: true
-				})
-				$state.go('iteration', {i_id: $scope.next})
-			} 
-		}
-
-		$scope.$on('$ionicView.enter', function(){
-			console.log('view entered', collaboration)
-			$scope.$apply()
-		})
 
 		$scope.$on('addThread', function(event, coords){
 			$ionicLoading.show();
@@ -70,18 +55,19 @@ angular.module('goodMood')
 		})
 		
 		$scope.$on('swipedown', function(){
-			console.log('previous: ', $scope.previous)
-			vm.previous()
+			if($scope.previous) {
+				$ionicLoading.show()
+				goToIteration($scope.previous)
+			}
 		})
 
 		$scope.$on('swipeup', function(){
-			console.log('next: ', $scope.next)
-			vm.next()
+			if($scope.next) {
+				$ionicLoading.show()
+				goToIteration($scope.next)
+			}
 		})
 
-		$scope.$on('swiperight', function(){
-			console.log('swipe right!')
-			$state.go('home')
-		})
+		$ionicLoading.hide()
 
 	})
