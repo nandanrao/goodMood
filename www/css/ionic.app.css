@@ -7060,28 +7060,33 @@ button {
   width: 100px;
   z-index: 2; }
 #pg--iteration div.instructions {
+  z-index: 2;
   position: fixed;
   width: 90%;
   left: 5%;
   top: 10%;
   color: #277FE9;
   font-size: 1.33em;
-  padding: 20px 10px;
+  padding: 1em 0.7em;
   background-color: rgba(255, 255, 255, 0.8); }
   #pg--iteration div.instructions h2 {
     color: #277FE9;
-    font-family: 'Futura-Bold'; }
+    font-family: 'Futura-Bold';
+    font-size: 2em; }
+    #pg--iteration div.instructions h2 span {
+      float: right; }
   #pg--iteration div.instructions button.ion-close {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    font-size: 2em;
+    font-size: 1em;
+    line-height: normal;
     color: #E96246; }
   #pg--iteration div.instructions p {
     border-top: 5px solid #277FE9;
     border-bottom: 5px solid #277FE9;
-    padding: 25px 20px;
+    padding: 2em 0;
     line-height: normal; }
+  @media (max-width: 767px) {
+    #pg--iteration div.instructions {
+      font-size: 0.8em; } }
 
 text-message > div, voice-message > div {
   position: relative;

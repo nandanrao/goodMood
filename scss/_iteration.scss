@@ -37,30 +37,36 @@
     z-index: 2;
   }
   div.instructions {
+    z-index: 2;
     position: fixed;
     width: 90%;
     left: 5%;
     top: 10%;
     color: $color-a;
     font-size: 1.33em;
-    padding: 20px 10px;
+    padding: 1em .7em;
     background-color: rgba(255, 255, 255, .80);
     h2 {
       color: $color-a;
       font-family: $title-font-family;
+      font-size: 2em;
+      span {
+        float: right;
+      }
     }
     button.ion-close {
-      position: absolute;
-      right: 20px;
-      top: 10px;
-      font-size: 2em;
+      font-size: 1em;
+      line-height: normal;
       color: $color-d;
     }
     p {
       border-top: 5px solid $color-a;
       border-bottom: 5px solid $color-a;
-      padding: 25px 20px;
+      padding: 2em 0;
       line-height: normal;
+    }
+    @media (max-width: 767px){
+      font-size: .8em;
     }
   }
 }

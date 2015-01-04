@@ -112,8 +112,7 @@ module.run(["$templateCache", function($templateCache) {
     "		<button class=\"next\" ng-if=\"next\" ng-click=\"iteration.next()\"> next iteration </button>\n" +
     "		<!-- <p>{{ colabits }} </p> -->\n" +
     "		<div ng-if=\"!iteration.hasThreads() && !instructionsRead\" class=\"instructions\">\n" +
-    "				<h2>instrucciones</h2>\n" +
-    "				<button class=\"ion-close\" ng-click=\"iteration.readInstructions()\"></button>\n" +
+    "				<h2>instrucciones <span><button class=\"ion-close\" ng-click=\"iteration.readInstructions()\"></button> </span></h2>\n" +
     "				<p>\n" +
     "					Toca sobre la imagen para agregar un comentario, puedes agregar multiples comentarios a tu imagen tocando los diferentes puntos donde quieras agregarlos.\n" +
     "				</p>\n" +
