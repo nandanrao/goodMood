@@ -43,7 +43,7 @@ angular.module('goodMood')
 	    		console.log('image saved', Date.now())
 	    	})
 	    	console.log('state go iteration view', Date.now())
-	    	$state.go('^.iteration.view', {
+	    	$state.go('iteration', {
 	    		i_id: iteration.$id,
 	    		c_id: collaboration.$id
 	    	})

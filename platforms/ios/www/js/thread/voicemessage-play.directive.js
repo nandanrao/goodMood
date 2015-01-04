@@ -14,7 +14,7 @@ angular.module('goodMood')
 
 				this.play = function(){
 					if (!$scope.playing) {
-						console.log('playing')
+						console.log('playing', _.keys($scope.media))
 						$scope.media.play()
 					}
 					else {

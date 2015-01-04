@@ -26,11 +26,6 @@ angular.module('goodMood')
 			}
 		}
 
-		this.recordNote = function(){
-			$scope.recordNote = true;
-			vm.sendMessage('voice', dataURI)
-		}
-
 		this.writeText = function(){
 			$scope.writeMessage = true;
 		}

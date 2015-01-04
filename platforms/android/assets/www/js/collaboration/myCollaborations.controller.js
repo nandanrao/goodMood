@@ -1,12 +1,8 @@
 angular.module('goodMood')
-	.controller('MyCollaborationsCtrl', function ($scope, $timeout, Auth, $state, user, collaborations, Collaboration, collaborationDefaultBg){
+	.controller('MyCollaborationsCtrl', function ($scope, Auth, $state, user, collaborations, Collaboration, collaborationDefaultBg){
 		
 		$scope.collaborations = collaborations;
 
-		this.digest = function(){
-			$timeout(0)
-		}
-		
 		this.getNewMessages = function(collaboration){
 			return _.size(collaboration._newMessages)
 		}
@@ -23,6 +19,6 @@ angular.module('goodMood')
 		this.collaboration = function(id){
 			var collaboration = collaborations[id]
 			var i_id = _.last(_.keys(collaboration.iterations))
-			$state.go('collaboration.iteration.view', {c_id: id, i_id: i_id})
+			$state.go('iteration', {c_id: id, i_id: i_id})
 		}
 	})

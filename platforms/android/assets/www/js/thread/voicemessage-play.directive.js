@@ -3,7 +3,6 @@ angular.module('goodMood')
 		return {
 			restrict: 'E', 
 			templateUrl: 'thread/voicemessage-play.html',
-			replace: true,
 			controllerAs: 'voiceMessagePlay',
 			controller: function ($scope, $attrs, $element){
 				$scope.playing = false;
@@ -14,7 +13,7 @@ angular.module('goodMood')
 
 				this.play = function(){
 					if (!$scope.playing) {
-						console.log('playing')
+						console.log('playing', _.keys($scope.media))
 						$scope.media.play()
 					}
 					else {

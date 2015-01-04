@@ -20,10 +20,14 @@ angular.module('goodMood', [
       templateUrl: 'collaboration/myCollaborations.html',
       resolve: {
         user: ['User', function (User){
+          console.log('starting mycollab resolves', Date.now())
           return User.getCurrentUser()
         }],
         collaborations: ['user', function (user){
-          return user.$getCollaborations()
+          return user.$getCollaborations().then(function(collaborations){
+            console.log('finishing mycollab resolves', Date.now())
+            return collaborations
+          })
         }]
       }
     })
@@ -42,16 +46,16 @@ angular.module('goodMood', [
         }]
       }
     })
-    .state('collaboration', {
-      abstract: true,
-      url: 'collaboration/:c_id',
-      templateUrl: 'collaboration/collaboration.html',
-      resolve: {
-        collaboration: ['Collaboration', '$stateParams', function (Collaboration, $stateParams){
-          return Collaboration.findById($stateParams.c_id)
-        }],
-      }
-    })
+    // .state('collaboration', {
+    //   abstract: true,
+    //   url: 'collaboration/:c_id',
+    //   templateUrl: 'collaboration/collaboration.html',
+    //   resolve: {
+    //     collaboration: ['Collaboration', '$stateParams', function (Collaboration, $stateParams){
+    //       return Collaboration.findById($stateParams.c_id)
+    //     }],
+    //   }
+    // })
     // .state('collaboration.timeline', {
     //   url: '/timeline',
     //   controller: 'TimelineCtrl as timeline',
@@ -72,8 +76,8 @@ angular.module('goodMood', [
     //     }]
     //   }
     // })
-    .state('collaboration.thread', {
-      url: '/thread/:t_id',
+    .state('thread', {
+      url: 'thread/:t_id',
       controller: 'ThreadCtrl as thread',
       templateUrl: 'thread/thread.html',
       resolve: {
@@ -85,26 +89,26 @@ angular.module('goodMood', [
         }]
       }
     })
-    .state('collaboration.newIteration', {
-      url: '/newiteration',
+    .state('newIteration', {
+      url: 'collaboration/:c_id/newiteration',
       controller: 'NewIterationCtrl as newIteration',
       templateUrl: 'iteration/newiteration.html',
+      resolve: {
+        collaboration: ['Collaboration', '$stateParams', function (Collaboration, $stateParams){
+          return Collaboration.findById($stateParams.c_id)
+        }]
+      }
     })
-    .state('collaboration.iteration', {
-      url: '/iteration',
-      abstract: true,
-      templateUrl: 'iteration/iterationparent.html'
-    })
-    .state('collaboration.iteration.view', {
-      url: '/:i_id',
+    .state('iteration', {
+      url: 'collaboration/:c_id/iteration/:i_id',
       controller: 'IterationCtrl as iteration',
       templateUrl: 'iteration/iteration.html',
       resolve: {
+        collaboration: ['Collaboration', '$stateParams', function (Collaboration, $stateParams){
+          return Collaboration.findById($stateParams.c_id)
+        }],
         iteration: ['Iteration', '$stateParams', function (Iteration, $stateParams){
           return Iteration.findById($stateParams.i_id)
-        }],
-        iterations: ['collaboration', function (collaboration){
-          return collaboration.$getIterations()
         }],
         threads: ['iteration', function (iteration){
           return iteration.$getThreads()

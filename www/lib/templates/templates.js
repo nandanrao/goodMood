@@ -78,190 +78,6 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("login/localLogin.html",
-    "<div class=\"list\">\n" +
-    "<form name=\"loginForm\" no-validate class=\"localLoginForm\" ng-submit=\"localLogin.login()\">\n" +
-    "	<label class=\"item item-input\">\n" +
-    "		<input required type=\"text\" ng-model=\"form.email\" class=\"email\" name=\"email\" placeholder=\"Email\"></input>\n" +
-    "	</label>\n" +
-    "	<label class=\"item item-input\">\n" +
-    "		<input required type=\"text\" ng-model=\"form.password\" class=\"password\" name=\"password\" placeholder=\"Password\"></input>\n" +
-    "	</label>\n" +
-    "	<label ng-if=\"register\" class=\"item item-input\">\n" +
-    "		<input type=\"text\" ng-model=\"form.passRepeat\" class=\"repeatPass\" name=\"repeatPass\" placeholder=\"Repeat Password\"></input>\n" +
-    "	</label>\n" +
-    "	<button required ng-if=\"!register\" class=\"button button-outline button-positive login\" type=\"submit\" >Login</button>\n" +
-    "	<button type=\"button\" ng-click=\"localLogin.register()\" class=\"button button-outline button-positive register\">Register</button>\n" +
-    "</form>\n" +
-    "</div>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("login/login.html",
-    "<ion-content>\n" +
-    "	<button class=\"button button-block button-positive button-outline\" ng-click=\"login.authLogin('facebook')\">Facebook</button>\n" +
-    "	<button class=\"button button-block button-assertive button-outline\" ng-click=\"login.authLogin('google')\">Googllle</button>\n" +
-    "	<button class=\"button button-block button-assertive button-outline\" ng-if=\"!local\" ng-click=\"login.showLocalLogin()\">Email</button>\n" +
-    "	<form name=\"blah\"></form>\n" +
-    "	<div ng-show=\"local\" class=\"list\">\n" +
-    "		<form name=\"loginForm\" no-validate class=\"localLoginForm\" ng-submit=\"login.login()\">\n" +
-    "			<label class=\"item item-input\">\n" +
-    "				<input required type=\"text\" ng-model=\"form.email\" class=\"email\" name=\"email\" placeholder=\"Email\"></input>\n" +
-    "			</label>\n" +
-    "			<label class=\"item item-input\">\n" +
-    "				<input required type=\"text\" ng-model=\"form.password\" class=\"password\" name=\"password\" placeholder=\"Password\"></input>\n" +
-    "			</label>\n" +
-    "			<label ng-if=\"register\" class=\"item item-input\">\n" +
-    "				<input type=\"text\" ng-model=\"form.passRepeat\" class=\"repeatPass\" name=\"repeatPass\" placeholder=\"Repeat Password\"></input>\n" +
-    "			</label>\n" +
-    "			<button required ng-if=\"!register\" class=\"button button-outline button-positive login\" type=\"submit\" >Login</button>\n" +
-    "			<button type=\"button\" ng-click=\"login.register()\" class=\"button button-outline button-positive register\">Register</button>\n" +
-    "		</form>\n" +
-    "	</div>\n" +
-    "</ion-content>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("sidemenu/sidemenu.html",
-    "<button ng-click=\"sidemenu.logout()\">logout</button>\n" +
-    "	<p>{{ user.displayName }}</p>\n" +
-    "<img ng-src=\"{{ user.picture }}\">");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("thread/textmessage.html",
-    "<div class=\"{{ sender ? 'sender' : 'reciever' }}\">\n" +
-    "	<p class=\"date\">\n" +
-    "		{{ formatDate(message.sentAt) }}\n" +
-    "	</p>	\n" +
-    "	<p class=\"content\">\n" +
-    "		{{ message.content }}\n" +
-    "	</p>\n" +
-    "	<div class=\"arrow-holder\">\n" +
-    "		<div class=\"arrow\">\n" +
-    "			<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
-    "				 viewBox=\"0 0 22.1 43.3\" enable-background=\"new 0 0 22.1 43.3\" xml:space=\"preserve\">\n" +
-    "			<polygon fill=\"#FFF\" ng-attr-points=\"{{ points }}\">\n" +
-    "			</svg>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "</div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("thread/thread.html",
-    "<ion-view id=\"pg_thread\" view-title=\"comentario\">\n" +
-    "	<ion-nav-buttons side=\"primary\">\n" +
-    "	 <button ng-click=\"thread.goBack()\" class=\"ion-chevron-left\">\n" +
-    "	 </button>\n" +
-    "	</ion-nav-buttons>\n" +
-    "	<ion-content>\n" +
-    "		<div class=\"messages\">\n" +
-    "			<div class=\"message\" ng-repeat=\"message in messages\">\n" +
-    "				<text-message ng-if=\"message.type === 'text'\" message=\"{{ message }}\">\n" +
-    "				</text-message>\n" +
-    "				<voice-message ng-if=\"message.type === 'audio'\">\n" +
-    "				</voice-message>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "		<div class=\"choose\">\n" +
-    "			<button voice-message-record class=\"voice\" ng-click=\"thread.redcordNote()\">\n" +
-    "			</button>\n" +
-    "			<button class=\"text\" ng-click=\"thread.writeText()\">		\n" +
-    "			text\n" +
-    "			</button>\n" +
-    "		</div>\n" +
-    "		<form ng-show=\"writeMessage\" ng-submit=\"thread.sendMessage('text', textField.content)\">\n" +
-    "			<input required ng-model=\"textField.content\" class=\"text\" placeholder=\"write here\" />\n" +
-    "		</form>\n" +
-    "	</ion-content>\n" +
-    "</ion-view>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("thread/voicemessage-audio.html",
-    "<audio ng-src=\"{{ audioURI }}\" preload></audio>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("thread/voicemessage-play.html",
-    "<svg ng-mousedown=\"voiceMessagePlay.mousedown($event)\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 543.5 88\" enable-background=\"new 0 0 543.5 88\" xml:space=\"preserve\">\n" +
-    "	<circle ng-click=\"voiceMessagePlay.play()\" fill=\"#277FE9\" cx=\"44\" cy=\"44\" r=\"44\"/>\n" +
-    "	<g>\n" +
-    "		<path fill=\"#FFFFFF\" d=\"M44.1,54c5,0,9-4,9-9V27c0-5-4-9-9-9c-5,0-9,4-9,9V45C35.2,50,39.2,54,44.1,54z\"/>\n" +
-    "		<path fill=\"#FFFFFF\" d=\"M57.3,41.4v3.7c0,7.3-5.9,13.2-13.2,13.2c-7.3,0-13.2-5.9-13.2-13.2v-3.7h-3.6v3.7c0,8.6,6.6,15.8,15,16.7\n" +
-    "			v6.7h-9.9V72h23.4v-3.6h-9.9v-6.7c8.4-0.9,15-8,15-16.7v-3.7H57.3z\"/>\n" +
-    "	</g>\n" +
-    "	<g>\n" +
-    "		<line fill=\"none\" stroke=\"#277FE9\" stroke-width=\"2\" stroke-miterlimit=\"10\" x1=\"88\" y1=\"44\" x2=\"543.5\" y2=\"44\"/>\n" +
-    "	</g>\n" +
-    "	<!-- <line fill=\"none\" stroke=\"#A2FF00\" stroke-width=\"8\" stroke-miterlimit=\"10\" x1=\"88\" y1=\"44\" x2=\"377.9\" y2=\"44\"/> -->\n" +
-    "</svg>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("thread/voicemessage.html",
-    "<div class=\"{{ sender ? 'sender' : 'reciever' }}\">\n" +
-    "	<voice-message-audio></voice-message-audio>\n" +
-    "	<p class=\"date\">\n" +
-    "		{{ formatDate(message.sentAt) }}\n" +
-    "	</p>\n" +
-    "	<voice-message-play></voice-message-play>\n" +
-    "	<div class=\"arrow-holder\">\n" +
-    "		<div class=\"arrow\">\n" +
-    "			<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
-    "				 viewBox=\"0 0 22.1 43.3\" enable-background=\"new 0 0 22.1 43.3\" xml:space=\"preserve\">\n" +
-    "			<polygon fill=\"#FFF\" ng-attr-points=\"{{ points }}\">\n" +
-    "			</svg>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "</div>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("thread/voicemessagerecord.html",
-    "<i class=\"ion-mic-a\" ng-click=\"record.record()\"></i>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/desktopupload.html",
     "<button ng-click=\"fileInputClick() \" class=\"from-device\">\n" +
     "	<div class=\"image\">\n" +
@@ -351,5 +167,190 @@ module.run(["$templateCache", function($templateCache) {
     "		</div>\n" +
     "	</ion-content>\n" +
     "</ion-view>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("login/localLogin.html",
+    "<div class=\"list\">\n" +
+    "<form name=\"loginForm\" no-validate class=\"localLoginForm\" ng-submit=\"localLogin.login()\">\n" +
+    "	<label class=\"item item-input\">\n" +
+    "		<input required type=\"text\" ng-model=\"form.email\" class=\"email\" name=\"email\" placeholder=\"Email\"></input>\n" +
+    "	</label>\n" +
+    "	<label class=\"item item-input\">\n" +
+    "		<input required type=\"text\" ng-model=\"form.password\" class=\"password\" name=\"password\" placeholder=\"Password\"></input>\n" +
+    "	</label>\n" +
+    "	<label ng-if=\"register\" class=\"item item-input\">\n" +
+    "		<input type=\"text\" ng-model=\"form.passRepeat\" class=\"repeatPass\" name=\"repeatPass\" placeholder=\"Repeat Password\"></input>\n" +
+    "	</label>\n" +
+    "	<button required ng-if=\"!register\" class=\"button button-outline button-positive login\" type=\"submit\" >Login</button>\n" +
+    "	<button type=\"button\" ng-click=\"localLogin.register()\" class=\"button button-outline button-positive register\">Register</button>\n" +
+    "</form>\n" +
+    "</div>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("login/login.html",
+    "<ion-content>\n" +
+    "	<button class=\"button button-block button-positive button-outline\" ng-click=\"login.authLogin('facebook')\">Facebook</button>\n" +
+    "	<button class=\"button button-block button-assertive button-outline\" ng-click=\"login.authLogin('google')\">Googllle</button>\n" +
+    "	<button class=\"button button-block button-assertive button-outline\" ng-if=\"!local\" ng-click=\"login.showLocalLogin()\">Email</button>\n" +
+    "	<form name=\"blah\"></form>\n" +
+    "	<div ng-show=\"local\" class=\"list\">\n" +
+    "		<form name=\"loginForm\" no-validate class=\"localLoginForm\" ng-submit=\"login.login()\">\n" +
+    "			<label class=\"item item-input\">\n" +
+    "				<input required type=\"text\" ng-model=\"form.email\" class=\"email\" name=\"email\" placeholder=\"Email\"></input>\n" +
+    "			</label>\n" +
+    "			<label class=\"item item-input\">\n" +
+    "				<input required type=\"text\" ng-model=\"form.password\" class=\"password\" name=\"password\" placeholder=\"Password\"></input>\n" +
+    "			</label>\n" +
+    "			<label ng-if=\"register\" class=\"item item-input\">\n" +
+    "				<input type=\"text\" ng-model=\"form.passRepeat\" class=\"repeatPass\" name=\"repeatPass\" placeholder=\"Repeat Password\"></input>\n" +
+    "			</label>\n" +
+    "			<button required ng-if=\"!register\" class=\"button button-outline button-positive login\" type=\"submit\" >Login</button>\n" +
+    "			<button type=\"button\" ng-click=\"login.register()\" class=\"button button-outline button-positive register\">Register</button>\n" +
+    "		</form>\n" +
+    "	</div>\n" +
+    "</ion-content>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("sidemenu/sidemenu.html",
+    "<button ng-click=\"sidemenu.logout()\">logout</button>\n" +
+    "	<p>{{ user.displayName }}</p>\n" +
+    "<img ng-src=\"{{ user.picture }}\">");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("thread/textmessage.html",
+    "<div class=\"{{ sender ? 'sender' : 'reciever' }}\">\n" +
+    "	<p class=\"date\">\n" +
+    "		{{ formatDate(message.sentAt) }}\n" +
+    "	</p>	\n" +
+    "	<p class=\"content\">\n" +
+    "		{{ message.content }}\n" +
+    "	</p>\n" +
+    "	<div class=\"arrow-holder\">\n" +
+    "		<div class=\"arrow\">\n" +
+    "			<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
+    "				 viewBox=\"0 0 22.1 43.3\" enable-background=\"new 0 0 22.1 43.3\" xml:space=\"preserve\">\n" +
+    "			<polygon fill=\"#FFF\" ng-attr-points=\"{{ points }}\">\n" +
+    "			</svg>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("thread/thread.html",
+    "<ion-view id=\"pg--thread\" view-title=\"comentario\">\n" +
+    "	<ion-nav-buttons side=\"primary\">\n" +
+    "	 <button ng-click=\"thread.goBack()\" class=\"ion-chevron-left\">\n" +
+    "	 </button>\n" +
+    "	</ion-nav-buttons>\n" +
+    "	<ion-content>\n" +
+    "		<div class=\"messages\">\n" +
+    "			<div class=\"message\" ng-repeat=\"message in messages\">\n" +
+    "				<text-message ng-if=\"message.type === 'text'\" message=\"{{ message }}\">\n" +
+    "				</text-message>\n" +
+    "				<voice-message ng-if=\"message.type === 'audio'\">\n" +
+    "				</voice-message>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"choose\">\n" +
+    "			<voice-message-record></voice-message-record>\n" +
+    "			<button class=\"text\" ng-click=\"thread.writeText()\">		\n" +
+    "			text\n" +
+    "			</button>\n" +
+    "		</div>\n" +
+    "		<form ng-show=\"writeMessage\" ng-submit=\"thread.sendMessage('text', textField.content)\">\n" +
+    "			<input required ng-model=\"textField.content\" class=\"text\" placeholder=\"write here\" />\n" +
+    "		</form>\n" +
+    "	</ion-content>\n" +
+    "</ion-view>\n" +
+    "");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("thread/voicemessage-audio.html",
+    "<audio ng-src=\"{{ audioURI }}\" preload></audio>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("thread/voicemessage-play.html",
+    "<svg ng-mousedown=\"voiceMessagePlay.mousedown($event)\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 543.5 88\" enable-background=\"new 0 0 543.5 88\" xml:space=\"preserve\">\n" +
+    "	<circle ng-click=\"voiceMessagePlay.play()\" fill=\"#277FE9\" cx=\"44\" cy=\"44\" r=\"44\"/>\n" +
+    "	<g>\n" +
+    "		<path fill=\"#FFFFFF\" d=\"M44.1,54c5,0,9-4,9-9V27c0-5-4-9-9-9c-5,0-9,4-9,9V45C35.2,50,39.2,54,44.1,54z\"/>\n" +
+    "		<path fill=\"#FFFFFF\" d=\"M57.3,41.4v3.7c0,7.3-5.9,13.2-13.2,13.2c-7.3,0-13.2-5.9-13.2-13.2v-3.7h-3.6v3.7c0,8.6,6.6,15.8,15,16.7\n" +
+    "			v6.7h-9.9V72h23.4v-3.6h-9.9v-6.7c8.4-0.9,15-8,15-16.7v-3.7H57.3z\"/>\n" +
+    "	</g>\n" +
+    "	<g>\n" +
+    "		<line fill=\"none\" stroke=\"#277FE9\" stroke-width=\"2\" stroke-miterlimit=\"10\" x1=\"88\" y1=\"44\" x2=\"543.5\" y2=\"44\"/>\n" +
+    "	</g>\n" +
+    "	<!-- <line fill=\"none\" stroke=\"#A2FF00\" stroke-width=\"8\" stroke-miterlimit=\"10\" x1=\"88\" y1=\"44\" x2=\"377.9\" y2=\"44\"/> -->\n" +
+    "</svg>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("thread/voicemessage.html",
+    "<div class=\"{{ sender ? 'sender' : 'reciever' }}\">\n" +
+    "	<voice-message-audio></voice-message-audio>\n" +
+    "	<p class=\"date\">\n" +
+    "		{{ formatDate(message.sentAt) }}\n" +
+    "	</p>\n" +
+    "	<voice-message-play></voice-message-play>\n" +
+    "	<div class=\"arrow-holder\">\n" +
+    "		<div class=\"arrow\">\n" +
+    "			<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
+    "				 viewBox=\"0 0 22.1 43.3\" enable-background=\"new 0 0 22.1 43.3\" xml:space=\"preserve\">\n" +
+    "			<polygon fill=\"#FFF\" ng-attr-points=\"{{ points }}\">\n" +
+    "			</svg>\n" +
+    "		</div>\n" +
+    "	</div>\n" +
+    "</div>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("thread/voicemessagerecord.html",
+    "<button class=\"voice-record\" ng-click=\"record.record()\">\n" +
+    "	<i class=\"ion-mic-a\"></i>\n" +
+    "</button>");
 }]);
 })();

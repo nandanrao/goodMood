@@ -27,7 +27,7 @@ angular.module('goodMood')
 		
 		Facebook.getPicture = function(){
 			return $cordovaFacebook.api('me?fields=picture.type(large)').then(function(obj){
-				return obj.data.url
+				return obj.picture.data.url
 			})
 	  }
 

@@ -109,5 +109,14 @@ gm-side-menu {
   }
 }
 
+#pg--thread {
+  voice-message > div {
+    height: 100px;
+  }
+  button.voice-record {
+    font-size: 6em;
+    margin-left: 20px;
+  }
+}
 
 

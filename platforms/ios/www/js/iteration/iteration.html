@@ -1,4 +1,4 @@
-<ion-view id="pg--iteration" title="{{ collaboration.name }} - ">
+<ion-view id="pg--iteration" title="{{ collaborationName }} - ">
 	<ion-nav-buttons side="primary">
 	 <button ng-click="iteration.goBack()" nav-direction="back" class="ion-chevron-left">
 	 </button>
@@ -14,8 +14,7 @@
 		<button class="next" ng-if="next" ng-click="iteration.next()"> next iteration </button>
 		<!-- <p>{{ colabits }} </p> -->
 		<div ng-if="!iteration.hasThreads() && !instructionsRead" class="instructions">
-				<h2>instrucciones</h2>
-				<button class="ion-close" ng-click="iteration.readInstructions()"></button>
+				<h2>instrucciones <span><button class="ion-close" ng-click="iteration.readInstructions()"></button> </span></h2>
 				<p>
 					Toca sobre la imagen para agregar un comentario, puedes agregar multiples comentarios a tu imagen tocando los diferentes puntos donde quieras agregarlos.
 				</p>
