@@ -38,7 +38,8 @@ angular.module('goodMood')
 		this.goBack = function(){
 			$ionicHistory.goBack()
 		}
- 
+
+ 		// TODO: add blur() to input field directive to hide keyboard after send!
 		this.sendMessage = function(type, content){
 			$ionicLoading.show()
 			return thread.$addMessage({
@@ -46,8 +47,9 @@ angular.module('goodMood')
 				user: Auth.currentUser.$id,
 				type: type,
 			}).then(function(message){
-				$ionicLoading.hide()
+				$scope.writeMessage = false;
 				$scope.textField = null;
+				$ionicLoading.hide()
 			})
 			
 		}
