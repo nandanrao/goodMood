@@ -1,9 +1,9 @@
 angular.module('goodMood')
 	.directive('voiceMessagePlay', function ($document){
 		return {
-			restrict: 'E', 
+			restrict: 'E',
+			replace: true, 
 			templateUrl: 'thread/voicemessage-play.html',
-			replace: true,
 			controllerAs: 'voiceMessagePlay',
 			controller: function ($scope, $attrs, $element){
 				$scope.playing = false;

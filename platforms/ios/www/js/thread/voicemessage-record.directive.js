@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.directive('voiceMessageRecord', function ($log, $window, $document, $ionicLoading, $cordovaMedia, $cordovaFile, Audio, utils){
+	.directive('voiceMessageRecord', function ($log, $window, $document, $ionicLoading, $cordovaMedia, $cordovaFile, $cordovaCapture, Audio, utils){
 		return {
 			restrict: 'EA',
       replace: true,
@@ -83,7 +83,14 @@ angular.module('goodMood')
 					}
 					else {
             console.log("not desktop")   
-						cordovaRecord()
+						// cordovaRecord()
+            var options = { limit: 3, duration: 10 };
+
+            $cordovaCapture.captureAudio(options).then(function(audioData) {
+              console.log('success', audioData)
+            }, function(err) {
+              // An error occurred. Show a message to the user
+            });
 					}
 				}
 			},

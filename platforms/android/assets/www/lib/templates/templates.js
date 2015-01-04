@@ -226,6 +226,17 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("sidemenu/sidemenu.html",
+    "<button ng-click=\"sidemenu.logout()\">logout</button>\n" +
+    "	<p>{{ user.displayName }}</p>\n" +
+    "<img ng-src=\"{{ user.picture }}\">");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/textmessage.html",
     "<div class=\"{{ sender ? 'sender' : 'reciever' }}\">\n" +
     "	<p class=\"date\">\n" +
@@ -267,8 +278,7 @@ module.run(["$templateCache", function($templateCache) {
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"choose\">\n" +
-    "			<button voice-message-record class=\"voice\">\n" +
-    "			</button>\n" +
+    "			<voice-message-record></voice-message-record>\n" +
     "			<button class=\"text\" ng-click=\"thread.writeText()\">		\n" +
     "			text\n" +
     "			</button>\n" +
@@ -339,17 +349,8 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/voicemessagerecord.html",
-    "<i class=\"ion-mic-a\" ng-click=\"record.record()\"></i>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("sidemenu/sidemenu.html",
-    "<button ng-click=\"sidemenu.logout()\">logout</button>\n" +
-    "	<p>{{ user.displayName }}</p>\n" +
-    "<img ng-src=\"{{ user.picture }}\">");
+    "<button class=\"voice-record\" ng-click=\"record.record()\">\n" +
+    "	<i class=\"ion-mic-a\"></i>\n" +
+    "</button>");
 }]);
 })();

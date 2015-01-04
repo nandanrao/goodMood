@@ -263,7 +263,7 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/thread.html",
-    "<ion-view id=\"pg_thread\" view-title=\"comentario\">\n" +
+    "<ion-view id=\"pg--thread\" view-title=\"comentario\">\n" +
     "	<ion-nav-buttons side=\"primary\">\n" +
     "	 <button ng-click=\"thread.goBack()\" class=\"ion-chevron-left\">\n" +
     "	 </button>\n" +
@@ -278,8 +278,7 @@ module.run(["$templateCache", function($templateCache) {
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"choose\">\n" +
-    "			<button voice-message-record class=\"voice\" ng-click=\"thread.redcordNote()\">\n" +
-    "			</button>\n" +
+    "			<voice-message-record></voice-message-record>\n" +
     "			<button class=\"text\" ng-click=\"thread.writeText()\">		\n" +
     "			text\n" +
     "			</button>\n" +
@@ -350,6 +349,8 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/voicemessagerecord.html",
-    "<i class=\"ion-mic-a\" ng-click=\"record.record()\"></i>");
+    "<button class=\"voice-record\" ng-click=\"record.record()\">\n" +
+    "	<i class=\"ion-mic-a\"></i>\n" +
+    "</button>");
 }]);
 })();

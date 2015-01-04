@@ -45,6 +45,10 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"Capture\"><param name=\"android-package\" value=\"org.apache.cordova.mediacapture.Capture\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"FacebookConnectPlugin\"><param name=\"android-package\" value=\"org.apache.cordova.facebook.ConnectPlugin\" /></feature>",
                             "count": 1
                         },
@@ -76,11 +80,11 @@
                     "/*": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 4
+                            "count": 5
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.RECORD_AUDIO\" />",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\" />",
@@ -88,6 +92,10 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.RECORD_VIDEO\" />",
                             "count": 1
                         }
                     ],
@@ -148,6 +156,9 @@
             "PACKAGE_NAME": "com.ionicframework.goodmood362235"
         },
         "org.apache.cordova.media": {
+            "PACKAGE_NAME": "com.ionicframework.goodmood362235"
+        },
+        "org.apache.cordova.media-capture": {
             "PACKAGE_NAME": "com.ionicframework.goodmood362235"
         },
         "com.phonegap.plugins.facebookconnect": {

@@ -53,6 +53,10 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"Capture\"><param name=\"ios-package\" value=\"CDVCapture\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"FacebookConnectPlugin\"><param name=\"ios-package\" value=\"FacebookConnectPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
@@ -100,7 +104,7 @@
                     "CoreGraphics.framework": [
                         {
                             "xml": "false",
-                            "count": 3
+                            "count": 4
                         }
                     ],
                     "AssetsLibrary.framework": [
@@ -112,7 +116,7 @@
                     "MobileCoreServices.framework": [
                         {
                             "xml": "false",
-                            "count": 2
+                            "count": 3
                         }
                     ],
                     "libsqlite3.dylib": [
@@ -200,6 +204,9 @@
             "PACKAGE_NAME": "com.ionicframework.goodmood362235"
         },
         "org.apache.cordova.media": {
+            "PACKAGE_NAME": "com.ionicframework.goodmood362235"
+        },
+        "org.apache.cordova.media-capture": {
             "PACKAGE_NAME": "com.ionicframework.goodmood362235"
         },
         "com.phonegap.plugins.facebookconnect": {

@@ -7292,6 +7292,8 @@ button[voice-message-record] {
 gm-side-menu img {
   border-radius: 50%; }
 
-#pg--thread voice-message {
-  height: 100px;
-  width: 100%; }
+#pg--thread voice-message > div {
+  height: 100px; }
+#pg--thread button.voice-record {
+  font-size: 6em;
+  margin-left: 20px; }
