@@ -41,9 +41,9 @@ angular.module('goodMood')
  
 		this.sendMessage = function(type, content){
 			$ionicLoading.show()
-			thread.$addMessage({
+			return thread.$addMessage({
 				content: content,
-				user: Auth.currentUser,
+				user: Auth.currentUser.$id,
 				type: type,
 			}).then(function(message){
 				$ionicLoading.hide()

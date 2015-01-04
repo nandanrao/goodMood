@@ -106,11 +106,14 @@ angular.module('goodMood', [
         threads: ['iteration', function (iteration){
           return iteration.$getThreads()
         }],
-        image: ['Image', 'iteration', function (Image, iteration){
-          return Image.findById(iteration.image)
+        image: ['iteration', function (iteration){
+          return iteration.$getImage()
         }] 
       }
     })
+})
+.config(function($ionicConfigProvider){
+  $ionicConfigProvider.views.maxCache(0)
 })
 .config(function($cordovaFacebookProvider) {
   var appID = 759883230731625;

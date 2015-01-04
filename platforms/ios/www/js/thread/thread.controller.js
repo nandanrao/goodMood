@@ -40,7 +40,6 @@ angular.module('goodMood')
 		}
  
 		this.sendMessage = function(type, content){
-			console.log($scope.textField.content)
 			$ionicLoading.show()
 			thread.$addMessage({
 				content: content,

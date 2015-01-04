@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.factory('Collaboration', function(fb, $firebase, $FirebaseObject, $q, Auth, Iteration, Thread, utils, $timeout){
+	.factory('Collaboration', function(fb, $firebase, $FirebaseObject, $q, Auth, Iteration, Thread, Image, utils, $timeout){
 		var Collaboration = {};
 
 		Collaboration.ref = fb.collaborations;
@@ -75,9 +75,10 @@ angular.module('goodMood')
        * @returns The iteration instance passed into it.
        */
       $addIteration: function(iteration){
-        if (!iteration || !iteration.$id){
+        if (!iteration || !iteration.$id || !iteration.image){
           throw new TypeError('we need an iteration object')
         }
+        this.$inst().$set('lastImage', iteration.image)
         var obj = {}
         obj[iteration.$id] = true;
         return this.$inst().$update('iterations', obj).then(function(obj){
@@ -168,28 +169,38 @@ angular.module('goodMood')
       },
 
       $getLastImage: function(){
-        var i_id = _.last(_.keys(this.iterations))
-        if (i_id){
-          return Iteration.findById(i_id)
-                  .then(function(iteration){
-                    return iteration.$getImage()
-                  })  
-        }
-        else {
+        if (!this.lastImage) {
           return $q.when(null)
         }
         
+        var lastImage = {};
+        var deferred = $q.defer();
+        
+        var ref = fb.images.child(this.lastImage)
+        ref.on('value', function(snap){
+          Image.findById(snap.key()).then(function(image){
+            lastImage[image.$id] = image;
+            console.log('new last image for colab!', image)
+            deferred.resolve(lastImage)
+          }, function(err){
+            deferred.reject(err)
+          })
+        })
+        Object.defineProperty(lastImage, '_notEmpty', {
+          value: true,
+          enumerable: false
+        })
+        return deferred.promise
       },
   	
       $populate: function(){
+        console.log(this.$id, 'collaboration populate called')
         var self = this;
         return $q.all({
-            users: self.$getUsers(),
             lastImage: self.$getLastImage(),
             newMessages: self.$getNewMessages()
           })
           .then(function(results){
-            self._users = results.users;
             self._lastImage = results.lastImage;
             self._newMessages = results.newMessages;
           	return self;
@@ -216,6 +227,7 @@ angular.module('goodMood')
     }
 
 		Collaboration.findById = function(id){
+      console.log(id, 'collaboration find by id called')
 			return $firebase(Collaboration.ref.child(id), {objectFactory: CollaborationFactory})
         .$asObject().$loaded().then(populate)
 		}

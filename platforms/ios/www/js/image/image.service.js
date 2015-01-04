@@ -23,3 +23,16 @@ angular.module('goodMood')
 
 		return Image;
 	})
+
+
+	// image factory
+
+	// Image create takes nothing
+	// image.addPhoto takes a fullsize dataURI and sets it to _file + full
+	// then it runs image.$createBaseSizes (resizes to one or two?)
+	// this spawns a web worker that resizes the images, and adds them to the instance
+	// we also want an image.$resize -- which just calls the imageresize service with itself
+	// we create an $getCorrectSize which runs image.$resize based on the device size
+	// this maybe also adds a listener for window resizes? 
+	// if so, make sure to kill the listener on $destroy!
+

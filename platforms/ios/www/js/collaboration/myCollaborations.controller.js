@@ -14,7 +14,7 @@ angular.module('goodMood')
 		this.getCollaborationImage = function(collaboration){
 			var imgURI;
 			var dataURI = collaboration._lastImage ? collaboration._lastImage.$value : collaborationDefaultBg
-			imgURI = "data:image/jpeg;base64," + dataURI
+			imgURI = dataURI
 			return imgURI
 		}
 

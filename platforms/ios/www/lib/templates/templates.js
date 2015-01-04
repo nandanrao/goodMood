@@ -78,6 +78,23 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("iteration/desktopupload.html",
+    "<button ng-click=\"fileInputClick() \" class=\"from-device\">\n" +
+    "	<div class=\"image\">\n" +
+    "		<img src=\"img/picture-file.svg\">\n" +
+    "	</div>\n" +
+    "	<p>elije una foto</p>\n" +
+    "	<file-input></file-input>\n" +
+    "</button>\n" +
+    "\n" +
+    "");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/iteration.html",
     "<ion-view id=\"pg--iteration\" title=\"{{ collaboration.name }} - \">\n" +
     "	<ion-nav-buttons side=\"primary\">\n" +
@@ -128,26 +145,24 @@ module.run(["$templateCache", function($templateCache) {
     "		</button>\n" +
     "	</ion-nav-buttons>\n" +
     "	<ion-content scroll=\"false\">\n" +
-    "	<div class=\"mobile\">\n" +
-    "		<button ng-click=\"newIteration.takePicture()\" class=\"take-picture\">\n" +
-    "			<div class=\"image\">\n" +
-    "				<img src=\"img/camera.svg\">\n" +
-    "			</div>\n" +
-    "			<p>toma una foto</p>\n" +
-    "		</button>\n" +
-    "		<div class=\"line\"></div>\n" +
-    "		<button ng-click=\"newIteration.fromDevice()\" class=\"from-device\">\n" +
-    "			<div class=\"image\">\n" +
-    "				<img src=\"img/picture-file.svg\">\n" +
-    "			</div>\n" +
-    "			<p>elije una foto</p>\n" +
-    "		</button>\n" +
-    "	</div>\n" +
-    "<!-- 		<div class=\"desktop\" ng-if=\"newIteration.isDesktop()\">\n" +
-    "		<button class=\"skip button button-block button-energized button-outline\" ng-click=\"newIteration.fromDevice()\"> \n" +
-    "			Skip\n" +
-    "		</button>\n" +
-    "	</div> -->\n" +
+    "		<div class=\"mobile\" ng-if=\"!newIteration.isDesktop()\">\n" +
+    "			<button ng-click=\"newIteration.takePicture()\" class=\"take-picture\">\n" +
+    "				<div class=\"image\">\n" +
+    "					<img src=\"img/camera.svg\">\n" +
+    "				</div>\n" +
+    "				<p>toma una foto</p>\n" +
+    "			</button>\n" +
+    "			<div class=\"line\"></div>\n" +
+    "			<button ng-click=\"newIteration.fromDevice()\" class=\"from-device\">\n" +
+    "				<div class=\"image\">\n" +
+    "					<img src=\"img/picture-file.svg\">\n" +
+    "				</div>\n" +
+    "				<p>elije una foto</p>\n" +
+    "			</button>\n" +
+    "		</div>\n" +
+    "		<div class=\"desktop\" ng-if=\"newIteration.isDesktop()\">\n" +
+    "			<desktop-upload></desktop-upload>\n" +
+    "		</div>\n" +
     "	</ion-content>\n" +
     "</ion-view>");
 }]);
@@ -322,6 +337,6 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/voicemessagerecord.html",
-    "<i class=\"ion-mic-a\"></i>");
+    "<i class=\"ion-mic-a\" ng-click=\"record.record()\"></i>");
 }]);
 })();

@@ -10,7 +10,6 @@ angular.module('goodMood')
       $ionicLoading.show()
       return Auth.viaOAuth(authProvider)
         .then(function(_authObj){
-          console.log('authObj', _.keys(_authObj), authProvider)
           authObj = _authObj;
           return User.findByAuth(authProvider, authObj)
         })

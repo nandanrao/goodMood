@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.directive('voiceMessageRecord', function ($log, $window, $ionicLoading, $cordovaMedia, $cordovaFile, Audio, Auth){
+	.directive('voiceMessageRecord', function ($log, $window, $document, $ionicLoading, $cordovaMedia, $cordovaFile, Audio, utils){
 		return {
 			restrict: 'EA',
 			templateUrl: 'thread/voicemessagerecord.html',
@@ -18,47 +18,67 @@ angular.module('goodMood')
     			fileDir = 'NoCloud/';
     		}
 
-				$element.on('click', function (){
-					console.log('mic clicked')					
-					if (!$scope.recording){
-						var fileName = 'test.wav'
-						var src = fileTransferDir + fileName
-						var fileSrc = fileDir + fileName;
-						
-						console.log('src', src)
-						console.log('filesrc', fileSrc)
-						media = $cordovaMedia.newMedia(src)
-						media
-							.then(function(){
-								return $cordovaFile.readAsDataURL(fileSrc)
-							})
-							.then(Audio.create)
-							.then(function(audio){
-								return $scope.thread.sendMessage('audio', audio.$id)
-							})
-							.then(function(){
-								$ionicLoading.hide()
-							})
-							.catch(function(err){
-								$log.error('error recording audio', err)
-								$window.alert('sorry but we couldnt record your audio, try again?')
-								$ionicLoading.hide()
-							})
+    		function cordovaRecord(){
+    			if (!$scope.recording){
+    				console.log('mic clicked - start recording')	
+    				var fileName = utils.uuid() + '.wav'
+    				var src = fileTransferDir + fileName
+    				var fileSrc = fileDir + fileName;
 
-						media.startRecord()
-						$scope.recording = true;	
+    				var audioCreated = Audio.create(false)
+    				
+    				media = $cordovaMedia.newMedia(src)
+    				media
+    					.then(function(){
+    						media.release()
+    						return $cordovaFile.readAsDataURL(fileSrc)
+    					})
+    					.then(function(dataURI){
+    						return audioCreated.then(function(audio){
+    							return audio
+    						})
+    					})
+    					.then(function(audio){
+    						return $scope.thread.sendMessage('audio', audio.$id)
+    					})
+    					.then(function(){
+    						audio.$inst().$set(dataURI).then(function(){
+    							console.log('audio saved to server')
+    						})
+    						return 
+    					})
+    					.then(function(){
+    						$ionicLoading.hide()
+    					})
+    					.catch(function(err){
+    						$log.error('error recording audio', err)
+    						$window.alert('sorry but we couldnt record your audio, try again?')
+    						$ionicLoading.hide()
+    					})
+
+    				$scope.recording = true;
+    				media.startRecord()	
+    			}
+    			else {	
+    				console.log('mic clicked - stop recording')
+    				$scope.recording = false;
+    				$ionicLoading.show()
+    				media.stopRecord()
+    			}
+    		}
+
+    		function desktopRecord(){
+    			$window.alert('sorry, no recording on desktop yet!')
+    		}
+
+				this.record = function (){			
+					if (utils.isDesktop()){
+						desktopRecord()
 					}
 					else {
-						media.stopRecord()
-						media.release()
-						$ionicLoading.show()
-						$scope.recording = false;
+						cordovaRecord()
 					}
-				})
-
-
-
-
+				}
 			},
 			link: function (){
 

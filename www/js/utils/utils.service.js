@@ -55,5 +55,13 @@ angular.module('goodMood')
       return uuid;
     }
 
+    utils.isDesktop = function(){
+      // TODO: why is this called HELLA times?
+      if (!window.cordova){
+        return true
+      }
+      return false  
+    }
+
     return utils;
 	})

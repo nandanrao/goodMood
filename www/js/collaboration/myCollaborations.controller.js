@@ -12,9 +12,9 @@ angular.module('goodMood')
 		}
 
 		this.getCollaborationImage = function(collaboration){
-			var imgURI;
-			var dataURI = collaboration._lastImage ? collaboration._lastImage.$value : collaborationDefaultBg
-			imgURI = dataURI
+			console.log('getcollabimage called... ', collaboration._lastImage)
+			var key = _.keys(collaboration._lastImage)[0]
+			var imgURI = collaboration._lastImage ? collaboration._lastImage[key].$value : collaborationDefaultBg
 			return imgURI
 		}
 

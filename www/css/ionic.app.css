@@ -7140,8 +7140,6 @@ text-message p.date, voice-message p.date {
   #pg--new-iteration ion-content > div button {
     width: 100%;
     display: block; }
-  #pg--new-iteration ion-content > div input {
-    display: none; }
   #pg--new-iteration ion-content > div .image {
     width: 20%;
     margin: auto auto;

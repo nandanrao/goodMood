@@ -139,6 +139,9 @@ angular.module('goodMood')
         return $q.when(threads)
       },
 
+      // Note: this is where we attempt to convert the Bacon/FRP streams
+      // into a POJO that Angular can put on its scope and watch.
+      // TODO: should deferred.resolve here be AFTER the forEach loops? 
       $getNewMessages: function(){
         var newMessages = {};
         var deferred = $q.defer();
