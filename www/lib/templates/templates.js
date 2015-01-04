@@ -78,102 +78,6 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("iteration/desktopupload.html",
-    "<button ng-click=\"fileInputClick() \" class=\"from-device\">\n" +
-    "	<div class=\"image\">\n" +
-    "		<img src=\"img/picture-file.svg\">\n" +
-    "	</div>\n" +
-    "	<p>elije una foto</p>\n" +
-    "	<file-input></file-input>\n" +
-    "</button>\n" +
-    "\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("iteration/iteration.html",
-    "<ion-view id=\"pg--iteration\" title=\"{{ collaborationName }} - \">\n" +
-    "	<ion-nav-buttons side=\"primary\">\n" +
-    "	 <button ng-click=\"iteration.goBack()\" nav-direction=\"back\" class=\"ion-chevron-left\">\n" +
-    "	 </button>\n" +
-    "	</ion-nav-buttons>\n" +
-    "	<div id=\"iterationBg\">\n" +
-    "		<p style=\"z-index: 999\">\n" +
-    "			{{ iterationArray }}\n" +
-    "		</p>\n" +
-    "		<canvas iteration-canvas></canvas>\n" +
-    "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ image.$value }}\" />\n" +
-    "		<button add-button class=\"addIteration\" ng-if=\"!next\" ng-click=\"iteration.addIteration()\"></button>\n" +
-    "		<button class=\"previous\" ng-if=\"previous\" ng-click=\"iteration.previous()\"> previous iteration </button>\n" +
-    "		<button class=\"next\" ng-if=\"next\" ng-click=\"iteration.next()\"> next iteration </button>\n" +
-    "		<!-- <p>{{ colabits }} </p> -->\n" +
-    "		<div ng-if=\"!iteration.hasThreads() && !instructionsRead\" class=\"instructions\">\n" +
-    "				<h2>instrucciones <span><button class=\"ion-close\" ng-click=\"iteration.readInstructions()\"></button> </span></h2>\n" +
-    "				<p>\n" +
-    "					Toca sobre la imagen para agregar un comentario, puedes agregar multiples comentarios a tu imagen tocando los diferentes puntos donde quieras agregarlos.\n" +
-    "				</p>\n" +
-    "		</div>\n" +
-    "		<drawing ng-repeat=\"thread in threads\" id=\"{{ thread.$id }}\" x=\"{{ thread.drawing.x }}\" y=\"{{ thread.drawing.y }}\">\n" +
-    "		</drawing>\n" +
-    "	</div>\n" +
-    "</ion-view> ");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("iteration/iterationparent.html",
-    "<ion-view>\n" +
-    "	<ion-nav-view id=\"iterationView\"></ion-nav-view> \n" +
-    "</ion-view>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("iteration/newiteration.html",
-    "<ion-view id=\"pg--new-iteration\" view-title=\"{{ newIteration.getViewTitle() }}\">\n" +
-    "\n" +
-    "	<ion-nav-buttons side=\"secondary\">\n" +
-    "		<button ng-click=\"newIteration.cancel()\" class=\"ion-close\" nav-direction=\"back\">\n" +
-    "		</button>\n" +
-    "	</ion-nav-buttons>\n" +
-    "	<ion-content scroll=\"false\">\n" +
-    "		<div class=\"mobile\" ng-if=\"!newIteration.isDesktop()\">\n" +
-    "			<button ng-click=\"newIteration.takePicture()\" class=\"take-picture\">\n" +
-    "				<div class=\"image\">\n" +
-    "					<img src=\"img/camera.svg\">\n" +
-    "				</div>\n" +
-    "				<p>toma una foto</p>\n" +
-    "			</button>\n" +
-    "			<div class=\"line\"></div>\n" +
-    "			<button ng-click=\"newIteration.fromDevice()\" class=\"from-device\">\n" +
-    "				<div class=\"image\">\n" +
-    "					<img src=\"img/picture-file.svg\">\n" +
-    "				</div>\n" +
-    "				<p>elije una foto</p>\n" +
-    "			</button>\n" +
-    "		</div>\n" +
-    "		<div class=\"desktop\" ng-if=\"newIteration.isDesktop()\">\n" +
-    "			<desktop-upload></desktop-upload>\n" +
-    "		</div>\n" +
-    "	</ion-content>\n" +
-    "</ion-view>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
   $templateCache.put("login/localLogin.html",
     "<div class=\"list\">\n" +
     "<form name=\"loginForm\" no-validate class=\"localLoginForm\" ng-submit=\"localLogin.login()\">\n" +
@@ -351,5 +255,101 @@ catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/voicemessagerecord.html",
     "<i class=\"ion-mic-a\" ng-click=\"record.record()\"></i>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("iteration/desktopupload.html",
+    "<button ng-click=\"fileInputClick() \" class=\"from-device\">\n" +
+    "	<div class=\"image\">\n" +
+    "		<img src=\"img/picture-file.svg\">\n" +
+    "	</div>\n" +
+    "	<p>elije una foto</p>\n" +
+    "	<file-input></file-input>\n" +
+    "</button>\n" +
+    "\n" +
+    "");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("iteration/iteration.html",
+    "<ion-view id=\"pg--iteration\" title=\"{{ collaborationName }} - \">\n" +
+    "	<ion-nav-buttons side=\"primary\">\n" +
+    "	 <button ng-click=\"iteration.goBack()\" nav-direction=\"back\" class=\"ion-chevron-left\">\n" +
+    "	 </button>\n" +
+    "	</ion-nav-buttons>\n" +
+    "	<div id=\"iterationBg\">\n" +
+    "		<p style=\"z-index: 999\">\n" +
+    "			{{ iterationArray }}\n" +
+    "		</p>\n" +
+    "		<canvas iteration-canvas></canvas>\n" +
+    "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ image.$value }}\" />\n" +
+    "		<button add-button class=\"addIteration\" ng-if=\"!next\" ng-click=\"iteration.addIteration()\"></button>\n" +
+    "		<button class=\"previous\" ng-if=\"previous\" ng-click=\"iteration.previous()\"> previous iteration </button>\n" +
+    "		<button class=\"next\" ng-if=\"next\" ng-click=\"iteration.next()\"> next iteration </button>\n" +
+    "		<!-- <p>{{ colabits }} </p> -->\n" +
+    "		<div ng-if=\"!iteration.hasThreads() && !instructionsRead\" class=\"instructions\">\n" +
+    "				<h2>instrucciones <span><button class=\"ion-close\" ng-click=\"iteration.readInstructions()\"></button> </span></h2>\n" +
+    "				<p>\n" +
+    "					Toca sobre la imagen para agregar un comentario, puedes agregar multiples comentarios a tu imagen tocando los diferentes puntos donde quieras agregarlos.\n" +
+    "				</p>\n" +
+    "		</div>\n" +
+    "		<drawing ng-repeat=\"thread in threads\" id=\"{{ thread.$id }}\" x=\"{{ thread.drawing.x }}\" y=\"{{ thread.drawing.y }}\">\n" +
+    "		</drawing>\n" +
+    "	</div>\n" +
+    "</ion-view> ");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("iteration/iterationparent.html",
+    "<ion-view>\n" +
+    "	<ion-nav-view id=\"iterationView\"></ion-nav-view> \n" +
+    "</ion-view>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("iteration/newiteration.html",
+    "<ion-view id=\"pg--new-iteration\" view-title=\"{{ newIteration.getViewTitle() }}\">\n" +
+    "\n" +
+    "	<ion-nav-buttons side=\"secondary\">\n" +
+    "		<button ng-click=\"newIteration.cancel()\" class=\"ion-close\" nav-direction=\"back\">\n" +
+    "		</button>\n" +
+    "	</ion-nav-buttons>\n" +
+    "	<ion-content scroll=\"false\">\n" +
+    "		<div class=\"mobile\" ng-if=\"!newIteration.isDesktop()\">\n" +
+    "			<button ng-click=\"newIteration.takePicture()\" class=\"take-picture\">\n" +
+    "				<div class=\"image\">\n" +
+    "					<img src=\"img/camera.svg\">\n" +
+    "				</div>\n" +
+    "				<p>toma una foto</p>\n" +
+    "			</button>\n" +
+    "			<div class=\"line\"></div>\n" +
+    "			<button ng-click=\"newIteration.fromDevice()\" class=\"from-device\">\n" +
+    "				<div class=\"image\">\n" +
+    "					<img src=\"img/picture-file.svg\">\n" +
+    "				</div>\n" +
+    "				<p>elije una foto</p>\n" +
+    "			</button>\n" +
+    "		</div>\n" +
+    "		<div class=\"desktop\" ng-if=\"newIteration.isDesktop()\">\n" +
+    "			<desktop-upload></desktop-upload>\n" +
+    "		</div>\n" +
+    "	</ion-content>\n" +
+    "</ion-view>");
 }]);
 })();
