@@ -27,7 +27,7 @@ angular.module('goodMood')
 		} 
 
 		this.addIteration = function(){
-			$state.go('^.newIteration')
+			$state.go('newIteration', {c_id: collaboration.$id})
 		}
 
 		this.goBack = function(){
@@ -42,7 +42,7 @@ angular.module('goodMood')
 				$ionicHistory.nextViewOptions({
 					disableAnimate: true
 				})
-				$state.go('^.iteration', {i_id: $scope.previous})
+				$state.go('iteration', {c_id: collaboration.$id, i_id: $scope.previous})
 			}
 		}
 
@@ -51,7 +51,7 @@ angular.module('goodMood')
 				$ionicHistory.nextViewOptions({
 					disableAnimate: true
 				})
-				$state.go('^.iteration', {i_id: $scope.next})
+				$state.go('iteration', {i_id: $scope.next})
 			} 
 		}
 
@@ -65,7 +65,7 @@ angular.module('goodMood')
 			Thread.create(coords, iteration, collaboration)
 				.then(_.partialRight(iteration.$addThread.bind(iteration)))
 				.then(function(thread){
-					$state.go('^.thread', {t_id: thread.$id})
+					$state.go('thread', {t_id: thread.$id})
 				})
 		})
 		
