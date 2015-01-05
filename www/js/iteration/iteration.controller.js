@@ -9,7 +9,6 @@ angular.module('goodMood')
 			var currentIndex = iterationArray.indexOf(iteration.$id);	
 			$scope.previous = iterationArray[currentIndex - 1];
 			$scope.next = iterationArray[currentIndex + 1];
-			console.log('in watchCollection', $scope.next, Date.now())
 		})
 
 		$scope.collaborationName = collaboration.name;		
@@ -38,7 +37,6 @@ angular.module('goodMood')
 		}
 
 		this.showAddIteration = function(){
-			console.log('in showAddIteration', Date.now())
 			return !this.showCheck() && !$scope.next && _.size(threads) > 0
 		}
 
@@ -56,14 +54,15 @@ angular.module('goodMood')
 			$state.go('iteration', {c_id: collaboration.$id, i_id: id})
 		}
 
-		$scope.$on('addThread', function(event, coords){
+		this.addThread = function(coords){
+			console.log('add thread')
 			$ionicLoading.show();
 			Thread.create(coords, iteration, collaboration)
 				.then(_.partialRight(iteration.$addThread.bind(iteration)))
 				.then(function(thread){
 					$state.go('thread', {t_id: thread.$id})
 				})
-		})
+		}
 		
 		$scope.$on('swipedown', function(){
 			if($scope.previous) {

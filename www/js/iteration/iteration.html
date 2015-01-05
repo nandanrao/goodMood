@@ -3,11 +3,11 @@
 	 <button ng-click="iteration.goBack()" nav-direction="back" class="ion-chevron-left">
 	 </button>
 	</ion-nav-buttons>
-	<div id="iterationBg" ng-class="iteration.showAddIteration() ? add-iteration : iteration">
+	<div id="iterationBg" ng-class="{'add-iteration': {{ iteration.showAddIteration() }} } ">
 		<p style="z-index: 999">
 			{{ iterationArray }}
 		</p>
-		<canvas iteration-canvas></canvas>
+		<canvas ng-if="imageSize" iteration-canvas></canvas>
 		<img class="iteration-image" iteration-image ng-src="{{ image.$value }}" />
 
 		<button check-button class="check" ng-if="iteration.showCheck()" ng-click="iteration.done()"></button>
@@ -20,7 +20,7 @@
 					Toca sobre la imagen para agregar un comentario, puedes agregar multiples comentarios a tu imagen tocando los diferentes puntos donde quieras agregarlos.
 				</p>
 		</div>
-		<drawing ng-repeat="thread in threads" id="{{ thread.$id }}" x="{{ thread.drawing.x }}" y="{{ thread.drawing.y }}">
+		<drawing ng-if="imageSize" ng-repeat="thread in threads" id="{{ thread.$id }}" x="{{ thread.drawing.x }}" y="{{ thread.drawing.y }}">
 		</drawing>
 	</div>
 	<div ng-if="iteration.showAddIteration()" class="bar bar-footer">

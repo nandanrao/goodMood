@@ -7046,12 +7046,10 @@ button {
   left: 50%; }
 #pg--iteration canvas {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
+  display: block;
   height: 100%;
+  width: 100%;
+  left: 50%;
   z-index: 1; }
 #pg--iteration div#iterationBg {
   position: absolute;

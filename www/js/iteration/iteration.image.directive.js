@@ -17,11 +17,13 @@ angular.module('goodMood')
 				})
 
 				function setImageSize() {
+
 					scope.imageSize = {
 						width: element[0].clientWidth,
 						height: element[0].clientHeight
 					}
 					element[0].style['margin-left'] = -scope.imageSize.width/2 + 'px'
+					scope.$apply();
 				}
 			}
 		}
