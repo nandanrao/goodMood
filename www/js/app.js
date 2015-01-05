@@ -110,6 +110,9 @@ angular.module('goodMood', [
         iteration: ['Iteration', '$stateParams', function (Iteration, $stateParams){
           return Iteration.findById($stateParams.i_id)
         }],
+        iterations: ['collaboration', function (collaboration){
+          return collaboration.$getIterations()
+        }],
         threads: ['iteration', function (iteration){
           return iteration.$getThreads()
         }],

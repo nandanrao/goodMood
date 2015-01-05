@@ -1,17 +1,15 @@
 angular.module('goodMood')
-	.controller('IterationCtrl', function ($firebase, $scope, $window, $log, $timeout, $state, $ionicLoading, $ionicHistory, collaboration, iteration, threads, Thread, image){
+	.controller('IterationCtrl', function ($firebase, $scope, $window, $log, $timeout, $state, $ionicLoading, $ionicHistory, collaboration, iteration, iterations, threads, Thread, image){
 		var vm = this;
 
 		// Create iterations array for inter-iteration navigation
-		$scope.iterations;
-		collaboration.$getIterations().then(function(iterations){
-			$scope.iterations = iterations;
-		})
+		$scope.iterations = iterations;
 		$scope.$watchCollection('iterations', function(curr, old){
 			var iterationArray = _.keys($scope.iterations).sort();	
 			var currentIndex = iterationArray.indexOf(iteration.$id);	
 			$scope.previous = iterationArray[currentIndex - 1];
 			$scope.next = iterationArray[currentIndex + 1];
+			console.log('in watchCollection', $scope.next, Date.now())
 		})
 
 		$scope.collaborationName = collaboration.name;		
@@ -40,6 +38,7 @@ angular.module('goodMood')
 		}
 
 		this.showAddIteration = function(){
+			console.log('in showAddIteration', Date.now())
 			return !this.showCheck() && !$scope.next && _.size(threads) > 0
 		}
 
