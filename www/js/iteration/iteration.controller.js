@@ -13,6 +13,7 @@ angular.module('goodMood')
 
 		$scope.collaborationName = collaboration.name;		
 		$scope.threads = threads;	
+		console.log('image', image.$value.length)
 		$scope.image = image;
 		$scope.instructionsRead = false;
 

@@ -32,8 +32,6 @@ angular.module('goodMood')
 					$state.go('thread', {t_id: attrs.id})
 				}
 
-				// console.log(scope.imageSize)
-
 				var textItem = new paper.PointText(point);
 				textItem.fillColor = '#277FE9';
 				textItem.justification = 'center';

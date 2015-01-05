@@ -102,11 +102,11 @@ module.run(["$templateCache", function($templateCache) {
     "	 <button ng-click=\"iteration.goBack()\" nav-direction=\"back\" class=\"ion-chevron-left\">\n" +
     "	 </button>\n" +
     "	</ion-nav-buttons>\n" +
-    "	<div id=\"iterationBg\" ng-class=\"iteration.showAddIteration() ? add-iteration : iteration\">\n" +
+    "	<div id=\"iterationBg\" ng-class=\"{'add-iteration': {{ iteration.showAddIteration() }} } \">\n" +
     "		<p style=\"z-index: 999\">\n" +
     "			{{ iterationArray }}\n" +
     "		</p>\n" +
-    "		<canvas iteration-canvas></canvas>\n" +
+    "		<canvas ng-if=\"imageSize\" iteration-canvas></canvas>\n" +
     "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ image.$value }}\" />\n" +
     "\n" +
     "		<button check-button class=\"check\" ng-if=\"iteration.showCheck()\" ng-click=\"iteration.done()\"></button>\n" +
@@ -119,7 +119,7 @@ module.run(["$templateCache", function($templateCache) {
     "					Toca sobre la imagen para agregar un comentario, puedes agregar multiples comentarios a tu imagen tocando los diferentes puntos donde quieras agregarlos.\n" +
     "				</p>\n" +
     "		</div>\n" +
-    "		<drawing ng-repeat=\"thread in threads\" id=\"{{ thread.$id }}\" x=\"{{ thread.drawing.x }}\" y=\"{{ thread.drawing.y }}\">\n" +
+    "		<drawing ng-if=\"imageSize\" ng-repeat=\"thread in threads\" id=\"{{ thread.$id }}\" x=\"{{ thread.drawing.x }}\" y=\"{{ thread.drawing.y }}\">\n" +
     "		</drawing>\n" +
     "	</div>\n" +
     "	<div ng-if=\"iteration.showAddIteration()\" class=\"bar bar-footer\">\n" +

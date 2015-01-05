@@ -1,14 +1,16 @@
 angular.module('goodMood')	
-	.directive('iterationImage', function ($window){
+	.directive('iterationImage', function ($window, $document){
 		return {
 			restrict: 'EA',
 			controller: function ($scope, $element){
 
 			},
 			link: function (scope, element, attrs){
-				element.ready(function(){
+
+				element.bind('load', function() {
+					console.log('image loaded')
 					setImageSize()
-				})
+			  });
 
 				$win = angular.element($window)
 				$win.on('resize', setImageSize)
@@ -17,7 +19,6 @@ angular.module('goodMood')
 				})
 
 				function setImageSize() {
-
 					scope.imageSize = {
 						width: element[0].clientWidth,
 						height: element[0].clientHeight

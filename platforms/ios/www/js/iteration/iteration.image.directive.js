@@ -1,14 +1,16 @@
 angular.module('goodMood')	
-	.directive('iterationImage', function ($window){
+	.directive('iterationImage', function ($window, $document){
 		return {
 			restrict: 'EA',
 			controller: function ($scope, $element){
 
 			},
 			link: function (scope, element, attrs){
-				element.ready(function(){
+
+				element.bind('load', function() {
+					console.log('image loaded')
 					setImageSize()
-				})
+			  });
 
 				$win = angular.element($window)
 				$win.on('resize', setImageSize)
@@ -22,6 +24,7 @@ angular.module('goodMood')
 						height: element[0].clientHeight
 					}
 					element[0].style['margin-left'] = -scope.imageSize.width/2 + 'px'
+					scope.$apply();
 				}
 			}
 		}

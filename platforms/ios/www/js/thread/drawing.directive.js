@@ -4,7 +4,9 @@ angular.module('goodMood')
 			restrict: 'E',
 			link: function(scope, el, attrs){
 
-				var point = new paper.Point(Number(attrs.x), Number(attrs.y))
+				var x = attrs.x*scope.imageSize.width
+				var y = attrs.y*scope.imageSize.height
+				var point = new paper.Point(x, y)
 
 				// Created shape automatically appended to paperjs 'view'
 				var shape = new paper.Path.Circle({
@@ -14,7 +16,13 @@ angular.module('goodMood')
 					opacity: .75
 				});
 
-				// console.log(paper.view.bounds)
+				// move position of circles on window resize!
+				scope.$watchCollection('imageSize', function(curr){
+					var x = attrs.x*curr.width
+					var y = attrs.y*curr.height
+					shape.position = new paper.Point(Number(x), Number(y))
+				})
+
 				// This is needed to update the view immediately!
 				paper.view.update()
 
@@ -23,8 +31,6 @@ angular.module('goodMood')
 					console.log('clicked!')
 					$state.go('thread', {t_id: attrs.id})
 				}
-
-				// console.log(scope.imageSize)
 
 				var textItem = new paper.PointText(point);
 				textItem.fillColor = '#277FE9';

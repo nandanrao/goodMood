@@ -3,8 +3,22 @@ angular.module('goodMood')
 		return {
 			restrict: 'A',
 			link: function (scope, el, attrs){
+
+				function resizeCanvas(){
+					el[0].style.width = scope.imageSize.width + 'px';
+					el[0].style.height = scope.imageSize.height + 'px';	
+					el[0].style['margin-left'] = -scope.imageSize.width/2 + 'px';
+					// resize paperJS view
+					paper.view.setViewSize(el[0].clientWidth, el[0].clientHeight)
+				}
+
+				scope.$watchCollection('imageSize', function(curr){
+					resizeCanvas()
+				})
+				 
 				paper.setup(el[0]);
 				paper.view.draw();
+				resizeCanvas()
 				
 				var project = paper.project
 				var tool = new paper.Tool();
@@ -12,9 +26,15 @@ angular.module('goodMood')
 				var circle;
 				var position;
 
+				paper.view.onResize = function(a,b){
+					console.log('resize,', a, b)
+				}
+
 				// TODO: Fix numbers/math on animation. CLEAN UP!
 				tool.onMouseDown = function(e){
-					console.log('mousedown ')
+					console.log('bounds', paper.view.bounds)
+					console.log('pixelRatio', paper.view.pixelRatio)
+					console.log('size', paper.view.viewSize)
 					position = e.point;
 					var i = 0;
 					counting = $interval(function(){
@@ -28,9 +48,12 @@ angular.module('goodMood')
 						}
 						if (i === 8){
 							paper.view.onFrame = angular.noop	
-							// console.log(paper.view.bounds)
+							var x = position.x/paper.view.bounds.width
+							var y = position.y/paper.view.bounds.height
+							console.log('add thread!', x, y)
+							console.log('iteration controller?', scope.iteration)
 							// TODO: store bounds to deal with different frame size? 
-							scope.$emit('addThread', {x: position.x, y: position.y})
+							scope.iteration.addThread({x: x, y: y})
 						}
 					}, 100, 8)
 				}

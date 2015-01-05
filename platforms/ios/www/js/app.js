@@ -130,6 +130,9 @@ angular.module('goodMood', [
 .config(function($compileProvider){
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|data):/);
 })
+.config(function($ionicConfigProvider){
+  $ionicConfigProvider.views.maxCache(0);
+})
 .run(function($ionicPlatform, $state, $location, $rootScope, Auth, $ionicLoading) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
