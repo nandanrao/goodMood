@@ -33,17 +33,14 @@ angular.module('goodMood')
     				media = $cordovaMedia.newMedia(src)
     				media
     					.then(function(){
-    						console.log('stop', Date.now())
     						media.release()
     						messageSent = audioCreated.then(function(_audio){
     							audio = _audio
     							return $scope.thread.sendMessage('audio', audio.$id)
     						})
-    						console.log('about to read as dataURI', Date.now())
     						return $cordovaFile.readAsDataURL(fileSrc)
     					})
     					.then(function(_dataURI){
-    						console.log('dataURI craeted', Date.now())
     						dataURI = _dataURI
     						audio.$inst().$set(dataURI).then(function(){
     							console.log('audio saved to server', Date.now())
@@ -51,7 +48,6 @@ angular.module('goodMood')
     						return messageSent
     					})
     					.then(function(){
-    						
     						console.log('message sent', Date.now())
     						$ionicLoading.hide()
     					})

@@ -8,15 +8,11 @@ angular.module('goodMood')
 			controller: function ($scope, $attrs, $element){
 				$scope.playing = false;
 
-				$document.on('click', function(e){
-					console.log('clicked on ', e.target.tagName, e.target.classList[0])
-				})
-
 				var counter;
 				this.play = function(){
 					if (!$scope.playing) {
 						// TODO: actually animate this!!!!!!!!
-						counter = $interval(angular.noop, 16.66)
+						counter = $interval(angular.noop, 100)
 						$scope.media.play()
 						$scope.playing = true;
 					}

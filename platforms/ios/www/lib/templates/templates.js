@@ -107,7 +107,7 @@ module.run(["$templateCache", function($templateCache) {
     "		</p>\n" +
     "		<canvas iteration-canvas></canvas>\n" +
     "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ image.$value }}\" />\n" +
-    "		<button add-button class=\"addIteration\" ng-if=\"!next\" ng-click=\"iteration.addIteration()\"></button>\n" +
+    "		\n" +
     "		<button class=\"previous\" ng-if=\"previous\" ng-click=\"iteration.previous()\"> previous iteration </button>\n" +
     "		<button class=\"next\" ng-if=\"next\" ng-click=\"iteration.next()\"> next iteration </button>\n" +
     "		<!-- <p>{{ colabits }} </p> -->\n" +
@@ -119,6 +119,9 @@ module.run(["$templateCache", function($templateCache) {
     "		</div>\n" +
     "		<drawing ng-repeat=\"thread in threads\" id=\"{{ thread.$id }}\" x=\"{{ thread.drawing.x }}\" y=\"{{ thread.drawing.y }}\">\n" +
     "		</drawing>\n" +
+    "	</div>\n" +
+    "	<div class=\"bar bar-footer\">\n" +
+    "		<button new-iteration-button class=\"addIteration\" ng-if=\"!next\" ng-click=\"iteration.addIteration()\"></button>\n" +
     "	</div>\n" +
     "</ion-view> ");
 }]);
