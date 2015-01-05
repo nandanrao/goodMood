@@ -7065,7 +7065,7 @@ button {
 #pg--iteration button.check {
   position: fixed;
   bottom: 60px;
-  right: 40px;
+  right: 30px;
   width: 75px;
   z-index: 2; }
 #pg--iteration div.instructions {
