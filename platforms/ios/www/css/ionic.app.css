@@ -7251,15 +7251,14 @@ voice-message {
 #pg--my-collaborations div.collaboration {
   display: inline-block;
   cursor: pointer;
-  width: 50vw;
-  height: 50vw;
-  padding: 3%; }
-  #pg--my-collaborations div.collaboration img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border-width: 5px;
-    border-color: #277FE9; }
+  width: 50vw; }
+  #pg--my-collaborations div.collaboration .thumbnail {
+    width: 45vw;
+    height: 45vw;
+    margin: auto auto;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 50%; }
   #pg--my-collaborations div.collaboration h2 {
     font-family: 'Futura-Bold';
     color: #277FE9;
