@@ -7043,7 +7043,8 @@ button {
   max-width: 100%;
   max-height: 100%;
   margin: auto auto;
-  left: 50%; }
+  left: 50%;
+  visibility: hidden; }
 #pg--iteration canvas {
   position: absolute;
   display: block;

@@ -102,28 +102,23 @@ module.run(["$templateCache", function($templateCache) {
     "	 <button ng-click=\"iteration.goBack()\" nav-direction=\"back\" class=\"ion-chevron-left\">\n" +
     "	 </button>\n" +
     "	</ion-nav-buttons>\n" +
-    "	<div id=\"iterationBg\" ng-class=\"{'add-iteration': {{ iteration.showAddIteration() }} } \">\n" +
-    "		<p style=\"z-index: 999\">\n" +
-    "			{{ iterationArray }}\n" +
-    "		</p>\n" +
-    "		<canvas ng-if=\"imageSize\" iteration-canvas></canvas>\n" +
+    "	<div id=\"iterationBg\" class=\"{{ iteration.showAddIteration() ? 'add-iteration' : 'iteraton' }}\">\n" +
     "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ image.$value }}\" />\n" +
-    "\n" +
+    "		<canvas iteration-canvas></canvas>\n" +
+    "		<drawing ng-repeat=\"thread in threads\" id=\"{{ thread.$id }}\" x=\"{{ thread.drawing.x }}\" y=\"{{ thread.drawing.y }}\">\n" +
+    "		</drawing>\n" +
     "		<button check-button class=\"check\" ng-if=\"iteration.showCheck()\" ng-click=\"iteration.done()\"></button>\n" +
-    "		<button class=\"previous\" ng-if=\"previous\" ng-click=\"iteration.previous()\"> previous iteration </button>\n" +
-    "		<button class=\"next\" ng-if=\"next\" ng-click=\"iteration.next()\"> next iteration </button>\n" +
-    "		<!-- <p>{{ colabits }} </p> -->\n" +
+    "		<!-- <button class=\"previous\" ng-if=\"previous\" ng-click=\"iteration.previous()\"> previous iteration </button>\n" +
+    "		<button class=\"next\" ng-if=\"next\" ng-click=\"iteration.next()\"> next iteration </button> -->\n" +
     "		<div ng-if=\"!iteration.hasThreads() && !instructionsRead\" class=\"instructions\">\n" +
     "				<h2>instrucciones <span><button class=\"ion-close\" ng-click=\"iteration.readInstructions()\"></button> </span></h2>\n" +
     "				<p>\n" +
     "					Toca sobre la imagen para agregar un comentario, puedes agregar multiples comentarios a tu imagen tocando los diferentes puntos donde quieras agregarlos.\n" +
     "				</p>\n" +
     "		</div>\n" +
-    "		<drawing ng-if=\"imageSize\" ng-repeat=\"thread in threads\" id=\"{{ thread.$id }}\" x=\"{{ thread.drawing.x }}\" y=\"{{ thread.drawing.y }}\">\n" +
-    "		</drawing>\n" +
     "	</div>\n" +
     "	<div ng-if=\"iteration.showAddIteration()\" class=\"bar bar-footer\">\n" +
-    "		<button new-iteration-button class=\"addIteration\" ng-if=\"!next\" ng-click=\"iteration.addIteration()\"></button>\n" +
+    "		<button new-iteration-button class=\"addIteration\" ng-click=\"iteration.addIteration()\"></button>\n" +
     "	</div>\n" +
     "</ion-view> ");
 }]);

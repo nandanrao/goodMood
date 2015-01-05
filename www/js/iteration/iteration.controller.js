@@ -1,19 +1,24 @@
 angular.module('goodMood')
-	.controller('IterationCtrl', function ($firebase, $scope, $window, $log, $timeout, $state, $ionicLoading, $ionicHistory, collaboration, iteration, iterations, threads, Thread, image){
+	.controller('IterationCtrl', function ($firebase, $scope, $rootScope, $window, $log, $timeout, $state, $ionicLoading, $ionicHistory, collaboration, iteration, iterations, threads, Thread, image){
 		var vm = this;
+
+		this.iteration$id = iteration.$id
 
 		// Create iterations array for inter-iteration navigation
 		$scope.iterations = iterations;
+		setIterationArray()
 		$scope.$watchCollection('iterations', function(curr, old){
+			setIterationArray()
+		})
+		function setIterationArray(){
 			var iterationArray = _.keys($scope.iterations).sort();	
 			var currentIndex = iterationArray.indexOf(iteration.$id);	
 			$scope.previous = iterationArray[currentIndex - 1];
 			$scope.next = iterationArray[currentIndex + 1];
-		})
+		}
 
 		$scope.collaborationName = collaboration.name;		
-		$scope.threads = threads;	
-		console.log('image', image.$value.length)
+		$scope.threads = threads;
 		$scope.image = image;
 		$scope.instructionsRead = false;
 
@@ -56,8 +61,8 @@ angular.module('goodMood')
 		}
 
 		this.addThread = function(coords){
-			console.log('add thread')
 			$ionicLoading.show();
+			console.log(iteration.$id)
 			Thread.create(coords, iteration, collaboration)
 				.then(_.partialRight(iteration.$addThread.bind(iteration)))
 				.then(function(thread){
@@ -77,6 +82,10 @@ angular.module('goodMood')
 				$ionicLoading.show()
 				goToIteration($scope.next)
 			}
+		})
+
+		$scope.$on('$ionicView.enter', function(){
+			console.log('iteration entering', iteration.$id)
 		})
 
 		$ionicLoading.hide()
