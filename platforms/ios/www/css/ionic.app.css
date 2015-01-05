@@ -7058,8 +7058,16 @@ button {
   top: 0;
   right: 0;
   left: 0;
-  bottom: 80px;
+  bottom: 0;
   background-color: #222; }
+  #pg--iteration div#iterationBg.add-iteration {
+    bottom: 80px; }
+#pg--iteration button.check {
+  position: fixed;
+  bottom: 60px;
+  right: 40px;
+  width: 75px;
+  z-index: 2; }
 #pg--iteration div.instructions {
   z-index: 2;
   position: fixed;

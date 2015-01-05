@@ -3,7 +3,7 @@
 	 <button ng-click="iteration.goBack()" nav-direction="back" class="ion-chevron-left">
 	 </button>
 	</ion-nav-buttons>
-	<div id="iterationBg">
+	<div id="iterationBg" ng-class="iteration.showAddIteration() ? add-iteration : iteration">
 		<p style="z-index: 999">
 			{{ iterationArray }}
 		</p>

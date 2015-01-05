@@ -25,12 +25,15 @@
     top: 0;
     right: 0;
     left: 0;
-    bottom: $bar-height;
+    bottom: 0;
     background-color: #222;
+    &.add-iteration {
+      bottom: $bar-height;
+    }
   }
   button.check {
     position: fixed;
-    bottom: $bar-height + 80px;
+    bottom: 60px;
     right: 40px;
     width: 75px;
     z-index: 2;
