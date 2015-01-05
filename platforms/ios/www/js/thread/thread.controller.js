@@ -2,7 +2,7 @@ angular.module('goodMood')
 	.controller('ThreadCtrl', function ($scope, $ionicLoading, $ionicHistory, thread, messages, Auth){
 		$scope.threadInstance = thread;
 		$scope.messages = messages;
-		$scope.writeMessage;
+		$scope.writing;
 		$scope.recordNote;
 		$scope.textField = {
 			content: null
@@ -26,8 +26,12 @@ angular.module('goodMood')
 			}
 		}
 
-		this.writeText = function(){
-			$scope.writeMessage = true;
+		this.writing = function(){
+			$scope.writing = true;
+		}
+
+		this.notWriting = function(){
+			$scope.writing = false;
 		}
 
 		this.goBack = function(){

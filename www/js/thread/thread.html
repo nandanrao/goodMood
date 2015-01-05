@@ -12,14 +12,16 @@
 				</voice-message>
 			</div>
 		</div>
-		<div class="choose">
-			<voice-message-record></voice-message-record>
-			<button class="text" ng-click="thread.writeText()">		
-			text
-			</button>
-		</div>
-		<form ng-show="writeMessage" ng-submit="thread.sendMessage('text', textField.content)">
-			<input required ng-model="textField.content" class="text" placeholder="write here" />
-		</form>
+		
 	</ion-content>
+	<div class="bar bar-footer choose">
+		<form ng-submit="thread.sendMessage('text', textField.content)">
+			<input ng-if="!recording" ng-blur="thread.notWriting()" ng-focus="thread.writing()"required ng-model="textField.content" class="text" placeholder="write a message" />
+		<div class="buttons">
+			<voice-message-record ng-if="!writing"></voice-message-record>
+			<button class="send" type="submit" ng-if="writing" class="send">SEND</button>
+		</div>
+		</form>	
+	</div>
+	
 </ion-view>

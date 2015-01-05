@@ -5,8 +5,9 @@ angular.module('goodMood')
 			templateUrl: 'thread/voicemessage.html',
 			controllerAs: 'voiceMessage',
 			controller: function ($scope, $element){
-				
-
+				// $scope.$watch('svgHeight', function(curr){
+				// 	$scope.divHeight = curr.clientHeight
+				// })
 			},
 			link: function (scope, el, attrs){
 				scope.formatDate = utils.formatDate;

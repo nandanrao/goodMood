@@ -8,10 +8,11 @@ angular.module('goodMood')
 			controller: function ($scope, $attrs){
 				$scope.audioURI;
 				$scope.audio;
-				// TODO: get this into the resolve of the thread! Maybe messages class populated? 
+				// TODO: don't load all of these immediately? 
 				Audio.findById($scope.message.content).then(function(audio){
 					$scope.audio = audio;
 				})
+				// TODO: we really need to not be watching the entire URI!
 				// watch in order to use sce trust as resource... (whitelist??)
 				$scope.$watchCollection('audio', function(audio){
 					if (audio && audio.$value){
@@ -24,7 +25,9 @@ angular.module('goodMood')
 				})
 			},
 			link: function (scope, el, attrs){
-				scope.media = el[0]
+				scope.media = el[0];
+				scope.currentTime = el[0].currentTime
+				scope.mediaEl = el;
 			}
 		}
 	})

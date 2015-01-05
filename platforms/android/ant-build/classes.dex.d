@@ -125,6 +125,11 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/ant-build/classes/org/apache/cordova/media/AudioPlayer$STATE.class \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/ant-build/classes/org/apache/cordova/media/AudioPlayer.class \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/ant-build/classes/org/apache/cordova/media/FileHelper.class \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/ant-build/classes/org/apache/cordova/mediacapture/Capture$1.class \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/ant-build/classes/org/apache/cordova/mediacapture/Capture$2.class \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/ant-build/classes/org/apache/cordova/mediacapture/Capture$3.class \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/ant-build/classes/org/apache/cordova/mediacapture/Capture.class \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/ant-build/classes/org/apache/cordova/mediacapture/FileHelper.class \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/ant-build/dexedLibs/classes-c481314aa087e61193f01cf1b4451e81.jar \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/ant-build/dexedLibs/classes-7e3484ab11a9afc74ab8e62db0f84365.jar \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/ant-build/dexedLibs/bolts-android-1.1.2-d189a889a4fbbd2d109311c05899323e.jar \

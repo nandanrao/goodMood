@@ -312,6 +312,8 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/img/triangle-right.svg \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/img/triangle.svg \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/img/voicemessage.svg \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/img/voicemessage2.svg \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/img/voicemessage2_playing.svg \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/app.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/audio \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/Auth \
@@ -780,6 +782,7 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.file-transfer \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.inappbrowser \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media-capture \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/com.bez4pieci.cookies/www \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/com.bez4pieci.cookies/www/cookies.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/com.ionic.keyboard/www \
@@ -825,4 +828,12 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media/www \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media/www/Media.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media/www/MediaError.js \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media-capture/www \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media-capture/www/capture.js \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media-capture/www/CaptureAudioOptions.js \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media-capture/www/CaptureError.js \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media-capture/www/CaptureImageOptions.js \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media-capture/www/CaptureVideoOptions.js \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media-capture/www/MediaFile.js \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media-capture/www/MediaFileData.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/ant-build/AndroidManifest.xml \

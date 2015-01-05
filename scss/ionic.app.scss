@@ -98,11 +98,6 @@ ion-nav-view ion-content.has-header {
   }
 }
 
-button[voice-message-record] {
-  color: $color-a;
-  font-size: 3em; 
-}
-
 gm-side-menu {
   img {
     border-radius: 50%;
@@ -110,12 +105,62 @@ gm-side-menu {
 }
 
 #pg--thread {
-  voice-message > div {
-    height: 100px;
+
+  $texting-footer-height: 55px;
+
+  div.messages {
+    padding-top: .5rem;
+    padding-bottom: $bar-height;
+  }
+  div.choose {
+    height: $texting-footer-height; 
+    background-color: $color-a;
+    padding: 0 3px 0 8px;
+    button.send {
+      font-family: $title-font-family;
+      color: $color-type-c;
+      font-size: 14px;
+      white-space: nowrap;
+      height: $texting-footer-height;
+    }
+    div.buttons {
+      width: 70px;
+    }
+  }
+  form {
+    @include display(flex);
+    @include align-items(center);
+    
+    width: 100%;
+    input {
+      width: 100%;
+      display: inline-block;
+      padding: 10px 10px;
+      border: none;
+      border-radius: 0;
+      background-color: #FFF;
+      line-height: normal;
+      @include placeholder {
+        line-height: 1;
+        color: red;
+        text-transform: uppercase;
+      }
+    }
+  }
+  voice-message-record {
+
   }
   button.voice-record {
-    font-size: 6em;
+    // float: right;
+    text-align: center;
+    width: 100%;
+    font-size: 2em;
     margin-left: 20px;
+    color: $color-type-c;
+    padding: 0;
+    padding-top: 2px;
+    margin: 0;
+    line-height: 1;
   }
 }
 

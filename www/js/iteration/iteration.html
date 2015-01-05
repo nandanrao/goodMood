@@ -9,7 +9,7 @@
 		</p>
 		<canvas iteration-canvas></canvas>
 		<img class="iteration-image" iteration-image ng-src="{{ image.$value }}" />
-		<button add-button class="addIteration" ng-if="!next" ng-click="iteration.addIteration()"></button>
+		
 		<button class="previous" ng-if="previous" ng-click="iteration.previous()"> previous iteration </button>
 		<button class="next" ng-if="next" ng-click="iteration.next()"> next iteration </button>
 		<!-- <p>{{ colabits }} </p> -->
@@ -21,5 +21,8 @@
 		</div>
 		<drawing ng-repeat="thread in threads" id="{{ thread.$id }}" x="{{ thread.drawing.x }}" y="{{ thread.drawing.y }}">
 		</drawing>
+	</div>
+	<div class="bar bar-footer">
+		<button new-iteration-button class="addIteration" ng-if="!next" ng-click="iteration.addIteration()"></button>
 	</div>
 </ion-view> 

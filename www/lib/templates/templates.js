@@ -107,7 +107,7 @@ module.run(["$templateCache", function($templateCache) {
     "		</p>\n" +
     "		<canvas iteration-canvas></canvas>\n" +
     "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ image.$value }}\" />\n" +
-    "		<button add-button class=\"addIteration\" ng-if=\"!next\" ng-click=\"iteration.addIteration()\"></button>\n" +
+    "		\n" +
     "		<button class=\"previous\" ng-if=\"previous\" ng-click=\"iteration.previous()\"> previous iteration </button>\n" +
     "		<button class=\"next\" ng-if=\"next\" ng-click=\"iteration.next()\"> next iteration </button>\n" +
     "		<!-- <p>{{ colabits }} </p> -->\n" +
@@ -119,6 +119,9 @@ module.run(["$templateCache", function($templateCache) {
     "		</div>\n" +
     "		<drawing ng-repeat=\"thread in threads\" id=\"{{ thread.$id }}\" x=\"{{ thread.drawing.x }}\" y=\"{{ thread.drawing.y }}\">\n" +
     "		</drawing>\n" +
+    "	</div>\n" +
+    "	<div class=\"bar bar-footer\">\n" +
+    "		<button new-iteration-button class=\"addIteration\" ng-if=\"!next\" ng-click=\"iteration.addIteration()\"></button>\n" +
     "	</div>\n" +
     "</ion-view> ");
 }]);
@@ -277,16 +280,18 @@ module.run(["$templateCache", function($templateCache) {
     "				</voice-message>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "		<div class=\"choose\">\n" +
-    "			<voice-message-record></voice-message-record>\n" +
-    "			<button class=\"text\" ng-click=\"thread.writeText()\">		\n" +
-    "			text\n" +
-    "			</button>\n" +
-    "		</div>\n" +
-    "		<form ng-show=\"writeMessage\" ng-submit=\"thread.sendMessage('text', textField.content)\">\n" +
-    "			<input required ng-model=\"textField.content\" class=\"text\" placeholder=\"write here\" />\n" +
-    "		</form>\n" +
+    "		\n" +
     "	</ion-content>\n" +
+    "	<div class=\"bar bar-footer choose\">\n" +
+    "		<form ng-submit=\"thread.sendMessage('text', textField.content)\">\n" +
+    "			<input ng-if=\"!recording\" ng-blur=\"thread.notWriting()\" ng-focus=\"thread.writing()\"required ng-model=\"textField.content\" class=\"text\" placeholder=\"write a message\" />\n" +
+    "		<div class=\"buttons\">\n" +
+    "			<voice-message-record ng-if=\"!writing\"></voice-message-record>\n" +
+    "			<button class=\"send\" type=\"submit\" ng-if=\"writing\" class=\"send\">SEND</button>\n" +
+    "		</div>\n" +
+    "		</form>	\n" +
+    "	</div>\n" +
+    "	\n" +
     "</ion-view>\n" +
     "");
 }]);
@@ -306,18 +311,25 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/voicemessage-play.html",
-    "<svg ng-mousedown=\"voiceMessagePlay.mousedown($event)\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 543.5 88\" enable-background=\"new 0 0 543.5 88\" xml:space=\"preserve\">\n" +
-    "	<circle ng-click=\"voiceMessagePlay.play()\" fill=\"#277FE9\" cx=\"44\" cy=\"44\" r=\"44\"/>\n" +
-    "	<g>\n" +
-    "		<path fill=\"#FFFFFF\" d=\"M44.1,54c5,0,9-4,9-9V27c0-5-4-9-9-9c-5,0-9,4-9,9V45C35.2,50,39.2,54,44.1,54z\"/>\n" +
-    "		<path fill=\"#FFFFFF\" d=\"M57.3,41.4v3.7c0,7.3-5.9,13.2-13.2,13.2c-7.3,0-13.2-5.9-13.2-13.2v-3.7h-3.6v3.7c0,8.6,6.6,15.8,15,16.7\n" +
-    "			v6.7h-9.9V72h23.4v-3.6h-9.9v-6.7c8.4-0.9,15-8,15-16.7v-3.7H57.3z\"/>\n" +
-    "	</g>\n" +
-    "	<g>\n" +
-    "		<line fill=\"none\" stroke=\"#277FE9\" stroke-width=\"2\" stroke-miterlimit=\"10\" x1=\"88\" y1=\"44\" x2=\"543.5\" y2=\"44\"/>\n" +
-    "	</g>\n" +
-    "	<!-- <line fill=\"none\" stroke=\"#A2FF00\" stroke-width=\"8\" stroke-miterlimit=\"10\" x1=\"88\" y1=\"44\" x2=\"377.9\" y2=\"44\"/> -->\n" +
-    "</svg>");
+    "<svg class=\"vm-play\" ng-click=\"voiceMessagePlay.lineClick($event)\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
+    "	 viewBox=\"0 0 538.8 53.1\" enable-background=\"new 0 0 538.8 53.1\" xml:space=\"preserve\">\n" +
+    "<g fill=\"#FFF\">\n" +
+    "	<path d=\"M14.3,34.3c4.2,0,7.6-3.4,7.6-7.6V11.3c0-4.2-3.4-7.6-7.6-7.6c-4.2,0-7.6,3.4-7.6,7.6v15.3C6.6,30.9,10,34.3,14.3,34.3z\"/>\n" +
+    "	<path d=\"M25.5,23.5v3.1c0,6.2-5,11.2-11.2,11.2c-6.2,0-11.2-5-11.2-11.2v-3.1H0v3.1C0,34,5.6,40.1,12.7,40.8v5.7H4.3v3.1h19.9v-3.1\n" +
+    "		h-8.4v-5.7c7.1-0.8,12.7-6.8,12.7-14.2v-3.1H25.5z\"/>\n" +
+    "</g>\n" +
+    "<line fill=\"none\" stroke=\"#727272\" stroke-width=\"2\" stroke-miterlimit=\"10\" x1=\"47\" y1=\"26.5\" x2=\"472\" y2=\"26.5\"/>\n" +
+    "<line class=\"progress\" fill=\"none\" stroke=\"#7DFF29\" stroke-width=\"8\" stroke-miterlimit=\"10\" x1=\"47\" y1=\"26.4\" ng-attr-x2=\"{{ voiceMessagePlay.getPlayerPosition() }}\" y2=\"26.4\"/>\n" +
+    "<g ng-click=\"voiceMessagePlay.play()\">\n" +
+    "	<circle fill=\"#277FE9\" cx=\"512.2\" cy=\"26.5\" r=\"26.5\"/>\n" +
+    "	<polygon ng-if=\"!playing\" fill=\"#FFFFFF\" points=\"503.8,12.9 527.7,26.7 503.8,40.5 	\"/>\n" +
+    "	<line ng-if=\"playing\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-miterlimit=\"10\" x1=\"507.8\" y1=\"37.5\" x2=\"507.8\" y2=\"15.3\"/>\n" +
+    "	<line ng-if=\"playing\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-miterlimit=\"10\" x1=\"516.7\" y1=\"37.5\" x2=\"516.7\" y2=\"15.3\"/>\n" +
+    "</g>\n" +
+    "<text transform=\"matrix(1 0 0 1 48 49.9811)\" fill=\"#727272\" font-family=\"'Futura-Bold'\" font-size=\"21\">\n" +
+    "{{ voiceMessagePlay.getTime() }}</text>\n" +
+    "</svg>\n" +
+    "");
 }]);
 })();
 
@@ -349,7 +361,7 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/voicemessagerecord.html",
-    "<button class=\"voice-record\" ng-click=\"record.record()\">\n" +
+    "<button type=\"button\" class=\"voice-record\" ng-click=\"record.record()\">\n" +
     "	<i class=\"ion-mic-a\"></i>\n" +
     "</button>");
 }]);

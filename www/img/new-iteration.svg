@@ -1,0 +1,21 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 119.2 119.2" enable-background="new 0 0 119.2 119.2" xml:space="preserve">
+<circle fill="#FFFFFF" cx="59.6" cy="59.6" r="59.6"/>
+<g>
+	<path fill="none" d="M101.3,59.6"/>
+</g>
+<g>
+	<path fill="none" stroke="#277FE9" stroke-width="4" stroke-miterlimit="10" d="M18.9,51.1C22.8,32.2,39.6,18,59.6,18
+		c21.5,0,39.3,16.4,41.4,37.4"/>
+
+		<polygon fill="#277FE9" points="25.2,50.1 18,59.6 13.3,48.6 			"/>
+</g>
+<g>
+	<path fill="none" d="M18,59.6"/>
+</g>
+<g>
+	<path fill="none" stroke="#277FE9" stroke-width="4" stroke-miterlimit="10" d="M100.4,68.2c-4,18.9-20.7,33.1-40.7,33.1
+		c-21.6,0-39.5-16.6-41.4-37.7"/>	
+	<polygon fill="#277FE9" points="94,69.2 101.3,59.6 105.9,70.6 			"/>
+</g>
+</svg>

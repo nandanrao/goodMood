@@ -1,16 +1,28 @@
 angular.module('goodMood')	
-	.directive('iterationImage', function (){
+	.directive('iterationImage', function ($window){
 		return {
 			restrict: 'EA',
 			controller: function ($scope, $element){
-				// $scope.imageSize = {
-				// 	width: $element.width,
-				// 	height: $element.height
-				// }
-				// console.log($scope, $element[0].width)
+
 			},
-			link: function (scope, el, attrs){
-					
+			link: function (scope, element, attrs){
+				element.ready(function(){
+					setImageSize()
+				})
+
+				$win = angular.element($window)
+				$win.on('resize', setImageSize)
+				element.on('$destroy', function(){
+					$win.off('resize', setImageSize)
+				})
+
+				function setImageSize() {
+					scope.imageSize = {
+						width: element[0].clientWidth,
+						height: element[0].clientHeight
+					}
+					element[0].style['margin-left'] = -scope.imageSize.width/2 + 'px'
+				}
 			}
 		}
 	})

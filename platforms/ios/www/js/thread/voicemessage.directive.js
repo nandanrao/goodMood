@@ -5,8 +5,6 @@ angular.module('goodMood')
 			templateUrl: 'thread/voicemessage.html',
 			controllerAs: 'voiceMessage',
 			controller: function ($scope, $element){
-				
-
 			},
 			link: function (scope, el, attrs){
 				scope.formatDate = utils.formatDate;

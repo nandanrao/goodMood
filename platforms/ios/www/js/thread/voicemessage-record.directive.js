@@ -1,10 +1,10 @@
 angular.module('goodMood')
-	.directive('voiceMessageRecord', function ($log, $window, $document, $ionicLoading, $cordovaMedia, $cordovaFile, $cordovaCapture, Audio, utils){
+	.directive('voiceMessageRecord', function ($log, $window, $document, $ionicLoading, $cordovaMedia, $cordovaFile, Audio, utils){
 		return {
 			restrict: 'EA',
-      replace: true,
 			templateUrl: 'thread/voicemessagerecord.html',
 			controllerAs: 'record',
+      replace: true,
 			controller: function ($scope, $element){
 				var vm = this;				
 				var media, fileTransferDir, fileDir;
@@ -16,7 +16,7 @@ angular.module('goodMood')
 	    	}
     		if (ionic.Platform.isIOS()) {
     			fileTransferDir = cordova.file.documentsDirectory.replace('file://', '') + '/NoCloud/';
-    			fileDir = 'NoCloud/'; 
+    			fileDir = 'NoCloud/';
     		}
 
     		function cordovaRecord(){
@@ -76,21 +76,12 @@ angular.module('goodMood')
     			$window.alert('sorry, no recording on desktop yet!')
     		}
 
-				this.record = function (){	
-          console.log("record clicked")   
+				this.record = function (){			
 					if (utils.isDesktop()){
 						desktopRecord()
 					}
 					else {
-            console.log("not desktop")   
-						// cordovaRecord()
-            var options = { limit: 3, duration: 10 };
-
-            $cordovaCapture.captureAudio(options).then(function(audioData) {
-              console.log('success', audioData)
-            }, function(err) {
-              // An error occurred. Show a message to the user
-            });
+						cordovaRecord()
 					}
 				}
 			},

@@ -1,26 +1,24 @@
 #pg--my-collaborations {
   div.collaborations {
-    @include display(flex);
-    @include flex-wrap(wrap);
-    @include align-content(space-around);
     width: 100%;
     height: 100%;
     padding-top: 1rem;
+    margin: auto auto;
   }
   button.new-collaboration {
       width: 100px;
-      margin: 2rem auto;
+      margin: 4rem auto;
       display: block;
   }
   div.collaboration {
     display: inline-block;
     cursor: pointer; 
-    flex-grow: 1;
-    width: 50%;
+    width: 50vw;
+    height: 50vw;
     padding: 3%;
     img {
       width: 100%;
-      // height: 200px;
+      height: 100%;
       border-radius: 50%;
       border-width: 5px;
       border-color: $color-a;  

@@ -7091,32 +7091,41 @@ button {
 text-message > div, voice-message > div {
   position: relative;
   margin: auto 10px auto 10px;
-  padding: 10px 15px; }
+  padding: 0.5rem 1rem; }
 text-message div.arrow-holder, voice-message div.arrow-holder {
   z-index: -1;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; }
+  bottom: 0; }
 text-message div.arrow, voice-message div.arrow {
-  width: 1em; }
-text-message div.sender, voice-message div.sender {
+  width: 14px;
+  position: absolute;
+  top: 50%;
+  padding-bottom: -33/2px; }
+text-message div.sender div.arrow, voice-message div.sender div.arrow {
+  right: 0; }
+text-message div.sender div.arrow-holder, voice-message div.sender div.arrow-holder {
   background-color: #DDD; }
-  text-message div.sender div.arrow, voice-message div.sender div.arrow {
-    align-self: flex-end; }
-text-message div.reciever, voice-message div.reciever {
+text-message div.reciever div.arrow, voice-message div.reciever div.arrow {
+  left: 0; }
+text-message div.reciever div.arrow-holder, voice-message div.reciever div.arrow-holder {
   background-color: #CCC; }
-  text-message div.reciever div.arrow, voice-message div.reciever div.arrow {
-    align-self: flex-start; }
 text-message p.date, voice-message p.date {
   text-transform: uppercase;
   font-size: 0.66em;
   color: #333;
-  line-height: 0.75; }
+  line-height: 0.75;
+  margin-bottom: 1em; }
+
+voice-message {
+  display: block; }
+  voice-message svg.vm-play {
+    display: block;
+    z-index: 1;
+    max-width: 600px;
+    margin: auto auto; }
 
 #pg--new-iteration ion-content > div {
   display: -webkit-box;
@@ -7292,8 +7301,6 @@ button[voice-message-record] {
 gm-side-menu img {
   border-radius: 50%; }
 
-#pg--thread voice-message > div {
-  height: 100px; }
 #pg--thread button.voice-record {
   font-size: 6em;
   margin-left: 20px; }
