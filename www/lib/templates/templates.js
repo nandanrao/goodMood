@@ -107,7 +107,10 @@ module.run(["$templateCache", function($templateCache) {
     "		</p>\n" +
     "		<canvas iteration-canvas></canvas>\n" +
     "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ image.$value }}\" />\n" +
-    "		\n" +
+
+    "		<button add-button class=\"addIteration\" ng-if=\"iteration.showAddIteration()\" ng-click=\"iteration.addIteration()\"></button>\n" +
+    "		<button check-button class=\"check\" ng-if=\"iteration.showCheck()\" ng-click=\"iteration.done()\"></button>\n" +
+
     "		<button class=\"previous\" ng-if=\"previous\" ng-click=\"iteration.previous()\"> previous iteration </button>\n" +
     "		<button class=\"next\" ng-if=\"next\" ng-click=\"iteration.next()\"> next iteration </button>\n" +
     "		<!-- <p>{{ colabits }} </p> -->\n" +
