@@ -4,6 +4,7 @@ angular.module('goodMood')
 			restrict: 'E',
 			templateUrl: 'thread/textmessage.html',
 			controllerAs: 'textMessage',
+			scope: true,
 			link: function (scope, el, attrs){
 				scope.formatDate = utils.formatDate;
 				scope.sender = false;

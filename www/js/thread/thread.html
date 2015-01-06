@@ -22,8 +22,8 @@
 			<record-light ng-if="recording.currently"></record-light>
 			<span ng-if="recording.currently" class="timer">{{ thread.getRecordTime() }}</span>
 		<div class="buttons">
-			<voice-message-record ng-if="!writing"></voice-message-record>
-			<button class="send" type="submit" ng-if="writing" class="send">SEND</button>
+			<voice-message-record ng-if="!writing.currently"></voice-message-record>
+			<button class="send" type="submit" ng-if="writing.currently" class="send">SEND</button>
 		</div>
 		</form>	
 	</div>

@@ -16,11 +16,11 @@ angular.module('goodMood')
 				// watch in order to use sce trust as resource... (whitelist??)
 				$scope.$watchCollection('audio', function(audio){
 					if (audio && audio.$value){
-						console.log('audio has value')
+						$scope.audioHasValue = true;
 						$scope.audioURI = $sce.trustAsResourceUrl(audio.$value)	
 					}
 					else {
-						console.log('audio has no value!')
+						$scope.audioHasValue = false;
 					}
 				})
 			},

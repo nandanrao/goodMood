@@ -45,14 +45,12 @@ angular.module('goodMood')
        * and adds it to the database
        */
       $addMessage: function(data){
-        console.log(data.user.$id, data.content)
         if(!data.content || !data.user){
           throw new TypeError('bad data!')
         }
         data = _.cloneDeep(data)
         data.thread = this.$id;
         data.sentAt = Firebase.ServerValue.TIMESTAMP;
-        console.log('pushing message to server', Date.now())
         var ref = fb.messages.push(data)
         ref.setPriority(this.$id)
         // $timeout(angular.noop)
@@ -143,7 +141,11 @@ angular.module('goodMood')
       })
       return bus.flatMap(function(arr){
         return _.filter(arr, function(obj){
-          return obj.sentAt > thread.lastViewed[Auth.currentUser.$id]
+          var lastViewed = thread.lastViewed[Auth.currentUser.$id]
+          if (!lastViewed) {
+            return true
+          }
+          return obj.sentAt > lastViewed
         })
       })
     }

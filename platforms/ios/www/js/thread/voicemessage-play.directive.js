@@ -1,20 +1,22 @@
 angular.module('goodMood')
-	.directive('voiceMessagePlay', function ($document, $interval, $window){
+	.directive('voiceMessagePlay', function ($document, $interval, $window, utils){
 		return {
 			restrict: 'E',
-			replace: true, 
+			replace: true,
 			templateUrl: 'thread/voicemessage-play.html',
 			controllerAs: 'voiceMessagePlay',
 			controller: function ($scope, $attrs, $element){
-				$scope.playing = false;
-
+				var vm = this;
 				var counter;
+
+				$scope.playing = false;
+				
 				this.play = function(){
 					if (!$scope.playing) {
-						// TODO: actually animate this!!!!!!!!
-						counter = $interval(angular.noop, 100)
 						$scope.media.play()
 						$scope.playing = true;
+						animate()
+						counter = $interval(angular.noop, 1000)
 					}
 					else {
 						$scope.media.pause()
@@ -27,19 +29,18 @@ angular.module('goodMood')
 					})
 				}
 
-				this.getTime = function(){
-					return parseTime($scope.media.currentTime)
+				function animate(){
+					function draw(){
+						$scope.playLine.setAttribute('x2', vm.getPlayerPosition())
+						if ($scope.playing){
+							$window.requestAnimationFrame(draw)
+						}
+					}
+					$window.requestAnimationFrame(draw)	
 				}
 
-				function parseTime(time){
-					var sec_num = parseInt(time, 10); 
-					var hours   = Math.floor(sec_num / 3600);
-					var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-					var seconds = sec_num - (hours * 3600) - (minutes * 60);
-					if (minutes < 10) {minutes = "0"+minutes;}
-					if (seconds < 10) {seconds = "0"+seconds;}
-					var time    = minutes+':'+seconds;
-					return time;
+				this.getTime = function(){
+					return utils.parseTime($scope.media.currentTime)
 				}
 
 				var lineStart = 47;
@@ -76,18 +77,6 @@ angular.module('goodMood')
 					var timecode = audioPercentage*$scope.media.duration
 					return timecode
 				}
-			},
-			link: function (scope, el, attrs){
-				// var $win = angular.element($window)
-				// $win.on('resize', resize)
-				// el.on('$destroy', function(){
-				// 	$win.off('resize', resize)
-				// })
-				// scope.divHeight = el[0].clientHeight + 30 + 'px';
-				// function resize(){
-				// 	scope.divHeight = el[0].clientHeight + 30 + 'px'
-				// 	scope.$apply()
-				// }
 			}
 		}
 	})

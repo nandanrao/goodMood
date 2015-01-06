@@ -20,12 +20,12 @@ angular.module('goodMood', [
       templateUrl: 'collaboration/myCollaborations.html',
       resolve: {
         user: ['User', function (User){
-          console.log('starting mycollab resolves', Date.now())
+          // console.log('starting mycollab resolves', Date.now())
           return User.getCurrentUser()
         }],
         collaborations: ['user', function (user){
           return user.$getCollaborations().then(function(collaborations){
-            console.log('finishing mycollab resolves', Date.now())
+            // console.log('finishing mycollab resolves', Date.now())
             return collaborations
           })
         }]

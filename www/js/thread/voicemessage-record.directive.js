@@ -5,6 +5,7 @@ angular.module('goodMood')
 			templateUrl: 'thread/voicemessagerecord.html',
 			controllerAs: 'record',
             replace: true,
+            scope: true,
 			controller: function ($scope, $element){
 				var vm = this;				
 				var media, fileTransferDir, fileDir;

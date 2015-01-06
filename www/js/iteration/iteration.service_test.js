@@ -240,29 +240,6 @@ describe('Factory: Iteration', function(){
 			})
 		})
 
-		describe('$populate', function(){
-
-			it('returns a promise', function(){
-				iteration.$populate().should.have.property('then')
-			})
-
-			it('resolves an instance with an _image property that is an image object', function(){
-				iteration.$populate().then(function(obj){
-					obj.should.have.property('_image')
-						.and.be.instanceof(Object) 
-				})
-				flushAll()
-			})
-
-			it('resolves an instance without a _threads property, if there are no threads', function(done){
-				iteration.$populate().then(function(obj){
-					obj.should.not.have.property('_threads')
-					done()
-				})
-				flushAll()
-			})
-		})
-
 		describe('$getThreads', function(){
 			var threads;
 

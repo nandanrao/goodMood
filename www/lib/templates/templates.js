@@ -272,7 +272,7 @@ module.run(["$templateCache", function($templateCache) {
     "<div class=\"{{ sender ? 'sender' : 'reciever' }}\">\n" +
     "<message-divider ng-if=\"thread.isPreviousSender(message, $index) && !thread.isNewDay(message, $index)\"></message-divider>\n" +
     "	<p class=\"date\">\n" +
-    "		{{ formatDate(message.sentAt) }}\n" +
+    "		{{ ::formatDate(message.sentAt) }}\n" +
     "	</p>	\n" +
     "	<p class=\"content\">\n" +
     "		{{ message.content }}\n" +
@@ -319,8 +319,8 @@ module.run(["$templateCache", function($templateCache) {
     "			<record-light ng-if=\"recording.currently\"></record-light>\n" +
     "			<span ng-if=\"recording.currently\" class=\"timer\">{{ thread.getRecordTime() }}</span>\n" +
     "		<div class=\"buttons\">\n" +
-    "			<voice-message-record ng-if=\"!writing\"></voice-message-record>\n" +
-    "			<button class=\"send\" type=\"submit\" ng-if=\"writing\" class=\"send\">SEND</button>\n" +
+    "			<voice-message-record ng-if=\"!writing.currently\"></voice-message-record>\n" +
+    "			<button class=\"send\" type=\"submit\" ng-if=\"writing.currently\" class=\"send\">SEND</button>\n" +
     "		</div>\n" +
     "		</form>	\n" +
     "	</div>\n" +

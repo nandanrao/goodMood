@@ -7083,6 +7083,8 @@ button {
     font-size: 2em; }
     #pg--iteration div.instructions h2 span {
       float: right; }
+      #pg--iteration div.instructions h2 span button {
+        padding: 2px 0px 2px 10px; }
   #pg--iteration div.instructions button.ion-close {
     font-size: 1em;
     line-height: normal;
@@ -7094,7 +7096,7 @@ button {
     line-height: normal; }
   @media (max-width: 767px) {
     #pg--iteration div.instructions {
-      font-size: 0.8em; } }
+      font-size: 1em; } }
 #pg--iteration div.bar-footer {
   background-color: #277FE9;
   display: -webkit-box;
@@ -7320,6 +7322,19 @@ gm-side-menu img {
 #pg--thread div.messages {
   padding-top: 0.5rem;
   padding-bottom: 80px; }
+#pg--thread div.message {
+  border: none; }
+  #pg--thread div.message svg.divider {
+    display: block;
+    margin: auto auto;
+    width: 100%;
+    position: relative;
+    bottom: 17px; }
+  #pg--thread div.message new-day-message p {
+    text-transform: uppercase;
+    color: #E96246;
+    font-size: 0.75em;
+    margin: 2em 0 2em 3%; }
 #pg--thread div.choose {
   height: 55px;
   background-color: #277FE9;
@@ -7331,7 +7346,22 @@ gm-side-menu img {
     white-space: nowrap;
     height: 55px; }
   #pg--thread div.choose div.buttons {
-    width: 70px; }
+    width: 4em;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center; }
 #pg--thread form {
   display: -webkit-box;
   display: -moz-box;
@@ -7350,6 +7380,7 @@ gm-side-menu img {
     width: 100%;
     display: inline-block;
     padding: 10px 10px;
+    margin-right: 4em;
     border: none;
     border-radius: 0;
     background-color: #FFF;
@@ -7361,13 +7392,22 @@ gm-side-menu img {
     #pg--thread form input::-webkit-input-placeholder {
       color: #aaaaaa;
       text-indent: 0; }
+  #pg--thread form svg.record-light {
+    height: 15px;
+    margin-left: 1em; }
+  #pg--thread form span {
+    display: inline-block;
+    margin-left: 1.5em;
+    color: #FFF;
+    font-family: 'Futura-Bold'; }
 #pg--thread button.voice-record {
   text-align: center;
   width: 100%;
-  font-size: 2em;
   margin-left: 20px;
   color: #FFF;
   padding: 0;
   padding-top: 2px;
   margin: 0;
   line-height: 1; }
+  #pg--thread button.voice-record svg {
+    max-height: 25px; }

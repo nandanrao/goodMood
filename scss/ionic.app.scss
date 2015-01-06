@@ -120,7 +120,7 @@ gm-side-menu {
       margin: auto auto;
       width: 100%;
       position:relative;
-      bottom: 1.5em;
+      bottom: 17px; // 15px padding on sender div + 1/2 height of svg
     }
     new-day-message {
       p {

@@ -40,7 +40,7 @@ angular.module('goodMood')
         hour: '2-digit',
         minute: '2-digit',
         hour12: false
-      } 
+      }
       var date = new Date(str);
       return date.toLocaleString('es-US', options);
     }
