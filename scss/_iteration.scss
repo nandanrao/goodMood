@@ -53,6 +53,9 @@
       font-size: 2em;
       span {
         float: right;
+        button {
+          padding: 2px 0px 2px 10px;
+        }
       }
     }
     button.ion-close {
@@ -67,7 +70,7 @@
       line-height: normal;
     }
     @media (max-width: 767px){
-      font-size: .8em;
+      font-size: 1em;
     }
   }
   div.bar-footer {
