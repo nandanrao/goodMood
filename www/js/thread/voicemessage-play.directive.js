@@ -2,19 +2,21 @@ angular.module('goodMood')
 	.directive('voiceMessagePlay', function ($document, $interval, $window){
 		return {
 			restrict: 'E',
-			replace: true, 
+			replace: true,
 			templateUrl: 'thread/voicemessage-play.html',
 			controllerAs: 'voiceMessagePlay',
 			controller: function ($scope, $attrs, $element){
-				$scope.playing = false;
-
+				var vm = this;
 				var counter;
+
+				$scope.playing = false;
+				
 				this.play = function(){
 					if (!$scope.playing) {
-						// TODO: actually animate this!!!!!!!!
-						counter = $interval(angular.noop, 100)
 						$scope.media.play()
 						$scope.playing = true;
+						animate()
+						counter = $interval(angular.noop, 1000)
 					}
 					else {
 						$scope.media.pause()
@@ -25,6 +27,16 @@ angular.module('goodMood')
 						$scope.playing = false;
 						$interval.cancel(counter)
 					})
+				}
+
+				function animate(){
+					function draw(){
+						$scope.playLine.setAttribute('x2', vm.getPlayerPosition())
+						if ($scope.playing){
+							$window.requestAnimationFrame(draw)
+						}
+					}
+					$window.requestAnimationFrame(draw)	
 				}
 
 				this.getTime = function(){
@@ -76,18 +88,6 @@ angular.module('goodMood')
 					var timecode = audioPercentage*$scope.media.duration
 					return timecode
 				}
-			},
-			link: function (scope, el, attrs){
-				// var $win = angular.element($window)
-				// $win.on('resize', resize)
-				// el.on('$destroy', function(){
-				// 	$win.off('resize', resize)
-				// })
-				// scope.divHeight = el[0].clientHeight + 30 + 'px';
-				// function resize(){
-				// 	scope.divHeight = el[0].clientHeight + 30 + 'px'
-				// 	scope.$apply()
-				// }
 			}
 		}
 	})
