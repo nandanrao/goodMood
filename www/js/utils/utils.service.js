@@ -32,8 +32,8 @@ angular.module('goodMood')
       return email;
     }
 
-    utils.formatDate = function(str){
-      var options = {
+    utils.formatDate = function(str, options){
+      var options = options || {
         month: 'short',  
         day: 'numeric',
         year: 'numeric', 

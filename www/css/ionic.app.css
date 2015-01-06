@@ -7322,6 +7322,19 @@ gm-side-menu img {
 #pg--thread div.messages {
   padding-top: 0.5rem;
   padding-bottom: 80px; }
+#pg--thread div.message {
+  border: none; }
+  #pg--thread div.message svg.divider {
+    display: block;
+    margin: auto auto;
+    width: 100%;
+    position: relative;
+    bottom: 1.5em; }
+  #pg--thread div.message new-day-message p {
+    text-transform: uppercase;
+    color: #E96246;
+    font-size: 0.75em;
+    margin: 2em 0 2em 3%; }
 #pg--thread div.choose {
   height: 55px;
   background-color: #277FE9;

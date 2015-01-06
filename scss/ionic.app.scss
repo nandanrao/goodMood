@@ -113,6 +113,24 @@ gm-side-menu {
     padding-top: .5rem;
     padding-bottom: $bar-height;
   }
+  div.message {
+    border: none;
+    svg.divider {
+      display: block;
+      margin: auto auto;
+      width: 100%;
+      position:relative;
+      bottom: 1.5em;
+    }
+    new-day-message {
+      p {
+        text-transform: uppercase;
+        color: $color-d;
+        font-size: .75em;
+        margin: 2em 0 2em 3%;
+      }
+    }
+  }
   div.choose {
     height: $texting-footer-height; 
     background-color: $color-a;

@@ -24,6 +24,30 @@ angular.module('goodMood')
 		
 		var vm = this;
 
+		this.isPreviousSender = function(msg, i) {
+			console.log('------------------')
+			if (i === 0){
+				return false
+			}
+			return getFormerMsg(msg, i).user === msg.user
+		}
+
+		this.isNewDay = function(msg, i){
+			if (i === 0) {
+				return false
+			}
+			var prevDay = getFormerMsg(msg, i).sentAt;
+			var newDay = msg.sentAt;
+			var options = {day: 'numeric'}
+			return utils.formatDate(prevDay, options) !== utils.formatDate(newDay, options)
+		}
+
+		function getFormerMsg(msg, i){
+			if (i) {
+				return messages[i-1] || 0
+			}
+		}
+
 		this.getTitle = function(){
 			if (_.size(messages) > 0){
 				return _.first(messages).content

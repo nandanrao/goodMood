@@ -237,6 +237,24 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("thread/messagedivider.html",
+    "");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("thread/newdaymessage.html",
+    "<p>{{ newDayMessage.getNewDayMessage(message) }}</p>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/record-light.html",
     "<svg class=\"record-light\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 27 27\" xml:space=\"preserve\">\n" +
     "<circle fill=\"#FF3333\" cx=\"13.5\" cy=\"13.5\" r=\"13.5\"/>\n" +
@@ -252,6 +270,7 @@ catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/textmessage.html",
     "<div class=\"{{ sender ? 'sender' : 'reciever' }}\">\n" +
+    "<message-divider ng-if=\"thread.isPreviousSender(message, $index) && !thread.isNewDay(message, $index)\"></message-divider>\n" +
     "	<p class=\"date\">\n" +
     "		{{ formatDate(message.sentAt) }}\n" +
     "	</p>	\n" +
@@ -284,6 +303,9 @@ module.run(["$templateCache", function($templateCache) {
     "	<ion-content>\n" +
     "		<div class=\"messages\">\n" +
     "			<div class=\"message\" ng-repeat=\"message in messages\">\n" +
+    "				<new-day-message ng-if=\"thread.isNewDay(message, $index)\"></new-day-message>\n" +
+    "				\n" +
+    "\n" +
     "				<text-message ng-if=\"message.type === 'text'\" message=\"{{ message }}\">\n" +
     "				</text-message>\n" +
     "				<voice-message ng-if=\"message.type === 'audio'\">\n" +
@@ -332,7 +354,7 @@ module.run(["$templateCache", function($templateCache) {
     "<line fill=\"none\" stroke=\"#727272\" stroke-width=\"2\" stroke-miterlimit=\"10\" x1=\"47\" y1=\"26.5\" x2=\"472\" y2=\"26.5\"/>\n" +
     "<line voice-message-line class=\"progress\" fill=\"none\" stroke=\"#7DFF29\" stroke-width=\"8\" stroke-miterlimit=\"10\" x1=\"47\" y1=\"26.4\" ng-attr-x2=\"{{ voiceMessagePlay.getPlayerPosition() }}\" y2=\"26.4\"/>\n" +
     "<g ng-click=\"voiceMessagePlay.play()\">\n" +
-    "	<circle fill=\"#277FE9\" cx=\"512.2\" cy=\"26.5\" r=\"26.5\"/>\n" +
+    "	<circle fill=\"{{ audioHasValue ? '#277FE9' : '#AAA' }}\" cx=\"512.2\" cy=\"26.5\" r=\"26.5\"/>\n" +
     "	<polygon ng-if=\"!playing\" fill=\"#FFFFFF\" points=\"503.8,12.9 527.7,26.7 503.8,40.5 	\"/>\n" +
     "	<line ng-if=\"playing\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-miterlimit=\"10\" x1=\"507.8\" y1=\"37.5\" x2=\"507.8\" y2=\"15.3\"/>\n" +
     "	<line ng-if=\"playing\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-miterlimit=\"10\" x1=\"516.7\" y1=\"37.5\" x2=\"516.7\" y2=\"15.3\"/>\n" +
@@ -350,6 +372,7 @@ catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/voicemessage.html",
     "<div class=\"{{ sender ? 'sender' : 'reciever' }}\">\n" +
+    "<message-divider ng-if=\"thread.isPreviousSender(message, $index) && !thread.isNewDay(message, $index)\"></message-divider>\n" +
     "	<voice-message-audio></voice-message-audio>\n" +
     "	<p class=\"date\">\n" +
     "		{{ formatDate(message.sentAt) }}\n" +
