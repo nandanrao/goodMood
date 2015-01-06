@@ -107,6 +107,7 @@ gm-side-menu {
 #pg--thread {
 
   $texting-footer-height: 55px;
+  $send-width: 4em;
 
   div.messages {
     padding-top: .5rem;
@@ -124,18 +125,23 @@ gm-side-menu {
       height: $texting-footer-height;
     }
     div.buttons {
-      width: 70px;
+      width: $send-width;
+      position: absolute;
+      right: 0;
+      height: 100%;
+      @include display(flex);
+      @include align-items(center);
     }
   }
   form {
     @include display(flex);
     @include align-items(center);
-    
     width: 100%;
     input {
       width: 100%;
       display: inline-block;
       padding: 10px 10px;
+      margin-right: $send-width;
       border: none;
       border-radius: 0;
       background-color: #FFF;
@@ -146,21 +152,31 @@ gm-side-menu {
         text-transform: uppercase;
       }
     }
-  }
-  voice-message-record {
-
+    svg.record-light {
+      height: 15px;
+      margin-left: 1em;
+    }
+    span {
+      display: inline-block;
+      // padding: 0;
+      // margin: 0;
+      margin-left: 1.5em;
+      color: $color-type-c;
+      font-family: $title-font-family;
+    }
   }
   button.voice-record {
-    // float: right;
     text-align: center;
     width: 100%;
-    font-size: 2em;
     margin-left: 20px;
     color: $color-type-c;
     padding: 0;
     padding-top: 2px;
     margin: 0;
     line-height: 1;
+    svg {
+      max-height: 25px;
+    }
   }
 }
 

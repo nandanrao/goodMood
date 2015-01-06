@@ -1,9 +1,16 @@
 angular.module('goodMood')
-	.controller('ThreadCtrl', function ($scope, $ionicLoading, $ionicHistory, thread, messages, Auth){
+	.controller('ThreadCtrl', function ($scope, $ionicLoading, $ionicHistory, thread, messages, Auth, utils){
 		$scope.threadInstance = thread;
 		$scope.messages = messages;
 		$scope.writing;
 		$scope.recordNote;
+		$scope.recordTime = {
+			currently: false
+		}
+
+		$scope.recording = {
+			currently: false
+		}
 		$scope.textField = {
 			content: null
 		};
@@ -24,6 +31,13 @@ angular.module('goodMood')
 			else {
 				return 'New Thread'
 			}
+		}
+
+		this.getRecordTime = function(){
+			if (!$scope.recordTime.currently){
+				return '00:00'
+			}
+			return utils.parseTime($scope.recordTime.currently)
 		}
 
 		this.writing = function(){

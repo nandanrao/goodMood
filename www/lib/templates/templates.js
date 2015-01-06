@@ -237,6 +237,19 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("thread/record-light.html",
+    "<svg class=\"record-light\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 27 27\" xml:space=\"preserve\">\n" +
+    "<circle fill=\"#FF3333\" cx=\"13.5\" cy=\"13.5\" r=\"13.5\"/>\n" +
+    "<animate attributeType=\"CSS\" attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" repeatCount=\"indefinite\" ease-in=\"cubic-bezier(0.47, 0, 0.745, 0.715)\" autoReverse ease-out=\"cubic-bezier(0.39, 0.575, 0.565, 1)\" />\n" +
+    "</svg>\n" +
+    "");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/textmessage.html",
     "<div class=\"{{ sender ? 'sender' : 'reciever' }}\">\n" +
     "	<p class=\"date\">\n" +
@@ -277,11 +290,12 @@ module.run(["$templateCache", function($templateCache) {
     "				</voice-message>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "		\n" +
     "	</ion-content>\n" +
     "	<div class=\"bar bar-footer choose\">\n" +
     "		<form ng-submit=\"thread.sendMessage('text', textField.content)\">\n" +
-    "			<input ng-if=\"!recording\" ng-blur=\"thread.notWriting()\" ng-focus=\"thread.writing()\"required ng-model=\"textField.content\" class=\"text\" placeholder=\"write a message\" />\n" +
+    "			<input ng-if=\"!recording.currently\" ng-blur=\"thread.notWriting()\" ng-focus=\"thread.writing()\"required ng-model=\"textField.content\" class=\"text\" placeholder=\"write a message\" />\n" +
+    "			<record-light ng-if=\"recording.currently\"></record-light>\n" +
+    "			<span ng-if=\"recording.currently\" class=\"timer\">{{ thread.getRecordTime() }}</span>\n" +
     "		<div class=\"buttons\">\n" +
     "			<voice-message-record ng-if=\"!writing\"></voice-message-record>\n" +
     "			<button class=\"send\" type=\"submit\" ng-if=\"writing\" class=\"send\">SEND</button>\n" +
@@ -359,7 +373,15 @@ catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("thread/voicemessagerecord.html",
     "<button type=\"button\" class=\"voice-record\" ng-click=\"record.record()\">\n" +
-    "	<i class=\"ion-mic-a\"></i>\n" +
+    "	<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
+    "		 viewBox=\"0 0 28.5 45.9\" enable-background=\"new 0 0 28.5 45.9\" xml:space=\"preserve\">\n" +
+    "	<g>\n" +
+    "		<path fill=\"#FFF\" d=\"M14.3,30.6c4.2,0,7.6-3.4,7.6-7.6V7.6c0-4.2-3.4-7.6-7.6-7.6C10,0,6.6,3.4,6.6,7.6V23\n" +
+    "			C6.6,27.2,10,30.6,14.3,30.6z\"/>\n" +
+    "		<path fill=\"#FFF\" d=\"M25.5,19.9V23c0,6.2-5,11.2-11.2,11.2c-6.2,0-11.2-5-11.2-11.2v-3.1H0V23c0,7.3,5.6,13.4,12.7,14.2v5.7H4.3\n" +
+    "			v3.1h19.9v-3.1h-8.4v-5.7c7.1-0.8,12.7-6.8,12.7-14.2v-3.1H25.5z\"/>\n" +
+    "	</g>\n" +
+    "	</svg>\n" +
     "</button>");
 }]);
 })();

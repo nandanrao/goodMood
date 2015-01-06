@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.directive('voiceMessagePlay', function ($document, $interval, $window){
+	.directive('voiceMessagePlay', function ($document, $interval, $window, utils){
 		return {
 			restrict: 'E',
 			replace: true,
@@ -40,18 +40,7 @@ angular.module('goodMood')
 				}
 
 				this.getTime = function(){
-					return parseTime($scope.media.currentTime)
-				}
-
-				function parseTime(time){
-					var sec_num = parseInt(time, 10); 
-					var hours   = Math.floor(sec_num / 3600);
-					var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-					var seconds = sec_num - (hours * 3600) - (minutes * 60);
-					if (minutes < 10) {minutes = "0"+minutes;}
-					if (seconds < 10) {seconds = "0"+seconds;}
-					var time    = minutes+':'+seconds;
-					return time;
+					return utils.parseTime($scope.media.currentTime)
 				}
 
 				var lineStart = 47;

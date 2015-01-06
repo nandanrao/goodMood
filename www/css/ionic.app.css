@@ -7333,7 +7333,22 @@ gm-side-menu img {
     white-space: nowrap;
     height: 55px; }
   #pg--thread div.choose div.buttons {
-    width: 70px; }
+    width: 4em;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center; }
 #pg--thread form {
   display: -webkit-box;
   display: -moz-box;
@@ -7352,6 +7367,7 @@ gm-side-menu img {
     width: 100%;
     display: inline-block;
     padding: 10px 10px;
+    margin-right: 4em;
     border: none;
     border-radius: 0;
     background-color: #FFF;
@@ -7363,13 +7379,22 @@ gm-side-menu img {
     #pg--thread form input::-webkit-input-placeholder {
       color: #aaaaaa;
       text-indent: 0; }
+  #pg--thread form svg.record-light {
+    height: 15px;
+    margin-left: 1em; }
+  #pg--thread form span {
+    display: inline-block;
+    margin-left: 1.5em;
+    color: #FFF;
+    font-family: 'Futura-Bold'; }
 #pg--thread button.voice-record {
   text-align: center;
   width: 100%;
-  font-size: 2em;
   margin-left: 20px;
   color: #FFF;
   padding: 0;
   padding-top: 2px;
   margin: 0;
   line-height: 1; }
+  #pg--thread button.voice-record svg {
+    max-height: 25px; }
