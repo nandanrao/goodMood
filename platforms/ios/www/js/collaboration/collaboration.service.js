@@ -104,7 +104,6 @@ angular.module('goodMood')
         var deferred = $q.defer()
         ref.child('iterations').on('child_added', function(snap){
           var id = snap.key()
-          console.log('iteration added')
           Iteration.findById(id).then(function(iteration){
             iterations[id] = iteration
           })

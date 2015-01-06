@@ -12,8 +12,8 @@ angular.module('goodMood')
 					paper.view.setViewSize(el[0].clientWidth, el[0].clientHeight)
 				}
 
-				scope.$watchCollection('imageSize', function(curr){
-					if (curr){
+				scope.$watchCollection('imageSize', function(imageSize){
+					if (imageSize){
 						resizeCanvas()	
 					}
 				})
