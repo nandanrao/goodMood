@@ -1,0 +1,56 @@
+gm-side-menu {	
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #DDD;
+	div.profile{
+		background-color: $color-a;
+		padding-bottom: .5em;
+		padding-top: 3em;
+		img {
+			border-radius: 50%;
+			width: 50%;
+			height: 50%;
+			margin: auto auto;
+			display: block;
+			padding: 0 0 .5em 0;
+		}
+		h2 {
+			font-family: $title-font-family;
+			color: $color-type-c;
+			font-size: 1.666em;
+			line-height: 1;
+			margin: 0;
+			text-align: center;
+			text-transform: lowercase;
+		}	
+	}
+
+	ul.options {
+		margin: 0 1em;
+		li {
+			border-bottom: 1px solid #444;
+			button {
+				text-transform: uppercase;	
+				text-align: left;
+				display: block;
+				padding: 2em 0;
+				width: 100%;
+				span {
+					line-height: 1.5em;
+				}
+			}
+			svg {
+				float: right;
+				width: 1.5em;
+			}
+		}
+		
+	}
+
+	
+
+}

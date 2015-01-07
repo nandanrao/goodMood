@@ -20,9 +20,9 @@ angular.module('goodMood')
 		$scope.image = image;
 		$scope.instructionsRead = false;
 
-		$scope.$watch(function(){
-			console.count('iteration digest run')
-		})
+		// $scope.$watch(function(){
+		// 	console.count('iteration digest run')
+		// })
 
 		this.hasThreads = function(){
 			return _.size(threads) > 0

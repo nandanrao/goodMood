@@ -1,3 +1,25 @@
-<button ng-click="sidemenu.logout()">logout</button>
-	<p>{{ user.displayName }}</p>
-<img ng-src="{{ user.picture }}">
+<div id="pg--sidemenu">
+	<div class="profile">
+		<img ng-src="{{ user.picture }}">
+		<h2>{{ user.displayName }}</h2>
+	</div>	
+
+
+	<ul class="options">
+		<li>
+			<button ng-click="sidemenu.logout()">
+				<span>logout</span>
+				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+					 viewBox="0 0 33.9 33.9" enable-background="new 0 0 33.9 33.9" xml:space="preserve">
+				<g>
+					<circle fill="none" stroke="#E85757" stroke-width="3" stroke-miterlimit="10" cx="17" cy="17" r="15.5"/>
+					<line fill="none" stroke="#E85757" stroke-width="3" stroke-miterlimit="10" x1="6" y1="27.9" x2="27.9" y2="6"/>
+				</g>
+				</svg>
+
+			</button>
+		</li>	
+	</ul>
+	
+</div>
+

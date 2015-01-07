@@ -21,11 +21,15 @@ module.run(["$templateCache", function($templateCache) {
     "	<ion-content>\n" +
     "		<div class=\"collaborations\">\n" +
     "			<div ng-repeat=\"collaboration in collaborations\" class=\"collaboration\" ng-click=\"myCollaborations.collaboration(collaboration.$id)\">\n" +
-    "			<div class=\"thumbnail\" ng-style=\"myCollaborations.setCollaborationBg(collaboration)\">\n" +
-    "			</div>\n" +
-    "			<h2>\n" +
-    "				{{ collaboration.name }} <span> ({{ myCollaborations.getNewMessages(collaboration) }})</span>\n" +
-    "			</h2>\n" +
+    "				<div class=\"thumbnail\" ng-style=\"myCollaborations.setCollaborationBg(collaboration)\">\n" +
+    "				</div>\n" +
+    "				<h2>\n" +
+    "					{{ collaboration.name }} \n" +
+    "				</h2>\n" +
+    "				<svg ng-if=\"myCollaborations.getNewMessages(collaboration) > 0\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 71.5 71.5\" enable-background=\"new 0 0 71.5 71.5\" xml:space=\"preserve\">\n" +
+    "					<path opacity=\"0.86\" fill=\"#FF2C2C\" d=\"M35.7,71.5C16,71.5,0,55.4,0,35.7S16,0,35.7,0s35.7,16,35.7,35.7S55.4,71.5,35.7,71.5z\"/>\n" +
+    "					<text transform=\"matrix(1 0 0 1 24.9419 46.6401)\" fill=\"#FFFFFF\" font-family=\"'Futura-Bold'\" font-size=\"36\">{{ myCollaborations.getNewMessages(collaboration) }}</text>\n" +
+    "				</svg>\n" +
     "			</div>  \n" +
     "		</div>\n" +
     "		<button add-button class=\"new-collaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
@@ -140,7 +144,7 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/newiteration.html",
-    "<ion-view id=\"pg--new-iteration\" view-title=\"{{ newIteration.getViewTitle() }}\">\n" +
+    "<ion-view id=\"pg--new-iteration\" view-title=\"{{ ::newIteration.getViewTitle() }}\">\n" +
     "\n" +
     "	<ion-nav-buttons side=\"secondary\">\n" +
     "		<button ng-click=\"newIteration.cancel()\" class=\"ion-close\" nav-direction=\"back\">\n" +

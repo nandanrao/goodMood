@@ -11,6 +11,7 @@
       display: block;
   }
   div.collaboration {
+    position: relative;
     display: inline-block;
     cursor: pointer; 
     width: 50vw;
@@ -27,6 +28,12 @@
       color: $color-a;
       text-align: center;
       font-size: 1em;
+    }
+    svg {
+      height: 3em;
+      position: absolute;
+      top: 3%;
+      right: 3%;
     }
   }
 }

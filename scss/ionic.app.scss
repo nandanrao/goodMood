@@ -38,9 +38,14 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
         "textmessage",
         "newiteration",
         "newcollaboration",
-        "mycollaborations"
+        "mycollaborations",
+        "thread",
+        "sidemenu"
 ;
 
+body {
+  color: #222;
+}
 
 .bar .title {
     font-family: $title-font-family;
@@ -97,105 +102,4 @@ ion-nav-view ion-content.has-header {
     }
   }
 }
-
-gm-side-menu {
-  img {
-    border-radius: 50%;
-  }
-}
-
-#pg--thread {
-
-  $texting-footer-height: 55px;
-  $send-width: 4em;
-
-  div.messages {
-    padding-top: .5rem;
-    padding-bottom: $bar-height;
-  }
-  div.message {
-    border: none;
-    svg.divider {
-      display: block;
-      margin: auto auto;
-      width: 100%;
-      position:relative;
-      bottom: 17px; // 15px padding on sender div + 1/2 height of svg
-    }
-    new-day-message {
-      p {
-        text-transform: uppercase;
-        color: $color-d;
-        font-size: .75em;
-        margin: 2em 0 2em 3%;
-      }
-    }
-  }
-  div.choose {
-    height: $texting-footer-height; 
-    background-color: $color-a;
-    padding: 0 3px 0 8px;
-    button.send {
-      font-family: $title-font-family;
-      color: $color-type-c;
-      font-size: 14px;
-      white-space: nowrap;
-      height: $texting-footer-height;
-    }
-    div.buttons {
-      width: $send-width;
-      position: absolute;
-      right: 0;
-      height: 100%;
-      @include display(flex);
-      @include align-items(center);
-    }
-  }
-  form {
-    @include display(flex);
-    @include align-items(center);
-    width: 100%;
-    input {
-      width: 100%;
-      display: inline-block;
-      padding: 10px 10px;
-      margin-right: $send-width;
-      border: none;
-      border-radius: 0;
-      background-color: #FFF;
-      line-height: normal;
-      @include placeholder {
-        line-height: 1;
-        color: red;
-        text-transform: uppercase;
-      }
-    }
-    svg.record-light {
-      height: 15px;
-      margin-left: 1em;
-    }
-    span {
-      display: inline-block;
-      // padding: 0;
-      // margin: 0;
-      margin-left: 1.5em;
-      color: $color-type-c;
-      font-family: $title-font-family;
-    }
-  }
-  button.voice-record {
-    text-align: center;
-    width: 100%;
-    margin-left: 20px;
-    color: $color-type-c;
-    padding: 0;
-    padding-top: 2px;
-    margin: 0;
-    line-height: 1;
-    svg {
-      max-height: 25px;
-    }
-  }
-}
-
 
