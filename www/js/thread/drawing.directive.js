@@ -46,10 +46,10 @@ angular.module('goodMood')
 						$state.go('thread', {t_id: attrs.id})
 					}
 
-					messageBus = Thread.getNewMessagesAsStream(attrs.id).onValue(function(val){
+					Thread.getNewMessagesAsStream(attrs.id).onValue(function(val){
 						var num = _.size(val)
 						textItem.content = num > 0 ? num : ''
-						if (paper){
+						if (paper && paper.view){
 							paper.view.update()	
 						}
 					})
@@ -67,13 +67,13 @@ angular.module('goodMood')
 				
 				// TODO: this is tightly coupled with scope relationship -- somehow fix? 
 				scope.$parent.$on('$ionicView.enter', function(){
-					if (messageBus) {
-						messageBus.end()
-					}
 					Thread.getNewMessagesAsStream(attrs.id).onValue(function(val){
 						var num = _.size(val)
+						if (num === textItem.content){
+							return
+						}
 						textItem.content = num > 0 ? num : ''
-						if (paper){
+						if (paper && paper.view){
 							paper.view.update()	
 						}
 					})
