@@ -185,7 +185,7 @@ describe('Factory: Collaboration', function(){
 			var iteration;
 
 			beforeEach(function(done){
-				var ref = fb.iterations.push({test:'test'})
+				var ref = fb.iterations.push({test:'test', image: 'image'})
 				$firebase(ref).$asObject().$loaded().then(function(obj){
 					iteration = obj;
 					done()	
@@ -216,7 +216,7 @@ describe('Factory: Collaboration', function(){
 
 			it('adds multiple iteration $ids to its own iterations property', function(){
 				var iteration2
-				var ref = fb.iterations.push({test:'test'})
+				var ref = fb.iterations.push({test:'test', image: 'image'})
 				$firebase(ref).$asObject().$loaded().then(function(obj){
 					iteration2 = obj;
 				})
@@ -233,7 +233,7 @@ describe('Factory: Collaboration', function(){
 			var iteration;
 
 			beforeEach(function(done){
-				var ref = fb.iterations.push({test:'test'})
+				var ref = fb.iterations.push({test:'test', image: 'image'})
 				$firebase(ref).$asObject().$loaded().then(function(obj){
 					iteration = obj;
 				})
@@ -273,7 +273,7 @@ describe('Factory: Collaboration', function(){
 			var iterations;
 
 			beforeEach(function(done){
-				var ref = fb.iterations.push({test:'test'})
+				var ref = fb.iterations.push({test:'test', image: 'image'})
 				$firebase(ref).$asObject().$loaded().then(function(obj){
 					iteration = obj;
 					done()	

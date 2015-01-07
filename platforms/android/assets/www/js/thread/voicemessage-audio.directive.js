@@ -12,14 +12,15 @@ angular.module('goodMood')
 				Audio.findById($scope.message.content).then(function(audio){
 					$scope.audio = audio;
 				})
+				// TODO: we really need to not be watching the entire URI!
 				// watch in order to use sce trust as resource... (whitelist??)
 				$scope.$watchCollection('audio', function(audio){
 					if (audio && audio.$value){
-						console.log('audio has value')
+						$scope.audioHasValue = true;
 						$scope.audioURI = $sce.trustAsResourceUrl(audio.$value)	
 					}
 					else {
-						console.log('audio has no value!')
+						$scope.audioHasValue = false;
 					}
 				})
 			},

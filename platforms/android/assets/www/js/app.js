@@ -20,12 +20,12 @@ angular.module('goodMood', [
       templateUrl: 'collaboration/myCollaborations.html',
       resolve: {
         user: ['User', function (User){
-          console.log('starting mycollab resolves', Date.now())
+          // console.log('starting mycollab resolves', Date.now())
           return User.getCurrentUser()
         }],
         collaborations: ['user', function (user){
           return user.$getCollaborations().then(function(collaborations){
-            console.log('finishing mycollab resolves', Date.now())
+            // console.log('finishing mycollab resolves', Date.now())
             return collaborations
           })
         }]
@@ -110,6 +110,9 @@ angular.module('goodMood', [
         iteration: ['Iteration', '$stateParams', function (Iteration, $stateParams){
           return Iteration.findById($stateParams.i_id)
         }],
+        iterations: ['collaboration', function (collaboration){
+          return collaboration.$getIterations()
+        }],
         threads: ['iteration', function (iteration){
           return iteration.$getThreads()
         }],
@@ -127,6 +130,9 @@ angular.module('goodMood', [
 .config(function($compileProvider){
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|data):/);
 })
+// .config(function($ionicConfigProvider){
+//   $ionicConfigProvider.views.maxCache(0);
+// })
 .run(function($ionicPlatform, $state, $location, $rootScope, Auth, $ionicLoading) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

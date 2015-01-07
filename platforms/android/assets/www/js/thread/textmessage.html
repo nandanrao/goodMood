@@ -1,6 +1,7 @@
 <div class="{{ sender ? 'sender' : 'reciever' }}">
+<message-divider ng-if="thread.isPreviousSender(message, $index) && !thread.isNewDay(message, $index)"></message-divider>
 	<p class="date">
-		{{ formatDate(message.sentAt) }}
+		{{ ::formatDate(message.sentAt) }}
 	</p>	
 	<p class="content">
 		{{ message.content }}

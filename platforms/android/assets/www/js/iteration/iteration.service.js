@@ -46,6 +46,7 @@ angular.module('goodMood')
           deferred.resolve(threads)
         })
         ref.child('threads').on('child_added', function(snap){
+          console.log('threads added to threads thats in resolve...')
           var id = snap.key()
           Thread.findById(id).then(function(thread){
             threads[id] = thread

@@ -86,10 +86,5 @@ angular.module('goodMood')
 			}
 		})
 
-		$scope.$on('$ionicView.enter', function(){
-			console.log('iteration entering', iteration.$id)
-		})
-
 		$ionicLoading.hide()
-
 	})

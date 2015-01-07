@@ -140,7 +140,7 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/newiteration.html",
-    "<ion-view id=\"pg--new-iteration\" view-title=\"{{ newIteration.getViewTitle() }}\">\n" +
+    "<ion-view id=\"pg--new-iteration\" view-title=\"{{ ::newIteration.getViewTitle() }}\">\n" +
     "\n" +
     "	<ion-nav-buttons side=\"secondary\">\n" +
     "		<button ng-click=\"newIteration.cancel()\" class=\"ion-close\" nav-direction=\"back\">\n" +

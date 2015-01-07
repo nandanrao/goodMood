@@ -3,6 +3,10 @@ angular.module('goodMood')
 		
 		$scope.collaborations = collaborations;
 
+		$scope.$watch(function(){
+			console.count('mycolaborations scope digest')
+		})
+
 		this.getNewMessages = function(collaboration){
 			return _.size(collaboration._newMessages)
 		}
@@ -11,9 +15,11 @@ angular.module('goodMood')
 			$state.go('newCollaboration')
 		}
 
-		this.getCollaborationImage = function(collaboration){
+		this.setCollaborationBg = function(collaboration){
 			var imgURI = _.size(collaboration._lastImage) > 0 ? collaboration._lastImage.image.$value : collaborationDefaultBg
-			return imgURI
+			return { 
+				'background-image': 'url(' + imgURI + ')'
+			}
 		}
 
 		this.collaboration = function(id){

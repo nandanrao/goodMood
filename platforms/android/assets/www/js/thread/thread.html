@@ -6,20 +6,24 @@
 	<ion-content>
 		<div class="messages">
 			<div class="message" ng-repeat="message in messages">
-				<text-message ng-if="message.type === 'text'" message="{{ message }}">
+				<new-day-message ng-if="thread.isNewDay(message, $index)"></new-day-message>
+				<text-message ng-if="message.type === 'text'">
 				</text-message>
 				<voice-message ng-if="message.type === 'audio'">
 				</voice-message>
 			</div>
 		</div>
-		<div class="choose">
-			<voice-message-record></voice-message-record>
-			<button class="text" ng-click="thread.writeText()">		
-			text
-			</button>
-		</div>
-		<form ng-show="writeMessage" ng-submit="thread.sendMessage('text', textField.content)">
-			<input required ng-model="textField.content" class="text" placeholder="write here" />
-		</form>
 	</ion-content>
+	<div class="bar bar-footer choose">
+		<form ng-submit="thread.sendMessage('text', textField.content)">
+			<input ng-if="!recording.currently" ng-blur="thread.notWriting()" ng-focus="thread.writing()"required ng-model="textField.content" class="text" placeholder="write a message" />
+			<record-light ng-if="recording.currently"></record-light>
+			<span ng-if="recording.currently" class="timer">{{ thread.getRecordTime() }}</span>
+		<div class="buttons">
+			<voice-message-record ng-if="!writing.currently"></voice-message-record>
+			<button class="send" type="submit" ng-if="writing.currently" class="send">SEND</button>
+		</div>
+		</form>	
+	</div>
+	
 </ion-view>

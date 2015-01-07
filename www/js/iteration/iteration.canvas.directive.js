@@ -3,7 +3,7 @@ angular.module('goodMood')
 		return {
 			restrict: 'A',
 			link: function (scope, el, attrs){
-				console.log('iteration id', scope.iteration.iteration$id)
+	
 				function resizeCanvas(){
 					el[0].style.width = scope.imageSize.width + 'px';
 					el[0].style.height = scope.imageSize.height + 'px';	
@@ -43,7 +43,6 @@ angular.module('goodMood')
 							}
 						}
 						if (i === 8){
-							console.log('-----8 count finished', Date.now())
 							paper.view.onFrame = angular.noop	
 							var x = position.x/paper.view.bounds.width
 							var y = position.y/paper.view.bounds.height
@@ -90,12 +89,7 @@ angular.module('goodMood')
 				function movePosition(point){
 					// TODO: move circle as mouse moves!
 				}
-
-				var testpoint = new paper.Point(20,20)
-				var test2 = new paper.Point(10,10)
-				console.log(testpoint + test2)
-
-
+				
 				// Helper function to create ionicgesture listener -- move to utils?
 				function createListener(gesture){
 					var fn = function(e){

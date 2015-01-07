@@ -1,13 +1,14 @@
 angular.module('goodMood')
-	.directive('voiceMessageRecord', function ($log, $window, $document, $ionicLoading, $cordovaMedia, $cordovaFile, Audio, utils){
+	.directive('voiceMessageRecord', function ($log, $window, $document, $interval, $ionicLoading, $cordovaMedia, $cordovaFile, Audio, utils){
 		return {
 			restrict: 'EA',
 			templateUrl: 'thread/voicemessagerecord.html',
 			controllerAs: 'record',
+            replace: true,
+            scope: true,
 			controller: function ($scope, $element){
 				var vm = this;				
 				var media, fileTransferDir, fileDir;
-				$scope.recording = false;
 
 				if (ionic.Platform.isAndroid()) {
     			fileTransferDir = cordova.file.externalDataDirectory
@@ -19,7 +20,7 @@ angular.module('goodMood')
     		}
 
     		function cordovaRecord(){
-    			if (!$scope.recording){
+    			if (!$scope.recording.currently){
     				console.log('mic clicked - start recording')	
     				var fileName = utils.uuid() + '.wav'
     				var src = fileTransferDir + fileName
@@ -32,17 +33,14 @@ angular.module('goodMood')
     				media = $cordovaMedia.newMedia(src)
     				media
     					.then(function(){
-    						console.log('stop', Date.now())
     						media.release()
     						messageSent = audioCreated.then(function(_audio){
     							audio = _audio
     							return $scope.thread.sendMessage('audio', audio.$id)
     						})
-    						console.log('about to read as dataURI', Date.now())
     						return $cordovaFile.readAsDataURL(fileSrc)
     					})
     					.then(function(_dataURI){
-    						console.log('dataURI craeted', Date.now())
     						dataURI = _dataURI
     						audio.$inst().$set(dataURI).then(function(){
     							console.log('audio saved to server', Date.now())
@@ -50,7 +48,6 @@ angular.module('goodMood')
     						return messageSent
     					})
     					.then(function(){
-    						
     						console.log('message sent', Date.now())
     						$ionicLoading.hide()
     					})
@@ -60,16 +57,30 @@ angular.module('goodMood')
     						$ionicLoading.hide()
     					})
 
-    				$scope.recording = true;
+    				$scope.recording.currently = true;
+            startTimer()
     				media.startRecord()	
     			}
     			else {	
     				console.log('mic clicked - stop recording')
-    				$scope.recording = false;
+    				$scope.recording.currently = false;
     				$ionicLoading.show()
     				media.stopRecord()
+            stopTimer()
     			}
     		}
+
+        var timerInt;
+
+        function startTimer(){
+          timerInt = $interval(function(){
+            $scope.recordTime.currently++
+          }, 1000)
+        }
+        function stopTimer(){
+          $interval.cancel(timerInt)
+          $scope.recordTime.currently = false;
+        }
 
     		function desktopRecord(){
     			$window.alert('sorry, no recording on desktop yet!')

@@ -2463,31 +2463,31 @@ ion-infinite-scroll {
 
 /* If you change these, change platform.scss as well */
 .has-header {
-  top: 100px; }
+  top: 80px; }
 
 .no-header {
   top: 0; }
 
 .has-subheader {
-  top: 200px; }
+  top: 160px; }
 
 .has-tabs-top {
-  top: 149px; }
+  top: 129px; }
 
 .has-header.has-subheader.has-tabs-top {
-  top: 249px; }
+  top: 209px; }
 
 .has-footer {
-  bottom: 100px; }
+  bottom: 80px; }
 
 .has-subfooter {
-  bottom: 200px; }
+  bottom: 160px; }
 
 .has-tabs, .bar-footer.has-tabs {
   bottom: 49px; }
 
 .has-footer.has-tabs {
-  bottom: 149px; }
+  bottom: 129px; }
 
 .pane {
   -webkit-transform: translate3d(0, 0, 0);
@@ -2743,7 +2743,7 @@ a.subdued {
   box-sizing: border-box;
   padding: 5px;
   width: 100%;
-  height: 100px;
+  height: 80px;
   border-width: 0;
   border-style: solid;
   border-top: 1px solid transparent;
@@ -2864,13 +2864,13 @@ a.subdued {
     overflow: hidden;
     margin: 0 10px;
     min-width: 30px;
-    height: 99px;
+    height: 79px;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 17px;
     font-weight: 500;
-    line-height: 100px; }
+    line-height: 80px; }
     .bar .title.title-left {
       text-align: left; }
     .bar .title.title-right {
@@ -3133,7 +3133,7 @@ a.subdued {
   border-top-width: 1px;
   border-bottom-width: 0;
   background-position: top;
-  height: 100px; }
+  height: 80px; }
   .bar-footer.item-input-inset {
     position: absolute; }
 
@@ -3141,14 +3141,14 @@ a.subdued {
   padding: 0; }
 
 .bar-subheader {
-  top: 100px;
+  top: 80px;
   display: block;
-  height: 100px; }
+  height: 80px; }
 
 .bar-subfooter {
-  bottom: 100px;
+  bottom: 80px;
   display: block;
-  height: 100px; }
+  height: 80px; }
 
 .nav-bar-block {
   position: absolute;
@@ -3791,7 +3791,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
 /* Allow parent element to have tabs-top */
 /* If you change this, change platform.scss as well */
 .tabs-top > .tabs, .tabs.tabs-top {
-  top: 100px;
+  top: 80px;
   padding-top: 0;
   background-position: bottom;
   border-top-width: 0;
@@ -4002,19 +4002,19 @@ ion-tabs.tabs-color-active-dark .tab-item {
   .modal.ng-leave-active {
     bottom: 0; }
   .platform-ios.platform-cordova .modal-wrapper .modal .bar-header:not(.bar-subheader) {
-    height: 100px; }
+    height: 80px; }
     .platform-ios.platform-cordova .modal-wrapper .modal .bar-header:not(.bar-subheader) > * {
       margin-top: 0; }
   .platform-ios.platform-cordova .modal-wrapper .modal .tabs-top > .tabs, .platform-ios.platform-cordova .modal-wrapper .modal .tabs.tabs-top {
-    top: 100px; }
+    top: 80px; }
   .platform-ios.platform-cordova .modal-wrapper .modal .has-header, .platform-ios.platform-cordova .modal-wrapper .modal .bar-subheader {
-    top: 100px; }
+    top: 80px; }
   .platform-ios.platform-cordova .modal-wrapper .modal .has-subheader {
-    top: 200px; }
+    top: 160px; }
   .platform-ios.platform-cordova .modal-wrapper .modal .has-tabs-top {
-    top: 149px; }
+    top: 129px; }
   .platform-ios.platform-cordova .modal-wrapper .modal .has-header.has-subheader.has-tabs-top {
-    top: 249px; } }
+    top: 209px; } }
 
 .modal-open {
   pointer-events: none; }
@@ -6881,21 +6881,21 @@ a.button {
  * Platform specific tweaks
  */
 .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) {
-  height: 120px; }
+  height: 100px; }
   .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader).item-input-inset .item-input-wrapper {
     margin-top: 19px !important; }
   .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
     margin-top: 20px; }
 .platform-ios.platform-cordova:not(.fullscreen) .tabs-top > .tabs, .platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top {
-  top: 120px; }
+  top: 100px; }
 .platform-ios.platform-cordova:not(.fullscreen) .has-header, .platform-ios.platform-cordova:not(.fullscreen) .bar-subheader {
-  top: 120px; }
+  top: 100px; }
 .platform-ios.platform-cordova:not(.fullscreen) .has-subheader {
-  top: 220px; }
+  top: 180px; }
 .platform-ios.platform-cordova:not(.fullscreen) .has-tabs-top {
-  top: 169px; }
+  top: 149px; }
 .platform-ios.platform-cordova:not(.fullscreen) .has-header.has-subheader.has-tabs-top {
-  top: 269px; }
+  top: 229px; }
 .platform-ios.platform-cordova.status-bar-hide {
   margin-bottom: 20px; }
 
@@ -7042,22 +7042,30 @@ button {
   position: absolute;
   max-width: 100%;
   max-height: 100%;
-  margin: auto auto; }
+  margin: auto auto;
+  left: 50%;
+  visibility: hidden; }
 #pg--iteration canvas {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
+  display: block;
   height: 100%;
-  z-index: 1; }
-#pg--iteration button.addIteration {
-  position: fixed;
-  bottom: 1rem;
+  width: 100%;
   left: 50%;
-  margin-left: -50px;
-  width: 100px;
+  z-index: 1; }
+#pg--iteration div#iterationBg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #222; }
+  #pg--iteration div#iterationBg.add-iteration {
+    bottom: 80px; }
+#pg--iteration button.check {
+  position: fixed;
+  bottom: 60px;
+  right: 30px;
+  width: 75px;
   z-index: 2; }
 #pg--iteration div.instructions {
   z-index: 2;
@@ -7075,6 +7083,8 @@ button {
     font-size: 2em; }
     #pg--iteration div.instructions h2 span {
       float: right; }
+      #pg--iteration div.instructions h2 span button {
+        padding: 2px 0px 2px 10px; }
   #pg--iteration div.instructions button.ion-close {
     font-size: 1em;
     line-height: normal;
@@ -7086,12 +7096,34 @@ button {
     line-height: normal; }
   @media (max-width: 767px) {
     #pg--iteration div.instructions {
-      font-size: 0.8em; } }
+      font-size: 1em; } }
+#pg--iteration div.bar-footer {
+  background-color: #277FE9;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  text-align: center; }
+  #pg--iteration div.bar-footer button.addIteration {
+    width: 80px;
+    margin: auto auto;
+    display: inline-block;
+    z-index: 2; }
 
 text-message > div, voice-message > div {
   position: relative;
-  margin: auto 10px auto 10px;
-  padding: 0.5rem 1rem; }
+  margin: auto 5% auto 5%; }
+  .platform-ios text-message > div, .platform-ios voice-message > div {
+    width: 95%;
+    margin: auto auto; }
 text-message div.arrow-holder, voice-message div.arrow-holder {
   z-index: -1;
   position: absolute;
@@ -7103,15 +7135,19 @@ text-message div.arrow, voice-message div.arrow {
   width: 14px;
   position: absolute;
   top: 50%;
-  padding-bottom: -33/2px; }
-text-message div.sender div.arrow, voice-message div.sender div.arrow {
-  right: 0; }
-text-message div.sender div.arrow-holder, voice-message div.sender div.arrow-holder {
-  background-color: #DDD; }
-text-message div.reciever div.arrow, voice-message div.reciever div.arrow {
-  left: 0; }
-text-message div.reciever div.arrow-holder, voice-message div.reciever div.arrow-holder {
-  background-color: #CCC; }
+  margin-top: -11px; }
+text-message div.sender, voice-message div.sender {
+  padding: 15px 25px 25px 10px; }
+  text-message div.sender div.arrow, voice-message div.sender div.arrow {
+    right: 0; }
+  text-message div.sender div.arrow-holder, voice-message div.sender div.arrow-holder {
+    background-color: #DDD; }
+text-message div.reciever, voice-message div.reciever {
+  padding: 1rem 0.75rem 1rem 1.5rem; }
+  text-message div.reciever div.arrow, voice-message div.reciever div.arrow {
+    left: 0; }
+  text-message div.reciever div.arrow-holder, voice-message div.reciever div.arrow-holder {
+    background-color: #CCC; }
 text-message p.date, voice-message p.date {
   text-transform: uppercase;
   font-size: 0.66em;
@@ -7205,24 +7241,10 @@ voice-message {
     margin-left: 0.5em; }
 
 #pg--my-collaborations div.collaborations {
-  display: -webkit-box;
-  display: -moz-box;
-  display: box;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  -moz-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-align-content: space-around;
-  -moz-align-content: space-around;
-  -ms-flex-line-pack: space-around;
-  align-content: space-around;
   width: 100%;
   height: 100%;
-  padding-top: 1rem; }
+  padding-top: 1rem;
+  margin: auto auto; }
 #pg--my-collaborations button.new-collaboration {
   width: 100px;
   margin: 2rem auto;
@@ -7230,14 +7252,14 @@ voice-message {
 #pg--my-collaborations div.collaboration {
   display: inline-block;
   cursor: pointer;
-  flex-grow: 1;
-  width: 50%;
-  padding: 3%; }
-  #pg--my-collaborations div.collaboration img {
-    width: 100%;
-    border-radius: 50%;
-    border-width: 5px;
-    border-color: #277FE9; }
+  width: 50vw; }
+  #pg--my-collaborations div.collaboration .thumbnail {
+    width: 45vw;
+    height: 45vw;
+    margin: auto auto;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 50%; }
   #pg--my-collaborations div.collaboration h2 {
     font-family: 'Futura-Bold';
     color: #277FE9;
@@ -7280,7 +7302,7 @@ ion-nav-view ion-content.has-header {
   bottom: 0;
   height: auto; }
   .view-container.has-header {
-    top: 100px; }
+    top: 80px; }
 
 .pane {
   height: auto; }
@@ -7294,13 +7316,98 @@ ion-nav-view ion-content.has-header {
     font-size: 50px !important;
     line-height: 50px !important; }
 
-button[voice-message-record] {
-  color: #277FE9;
-  font-size: 3em; }
-
 gm-side-menu img {
   border-radius: 50%; }
 
+#pg--thread div.messages {
+  padding-top: 0.5rem;
+  padding-bottom: 80px; }
+#pg--thread div.message {
+  border: none; }
+  #pg--thread div.message svg.divider {
+    display: block;
+    margin: auto auto;
+    width: 100%;
+    position: relative;
+    bottom: 17px; }
+  #pg--thread div.message new-day-message p {
+    text-transform: uppercase;
+    color: #E96246;
+    font-size: 0.75em;
+    margin: 2em 0 2em 3%; }
+#pg--thread div.choose {
+  height: 55px;
+  background-color: #277FE9;
+  padding: 0 3px 0 8px; }
+  #pg--thread div.choose button.send {
+    font-family: 'Futura-Bold';
+    color: #FFF;
+    font-size: 14px;
+    white-space: nowrap;
+    height: 55px; }
+  #pg--thread div.choose div.buttons {
+    width: 4em;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center; }
+#pg--thread form {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  width: 100%; }
+  #pg--thread form input {
+    width: 100%;
+    display: inline-block;
+    padding: 10px 10px;
+    margin-right: 4em;
+    border: none;
+    border-radius: 0;
+    background-color: #FFF;
+    line-height: normal; }
+    #pg--thread form input::-moz-placeholder {
+      color: #aaaaaa; }
+    #pg--thread form input:-ms-input-placeholder {
+      color: #aaaaaa; }
+    #pg--thread form input::-webkit-input-placeholder {
+      color: #aaaaaa;
+      text-indent: 0; }
+  #pg--thread form svg.record-light {
+    height: 15px;
+    margin-left: 1em; }
+  #pg--thread form span {
+    display: inline-block;
+    margin-left: 1.5em;
+    color: #FFF;
+    font-family: 'Futura-Bold'; }
 #pg--thread button.voice-record {
-  font-size: 6em;
-  margin-left: 20px; }
+  text-align: center;
+  width: 100%;
+  margin-left: 20px;
+  color: #FFF;
+  padding: 0;
+  padding-top: 2px;
+  margin: 0;
+  line-height: 1; }
+  #pg--thread button.voice-record svg {
+    max-height: 25px; }

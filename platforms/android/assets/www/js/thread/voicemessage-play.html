@@ -1,14 +1,14 @@
 <svg class="vm-play" ng-click="voiceMessagePlay.lineClick($event)" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 538.8 53.1" enable-background="new 0 0 538.8 53.1" xml:space="preserve">
-<g>
+<g fill="#FFF">
 	<path d="M14.3,34.3c4.2,0,7.6-3.4,7.6-7.6V11.3c0-4.2-3.4-7.6-7.6-7.6c-4.2,0-7.6,3.4-7.6,7.6v15.3C6.6,30.9,10,34.3,14.3,34.3z"/>
 	<path d="M25.5,23.5v3.1c0,6.2-5,11.2-11.2,11.2c-6.2,0-11.2-5-11.2-11.2v-3.1H0v3.1C0,34,5.6,40.1,12.7,40.8v5.7H4.3v3.1h19.9v-3.1
 		h-8.4v-5.7c7.1-0.8,12.7-6.8,12.7-14.2v-3.1H25.5z"/>
 </g>
 <line fill="none" stroke="#727272" stroke-width="2" stroke-miterlimit="10" x1="47" y1="26.5" x2="472" y2="26.5"/>
-<line class="progress" fill="none" stroke="#7DFF29" stroke-width="8" stroke-miterlimit="10" x1="47" y1="26.4" ng-attr-x2="{{ voiceMessagePlay.getPlayerPosition() }}" y2="26.4"/>
+<line voice-message-line class="progress" fill="none" stroke="#7DFF29" stroke-width="8" stroke-miterlimit="10" x1="47" y1="26.4" ng-attr-x2="{{ voiceMessagePlay.getPlayerPosition() }}" y2="26.4"/>
 <g ng-click="voiceMessagePlay.play()">
-	<circle fill="#277FE9" cx="512.2" cy="26.5" r="26.5"/>
+	<circle fill="{{ audioHasValue ? '#277FE9' : '#AAA' }}" cx="512.2" cy="26.5" r="26.5"/>
 	<polygon ng-if="!playing" fill="#FFFFFF" points="503.8,12.9 527.7,26.7 503.8,40.5 	"/>
 	<line ng-if="playing" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="507.8" y1="37.5" x2="507.8" y2="15.3"/>
 	<line ng-if="playing" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="516.7" y1="37.5" x2="516.7" y2="15.3"/>

@@ -45,14 +45,12 @@ angular.module('goodMood')
        * and adds it to the database
        */
       $addMessage: function(data){
-        console.log(data.user.$id, data.content)
         if(!data.content || !data.user){
           throw new TypeError('bad data!')
         }
         data = _.cloneDeep(data)
         data.thread = this.$id;
         data.sentAt = Firebase.ServerValue.TIMESTAMP;
-        console.log('pushing message to server', Date.now())
         var ref = fb.messages.push(data)
         ref.setPriority(this.$id)
         // $timeout(angular.noop)
@@ -94,17 +92,16 @@ angular.module('goodMood')
       // add iteration...
       data.iterations = {};
       data.iterations[iteration.$id] = true
-      // lastViewed ------ do we really need this here? Or just call open when created? 
+      // // lastViewed ------ do we really need this here? Or just call open when created? 
       data.lastViewed = {};
       data.lastViewed[Auth.currentUser.$id] = Firebase.ServerValue.TIMESTAMP;
-      // add everything else
+      // // add everything else
       data.collaboration = collaboration.$id;
       data.drawing = drawing;
       data.createdBy = Auth.currentUser.$id
       data.createdAt = Firebase.ServerValue.TIMESTAMP;
       // Create firebase object
     	var ref = Thread.ref.push(data);
-      ref.setPriority(collaboration.$id)
     	var obj = $firebase(ref, {objectFactory: ThreadFactory})
     	return obj.$asObject().$loaded()
     }
@@ -143,7 +140,11 @@ angular.module('goodMood')
       })
       return bus.flatMap(function(arr){
         return _.filter(arr, function(obj){
-          return obj.sentAt > thread.lastViewed[Auth.currentUser.$id]
+          var lastViewed = thread.lastViewed[Auth.currentUser.$id]
+          if (!lastViewed) {
+            return true
+          }
+          return obj.sentAt > lastViewed
         })
       })
     }
