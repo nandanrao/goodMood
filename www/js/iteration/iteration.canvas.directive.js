@@ -1,10 +1,9 @@
 angular.module('goodMood')
-	.directive('iterationCanvas', function ($ionicGesture, $interval){
+	.directive('iterationCanvas', function ($ionicGesture, $interval, $window){
 		return {
 			restrict: 'A',
 			link: function (scope, el, attrs){
 				console.log('iteration id', scope.iteration.iteration$id)
-
 				function resizeCanvas(){
 					el[0].style.width = scope.imageSize.width + 'px';
 					el[0].style.height = scope.imageSize.height + 'px';	
@@ -23,64 +22,78 @@ angular.module('goodMood')
 				
 				var project = paper.project
 				var tool = new paper.Tool();
-				var counting;
-				var circle;
-				var position;
+				var counting,
+						path,
+						position,
+						pathStart,
+						count
 
 					
-					// TODO: Fix numbers/math on animation. CLEAN UP!
-					tool.onMouseDown = function(e){
-						position = e.point;
-						var i = 0;
-						counting = $interval(function(){
-							i++
-							if (i === 2){
-								drawCircle(position)	
-								paper.view.onFrame = function(event){
-									circle.opacity += .025
-									circle.scale(.95)
-								}
+				tool.onMouseDown = function(e){
+					position = e.point;
+					pathStart = position.add(new paper.Point(0,-50))
+					count = -45;
+					var i = 0;
+					counting = $window.setInterval(function(){
+						i++
+						if (i === 2){
+							startPath(position)	
+							paper.view.onFrame = function(event){
+								growPath()
 							}
-							if (i === 8){
-								paper.view.onFrame = angular.noop	
-								var x = position.x/paper.view.bounds.width
-								var y = position.y/paper.view.bounds.height
-								console.log('add thread!', x, y)
-								console.log('iteration controller?', scope.iteration)
-								// TODO: store bounds to deal with different frame size? 
-								scope.iteration.addThread({x: x, y: y})
-							}
-						}, 100, 8)
-					}
-
-					tool.onMouseDrag = function(e){
-						position = e.point;
-						moveCircle(e.point)
-					}
-
-					tool.onMouseUp = function(e){
-						if (circle){
-							circle.remove()
 						}
-						paper.view.onFrame = angular.noop
-						circle = undefined;
-						$interval.cancel(counting)
-					}
-
-					function drawCircle(point){
-						circle = new paper.Path.Circle({
-							center: point,
-							fillColor: '#b6ff29',		
-							radius: 250,
-							opacity: 0,
-						});
-					}
-
-					function moveCircle(point){
-						if (circle){
-							circle.position = point
+						if (i === 8){
+							console.log('-----8 count finished', Date.now())
+							paper.view.onFrame = angular.noop	
+							var x = position.x/paper.view.bounds.width
+							var y = position.y/paper.view.bounds.height
+							scope.iteration.addThread({x: x, y: y})
+							$window.clearInterval(counting)
 						}
+					}, 100)
+				}
+
+				tool.onMouseDrag = function(e){
+					// position = e.point;
+					movePosition(e.point)
+				}
+
+				tool.onMouseUp = function(e){
+					if (path){
+						path.remove()
 					}
+					paper.view.onFrame = angular.noop
+					path = undefined;
+					$window.clearInterval(counting)
+				}
+
+				function startPath(position){
+					path = new paper.Path()
+					path.strokeColor = '#277FE9';
+					path.strokeWidth = 15;
+					path.opacity = .85;
+				}
+
+				
+				function growPath(){
+					var vector = new paper.Point({
+						angle: count * 12,
+						length: 50
+					});
+					var z = position.add(vector)
+					path.add(z)
+					pathStart = pathStart.add(vector);
+					path.smooth()
+					count++;
+				}
+
+				function movePosition(point){
+					// TODO: move circle as mouse moves!
+				}
+
+				var testpoint = new paper.Point(20,20)
+				var test2 = new paper.Point(10,10)
+				console.log(testpoint + test2)
 
 
 				// Helper function to create ionicgesture listener -- move to utils?

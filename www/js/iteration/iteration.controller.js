@@ -2,8 +2,6 @@ angular.module('goodMood')
 	.controller('IterationCtrl', function ($firebase, $scope, $rootScope, $window, $log, $timeout, $state, $ionicLoading, $ionicHistory, collaboration, iteration, iterations, threads, Thread, image){
 		var vm = this;
 
-		this.iteration$id = iteration.$id
-
 		// Create iterations array for inter-iteration navigation
 		$scope.iterations = iterations;
 		setIterationArray()
@@ -21,6 +19,10 @@ angular.module('goodMood')
 		$scope.threads = threads;
 		$scope.image = image;
 		$scope.instructionsRead = false;
+
+		$scope.$watch(function(){
+			console.count('iteration digest run')
+		})
 
 		this.hasThreads = function(){
 			return _.size(threads) > 0
@@ -61,8 +63,8 @@ angular.module('goodMood')
 		}
 
 		this.addThread = function(coords){
+			console.log('-----add thread called', Date.now())
 			$ionicLoading.show();
-			console.log(iteration.$id)
 			Thread.create(coords, iteration, collaboration)
 				.then(_.partialRight(iteration.$addThread.bind(iteration)))
 				.then(function(thread){

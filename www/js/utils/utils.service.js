@@ -33,6 +33,7 @@ angular.module('goodMood')
     }
 
     utils.formatDate = function(str, options){
+      console.count('formatDate called')
       var options = options || {
         month: 'short',  
         day: 'numeric',

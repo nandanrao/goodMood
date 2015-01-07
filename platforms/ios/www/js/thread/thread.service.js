@@ -141,7 +141,11 @@ angular.module('goodMood')
       })
       return bus.flatMap(function(arr){
         return _.filter(arr, function(obj){
-          return obj.sentAt > thread.lastViewed[Auth.currentUser.$id]
+          var lastViewed = thread.lastViewed[Auth.currentUser.$id]
+          if (!lastViewed) {
+            return true
+          }
+          return obj.sentAt > lastViewed
         })
       })
     }

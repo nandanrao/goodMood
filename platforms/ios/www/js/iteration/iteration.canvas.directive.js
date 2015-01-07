@@ -100,29 +100,26 @@ angular.module('goodMood')
 				];
 
 				var removers;
-
-				console.log("canvas entering", scope)
-
 				scope.$on('$ionicView.enter', function(){
-					console.log('view enter')
+					// console.log('view enter')
 					removers = _.map(listenerArray, createListener)
 				})
 
 				scope.$on('$ionicView.beforeLeave', function(){
-					console.log('view beforeleave')
+					// console.log('view beforeleave')
 					_.forEach(removers, function(fn){
 						fn()
 					})
 				})
 				
 				scope.$on('$ionicView.beforeEnter', function(){
-					console.log('beforeenter', project, tool)
+					// console.log('beforeenter', project, tool)
 					project.activate()
 					tool.activate()
 				})
 
 				scope.$on('$ionicView.unloaded', function(){
-					console.log("unloaded", project._view._id, project, tool)
+					// console.log("unloaded", project._view._id, project, tool)
 					tool.remove();
 					project.remove();
 				})

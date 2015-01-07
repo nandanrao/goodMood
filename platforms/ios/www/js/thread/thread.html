@@ -7,9 +7,7 @@
 		<div class="messages">
 			<div class="message" ng-repeat="message in messages">
 				<new-day-message ng-if="thread.isNewDay(message, $index)"></new-day-message>
-				
-
-				<text-message ng-if="message.type === 'text'" message="{{ message }}">
+				<text-message ng-if="message.type === 'text'">
 				</text-message>
 				<voice-message ng-if="message.type === 'audio'">
 				</voice-message>

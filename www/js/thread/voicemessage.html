@@ -2,7 +2,7 @@
 <message-divider ng-if="thread.isPreviousSender(message, $index) && !thread.isNewDay(message, $index)"></message-divider>
 	<voice-message-audio></voice-message-audio>
 	<p class="date">
-		{{ formatDate(message.sentAt) }}
+		{{ ::formatDate(message.sentAt) }}
 	</p>
 	<voice-message-play></voice-message-play>
 	<div class="arrow-holder">

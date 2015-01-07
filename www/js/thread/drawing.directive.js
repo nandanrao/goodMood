@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.directive('drawing', function ($state, Thread){
+	.directive('drawing', function ($state, $timeout, Thread){
 		return {
 			restrict: 'E',
 			link: function(scope, el, attrs){
@@ -20,10 +20,19 @@ angular.module('goodMood')
 
 					// move position of circles on window resize!
 					scope.$watchCollection('imageSize', function(curr){
-						var x = attrs.x*curr.width
-						var y = attrs.y*curr.height
-						shape.position = new paper.Point(Number(x), Number(y))
+						var x = attrs.x*curr.width;
+						var y = attrs.y*curr.height;
+						var point = new paper.Point(x,y);
+						shape.position = point;
+						textItem.position = point;
 					})
+
+					textItem = new paper.PointText(point);
+					textItem.fillColor = '#277FE9';
+					textItem.justification = 'center';
+					textItem.fontFamily = 'Futura-Bold';
+					textItem.fontSize = '26px';
+					textItem.content = ''
 
 					// This is needed to update the view immediately!
 					paper.view.update()
@@ -33,12 +42,6 @@ angular.module('goodMood')
 						console.log('clicked!')
 						$state.go('thread', {t_id: attrs.id})
 					}
-
-					textItem = new paper.PointText(point);
-					textItem.fillColor = '#277FE9';
-					textItem.justification = 'center';
-					textItem.fontFamily = 'Futura-Bold';
-					textItem.fontSize = '22px';
 
 					// Remove the shape, with its listeners, on dom removal,
 					// this allows the elements to react to server-side data events

@@ -36,8 +36,6 @@ angular.module('goodMood')
 			console.log('thread digest run')
 		})
 
-		console.log('thread scope looks like this', $scope)
-
 		this.isNewDay = function(msg, i){
 			if (i === 0) {
 				return false

@@ -4,6 +4,7 @@ angular.module('goodMood')
 			restrict: 'E',
 			templateUrl: 'thread/voicemessage.html',
 			controllerAs: 'voiceMessage',
+			scope: true,
 			controller: function ($scope, $element){
 			},
 			link: function (scope, el, attrs){

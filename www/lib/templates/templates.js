@@ -304,9 +304,7 @@ module.run(["$templateCache", function($templateCache) {
     "		<div class=\"messages\">\n" +
     "			<div class=\"message\" ng-repeat=\"message in messages\">\n" +
     "				<new-day-message ng-if=\"thread.isNewDay(message, $index)\"></new-day-message>\n" +
-    "				\n" +
-    "\n" +
-    "				<text-message ng-if=\"message.type === 'text'\" message=\"{{ message }}\">\n" +
+    "				<text-message ng-if=\"message.type === 'text'\">\n" +
     "				</text-message>\n" +
     "				<voice-message ng-if=\"message.type === 'audio'\">\n" +
     "				</voice-message>\n" +
@@ -375,7 +373,7 @@ module.run(["$templateCache", function($templateCache) {
     "<message-divider ng-if=\"thread.isPreviousSender(message, $index) && !thread.isNewDay(message, $index)\"></message-divider>\n" +
     "	<voice-message-audio></voice-message-audio>\n" +
     "	<p class=\"date\">\n" +
-    "		{{ formatDate(message.sentAt) }}\n" +
+    "		{{ ::formatDate(message.sentAt) }}\n" +
     "	</p>\n" +
     "	<voice-message-play></voice-message-play>\n" +
     "	<div class=\"arrow-holder\">\n" +

@@ -3,6 +3,10 @@ angular.module('goodMood')
 		
 		$scope.collaborations = collaborations;
 
+		$scope.$watch(function(){
+			console.count('mycolaborations scope digest')
+		})
+
 		this.getNewMessages = function(collaboration){
 			return _.size(collaboration._newMessages)
 		}
