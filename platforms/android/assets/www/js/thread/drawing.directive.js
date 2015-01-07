@@ -39,7 +39,9 @@ angular.module('goodMood')
 
 					// Click event for the shape
 					shape.onClick = function(event){
-						console.log('clicked!')
+						$state.go('thread', {t_id: attrs.id})
+					}
+					textItem.onClick = function(event){
 						$state.go('thread', {t_id: attrs.id})
 					}
 

@@ -36,8 +36,6 @@
 		57CDB750019E4F01B544FE49 /* CDVCookies.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF5BCF53F614C4E84C2A9E4 /* CDVCookies.m */; };
 		58A9D41EB4604FC18FE86203 /* CDVCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F65866A6F145D68E0784E1 /* CDVCapture.m */; };
 		5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */; };
-		5B837DAF9BCE445692002610 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D43B26AEFE4F6DB5E3644D /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		5DA06A75ADD6421A95DA2232 /* FacebookConnectPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1A9C57A9DE4F23BA48AA5E /* FacebookConnectPlugin.m */; };
 		63B215FB2B784214AE443A7E /* CDVLocalFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 472B0BA7CE9B49E69BBECA62 /* CDVLocalFilesystem.m */; };
 		6A5F61475E5D456F9393F161 /* CDVSpinnerDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A868CED9EF404EF88ABD1BD1 /* CDVSpinnerDialog.m */; };
 		6DA5A9EE92494A82B83CC971 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 73791ADE67D44AB1874CC01F /* CDVDevice.m */; };
@@ -52,17 +50,14 @@
 		7E7966E51810823500FA85AD /* icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DB1810823500FA85AD /* icon-76@2x.png */; };
 		7E7966E61810823500FA85AD /* icon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DC1810823500FA85AD /* icon-small.png */; };
 		7E7966E71810823500FA85AD /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DD1810823500FA85AD /* icon-small@2x.png */; };
-		8C3A8B2F00854A0CB0F80CCA /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A27AA672F5B4119BFA05AB0 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		928230CB370343D9BC1A4559 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B993FF057C124B9AB5CEDBE5 /* libsqlite3.dylib */; };
 		9362458C5AC3449B8944B56E /* CDVCapture.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4378048938754170868527A6 /* CDVCapture.bundle */; };
 		97D63C723C8C47889FA21DE7 /* CDVAssetLibraryFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 458655405191480CB6EB3EDF /* CDVAssetLibraryFilesystem.m */; };
-		99D4C763E7364ACA8FD00C14 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E9DA98CEC149CFA49A1793 /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B39ACFAE8E9748189CA7976E /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = F925CE75AA4F4200A03BA414 /* CDVInAppBrowser.m */; };
 		B56FB1389BBE4358ACFD26CD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A87C3DA0FFDA4F25BA1ABF59 /* CoreLocation.framework */; };
 		C532C1E96F734B11A4F1B355 /* CDVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 0890FFEA09C84EEB989B5F5C /* CDVFile.m */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
-		DD14D2A968F24D348E037E99 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8A293A35A5489F864E118B /* FacebookSDK.framework */; };
 		E3B43E7A3FD243FFABF76DEB /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F10DF154AB054FDF8527CFB2 /* CDVLogger.m */; };
+		307D22A3B3D5464C8850D1D4 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAA525587BBD41C0B59B950B /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +162,7 @@
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = goodMood/config.xml; sourceTree = "<group>"; };
 		F8D84515E6874F5C8075E437 /* CDVDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVDevice.h; path = org.apache.cordova.device/CDVDevice.h; sourceTree = "<group>"; };
 		F925CE75AA4F4200A03BA414 /* CDVInAppBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVInAppBrowser.m; path = org.apache.cordova.inappbrowser/CDVInAppBrowser.m; sourceTree = "<group>"; };
+		EAA525587BBD41C0B59B950B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "FacebookSDK.framework"; path = "build/device/goodMood.app/Plugins/com.phonegap.plugins.facebookconnect/FacebookSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,11 +176,7 @@
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
 				49BA8402DF57428EBF4D67A6 /* ImageIO.framework in Frameworks */,
 				B56FB1389BBE4358ACFD26CD /* CoreLocation.framework in Frameworks */,
-				DD14D2A968F24D348E037E99 /* FacebookSDK.framework in Frameworks */,
-				928230CB370343D9BC1A4559 /* libsqlite3.dylib in Frameworks */,
-				8C3A8B2F00854A0CB0F80CCA /* Social.framework in Frameworks */,
-				5B837DAF9BCE445692002610 /* Accounts.framework in Frameworks */,
-				99D4C763E7364ACA8FD00C14 /* Security.framework in Frameworks */,
+				307D22A3B3D5464C8850D1D4 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +257,7 @@
 				4A27AA672F5B4119BFA05AB0 /* Social.framework */,
 				08D43B26AEFE4F6DB5E3644D /* Accounts.framework */,
 				E2E9DA98CEC149CFA49A1793 /* Security.framework */,
+				EAA525587BBD41C0B59B950B /* FacebookSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -518,7 +511,6 @@
 				B39ACFAE8E9748189CA7976E /* CDVInAppBrowser.m in Sources */,
 				068DAB9D4AEE4535883BE21A /* CDVSound.m in Sources */,
 				58A9D41EB4604FC18FE86203 /* CDVCapture.m in Sources */,
-				5DA06A75ADD6421A95DA2232 /* FacebookConnectPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,6 +536,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"goodMood/Plugins/com.phonegap.plugins.facebookconnect\"",
+					"\"build/device/goodMood.app/Plugins/com.phonegap.plugins.facebookconnect\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -582,6 +575,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"goodMood/Plugins/com.phonegap.plugins.facebookconnect\"",
+					"\"build/device/goodMood.app/Plugins/com.phonegap.plugins.facebookconnect\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "goodMood/goodMood-Prefix.pch";

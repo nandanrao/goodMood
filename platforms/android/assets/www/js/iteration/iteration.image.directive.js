@@ -35,8 +35,6 @@ angular.module('goodMood')
 					element[0].style['margin-left'] = -scope.imageSize.width/2 + 'px'
 					scope.$apply();
 				}
-
-				console.log('done with iteration link', Date.now())
 			}
 		}
 	})
