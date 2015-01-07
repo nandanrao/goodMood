@@ -167,6 +167,7 @@ angular.module('goodMood', [
     $state.go("login", {notify: false});
   });
   $rootScope.$on('$stateChangeStart', function(event, toState){
+    $ionicLoading.show()
     // console.log('statechange start', toState.name)
   })
 

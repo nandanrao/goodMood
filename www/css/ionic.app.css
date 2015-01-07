@@ -7061,6 +7061,13 @@ button {
   background-color: #222; }
   #pg--iteration div#iterationBg.add-iteration {
     bottom: 80px; }
+  #pg--iteration div#iterationBg button.prev-iteration {
+    position: absolute;
+    top: 0;
+    width: 100px;
+    left: 50%;
+    margin-left: -50px;
+    padding: 10px; }
 #pg--iteration button.check {
   position: fixed;
   bottom: 60px;

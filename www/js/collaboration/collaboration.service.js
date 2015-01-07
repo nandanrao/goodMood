@@ -154,7 +154,6 @@ angular.module('goodMood')
         var deferred = $q.defer();
         var stream = Collaboration.getNewMessagesAsStream(this.$id)
         stream.onValue(function(val){
-          console.log('onvalue in stream for getnewmessages!', self.$id)
           deferred.resolve(newMessages)
           _.forEach(newMessages, function(val, key, col){
             delete col[key]
@@ -233,7 +232,6 @@ angular.module('goodMood')
       var ref = fb.threads.orderByChild('collaboration').equalTo(id)
       return Bacon.fromEventTarget(ref, 'value')
         .map(function(snap){
-          console.log("mapping over fb value")
           return _.keys(snap.val())
         })
     }

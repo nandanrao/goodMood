@@ -8,21 +8,26 @@ angular.module('goodMood')
             scope: true,
 			controller: function ($scope, $element){
 				var vm = this;				
-				var media, fileTransferDir, fileDir;
+				var media, 
+            fileTransferDir, 
+            fileDir,
+            extension
 
 				if (ionic.Platform.isAndroid()) {
-    			fileTransferDir = cordova.file.externalDataDirectory
-					fileDir = /Android.*/.exec(fileTransferDir)[0]
+    			fileTransferDir = cordova.file.externalDataDirectory;
+					fileDir = /Android.*/.exec(fileTransferDir)[0];
+          extension = '.wav';
 	    	}
     		if (ionic.Platform.isIOS()) {
     			fileTransferDir = cordova.file.documentsDirectory.replace('file://', '') + '/NoCloud/';
     			fileDir = 'NoCloud/';
+          extension = '.wav';
     		}
 
     		function cordovaRecord(){
     			if (!$scope.recording.currently){
     				console.log('mic clicked - start recording')	
-    				var fileName = utils.uuid() + '.wav'
+    				var fileName = utils.uuid() + extension
     				var src = fileTransferDir + fileName
     				var fileSrc = fileDir + fileName;
     				var dataURI;

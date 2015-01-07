@@ -1085,6 +1085,7 @@
          * notifies listeners registered with $watch
          */
         $$notify: function() {
+          // console.count('-------FB---------')
           var self = this, list = this.$$conf.listeners.slice();
           // be sure to do this after setting up data and init state
           angular.forEach(list, function (parts) {
