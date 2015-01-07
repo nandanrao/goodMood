@@ -33,7 +33,7 @@ angular.module('goodMood')
 		}
 
 		$scope.$watch(function(){
-			console.log('thread digest run')
+			console.count('thread digest run')
 		})
 
 		this.isNewDay = function(msg, i){

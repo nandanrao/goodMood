@@ -7250,6 +7250,7 @@ voice-message {
   margin: 2rem auto;
   display: block; }
 #pg--my-collaborations div.collaboration {
+  position: relative;
   display: inline-block;
   cursor: pointer;
   width: 50vw; }
@@ -7265,6 +7266,11 @@ voice-message {
     color: #277FE9;
     text-align: center;
     font-size: 1em; }
+  #pg--my-collaborations div.collaboration svg {
+    height: 3em;
+    position: absolute;
+    top: 3%;
+    right: 3%; }
 
 .bar .title {
   font-family: 'Futura-Bold';

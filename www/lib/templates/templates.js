@@ -231,9 +231,32 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("sidemenu/sidemenu.html",
-    "<button ng-click=\"sidemenu.logout()\">logout</button>\n" +
-    "	<p>{{ user.displayName }}</p>\n" +
-    "<img ng-src=\"{{ user.picture }}\">");
+    "<div id=\"pg--sidemenu\">\n" +
+    "	<div class=\"profile\">\n" +
+    "		<img ng-src=\"{{ user.picture }}\">\n" +
+    "		<h2>{{ user.displayName }}</h2>\n" +
+    "	</div>	\n" +
+    "\n" +
+    "\n" +
+    "	<ul class=\"options\">\n" +
+    "		<li>\n" +
+    "			<button ng-click=\"sidemenu.logout()\">\n" +
+    "				<span>logout</span>\n" +
+    "				<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
+    "					 viewBox=\"0 0 33.9 33.9\" enable-background=\"new 0 0 33.9 33.9\" xml:space=\"preserve\">\n" +
+    "				<g>\n" +
+    "					<circle fill=\"none\" stroke=\"#E85757\" stroke-width=\"3\" stroke-miterlimit=\"10\" cx=\"17\" cy=\"17\" r=\"15.5\"/>\n" +
+    "					<line fill=\"none\" stroke=\"#E85757\" stroke-width=\"3\" stroke-miterlimit=\"10\" x1=\"6\" y1=\"27.9\" x2=\"27.9\" y2=\"6\"/>\n" +
+    "				</g>\n" +
+    "				</svg>\n" +
+    "\n" +
+    "			</button>\n" +
+    "		</li>	\n" +
+    "	</ul>\n" +
+    "	\n" +
+    "</div>\n" +
+    "\n" +
+    "");
 }]);
 })();
 

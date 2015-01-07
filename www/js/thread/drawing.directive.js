@@ -4,6 +4,7 @@ angular.module('goodMood')
 			restrict: 'E',
 			link: function(scope, el, attrs){
 				var textItem;
+				var messageBus;
 
 				scope.imageLoaded.then(function(){
 					var x = attrs.x*scope.imageSize.width
@@ -45,22 +46,36 @@ angular.module('goodMood')
 						$state.go('thread', {t_id: attrs.id})
 					}
 
+					messageBus = Thread.getNewMessagesAsStream(attrs.id).onValue(function(val){
+						var num = _.size(val)
+						textItem.content = num > 0 ? num : ''
+						if (paper){
+							paper.view.update()	
+						}
+					})
+
 					// Remove the shape, with its listeners, on dom removal,
 					// this allows the elements to react to server-side data events
 					el.on('$destroy', function(){
 						if (shape.view){
 							shape.remove()	
 							paper.view.update()
+							messageBus.end()
 						}
 					})
 				})
 				
 				// TODO: this is tightly coupled with scope relationship -- somehow fix? 
 				scope.$parent.$on('$ionicView.enter', function(){
+					if (messageBus) {
+						messageBus.end()
+					}
 					Thread.getNewMessagesAsStream(attrs.id).onValue(function(val){
 						var num = _.size(val)
 						textItem.content = num > 0 ? num : ''
-						paper.view.update()
+						if (paper){
+							paper.view.update()	
+						}
 					})
 				})
 

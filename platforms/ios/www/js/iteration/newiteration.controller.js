@@ -3,13 +3,12 @@ angular.module('goodMood')
 		var vm = this;
 		this.isDesktop = utils.isDesktop
 
-
 		this.cancel = function(){
 			$ionicHistory.goBack()
 		}
 
 		this.getViewTitle = function(){
-			if (collaboration.iterations && collaboration.iterations.length > 1){
+			if (collaboration.iterations && _.size(collaboration.iterations) > 1){
 				return 'nueva iteracion'
 			}
 			else {
@@ -19,16 +18,13 @@ angular.module('goodMood')
 
 		this.createIteration = function(imageDataLoaded){
 			$ionicLoading.show();
-
 			var image, DataURI;
 			var imageCreated = Image.create(false)
-
 	    $q.all({
 	    	image: imageCreated,
 	    	dataURI: imageDataLoaded
 	    })
     	.then(function(results){
-    		console.log('imageread and imagecreated', Date.now())
     		dataURI = results.dataURI;
     		image = results.image;
     		return Iteration.create({
@@ -38,11 +34,9 @@ angular.module('goodMood')
 	    })
 	    .then(_.partialRight(collaboration.$addIteration.bind(collaboration)))
 	    .then(function(iteration){
-	    	console.log('update image inst', Date.now())
 	    	image.$inst().$set(dataURI).then(function(obj){
 	    		console.log('image saved', Date.now())
 	    	})
-	    	console.log('state go iteration view', Date.now())
 	    	$state.go('iteration', {
 	    		i_id: iteration.$id,
 	    		c_id: collaboration.$id
@@ -76,7 +70,6 @@ angular.module('goodMood')
 		function getPicture (options){
 			var pictureRecieved = $cordovaCamera.getPicture(pictureOptions)
 			var imageData = pictureRecieved.then(function(datURI){
-				console.log('got data from cordovaCamera')
 					return "data:image/jpeg;base64," + datURI
 				})
 			vm.createIteration(imageData)

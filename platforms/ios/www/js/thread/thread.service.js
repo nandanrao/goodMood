@@ -92,17 +92,16 @@ angular.module('goodMood')
       // add iteration...
       data.iterations = {};
       data.iterations[iteration.$id] = true
-      // lastViewed ------ do we really need this here? Or just call open when created? 
+      // // lastViewed ------ do we really need this here? Or just call open when created? 
       data.lastViewed = {};
       data.lastViewed[Auth.currentUser.$id] = Firebase.ServerValue.TIMESTAMP;
-      // add everything else
+      // // add everything else
       data.collaboration = collaboration.$id;
       data.drawing = drawing;
       data.createdBy = Auth.currentUser.$id
       data.createdAt = Firebase.ServerValue.TIMESTAMP;
       // Create firebase object
     	var ref = Thread.ref.push(data);
-      ref.setPriority(collaboration.$id)
     	var obj = $firebase(ref, {objectFactory: ThreadFactory})
     	return obj.$asObject().$loaded()
     }

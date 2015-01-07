@@ -7272,59 +7272,6 @@ voice-message {
     top: 3%;
     right: 3%; }
 
-.bar .title {
-  font-family: 'Futura-Bold';
-  font-size: 22px; }
-
-ion-view {
-  background-color: #fff; }
-
-ion-header-bar .buttons {
-  display: -webkit-box;
-  display: -moz-box;
-  display: box;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  align-items: center; }
-  ion-header-bar .buttons button {
-    color: #FFF; }
-    ion-header-bar .buttons button::before {
-      font-size: 28px;
-      line-height: 28px; }
-
-ion-nav-view ion-content.has-header {
-  top: 0 !important; }
-
-.view-container {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: auto; }
-  .view-container.has-header {
-    top: 80px; }
-
-.pane {
-  height: auto; }
-
-.gm-nav-bar {
-  color: #FFF;
-  background-color: #277FE9; }
-  .gm-nav-bar .icon {
-    color: #FFF; }
-  .gm-nav-bar .ion-navicon::before {
-    font-size: 50px !important;
-    line-height: 50px !important; }
-
-gm-side-menu img {
-  border-radius: 50%; }
-
 #pg--thread div.messages {
   padding-top: 0.5rem;
   padding-bottom: 80px; }
@@ -7336,6 +7283,8 @@ gm-side-menu img {
     width: 100%;
     position: relative;
     bottom: 17px; }
+    .reciever #pg--thread div.message svg.divider rect {
+      fill: #000; }
   #pg--thread div.message new-day-message p {
     text-transform: uppercase;
     color: #E96246;
@@ -7417,3 +7366,99 @@ gm-side-menu img {
   line-height: 1; }
   #pg--thread button.voice-record svg {
     max-height: 25px; }
+
+gm-side-menu {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #DDD; }
+  gm-side-menu div.profile {
+    background-color: #277FE9;
+    padding-bottom: 0.5em;
+    padding-top: 3em; }
+    gm-side-menu div.profile img {
+      border-radius: 50%;
+      width: 50%;
+      height: 50%;
+      margin: auto auto;
+      display: block;
+      padding: 0 0 0.5em 0; }
+    gm-side-menu div.profile h2 {
+      font-family: 'Futura-Bold';
+      color: #FFF;
+      font-size: 1.666em;
+      line-height: 1;
+      margin: 0;
+      text-align: center;
+      text-transform: lowercase; }
+  gm-side-menu ul.options {
+    margin: 0 1em; }
+    gm-side-menu ul.options li {
+      border-bottom: 1px solid #444; }
+      gm-side-menu ul.options li button {
+        text-transform: uppercase;
+        text-align: left;
+        display: block;
+        padding: 2em 0;
+        width: 100%; }
+        gm-side-menu ul.options li button span {
+          line-height: 1.5em; }
+      gm-side-menu ul.options li svg {
+        float: right;
+        width: 1.5em; }
+
+body {
+  color: #222; }
+
+.bar .title {
+  font-family: 'Futura-Bold';
+  font-size: 22px; }
+
+ion-view {
+  background-color: #fff; }
+
+ion-header-bar .buttons {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center; }
+  ion-header-bar .buttons button {
+    color: #FFF; }
+    ion-header-bar .buttons button::before {
+      font-size: 28px;
+      line-height: 28px; }
+
+ion-nav-view ion-content.has-header {
+  top: 0 !important; }
+
+.view-container {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: auto; }
+  .view-container.has-header {
+    top: 80px; }
+
+.pane {
+  height: auto; }
+
+.gm-nav-bar {
+  color: #FFF;
+  background-color: #277FE9; }
+  .gm-nav-bar .icon {
+    color: #FFF; }
+  .gm-nav-bar .ion-navicon::before {
+    font-size: 50px !important;
+    line-height: 50px !important; }
