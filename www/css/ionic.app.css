@@ -7161,7 +7161,8 @@ voice-message {
     display: block;
     z-index: 1;
     max-width: 600px;
-    margin: auto auto; }
+    margin: auto auto;
+    width: 100%; }
 
 #pg--new-iteration ion-content > div {
   display: -webkit-box;
