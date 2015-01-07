@@ -5,11 +5,15 @@
 	<ion-content>
 		<div class="collaborations">
 			<div ng-repeat="collaboration in collaborations" class="collaboration" ng-click="myCollaborations.collaboration(collaboration.$id)">
-			<div class="thumbnail" ng-style="myCollaborations.setCollaborationBg(collaboration)">
-			</div>
-			<h2>
-				{{ collaboration.name }} <span> ({{ myCollaborations.getNewMessages(collaboration) }})</span>
-			</h2>
+				<div class="thumbnail" ng-style="myCollaborations.setCollaborationBg(collaboration)">
+				</div>
+				<h2>
+					{{ collaboration.name }} 
+				</h2>
+				<svg ng-if="myCollaborations.getNewMessages(collaboration) > 0" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 71.5 71.5" enable-background="new 0 0 71.5 71.5" xml:space="preserve">
+					<path opacity="0.86" fill="#FF2C2C" d="M35.7,71.5C16,71.5,0,55.4,0,35.7S16,0,35.7,0s35.7,16,35.7,35.7S55.4,71.5,35.7,71.5z"/>
+					<text transform="matrix(1 0 0 1 24.9419 46.6401)" fill="#FFFFFF" font-family="'Futura-Bold'" font-size="36">{{ myCollaborations.getNewMessages(collaboration) }}</text>
+				</svg>
 			</div>  
 		</div>
 		<button add-button class="new-collaboration" ng-click="myCollaborations.newCollaboration()" nav-direction="forward">
