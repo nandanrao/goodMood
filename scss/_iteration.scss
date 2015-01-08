@@ -81,21 +81,4 @@
       font-size: 1em;
     }
   }
-  div.bar-footer {
-    background-color: $color-a;
-    @include display(flex);
-    @include align-items(center);
-    text-align: center;
-    button.addIteration {
-      // position: fixed;
-      // bottom: 10px;
-      // left: 50%;
-      // margin-left: -50px;
-      width: 80px;
-      margin: auto auto;
-      display: inline-block;
-      // height: 100%;
-      z-index: 2;
-    }
-  }
 }
