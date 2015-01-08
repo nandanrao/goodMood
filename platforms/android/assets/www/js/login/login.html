@@ -1,7 +1,7 @@
 <ion-content>
 	<button class="button button-block button-positive button-outline" ng-click="login.authLogin('facebook')">Facebook</button>
-	<button class="button button-block button-assertive button-outline" ng-click="login.authLogin('google')">Googllle</button>
-	<button class="button button-block button-assertive button-outline" ng-if="!local" ng-click="login.showLocalLogin()">Email</button>
+	<button class="button button-block button-assertive button-outline" ng-click="login.authLogin('google')">Google</button>
+	<!-- <button class="button button-block button-assertive button-outline" ng-if="!local" ng-click="login.showLocalLogin()">Email</button> -->
 	<form name="blah"></form>
 	<div ng-show="local" class="list">
 		<form name="loginForm" no-validate class="localLoginForm" ng-submit="login.login()">

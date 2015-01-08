@@ -32,9 +32,9 @@ angular.module('goodMood')
 			return getFormerMsg(msg, i).user === msg.user
 		}
 
-		$scope.$watch(function(){
-			console.count('thread digest run')
-		})
+		// $scope.$watch(function(){
+		// 	console.count('thread digest run')
+		// })
 
 		this.isNewDay = function(msg, i){
 			if (i === 0) {

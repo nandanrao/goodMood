@@ -7,6 +7,10 @@ angular.module('goodMood')
 			console.count('mycolaborations scope digest')
 		})
 
+		$scope.$on('$destroy', function(){
+			console.log('scope destroyed')
+		})
+
 		this.getNewMessages = function(collaboration){
 			return _.size(collaboration._newMessages)
 		}

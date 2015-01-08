@@ -144,7 +144,13 @@ angular.module('goodMood')
       // into a POJO that Angular can put on its scope and watch.
       // TODO: should deferred.resolve here be AFTER the forEach loops? 
       $getNewMessages: function(){
+        var self = this;
         var newMessages = {};
+        Object.defineProperty(newMessages, '_notEmpty', {
+          value: true,
+          enumerable: false
+        })
+
         var deferred = $q.defer();
         var stream = Collaboration.getNewMessagesAsStream(this.$id)
         stream.onValue(function(val){
@@ -158,12 +164,7 @@ angular.module('goodMood')
         })
         stream.onError(function(err){
           deferred.reject(err)
-        }) 
-        // Hack so that it isn't discarded as an empty object,
-        // but still looks empty / has _.size of 0 
-        Object.defineProperty(newMessages, '_notEmpty', {
-          value: true,
-          enumerable: false
+          throw new Error('get new message stream eerr:', err)
         })
         return deferred.promise
       },
@@ -228,7 +229,7 @@ angular.module('goodMood')
 		}
 
     Collaboration.getThreadsAsStream = function(id){
-      var ref = fb.threads.startAt(id).endAt(id)
+      var ref = fb.threads.orderByChild('collaboration').equalTo(id)
       return Bacon.fromEventTarget(ref, 'value')
         .map(function(snap){
           return _.keys(snap.val())

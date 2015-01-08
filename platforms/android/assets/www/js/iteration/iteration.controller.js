@@ -37,7 +37,7 @@ angular.module('goodMood')
 		}
 
 		this.showCheck = function(){
-			return _.size(collaboration.users) < 2 && _.size(threads) > 0
+			return false
 		}
 
 		this.done = function(){
@@ -63,7 +63,6 @@ angular.module('goodMood')
 		}
 
 		this.addThread = function(coords){
-			console.log('-----add thread called', Date.now())
 			$ionicLoading.show();
 			Thread.create(coords, iteration, collaboration)
 				.then(_.partialRight(iteration.$addThread.bind(iteration)))
