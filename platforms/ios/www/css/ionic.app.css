@@ -7104,26 +7104,6 @@ button {
   @media (max-width: 767px) {
     #pg--iteration div.instructions {
       font-size: 1em; } }
-#pg--iteration div.bar-footer {
-  background-color: #277FE9;
-  display: -webkit-box;
-  display: -moz-box;
-  display: box;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  align-items: center;
-  text-align: center; }
-  #pg--iteration div.bar-footer button.addIteration {
-    width: 80px;
-    margin: auto auto;
-    display: inline-block;
-    z-index: 2; }
 
 text-message > div, voice-message > div {
   position: relative;
@@ -7253,10 +7233,6 @@ voice-message {
   height: 100%;
   padding-top: 1rem;
   margin: auto auto; }
-#pg--my-collaborations button.new-collaboration {
-  width: 100px;
-  margin: 2rem auto;
-  display: block; }
 #pg--my-collaborations div.collaboration {
   position: relative;
   display: inline-block;
@@ -7338,7 +7314,8 @@ voice-message {
   -webkit-align-items: center;
   -moz-align-items: center;
   align-items: center;
-  width: 100%; }
+  width: 100%;
+  height: 100%; }
   #pg--thread form input {
     width: 100%;
     display: inline-block;
@@ -7470,3 +7447,28 @@ ion-nav-view ion-content.has-header {
   .gm-nav-bar .ion-navicon::before {
     font-size: 50px !important;
     line-height: 50px !important; }
+
+div.bar-footer {
+  background-color: #277FE9;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  text-align: center;
+  padding: 0; }
+  div.bar-footer button {
+    padding: 0;
+    width: 65px;
+    margin: auto auto;
+    display: inline-block; }
+  #pg--my-collaborations div.bar-footer button {
+    width: 55px;
+    line-height: 0; }

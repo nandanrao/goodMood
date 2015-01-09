@@ -64,7 +64,11 @@
     <access origin="https://api.facebook.com" />
     <access origin="https://*.fbcdn.net" />
     <access origin="https://*.akamaihd.net" />
-    <name>goodMood</name>
+    <icon height="60" src="res/ios/icon-60.png" width="60" />
+    <icon height="120" src="res/ios/icon-60@2x.png" width="120" />
+    <splash height="960" src="res/screen/ios/Default@2x~iphone.png" width="640" />
+    <splash height="1136" src="res/screen/ios/Default-568h@2x~iphone.png" width="640" />
+    <name>GoodMood</name>
     <description>
         An Ionic Framework and Cordova project.
     </description>
@@ -79,4 +83,5 @@
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="BackupWebStorage" value="none" />
+    <preference name="SplashScreenDelay" value="5000" />
 </widget>

@@ -32,9 +32,18 @@ module.run(["$templateCache", function($templateCache) {
     "				</svg>\n" +
     "			</div>  \n" +
     "		</div>\n" +
-    "		<button add-button class=\"new-collaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
-    "		</button> \n" +
     "	</ion-content>\n" +
+    "	<div class=\"bar bar-footer\">\n" +
+    "		<button class=\"new-collaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
+    "			<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 119.2 119.2\" enable-background=\"new 0 0 119.2 119.2\" xml:space=\"preserve\">\n" +
+    "			<circle fill=\"#FFF\" cx=\"59.6\" cy=\"59.6\" r=\"59.6\"/>\n" +
+    "			<g>\n" +
+    "				<line fill=\"none\" stroke=\"#277FE9\" stroke-width=\"4\" stroke-miterlimit=\"10\" x1=\"59.6\" y1=\"29.1\" x2=\"59.6\" y2=\"90.1\"/>\n" +
+    "				<line fill=\"none\" stroke=\"#277FE9\" stroke-width=\"4\" stroke-miterlimit=\"10\" x1=\"90.1\" y1=\"59.6\" x2=\"29.1\" y2=\"59.6\"/>\n" +
+    "			</g>\n" +
+    "			</svg>\n" +
+    "		</button>\n" +
+    "	</div>\n" +
     "</ion-view> ");
 }]);
 })();
