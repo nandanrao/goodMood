@@ -85,16 +85,11 @@ angular.module('goodMood')
 			}
 		})
 
-		$scope.$on('$ionicView.beforeLeave', function(){
-			console.log("iteration ionic leave")
+		// This does not seem to actually be making a difference... 
+		$scope.$on('$ionicView.afterLeave', function(){
 			_.forEach(threads, function(thread){
-				console.log('this is a thread', thread)
 				thread.$destroy()
 			})			
-		})
-
-		$scope.$on('$destroy', function(){
-			console.log('iteration destroy')
 		})
 
 		$ionicLoading.hide()

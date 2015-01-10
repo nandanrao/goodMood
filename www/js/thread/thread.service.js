@@ -122,22 +122,32 @@ angular.module('goodMood')
       var thread;
       var ref = fb.messages.startAt(id).endAt(id)
       var bus = new Bacon.Bus()
+      var loadMessages = function(snap){
+        // This is ugly! Need to keep that $id somehow...
+        // var promises = [];
+        // snap.forEach(function(childSnap){
+        //   var ref = childSnap.ref()
+        //   promises.push($firebase(ref).$asObject().$loaded())
+        // })
+        // $q.all(promises).then(function(results){
+        //   bus.push(results)
+        // })
+        var arr = [];
+        snap.forEach(function(childSnap){
+          arr.push(childSnap.val())
+        })
+        bus.push(arr)
+      }
       Thread.findById(id).then(function(_thread){
         thread = _thread
-        ref.on('value', function(snap){
-          // This is ugly! Need to keep that $id somehow...
-          var promises = [];
-          snap.forEach(function(childSnap){
-            var ref = childSnap.ref()
-            promises.push($firebase(ref).$asObject().$loaded())
-          })
-          $q.all(promises).then(function(results){
-            console.count('---------------- results')
-            bus.push(results)
-          })
-        })
+        ref.on('value', loadMessages)
       })
-      return bus.flatMap(function(arr){
+
+      var off = function(){
+        ref.off('value', loadMessages)
+      }
+
+      var stream = bus.flatMap(function(arr){
         return _.filter(arr, function(obj){
           var lastViewed = thread.lastViewed[Auth.currentUser.$id]
           if (!lastViewed) {
@@ -146,6 +156,12 @@ angular.module('goodMood')
           return obj.sentAt > lastViewed
         })
       })
+
+      return {
+        stream: stream,
+        off: off
+      }
+
     }
 
 		return Thread
