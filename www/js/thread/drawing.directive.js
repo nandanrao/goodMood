@@ -4,7 +4,6 @@ angular.module('goodMood')
 			restrict: 'E',
 			link: function(scope, el, attrs){
 				var textItem;
-				var messageBus;
 
 				scope.imageLoaded.then(function(){
 					var x = attrs.x*scope.imageSize.width
@@ -60,7 +59,6 @@ angular.module('goodMood')
 						if (shape.view){
 							shape.remove()	
 							paper.view.update()
-							messageBus.end()
 						}
 					})
 				})

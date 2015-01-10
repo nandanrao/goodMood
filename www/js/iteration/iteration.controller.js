@@ -85,5 +85,17 @@ angular.module('goodMood')
 			}
 		})
 
+		$scope.$on('$ionicView.beforeLeave', function(){
+			console.log("iteration ionic leave")
+			_.forEach(threads, function(thread){
+				console.log('this is a thread', thread)
+				thread.$destroy()
+			})			
+		})
+
+		$scope.$on('$destroy', function(){
+			console.log('iteration destroy')
+		})
+
 		$ionicLoading.hide()
 	})

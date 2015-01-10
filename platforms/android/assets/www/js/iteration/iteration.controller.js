@@ -20,6 +20,10 @@ angular.module('goodMood')
 		$scope.image = image;
 		$scope.instructionsRead = false;
 
+		$scope.$on('ionic.disconnectScope', function(){
+			console.log('scope disconnected')
+		})
+
 		$scope.$watch(function(){
 			console.count('iteration digest run')
 		})

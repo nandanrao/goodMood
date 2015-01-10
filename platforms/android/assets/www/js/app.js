@@ -171,6 +171,10 @@ angular.module('goodMood', [
     // console.log('statechange start', toState.name)
   })
 
+  $rootScope.$on('$ionic.disconnectScope', function(scope){
+    console.log('disconnectScope', scope)
+  })
+
 })
 .filter('orderObjectBy', function() {
   return function (items, field, reverse) {

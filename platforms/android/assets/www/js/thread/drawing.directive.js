@@ -40,6 +40,25 @@ angular.module('goodMood')
 
 					// Click event for the shape
 					shape.onClick = function(event){
+						
+						// var parent = scope.$parent;
+						// scope.$$disconnected = true;
+						// scope.$broadcast('$ionic.disconnectScope');
+						// // See Scope.$destroy
+						// if (parent.$$childHead === scope) {
+						//   parent.$$childHead = scope.$$nextSibling;
+						// }
+						// if (parent.$$childTail === scope) {
+						//   parent.$$childTail = scope.$$prevSibling;
+						// }
+						// if (scope.$$prevSibling) {
+						//   scope.$$prevSibling.$$nextSibling = scope.$$nextSibling;
+						// }
+						// if (scope.$$nextSibling) {
+						//   scope.$$nextSibling.$$prevSibling = scope.$$prevSibling;
+						// }
+						// scope.$$nextSibling = scope.$$prevSibling = null;
+						console.log('disconnecting!')
 						$state.go('thread', {t_id: attrs.id})
 					}
 					textItem.onClick = function(event){

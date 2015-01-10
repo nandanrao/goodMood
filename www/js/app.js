@@ -114,6 +114,7 @@ angular.module('goodMood', [
           return collaboration.$getIterations()
         }],
         threads: ['iteration', function (iteration){
+          console.log('getings threads')
           return iteration.$getThreads()
         }],
         image: ['iteration', function (iteration){

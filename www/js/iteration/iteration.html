@@ -16,8 +16,6 @@
 		<drawing ng-repeat="thread in threads" id="{{ thread.$id }}" x="{{ thread.drawing.x }}" y="{{ thread.drawing.y }}">
 		</drawing>
 		<button check-button class="check" ng-if="iteration.showCheck()" ng-click="iteration.done()"></button>
-		<!-- <button class="previous" ng-if="previous" ng-click="iteration.previous()"> previous iteration </button>
-		<button class="next" ng-if="next" ng-click="iteration.next()"> next iteration </button> -->
 		<div ng-if="!iteration.hasThreads() && !instructionsRead" class="instructions">
 				<h2>instrucciones <span><button class="ion-close" ng-click="iteration.readInstructions()"></button> </span></h2>
 				<p>

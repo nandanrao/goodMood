@@ -27,6 +27,7 @@ angular.module('goodMood')
 		}
 
 		this.collaboration = function(id){
+			ionic.Utils.disconnectScope($scope)
 			var collaboration = collaborations[id]
 			var i_id = _.last(_.keys(collaboration.iterations))
 			$state.go('iteration', {c_id: id, i_id: i_id})

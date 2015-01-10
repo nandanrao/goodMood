@@ -9,6 +9,12 @@ angular.module('goodMood')
 			currently: false
 		}
 
+		$scope.scopeName = 'thread'
+
+		$scope.$on('ionic.disconnectScope', function(){
+			console.log('scope disconnected', $scope)
+		})
+
 		$scope.recording = {
 			currently: false
 		}
@@ -32,9 +38,9 @@ angular.module('goodMood')
 			return getFormerMsg(msg, i).user === msg.user
 		}
 
-		// $scope.$watch(function(){
-		// 	console.count('thread digest run')
-		// })
+		$scope.$watch(function(){
+			console.count('thread digest run')
+		})
 
 		this.isNewDay = function(msg, i){
 			if (i === 0) {
@@ -78,6 +84,25 @@ angular.module('goodMood')
 		}
 
 		this.goBack = function(){
+			var scope = $scope;
+			var parent = scope.$parent;
+			scope.$$disconnected = true;
+			scope.$broadcast('$ionic.disconnectScope');
+			// See Scope.$destroy
+			if (parent.$$childHead === scope) {
+			  parent.$$childHead = scope.$$nextSibling;
+			}
+			if (parent.$$childTail === scope) {
+			  parent.$$childTail = scope.$$prevSibling;
+			}
+			if (scope.$$prevSibling) {
+			  scope.$$prevSibling.$$nextSibling = scope.$$nextSibling;
+			}
+			if (scope.$$nextSibling) {
+			  scope.$$nextSibling.$$prevSibling = scope.$$prevSibling;
+			}
+			scope.$$nextSibling = scope.$$prevSibling = null;
+			console.log('disconnecting!')
 			$ionicHistory.goBack()
 		}
 

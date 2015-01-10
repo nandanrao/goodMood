@@ -7,8 +7,6 @@ angular.module('goodMood')
        * Open must be called every time this thread is viewed!
        */
       $open: function(){
-        var obj = {};
-        obj[Auth.currentUser.$id] = 9999999999999;
         this.$inst().$ref()
           .child('lastViewed')
           .child(Auth.currentUser.$id)
@@ -71,7 +69,7 @@ angular.module('goodMood')
 
       $getMessages: function(){
         // Firebase2.0 --> transition to orderbychild!
-        // var ref = fb.messages.orderByChild('thread').equalTo(this.id);
+        // var ref = fb.messages.orderByChild('thread').equalTo(this.$id);
         var ref = fb.messages.startAt(this.$id).endAt(this.$id)
         return $firebase(ref).$asArray().$loaded();
       }
@@ -134,6 +132,7 @@ angular.module('goodMood')
             promises.push($firebase(ref).$asObject().$loaded())
           })
           $q.all(promises).then(function(results){
+            console.count('---------------- results')
             bus.push(results)
           })
         })
