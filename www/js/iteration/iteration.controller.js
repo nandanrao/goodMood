@@ -1,23 +1,54 @@
 angular.module('goodMood')
-	.controller('IterationCtrl', function ($firebase, $scope, $rootScope, $window, $log, $timeout, $state, $ionicLoading, $ionicHistory, collaboration, iteration, iterations, threads, Thread, image){
+	.controller('IterationCtrl', function ($firebase, $scope, $rootScope, $window, $log, $timeout, $state, $stateParams, $ionicLoading, $ionicHistory, Collaboration, Iteration, Thread){
+
+		var collaboration,
+				iteration,
+				threads;
+
+		Collaboration.findById($stateParams.c_id).then(function(collaboration){
+			$scope.collaborationName = collaboration.name;
+			return collaboration.$getIterations()	
+		})
+		.then(function(iterations){
+			$scope.iterations = iterations;
+		})
+
+	  var iterationPromise = Iteration.findById($stateParams.i_id).then(function(_iteration){
+	  	iteration = _iteration;
+	  	iteration.$getThreads().then(function(_threads){
+	  		threads = _threads;
+	  		$scope.threads = threads;
+	  	})
+	  	iteration.$getImage().then(function(_image){
+	  		$scope.image = _image;
+	  	})
+	  })
+
+	  $scope.$on('$ionicView.enter', function(){
+	  	iterationPromise.then(function(){
+	  		$ionicLoading.hide()
+	  	})
+	  })
+
+
 		var vm = this;
 
 		// Create iterations array for inter-iteration navigation
-		$scope.iterations = iterations;
-		setIterationArray()
 		$scope.$watchCollection('iterations', function(curr, old){
 			setIterationArray()
 		})
 		function setIterationArray(){
+			if (!iteration || !$scope.iterations){
+				return
+			}
 			var iterationArray = _.keys($scope.iterations).sort();	
 			var currentIndex = iterationArray.indexOf(iteration.$id);	
 			$scope.previous = iterationArray[currentIndex - 1];
 			$scope.next = iterationArray[currentIndex + 1];
 		}
-
-		$scope.collaborationName = collaboration.name;		
+				
 		$scope.threads = threads;
-		$scope.image = image;
+		
 		$scope.instructionsRead = false;
 
 		$scope.$watch(function(){
@@ -25,7 +56,8 @@ angular.module('goodMood')
 		})
 
 		this.hasThreads = function(){
-			return _.size(threads) > 0
+			return true;
+			// return !!threads ? _.size(threads) > 0 : true
 		}
 
 		this.readInstructions = function(){
@@ -86,7 +118,7 @@ angular.module('goodMood')
 		})
 
 		// This does not seem to actually be making a difference... 
-		$scope.$on('$ionicView.afterLeave', function(){
+		$scope.$on('$ionicView.leave', function(){
 			_.forEach(threads, function(thread){
 				thread.$destroy()
 			})			

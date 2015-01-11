@@ -1,6 +1,19 @@
 angular.module('goodMood')
-	.controller('ThreadCtrl', function ($scope, $ionicLoading, $ionicHistory, thread, messages, Auth, utils){
-		$scope.messages = messages;
+	.controller('ThreadCtrl', function ($scope, $ionicLoading, $ionicHistory, $stateParams, Auth, utils, Thread){
+		var vm = this;
+		var thread,
+				messages;
+
+		Thread.findById($stateParams.t_id).then(function(_thread){
+			thread = _thread;
+			thread.$open();
+			return thread.$getMessages()
+		})
+		.then(function(_messages){
+			messages = _messages;
+			$scope.messages = messages;
+		})
+
 		$scope.writing = {
 			currently: false
 		}
@@ -8,7 +21,6 @@ angular.module('goodMood')
 		$scope.recordTime = {
 			currently: false
 		}
-
 		$scope.recording = {
 			currently: false
 		}
@@ -17,7 +29,7 @@ angular.module('goodMood')
 		};
 
 		$scope.$on('$ionicView.enter', function(){
-			thread.$open()
+			thread && thread.$open();
 		})
 		$scope.$on('$ionicView.leave', function(){
 			thread.$close()
@@ -27,8 +39,6 @@ angular.module('goodMood')
 		$scope.$on('$ionicView.afterLeave', function(){
 			thread.$destroy()
 		})
-		
-		var vm = this;
 
 		this.isPreviousSender = function(msg, i) {
 			if (i === 0){

@@ -1,6 +1,10 @@
 angular.module('goodMood')
-	.controller('MyCollaborationsCtrl', function ($scope, Auth, $state, user, collaborations, Collaboration, collaborationDefaultBg){
+	.controller('MyCollaborationsCtrl', function ($scope, Auth, $state, user, $ionicLoading, collaborations, Collaboration, collaborationDefaultBg){
 		
+		$scope.$on('$ionicView.enter', function(){
+			$ionicLoading.hide()
+		})
+
 		$scope.collaborations = collaborations;
 
 		$scope.$watch(function(){
