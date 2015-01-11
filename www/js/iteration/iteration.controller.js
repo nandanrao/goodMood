@@ -1,37 +1,70 @@
 angular.module('goodMood')
-	.controller('IterationCtrl', function ($firebase, $scope, $rootScope, $window, $log, $timeout, $state, $stateParams, $ionicLoading, $ionicHistory, Collaboration, Iteration, Thread){
-
-		var collaboration,
-				iteration,
-				threads;
-
-		Collaboration.findById($stateParams.c_id).then(function(collaboration){
-			$scope.collaborationName = collaboration.name;
-			return collaboration.$getIterations()	
-		})
-		.then(function(iterations){
-			$scope.iterations = iterations;
-		})
-
-	  var iterationPromise = Iteration.findById($stateParams.i_id).then(function(_iteration){
-	  	iteration = _iteration;
-	  	iteration.$getThreads().then(function(_threads){
-	  		threads = _threads;
-	  		$scope.threads = threads;
-	  	})
-	  	iteration.$getImage().then(function(_image){
-	  		$scope.image = _image;
-	  	})
-	  })
-
-	  $scope.$on('$ionicView.enter', function(){
-	  	iterationPromise.then(function(){
-	  		$ionicLoading.hide()
-	  	})
-	  })
-
+	.controller('IterationCtrl', function ($firebase, $scope, $q, $rootScope, $window, $log, $timeout, $state, $stateParams, $ionicLoading, $ionicHistory, Collaboration, Iteration, Thread){
 
 		var vm = this;
+		var collaboration,
+				iteration,
+				threads,
+				resolve;
+
+		function init(){
+			var collaborationResolve = Collaboration.findById($stateParams.c_id).then(function(_collaboration){
+				collaboration = _collaboration;
+				$scope.collaborationName = collaboration.name;
+				return collaboration.$getIterations()	
+			})
+			.then(function(iterations){
+				$scope.iterations = iterations;
+				return
+			})
+
+		  var iterationResolve = Iteration.findById($stateParams.i_id).then(function(_iteration){
+		  	iteration = _iteration;
+		  	var threadsResolve = iteration.$getThreads().then(function(_threads){
+		  		threads = _threads;
+		  		$scope.threads = threads;
+		  		return
+		  	})
+		  	var imageResolve = iteration.$getImage().then(function(_image){
+		  		$scope.image = _image;
+		  		return
+		  	})
+		  	return $q.all([threadsResolve, imageResolve])
+		  })
+		  resolve = $q.all([collaborationResolve, iterationResolve])
+		}
+
+		// Use 'enter' instead of 'loaded' so animation completes
+		$scope.$on('$ionicView.enter', function(){
+			if (!resolve){
+				init()	
+				resolve.then(function(){
+					$ionicLoading.hide()
+				})
+			}
+		})
+		
+	  $scope.$on('$ionicView.beforeEnter', function(){
+	  	if (resolve){
+	  		resolve.then(function(){
+	  			$ionicLoading.hide()
+	  		})	
+	  	}
+	  })
+
+	  $scope.$on('swipedown', function(){
+	  	if($scope.previous) {
+	  		$ionicLoading.show()
+	  		goToIteration($scope.previous)
+	  	}
+	  })
+
+	  $scope.$on('swipeup', function(){
+	  	if($scope.next) {
+	  		$ionicLoading.show()
+	  		goToIteration($scope.next)
+	  	}
+	  })
 
 		// Create iterations array for inter-iteration navigation
 		$scope.$watchCollection('iterations', function(curr, old){
@@ -46,14 +79,12 @@ angular.module('goodMood')
 			$scope.previous = iterationArray[currentIndex - 1];
 			$scope.next = iterationArray[currentIndex + 1];
 		}
-				
-		$scope.threads = threads;
-		
-		$scope.instructionsRead = false;
 
 		$scope.$watch(function(){
 			console.count('iteration digest run')
 		})
+				
+		$scope.instructionsRead = false;
 
 		this.hasThreads = function(){
 			return true;
@@ -97,32 +128,10 @@ angular.module('goodMood')
 		this.addThread = function(coords){
 			$ionicLoading.show();
 			Thread.create(coords, iteration, collaboration)
-				.then(_.partialRight(iteration.$addThread.bind(iteration)))
 				.then(function(thread){
 					$state.go('thread', {t_id: thread.$id})
+					return thread
 				})
+				.then(_.partialRight(iteration.$addThread.bind(iteration)))
 		}
-		
-		$scope.$on('swipedown', function(){
-			if($scope.previous) {
-				$ionicLoading.show()
-				goToIteration($scope.previous)
-			}
-		})
-
-		$scope.$on('swipeup', function(){
-			if($scope.next) {
-				$ionicLoading.show()
-				goToIteration($scope.next)
-			}
-		})
-
-		// This does not seem to actually be making a difference... 
-		$scope.$on('$ionicView.leave', function(){
-			_.forEach(threads, function(thread){
-				thread.$destroy()
-			})			
-		})
-
-		$ionicLoading.hide()
 	})

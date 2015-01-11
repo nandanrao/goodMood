@@ -19,16 +19,16 @@ angular.module('goodMood', [
       controller: 'MyCollaborationsCtrl as myCollaborations',
       templateUrl: 'collaboration/myCollaborations.html',
       resolve: {
-        user: ['User', function (User){
-          // console.log('starting mycollab resolves', Date.now())
-          return User.getCurrentUser()
-        }],
-        collaborations: ['user', function (user){
-          return user.$getCollaborations().then(function(collaborations){
-            // console.log('finishing mycollab resolves', Date.now())
-            return collaborations
-          })
-        }]
+        // user: ['User', function (User){
+        //   // console.log('starting mycollab resolves', Date.now())
+        //   return User.getCurrentUser()
+        // }],
+        // collaborations: ['user', function (user){
+        //   return user.$getCollaborations().then(function(collaborations){
+        //     // console.log('finishing mycollab resolves', Date.now())
+        //     return collaborations
+        //   })
+        // }]
       }
     })
     .state('login', {
@@ -170,35 +170,14 @@ angular.module('goodMood', [
     $ionicLoading.show()
     // console.log('statechange start', toState.name)
   })
-
 })
-.filter('orderObjectBy', function() {
-  return function (items, field, reverse) {
-    var filtered = [];
-    angular.forEach(items, function(item) {
-      filtered.push(item);
-    });
-    function index(obj, i) {
-      return obj[i];
-    }
-    filtered.sort(function (a, b) {
-      var comparator;
-      var reducedA = field.split('.').reduce(index, a);
-      var reducedB = field.split('.').reduce(index, b);
-      if (reducedA === reducedB) {
-        comparator = 0;
-      } 
-      else if (!reducedA || reducedA > reducedB){
-        comparator = 1
+.filter('threadHasDrawing', function (){
+  return function(items){
+    return _.filter(items, function(thread){
+      if (thread.$isDestroyed){
+        return true
       }
-      else {
-        comparator = -1
-      }
-      return comparator;
-    });
-    if (reverse) {
-      filtered.reverse();
-    }
-    return filtered;
-  };
+      return thread.drawing && thread.drawing.x  && thread.drawing.y
+    })
+  }
 });

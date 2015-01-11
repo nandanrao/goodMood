@@ -1,11 +1,36 @@
 angular.module('goodMood')
-	.controller('MyCollaborationsCtrl', function ($scope, Auth, $state, user, $ionicLoading, collaborations, Collaboration, collaborationDefaultBg){
+	.controller('MyCollaborationsCtrl', function ($scope, Auth, $state, $ionicLoading, Collaboration, User, collaborationDefaultBg){
 		
-		$scope.$on('$ionicView.enter', function(){
-			$ionicLoading.hide()
-		})
+		var user,
+				collaborations,
+				resolve;
+		
+		function init(){
+			resolve = User.getCurrentUser().then(function(_user){
+				user = _user;
+				return user.$getCollaborations()
+			})
+			.then(function(_collaborations){
+		    collaborations = _collaborations;
+		    $scope.collaborations = collaborations;
+		    return
+		  })
+		}
 
-		$scope.collaborations = collaborations;
+		$scope.$on('$ionicView.loaded', function(){
+			init()
+			resolve.then(function(){
+				$ionicLoading.hide()
+			})
+		})
+		
+	  $scope.$on('$ionicView.beforeEnter', function(){
+	  	if (resolve){
+	  		resolve.then(function(){
+	  			$ionicLoading.hide()
+	  		})	
+	  	}
+	  })
 
 		$scope.$watch(function(){
 			console.count('mycolaborations scope digest')
