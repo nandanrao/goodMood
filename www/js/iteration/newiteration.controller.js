@@ -74,4 +74,6 @@ angular.module('goodMood')
 				})
 			vm.createIteration(imageData)
 		}
+
+		$ionicLoading.hide()
 	})

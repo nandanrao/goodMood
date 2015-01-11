@@ -13,7 +13,7 @@
 
 		<img class="iteration-image" iteration-image ng-src="{{ image.$value }}" />
 		<canvas iteration-canvas></canvas>
-		<drawing ng-repeat="thread in threads" id="{{ thread.$id }}" x="{{ thread.drawing.x }}" y="{{ thread.drawing.y }}">
+		<drawing ng-repeat="thread in threads | threadHasDrawing" id="{{ ::thread.$id }}">
 		</drawing>
 		<button check-button class="check" ng-if="iteration.showCheck()" ng-click="iteration.done()"></button>
 		<div ng-if="!iteration.hasThreads() && !instructionsRead" class="instructions">

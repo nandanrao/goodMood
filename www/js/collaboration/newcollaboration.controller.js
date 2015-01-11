@@ -25,4 +25,5 @@ angular.module('goodMood')
 			$state.go('home')
 		}
 
+		$ionicLoading.hide()
 	})
