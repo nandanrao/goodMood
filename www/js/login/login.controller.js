@@ -1,5 +1,6 @@
 angular.module('goodMood')
   .controller('LoginCtrl', function ($scope, $ionicLoading, Auth, User, utils, $q, $window, $log, $state){
+    $ionicLoading.hide()
     $scope.local = false;
     $scope.register = false;
     $scope.form = {};

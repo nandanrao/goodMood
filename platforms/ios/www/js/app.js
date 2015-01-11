@@ -19,16 +19,16 @@ angular.module('goodMood', [
       controller: 'MyCollaborationsCtrl as myCollaborations',
       templateUrl: 'collaboration/myCollaborations.html',
       resolve: {
-        user: ['User', function (User){
-          // console.log('starting mycollab resolves', Date.now())
-          return User.getCurrentUser()
-        }],
-        collaborations: ['user', function (user){
-          return user.$getCollaborations().then(function(collaborations){
-            // console.log('finishing mycollab resolves', Date.now())
-            return collaborations
-          })
-        }]
+        // user: ['User', function (User){
+        //   // console.log('starting mycollab resolves', Date.now())
+        //   return User.getCurrentUser()
+        // }],
+        // collaborations: ['user', function (user){
+        //   return user.$getCollaborations().then(function(collaborations){
+        //     // console.log('finishing mycollab resolves', Date.now())
+        //     return collaborations
+        //   })
+        // }]
       }
     })
     .state('login', {
@@ -81,12 +81,12 @@ angular.module('goodMood', [
       controller: 'ThreadCtrl as thread',
       templateUrl: 'thread/thread.html',
       resolve: {
-        thread: ['Thread', '$stateParams', function (Thread, $stateParams){
-          return Thread.findById($stateParams.t_id)
-        }],
-        messages: ['thread', function (thread){
-          return thread.$getMessages()
-        }]
+        // thread: ['Thread', '$stateParams', function (Thread, $stateParams){
+        //   return Thread.findById($stateParams.t_id)
+        // }],
+        // messages: ['thread', function (thread){
+        //   return thread.$getMessages()
+        // }]
       }
     })
     .state('newIteration', {
@@ -104,22 +104,21 @@ angular.module('goodMood', [
       controller: 'IterationCtrl as iteration',
       templateUrl: 'iteration/iteration.html',
       resolve: {
-        collaboration: ['Collaboration', '$stateParams', function (Collaboration, $stateParams){
-          return Collaboration.findById($stateParams.c_id)
-        }],
-        iteration: ['Iteration', '$stateParams', function (Iteration, $stateParams){
-          return Iteration.findById($stateParams.i_id)
-        }],
-        iterations: ['collaboration', function (collaboration){
-          return collaboration.$getIterations()
-        }],
-        threads: ['iteration', function (iteration){
-          console.log('getings threads')
-          return iteration.$getThreads()
-        }],
-        image: ['iteration', function (iteration){
-          return iteration.$getImage()
-        }] 
+        // collaboration: ['Collaboration', '$stateParams', function (Collaboration, $stateParams){
+        //   return Collaboration.findById($stateParams.c_id)
+        // }],
+        // iteration: ['Iteration', '$stateParams', function (Iteration, $stateParams){
+        //   return Iteration.findById($stateParams.i_id)
+        // }],
+        // iterations: ['collaboration', function (collaboration){
+        //   return collaboration.$getIterations()
+        // }],
+        // threads: ['iteration', function (iteration){
+        //   return iteration.$getThreads()
+        // }],
+        // image: ['iteration', function (iteration){
+        //   return iteration.$getImage()
+        // }] 
       }
     })
 })
@@ -131,9 +130,9 @@ angular.module('goodMood', [
 .config(function($compileProvider){
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|data):/);
 })
-.config(function($ionicConfigProvider){
-  $ionicConfigProvider.views.maxCache(0);
-})
+// .config(function($ionicConfigProvider){
+//   $ionicConfigProvider.views.maxCache(0);
+// })
 .run(function($ionicPlatform, $state, $location, $rootScope, Auth, $ionicLoading) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -148,7 +147,7 @@ angular.module('goodMood', [
 
   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams){
     // console.log('state change success', toState.name)
-    $ionicLoading.hide()
+    // $ionicLoading.hide()
     if (!Auth.$getAuth()){
       event.preventDefault()
       var href = $state.href(toState, toParams)
@@ -171,35 +170,14 @@ angular.module('goodMood', [
     $ionicLoading.show()
     // console.log('statechange start', toState.name)
   })
-
 })
-.filter('orderObjectBy', function() {
-  return function (items, field, reverse) {
-    var filtered = [];
-    angular.forEach(items, function(item) {
-      filtered.push(item);
-    });
-    function index(obj, i) {
-      return obj[i];
-    }
-    filtered.sort(function (a, b) {
-      var comparator;
-      var reducedA = field.split('.').reduce(index, a);
-      var reducedB = field.split('.').reduce(index, b);
-      if (reducedA === reducedB) {
-        comparator = 0;
-      } 
-      else if (!reducedA || reducedA > reducedB){
-        comparator = 1
+.filter('threadHasDrawing', function (){
+  return function(items){
+    return _.filter(items, function(thread){
+      if (thread.$isDestroyed){
+        return true
       }
-      else {
-        comparator = -1
-      }
-      return comparator;
-    });
-    if (reverse) {
-      filtered.reverse();
-    }
-    return filtered;
-  };
+      return thread.drawing && thread.drawing.x  && thread.drawing.y
+    })
+  }
 });

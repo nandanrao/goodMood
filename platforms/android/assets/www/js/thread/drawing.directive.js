@@ -5,9 +5,11 @@ angular.module('goodMood')
 			link: function(scope, el, attrs){
 				var textItem;
 
+				console.log('linking', scope.thread.drawing.x)
+
 				scope.imageLoaded.then(function(){
-					var x = attrs.x*scope.imageSize.width
-					var y = attrs.y*scope.imageSize.height
+					var x = scope.thread.drawing.x*scope.imageSize.width
+					var y = scope.thread.drawing.y*scope.imageSize.height
 					var point = new paper.Point(x, y)
 
 					// Created shape automatically appended to paperjs 'view'
@@ -20,8 +22,8 @@ angular.module('goodMood')
 
 					// move position of circles on window resize!
 					scope.$watchCollection('imageSize', function(curr){
-						var x = attrs.x*curr.width;
-						var y = attrs.y*curr.height;
+						var x = scope.thread.drawing.x*curr.width;
+						var y = scope.thread.drawing.y*curr.height;
 						var point = new paper.Point(x,y);
 						shape.position = point;
 						textItem.position = point;
@@ -53,7 +55,9 @@ angular.module('goodMood')
 							paper.view.update()	
 						}
 					})	
-					
+
+					// Remove the $firebase listeners to free up memory/prevent callbacks
+					scope.thread.$destroy()						
 					
 					// Remove the shape, with its listeners, on dom removal,
 					// this allows the elements to react to server-side data events

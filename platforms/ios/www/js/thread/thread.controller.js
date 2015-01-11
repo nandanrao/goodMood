@@ -1,6 +1,39 @@
 angular.module('goodMood')
-	.controller('ThreadCtrl', function ($scope, $ionicLoading, $ionicHistory, thread, messages, Auth, utils){
-		$scope.messages = messages;
+	.controller('ThreadCtrl', function ($scope, $ionicLoading, $ionicHistory, $stateParams, Auth, utils, Thread){
+		var vm = this;
+		var thread,
+				messages,
+				threadResolve;
+
+		function init(){
+			threadResolve = Thread.findById($stateParams.t_id).then(function(_thread){
+				thread = _thread;
+				thread.$open();
+				return thread.$getMessages()
+			})
+			.then(function(_messages){
+				messages = _messages;
+				$scope.messages = messages;
+			})	
+		}
+
+		$scope.$on('$ionicView.enter', function(){
+			if (!threadResolve){
+				init()	
+				threadResolve.then(function(){
+					$ionicLoading.hide()
+				})
+			}
+		})
+		
+	  $scope.$on('$ionicView.beforeEnter', function(){
+	  	if (threadResolve){
+	  		threadResolve.then(function(){
+	  			$ionicLoading.hide()
+	  		})	
+	  	}
+	  })
+
 		$scope.writing = {
 			currently: false
 		}
@@ -8,7 +41,6 @@ angular.module('goodMood')
 		$scope.recordTime = {
 			currently: false
 		}
-
 		$scope.recording = {
 			currently: false
 		}
@@ -17,18 +49,20 @@ angular.module('goodMood')
 		};
 
 		$scope.$on('$ionicView.enter', function(){
-			thread.$open()
+			thread && thread.$open();
 		})
 		$scope.$on('$ionicView.leave', function(){
 			thread.$close()
+		})
+
+		$scope.$watch(function(){
+			console.count('thread digest run')
 		})
 		// $destroy needs a short delay after $close, because $close modifies thread
 		// and it would appear that firebase can't deal with the rapidity
 		$scope.$on('$ionicView.afterLeave', function(){
 			thread.$destroy()
 		})
-		
-		var vm = this;
 
 		this.isPreviousSender = function(msg, i) {
 			if (i === 0){
@@ -36,10 +70,6 @@ angular.module('goodMood')
 			}
 			return getFormerMsg(msg, i).user === msg.user
 		}
-
-		$scope.$watch(function(){
-			console.count('thread digest run')
-		})
 
 		this.isNewDay = function(msg, i){
 			if (i === 0) {
@@ -84,7 +114,6 @@ angular.module('goodMood')
 
 		this.goBack = function(){
 			ionic.Utils.disconnectScope($scope)
-			console.log('disconnecting!')
 			$ionicHistory.goBack()
 		}
 

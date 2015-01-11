@@ -125,7 +125,7 @@ module.run(["$templateCache", function($templateCache) {
     "\n" +
     "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ image.$value }}\" />\n" +
     "		<canvas iteration-canvas></canvas>\n" +
-    "		<drawing ng-repeat=\"thread in threads\" id=\"{{ thread.$id }}\" x=\"{{ thread.drawing.x }}\" y=\"{{ thread.drawing.y }}\">\n" +
+    "		<drawing ng-repeat=\"thread in threads | threadHasDrawing\" id=\"{{ ::thread.$id }}\">\n" +
     "		</drawing>\n" +
     "		<button check-button class=\"check\" ng-if=\"iteration.showCheck()\" ng-click=\"iteration.done()\"></button>\n" +
     "		<div ng-if=\"!iteration.hasThreads() && !instructionsRead\" class=\"instructions\">\n" +
