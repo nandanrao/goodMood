@@ -42,7 +42,9 @@ angular.module('goodMood')
           var promises = {};
           snap.forEach(function(snap){
             var id = snap.key()
-            promises[id] = Collaboration.findById(id)
+            promises[id] = Collaboration.findById(id).then(function(collaboration){
+              return collaboration.$populate()
+            })
           })
           $q.all(promises).then(function(results){
             _.forEach(results, function(collaboration){
@@ -53,6 +55,8 @@ angular.module('goodMood')
               var id = snap.key()
               if (!collaborations[id]){
                 Collaboration.findById(id).then(function(collaboration){
+                  return collaboration.$populate()
+                }).then(function(collaboration){
                   collaborations[id] = collaboration
                 })
               }

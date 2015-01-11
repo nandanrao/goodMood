@@ -3,8 +3,7 @@ angular.module('goodMood')
 		return {
 			restrict: 'E',
 			link: function(scope, el, attrs){
-				var textItem,
-						messageBus;
+				var textItem;
 
 				scope.imageLoaded.then(function(){
 					var x = attrs.x*scope.imageSize.width
@@ -26,6 +25,7 @@ angular.module('goodMood')
 						var point = new paper.Point(x,y);
 						shape.position = point;
 						textItem.position = point;
+						paper.view.update()
 					})
 
 					textItem = new paper.PointText(point);
@@ -46,9 +46,7 @@ angular.module('goodMood')
 						$state.go('thread', {t_id: attrs.id})
 					}
 
-					messageBus && messageBus.off()
-					messageBus = Thread.getNewMessagesAsStream(attrs.id)
-					messageBus.stream.onValue(function(val){
+					Thread.getNewMessagesAsStream(attrs.id).onValue(function(val){
 						var num = _.size(val)
 						textItem.content = num > 0 ? num : ''
 						if (paper && paper.view){
@@ -63,16 +61,13 @@ angular.module('goodMood')
 						if (shape.view){
 							shape.remove()	
 							paper.view.update()
-							messageBus.off()
 						}
 					})
 				})
 				
 				// TODO: this is tightly coupled with scope relationship -- somehow fix? 
 				scope.$parent.$on('$ionicView.enter', function(){
-					messageBus && messageBus.off()
-					messageBus = Thread.getNewMessagesAsStream(attrs.id)
-					messageBus.stream.onValue(function(val){
+					Thread.getNewMessagesAsStream(attrs.id).onValue(function(val){
 						var num = _.size(val)
 						if (num === textItem.content){
 							return
@@ -82,10 +77,6 @@ angular.module('goodMood')
 							paper.view.update()	
 						}	
 					})
-				})
-
-				scope.$parent.$on('$ionicView.leave', function(){
-					messageBus && messageBus.off()	
 				})
 			}
 		}

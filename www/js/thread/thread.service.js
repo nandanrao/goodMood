@@ -121,47 +121,30 @@ angular.module('goodMood')
     Thread.getNewMessagesAsStream = function(id){
       var thread;
       var ref = fb.messages.startAt(id).endAt(id)
-      var bus = new Bacon.Bus()
-      var loadMessages = function(snap){
-        // This is ugly! Need to keep that $id somehow...
-        // var promises = [];
-        // snap.forEach(function(childSnap){
-        //   var ref = childSnap.ref()
-        //   promises.push($firebase(ref).$asObject().$loaded())
-        // })
-        // $q.all(promises).then(function(results){
-        //   bus.push(results)
-        // })
-        var arr = [];
-        snap.forEach(function(childSnap){
-          arr.push(childSnap.val())
+      var stream = Bacon.fromEventTarget(ref, 'value')
+
+      return stream.map(function(snap){
+          var arr = [];
+          snap.forEach(function(childSnap){
+            var val = childSnap.val();
+            val.$id = childSnap.key();
+            arr.push(val)
+          })
+          return arr
         })
-        bus.push(arr)
-      }
-      Thread.findById(id).then(function(_thread){
-        thread = _thread
-        ref.on('value', loadMessages)
+        .flatMap(function(arr){
+          var deferred = $q.defer()
+          Thread.ref.child(id).child('lastViewed').child(Auth.currentUser.$id).on('value', function(snap){
+            var lastViewed = snap.val()
+            var newMessages = _.filter(arr, function(obj){
+              return !lastViewed ? true : obj.sentAt > lastViewed
+            })
+            deferred.resolve(newMessages)
+          })
+          return Bacon.fromPromise(deferred.promise)
       })
 
-      var off = function(){
-        ref.off('value', loadMessages)
-      }
-
-      var stream = bus.flatMap(function(arr){
-        return _.filter(arr, function(obj){
-          var lastViewed = thread.lastViewed[Auth.currentUser.$id]
-          if (!lastViewed) {
-            return true
-          }
-          return obj.sentAt > lastViewed
-        })
-      })
-
-      return {
-        stream: stream,
-        off: off
-      }
-
+      
     }
 
 		return Thread
