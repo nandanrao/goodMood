@@ -49,7 +49,6 @@ angular.module('goodMood')
           
           var id = snap.key()
           Thread.findById(id).then(function(thread){
-            console.log('threads added to threads thats in resolve...', thread)
             threads[id] = thread
           })
         })

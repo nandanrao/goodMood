@@ -229,12 +229,6 @@ describe('Factory: Thread', function(){
 					content: 'test',
 					user: Auth.currentUser.$id
 				};
-
-				var ref = fb.messages.push({test:'test'})
-				$firebase(ref).$asObject().$loaded().then(function(obj){
-					message = obj
-				})
-				flushAll()
 			})
 
 			it('returns a Bacon event stream', function(){
@@ -244,25 +238,34 @@ describe('Factory: Thread', function(){
  
 			it('returns a stream of messages not seen by the user', function(){
 				// Messages that should not be contained in stream
-				thread.$addMessage(messageData)
-				thread.$addMessage(messageData)
-				thread.$addMessage(messageData)
+				function sendMessage(){
+					var ref = fb.messages.push({
+						sentAt: Date.now()
+					})
+					ref.setPriority(thread.$id)	
+				}
+				sendMessage()
+				sendMessage()
+				sendMessage()
+				flushAll()
+
 				// Set the users last view here
-				sinon.stub(Thread, 'findById').returns($q.when(thread))
-				thread.lastViewed = {}
-				thread.lastViewed[Auth.currentUser.$id] = Date.now()
+				Thread.ref.child(thread.$id)
+					.child('lastViewed')
+					.child(Auth.currentUser.$id)
+					.set(Date.now())
+								
 				// create the stream listener and spy to be called
 				var spy = sinon.spy()
 				var stream = Thread.getNewMessagesAsStream(thread.$id)
 				stream.onValue(function(val){
 					spy(val)	
 				})
-				flushAll()
-				flushAll()
+
 				// Add 2 more messages (last transaction doesn't go through - #mockbug)
-				thread.$addMessage(messageData)
-				thread.$addMessage(messageData)
-				thread.$addMessage(messageData)
+				sendMessage()
+				sendMessage()
+				sendMessage()
 				flushAll()
 				flushAll()
 				// Spy should be called three times, first with 0 messages
