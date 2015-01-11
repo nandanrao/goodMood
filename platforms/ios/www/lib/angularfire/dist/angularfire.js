@@ -1049,7 +1049,6 @@
          * @return {boolean} true if any changes were made.
          */
         $$updated: function (snap) {
-          console.log("notify", snap.val())
           // applies new data to this object
           var changed = $firebaseUtils.updateRec(this, snap);
           // applies any defaults set using $$defaults
