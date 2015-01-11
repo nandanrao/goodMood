@@ -28,7 +28,7 @@ module.run(["$templateCache", function($templateCache) {
     "				</h2>\n" +
     "				<svg ng-if=\"myCollaborations.getNewMessages(collaboration) > 0\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 71.5 71.5\" enable-background=\"new 0 0 71.5 71.5\" xml:space=\"preserve\">\n" +
     "					<path opacity=\"0.86\" fill=\"#FF2C2C\" d=\"M35.7,71.5C16,71.5,0,55.4,0,35.7S16,0,35.7,0s35.7,16,35.7,35.7S55.4,71.5,35.7,71.5z\"/>\n" +
-    "					<text transform=\"matrix(1 0 0 1 24.9419 46.6401)\" fill=\"#FFFFFF\" font-family=\"'Futura-Bold'\" font-size=\"36\">{{ myCollaborations.getNewMessages(collaboration) }}</text>\n" +
+    "					<text transform=\"matrix(1 0 0 1 35.75 47.6401)\" text-anchor=\"middle\" fill=\"#FFFFFF\" font-family=\"'Futura-Bold'\" font-size=\"36\">{{ myCollaborations.getNewMessages(collaboration) }}</text>\n" +
     "				</svg>\n" +
     "			</div>  \n" +
     "		</div>\n" +

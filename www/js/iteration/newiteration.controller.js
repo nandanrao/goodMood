@@ -48,6 +48,7 @@ angular.module('goodMood')
     		$log.error('Error creating a picture for a new iteration')
     		$window.alert('Sorry we had a problem! Try again?')
     		$state.reload()
+    		$ionicLoading.hide()
     	})
 		}
 
