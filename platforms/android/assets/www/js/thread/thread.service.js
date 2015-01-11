@@ -7,8 +7,6 @@ angular.module('goodMood')
        * Open must be called every time this thread is viewed!
        */
       $open: function(){
-        var obj = {};
-        obj[Auth.currentUser.$id] = 9999999999999;
         this.$inst().$ref()
           .child('lastViewed')
           .child(Auth.currentUser.$id)
@@ -71,7 +69,7 @@ angular.module('goodMood')
 
       $getMessages: function(){
         // Firebase2.0 --> transition to orderbychild!
-        // var ref = fb.messages.orderByChild('thread').equalTo(this.id);
+        // var ref = fb.messages.orderByChild('thread').equalTo(this.$id);
         var ref = fb.messages.startAt(this.$id).endAt(this.$id)
         return $firebase(ref).$asArray().$loaded();
       }
@@ -123,30 +121,30 @@ angular.module('goodMood')
     Thread.getNewMessagesAsStream = function(id){
       var thread;
       var ref = fb.messages.startAt(id).endAt(id)
-      var bus = new Bacon.Bus()
-      Thread.findById(id).then(function(_thread){
-        thread = _thread
-        ref.on('value', function(snap){
-          // This is ugly! Need to keep that $id somehow...
-          var promises = [];
+      var stream = Bacon.fromEventTarget(ref, 'value')
+
+      return stream.map(function(snap){
+          var arr = [];
           snap.forEach(function(childSnap){
-            var ref = childSnap.ref()
-            promises.push($firebase(ref).$asObject().$loaded())
+            var val = childSnap.val();
+            val.$id = childSnap.key();
+            arr.push(val)
           })
-          $q.all(promises).then(function(results){
-            bus.push(results)
+          return arr
+        })
+        .flatMap(function(arr){
+          var deferred = $q.defer()
+          Thread.ref.child(id).child('lastViewed').child(Auth.currentUser.$id).on('value', function(snap){
+            var lastViewed = snap.val()
+            var newMessages = _.filter(arr, function(obj){
+              return !lastViewed ? true : obj.sentAt > lastViewed
+            })
+            deferred.resolve(newMessages)
           })
-        })
+          return Bacon.fromPromise(deferred.promise)
       })
-      return bus.flatMap(function(arr){
-        return _.filter(arr, function(obj){
-          var lastViewed = thread.lastViewed[Auth.currentUser.$id]
-          if (!lastViewed) {
-            return true
-          }
-          return obj.sentAt > lastViewed
-        })
-      })
+
+      
     }
 
 		return Thread

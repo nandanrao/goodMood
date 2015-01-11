@@ -114,6 +114,7 @@ angular.module('goodMood', [
           return collaboration.$getIterations()
         }],
         threads: ['iteration', function (iteration){
+          console.log('getings threads')
           return iteration.$getThreads()
         }],
         image: ['iteration', function (iteration){
@@ -130,9 +131,9 @@ angular.module('goodMood', [
 .config(function($compileProvider){
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|data):/);
 })
-// .config(function($ionicConfigProvider){
-//   $ionicConfigProvider.views.maxCache(0);
-// })
+.config(function($ionicConfigProvider){
+  $ionicConfigProvider.views.maxCache(0);
+})
 .run(function($ionicPlatform, $state, $location, $rootScope, Auth, $ionicLoading) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -169,10 +170,6 @@ angular.module('goodMood', [
   $rootScope.$on('$stateChangeStart', function(event, toState){
     $ionicLoading.show()
     // console.log('statechange start', toState.name)
-  })
-
-  $rootScope.$on('$ionic.disconnectScope', function(scope){
-    console.log('disconnectScope', scope)
   })
 
 })

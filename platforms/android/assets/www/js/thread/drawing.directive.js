@@ -4,7 +4,6 @@ angular.module('goodMood')
 			restrict: 'E',
 			link: function(scope, el, attrs){
 				var textItem;
-				var messageBus;
 
 				scope.imageLoaded.then(function(){
 					var x = attrs.x*scope.imageSize.width
@@ -26,6 +25,7 @@ angular.module('goodMood')
 						var point = new paper.Point(x,y);
 						shape.position = point;
 						textItem.position = point;
+						paper.view.update()
 					})
 
 					textItem = new paper.PointText(point);
@@ -40,25 +40,6 @@ angular.module('goodMood')
 
 					// Click event for the shape
 					shape.onClick = function(event){
-						
-						// var parent = scope.$parent;
-						// scope.$$disconnected = true;
-						// scope.$broadcast('$ionic.disconnectScope');
-						// // See Scope.$destroy
-						// if (parent.$$childHead === scope) {
-						//   parent.$$childHead = scope.$$nextSibling;
-						// }
-						// if (parent.$$childTail === scope) {
-						//   parent.$$childTail = scope.$$prevSibling;
-						// }
-						// if (scope.$$prevSibling) {
-						//   scope.$$prevSibling.$$nextSibling = scope.$$nextSibling;
-						// }
-						// if (scope.$$nextSibling) {
-						//   scope.$$nextSibling.$$prevSibling = scope.$$prevSibling;
-						// }
-						// scope.$$nextSibling = scope.$$prevSibling = null;
-						console.log('disconnecting!')
 						$state.go('thread', {t_id: attrs.id})
 					}
 					textItem.onClick = function(event){
@@ -71,15 +52,15 @@ angular.module('goodMood')
 						if (paper && paper.view){
 							paper.view.update()	
 						}
-					})
-
+					})	
+					
+					
 					// Remove the shape, with its listeners, on dom removal,
 					// this allows the elements to react to server-side data events
 					el.on('$destroy', function(){
 						if (shape.view){
 							shape.remove()	
 							paper.view.update()
-							messageBus.end()
 						}
 					})
 				})
@@ -94,10 +75,9 @@ angular.module('goodMood')
 						textItem.content = num > 0 ? num : ''
 						if (paper && paper.view){
 							paper.view.update()	
-						}
+						}	
 					})
 				})
-
 			}
 		}
 	})

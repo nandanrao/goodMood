@@ -1049,6 +1049,7 @@
          * @return {boolean} true if any changes were made.
          */
         $$updated: function (snap) {
+          console.log("notify", snap.val())
           // applies new data to this object
           var changed = $firebaseUtils.updateRec(this, snap);
           // applies any defaults set using $$defaults
@@ -1569,6 +1570,10 @@
           var ref = $inst.$ref();
           var batch = $firebaseUtils.batch();
           var applyUpdate = batch(function(snap) {
+            if (!obj){
+              console.log('------------------obj doesnt exist!')
+              return
+            }
             var changed = obj.$$updated(snap);
             if( changed ) {
               // notifies $watch listeners and

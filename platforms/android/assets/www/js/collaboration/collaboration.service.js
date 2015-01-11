@@ -220,12 +220,11 @@ angular.module('goodMood')
     	var ref = Collaboration.ref.push(data);
     	var obj = $firebase(ref, {objectFactory: CollaborationFactory})
     	return obj.$asObject().$loaded()
-    		.then(populate)
     }
 
 		Collaboration.findById = function(id){
 			return $firebase(Collaboration.ref.child(id), {objectFactory: CollaborationFactory})
-        .$asObject().$loaded().then(populate)
+        .$asObject().$loaded()
 		}
 
     Collaboration.getThreadsAsStream = function(id){

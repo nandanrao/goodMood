@@ -7,10 +7,6 @@ angular.module('goodMood')
 			console.count('mycolaborations scope digest')
 		})
 
-		$scope.$on('$destroy', function(){
-			console.log('scope destroyed')
-		})
-
 		this.getNewMessages = function(collaboration){
 			return _.size(collaboration._newMessages)
 		}
@@ -27,6 +23,7 @@ angular.module('goodMood')
 		}
 
 		this.collaboration = function(id){
+			ionic.Utils.disconnectScope($scope)
 			var collaboration = collaborations[id]
 			var i_id = _.last(_.keys(collaboration.iterations))
 			$state.go('iteration', {c_id: id, i_id: i_id})

@@ -20,10 +20,6 @@ angular.module('goodMood')
 		$scope.image = image;
 		$scope.instructionsRead = false;
 
-		$scope.$on('ionic.disconnectScope', function(){
-			console.log('scope disconnected')
-		})
-
 		$scope.$watch(function(){
 			console.count('iteration digest run')
 		})
@@ -87,6 +83,13 @@ angular.module('goodMood')
 				$ionicLoading.show()
 				goToIteration($scope.next)
 			}
+		})
+
+		// This does not seem to actually be making a difference... 
+		$scope.$on('$ionicView.afterLeave', function(){
+			_.forEach(threads, function(thread){
+				thread.$destroy()
+			})			
 		})
 
 		$ionicLoading.hide()

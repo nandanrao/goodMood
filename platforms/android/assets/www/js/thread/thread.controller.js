@@ -9,12 +9,6 @@ angular.module('goodMood')
 			currently: false
 		}
 
-		$scope.scopeName = 'thread'
-
-		$scope.$on('ionic.disconnectScope', function(){
-			console.log('scope disconnected', $scope)
-		})
-
 		$scope.recording = {
 			currently: false
 		}
@@ -27,6 +21,11 @@ angular.module('goodMood')
 		})
 		$scope.$on('$ionicView.leave', function(){
 			thread.$close()
+		})
+		// $destroy needs a short delay after $close, because $close modifies thread
+		// and it would appear that firebase can't deal with the rapidity
+		$scope.$on('$ionicView.afterLeave', function(){
+			thread.$destroy()
 		})
 		
 		var vm = this;
@@ -84,24 +83,7 @@ angular.module('goodMood')
 		}
 
 		this.goBack = function(){
-			var scope = $scope;
-			var parent = scope.$parent;
-			scope.$$disconnected = true;
-			scope.$broadcast('$ionic.disconnectScope');
-			// See Scope.$destroy
-			if (parent.$$childHead === scope) {
-			  parent.$$childHead = scope.$$nextSibling;
-			}
-			if (parent.$$childTail === scope) {
-			  parent.$$childTail = scope.$$prevSibling;
-			}
-			if (scope.$$prevSibling) {
-			  scope.$$prevSibling.$$nextSibling = scope.$$nextSibling;
-			}
-			if (scope.$$nextSibling) {
-			  scope.$$nextSibling.$$prevSibling = scope.$$prevSibling;
-			}
-			scope.$$nextSibling = scope.$$prevSibling = null;
+			ionic.Utils.disconnectScope($scope)
 			console.log('disconnecting!')
 			$ionicHistory.goBack()
 		}

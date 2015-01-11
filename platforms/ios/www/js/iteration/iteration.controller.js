@@ -85,5 +85,12 @@ angular.module('goodMood')
 			}
 		})
 
+		// This does not seem to actually be making a difference... 
+		$scope.$on('$ionicView.afterLeave', function(){
+			_.forEach(threads, function(thread){
+				thread.$destroy()
+			})			
+		})
+
 		$ionicLoading.hide()
 	})

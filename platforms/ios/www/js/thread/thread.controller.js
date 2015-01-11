@@ -22,6 +22,11 @@ angular.module('goodMood')
 		$scope.$on('$ionicView.leave', function(){
 			thread.$close()
 		})
+		// $destroy needs a short delay after $close, because $close modifies thread
+		// and it would appear that firebase can't deal with the rapidity
+		$scope.$on('$ionicView.afterLeave', function(){
+			thread.$destroy()
+		})
 		
 		var vm = this;
 
@@ -32,9 +37,9 @@ angular.module('goodMood')
 			return getFormerMsg(msg, i).user === msg.user
 		}
 
-		// $scope.$watch(function(){
-		// 	console.count('thread digest run')
-		// })
+		$scope.$watch(function(){
+			console.count('thread digest run')
+		})
 
 		this.isNewDay = function(msg, i){
 			if (i === 0) {
@@ -78,6 +83,8 @@ angular.module('goodMood')
 		}
 
 		this.goBack = function(){
+			ionic.Utils.disconnectScope($scope)
+			console.log('disconnecting!')
 			$ionicHistory.goBack()
 		}
 
