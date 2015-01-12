@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00A506BB99BA439E94717828 /* CDVSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 850877CED9AA43E390C5492B /* CDVSound.m */; };
 		0366F89D5DCC407CAED88324 /* CDVCapture.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8902FD978FAF45D68A4E8E11 /* CDVCapture.bundle */; };
@@ -401,7 +402,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GoodMood" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "goodMood" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -565,7 +566,7 @@
 					"-weak-lSystem",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "GoodMood";
+				PRODUCT_NAME = GoodMood;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -601,7 +602,7 @@
 					"-weak-lSystem",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "GoodMood";
+				PRODUCT_NAME = GoodMood;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -706,7 +707,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GoodMood" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "goodMood" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
