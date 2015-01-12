@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.factory('Thread', function(fb, $firebase, $FirebaseObject, $q, $timeout, Auth){
+	.factory('Thread', function (fb, $firebase, $FirebaseObject, $q, $timeout, Auth){
 		var Thread = {};
 
     var ThreadFactory = $FirebaseObject.$extendFactory({

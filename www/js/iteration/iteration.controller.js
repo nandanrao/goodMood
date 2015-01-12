@@ -25,8 +25,11 @@ angular.module('goodMood')
 		  		$scope.threads = threads;
 		  		return
 		  	})
-		  	var imageResolve = iteration.$getImage().then(function(_image){
-		  		$scope.image = _image;
+		  	var imageResolve = iteration.$getImage().then(function(image){
+		  		image.$getSmall().then(function(uri){
+		  			console.log('uri', uri)
+		  			$scope.imageURI = uri
+		  		})
 		  		return
 		  	})
 		  	return $q.all([threadsResolve, imageResolve])

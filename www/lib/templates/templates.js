@@ -107,7 +107,7 @@ module.run(["$templateCache", function($templateCache) {
     "			</svg>\n" +
     "		</button> -->\n" +
     "\n" +
-    "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ image.$value }}\" />\n" +
+    "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ imageURI }}\" />\n" +
     "		<canvas iteration-canvas></canvas>\n" +
     "		<drawing ng-repeat=\"thread in threads | threadHasDrawing\" id=\"{{ ::thread.$id }}\">\n" +
     "		</drawing>\n" +

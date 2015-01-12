@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.directive('desktopUpload', function ($q, $state, Image, Iteration){
+	.directive('desktopUpload', function ($q, $state, Picture, Iteration){
 		return {
 			restrict: 'E',
 			templateUrl: 'iteration/desktopupload.html',
@@ -10,11 +10,9 @@ angular.module('goodMood')
 			this.selectFile = function(e){
 				var imageRead = $q.defer()
 				$scope.newIteration.createIteration(imageRead.promise)
-
 				var file = e.srcElement.files[0]
 				var reader = new FileReader();
 				reader.onload = function(e) {
-					console.log('imageread', Date.now()) 
 					imageRead.resolve(e.target.result) 
 				}
 		    reader.readAsDataURL(file);

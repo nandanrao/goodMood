@@ -43,13 +43,14 @@ describe('Factory: User', function(){
 		$timeout = _$timeout_;
 		User = _User_;
 		fb = _fb_;
+		var collaboration = {
+			$populate: sinon.stub().returns($q.when({
+				collaboration: 'test',	
+			}))
+		}
 		Facebook.getPicture = sinon.stub().returns($q.when());
-		Collaboration.create = sinon.stub().returns($q.when({
-			collaboration: 'test',
-		}))
-		Collaboration.findById = sinon.stub().returns($q.when({
-			collaboration: 'test',
-		}))
+		Collaboration.create = sinon.stub().returns($q.when(collaboration))
+		Collaboration.findById = sinon.stub().returns($q.when(collaboration))
 
 		authObj = {
 			google: {

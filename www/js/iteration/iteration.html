@@ -11,7 +11,7 @@
 			</svg>
 		</button> -->
 
-		<img class="iteration-image" iteration-image ng-src="{{ image.$value }}" />
+		<img class="iteration-image" iteration-image ng-src="{{ imageURI }}" />
 		<canvas iteration-canvas></canvas>
 		<drawing ng-repeat="thread in threads | threadHasDrawing" id="{{ ::thread.$id }}">
 		</drawing>

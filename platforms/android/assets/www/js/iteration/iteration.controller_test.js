@@ -94,7 +94,7 @@ describe('Controller: Iteration', function(){
 
 		}))
 
-		describe('on addThread event', function(){
+		xdescribe('on addThread event', function(){
 
 			beforeEach(function(){
 				$state.expectTransitionTo('^.^.thread')

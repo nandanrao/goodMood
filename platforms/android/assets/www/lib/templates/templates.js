@@ -28,20 +28,13 @@ module.run(["$templateCache", function($templateCache) {
     "				</h2>\n" +
     "				<svg ng-if=\"myCollaborations.getNewMessages(collaboration) > 0\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 71.5 71.5\" enable-background=\"new 0 0 71.5 71.5\" xml:space=\"preserve\">\n" +
     "					<path opacity=\"0.86\" fill=\"#FF2C2C\" d=\"M35.7,71.5C16,71.5,0,55.4,0,35.7S16,0,35.7,0s35.7,16,35.7,35.7S55.4,71.5,35.7,71.5z\"/>\n" +
-    "					<text transform=\"matrix(1 0 0 1 24.9419 46.6401)\" fill=\"#FFFFFF\" font-family=\"'Futura-Bold'\" font-size=\"36\">{{ myCollaborations.getNewMessages(collaboration) }}</text>\n" +
+    "					<text transform=\"matrix(1 0 0 1 35.75 47.6401)\" text-anchor=\"middle\" fill=\"#FFFFFF\" font-family=\"'Futura-Bold'\" font-size=\"36\">{{ myCollaborations.getNewMessages(collaboration) }}</text>\n" +
     "				</svg>\n" +
     "			</div>  \n" +
     "		</div>\n" +
     "	</ion-content>\n" +
     "	<div class=\"bar bar-footer\">\n" +
-    "		<button class=\"new-collaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
-    "			<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 119.2 119.2\" enable-background=\"new 0 0 119.2 119.2\" xml:space=\"preserve\">\n" +
-    "			<circle fill=\"#FFF\" cx=\"59.6\" cy=\"59.6\" r=\"59.6\"/>\n" +
-    "			<g>\n" +
-    "				<line fill=\"none\" stroke=\"#277FE9\" stroke-width=\"4\" stroke-miterlimit=\"10\" x1=\"59.6\" y1=\"29.1\" x2=\"59.6\" y2=\"90.1\"/>\n" +
-    "				<line fill=\"none\" stroke=\"#277FE9\" stroke-width=\"4\" stroke-miterlimit=\"10\" x1=\"90.1\" y1=\"59.6\" x2=\"29.1\" y2=\"59.6\"/>\n" +
-    "			</g>\n" +
-    "			</svg>\n" +
+    "		<button new-collaboration-button class=\"new-collaboration\" ng-click=\"myCollaborations.newCollaboration()\" nav-direction=\"forward\">\n" +
     "		</button>\n" +
     "	</div>\n" +
     "</ion-view> ");
@@ -67,15 +60,6 @@ module.run(["$templateCache", function($templateCache) {
     "		</form> \n" +
     "	</ion-content>\n" +
     "</ion-view>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("collaboration/threads.html",
-    "");
 }]);
 })();
 
@@ -192,6 +176,40 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("sidemenu/sidemenu.html",
+    "<div id=\"pg--sidemenu\">\n" +
+    "	<div class=\"profile\">\n" +
+    "		<img ng-src=\"{{ user.picture }}\">\n" +
+    "		<h2>{{ user.displayName }}</h2>\n" +
+    "	</div>	\n" +
+    "\n" +
+    "\n" +
+    "	<ul class=\"options\">\n" +
+    "		<li>\n" +
+    "			<button ng-click=\"sidemenu.logout()\">\n" +
+    "				<span>logout</span>\n" +
+    "				<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
+    "					 viewBox=\"0 0 33.9 33.9\" enable-background=\"new 0 0 33.9 33.9\" xml:space=\"preserve\">\n" +
+    "				<g>\n" +
+    "					<circle fill=\"none\" stroke=\"#E85757\" stroke-width=\"3\" stroke-miterlimit=\"10\" cx=\"17\" cy=\"17\" r=\"15.5\"/>\n" +
+    "					<line fill=\"none\" stroke=\"#E85757\" stroke-width=\"3\" stroke-miterlimit=\"10\" x1=\"6\" y1=\"27.9\" x2=\"27.9\" y2=\"6\"/>\n" +
+    "				</g>\n" +
+    "				</svg>\n" +
+    "\n" +
+    "			</button>\n" +
+    "		</li>	\n" +
+    "	</ul>\n" +
+    "	\n" +
+    "</div>\n" +
+    "\n" +
+    "");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
   $templateCache.put("login/localLogin.html",
     "<div class=\"list\">\n" +
     "<form name=\"loginForm\" no-validate class=\"localLoginForm\" ng-submit=\"localLogin.login()\">\n" +
@@ -237,40 +255,6 @@ module.run(["$templateCache", function($templateCache) {
     "		</form>\n" +
     "	</div>\n" +
     "</ion-content>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("sidemenu/sidemenu.html",
-    "<div id=\"pg--sidemenu\">\n" +
-    "	<div class=\"profile\">\n" +
-    "		<img ng-src=\"{{ user.picture }}\">\n" +
-    "		<h2>{{ user.displayName }}</h2>\n" +
-    "	</div>	\n" +
-    "\n" +
-    "\n" +
-    "	<ul class=\"options\">\n" +
-    "		<li>\n" +
-    "			<button ng-click=\"sidemenu.logout()\">\n" +
-    "				<span>logout</span>\n" +
-    "				<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
-    "					 viewBox=\"0 0 33.9 33.9\" enable-background=\"new 0 0 33.9 33.9\" xml:space=\"preserve\">\n" +
-    "				<g>\n" +
-    "					<circle fill=\"none\" stroke=\"#E85757\" stroke-width=\"3\" stroke-miterlimit=\"10\" cx=\"17\" cy=\"17\" r=\"15.5\"/>\n" +
-    "					<line fill=\"none\" stroke=\"#E85757\" stroke-width=\"3\" stroke-miterlimit=\"10\" x1=\"6\" y1=\"27.9\" x2=\"27.9\" y2=\"6\"/>\n" +
-    "				</g>\n" +
-    "				</svg>\n" +
-    "\n" +
-    "			</button>\n" +
-    "		</li>	\n" +
-    "	</ul>\n" +
-    "	\n" +
-    "</div>\n" +
-    "\n" +
-    "");
 }]);
 })();
 

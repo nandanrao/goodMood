@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.factory('Thread', function(fb, $firebase, $FirebaseObject, $q, $timeout, Auth){
+	.factory('Thread', function (fb, $firebase, $FirebaseObject, $q, $timeout, Auth){
 		var Thread = {};
 
     var ThreadFactory = $FirebaseObject.$extendFactory({
@@ -114,8 +114,7 @@ angular.module('goodMood')
 
     /** 
      * Creates a Bacon stream that contains a hash with all unread messages
-     * @param {object} thread
-     * @param {string} userId
+     * @param {string} thread id
      * @returns Bacon Bus
      */
     Thread.getNewMessagesAsStream = function(id){
@@ -134,13 +133,15 @@ angular.module('goodMood')
         })
         .flatMap(function(arr){
           var deferred = $q.defer()
-          Thread.ref.child(id).child('lastViewed').child(Auth.currentUser.$id).on('value', function(snap){
-            var lastViewed = snap.val()
-            var newMessages = _.filter(arr, function(obj){
-              return !lastViewed ? true : obj.sentAt > lastViewed
+          Thread.ref.child(id).child('lastViewed')
+            .child(Auth.currentUser.$id)
+            .on('value', function(snap){
+              var lastViewed = snap.val()
+              var newMessages = _.filter(arr, function(obj){
+                return !lastViewed ? true : obj.sentAt > lastViewed
+              })
+              deferred.resolve(newMessages)
             })
-            deferred.resolve(newMessages)
-          })
           return Bacon.fromPromise(deferred.promise)
       })
 

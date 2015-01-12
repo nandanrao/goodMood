@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.controller('NewIterationCtrl', function($scope, $q, $window, $log, $state, collaboration, $cordovaCamera, $ionicLoading, $ionicHistory, utils, Iteration, Image){
+	.controller('NewIterationCtrl', function($scope, $q, $window, $log, $state, collaboration, $cordovaCamera, $ionicLoading, $ionicHistory, utils, Iteration, Picture){
 		var vm = this;
 		this.isDesktop = utils.isDesktop
 
@@ -19,7 +19,7 @@ angular.module('goodMood')
 		this.createIteration = function(imageDataLoaded){
 			$ionicLoading.show();
 			var image, DataURI;
-			var imageCreated = Image.create(false)
+			var imageCreated = Picture.create()
 	    $q.all({
 	    	image: imageCreated,
 	    	dataURI: imageDataLoaded
@@ -34,7 +34,7 @@ angular.module('goodMood')
 	    })
 	    .then(_.partialRight(collaboration.$addIteration.bind(collaboration)))
 	    .then(function(iteration){
-	    	image.$inst().$set(dataURI).then(function(obj){
+	    	image.$addImage(dataURI).then(function(obj){
 	    		console.log('image saved', Date.now())
 	    	})
 	    	$state.go('iteration', {
