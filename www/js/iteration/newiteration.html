@@ -6,19 +6,7 @@
 	</ion-nav-buttons>
 	<ion-content scroll="false">
 		<div class="mobile" ng-if="!newIteration.isDesktop()">
-			<button ng-click="newIteration.takePicture()" class="take-picture">
-				<div class="image">
-					<img src="img/camera.svg">
-				</div>
-				<p>toma una foto</p>
-			</button>
-			<div class="line"></div>
-			<button ng-click="newIteration.fromDevice()" class="from-device">
-				<div class="image">
-					<img src="img/picture-file.svg">
-				</div>
-				<p>elije una foto</p>
-			</button>
+			<mobile-upload></mobile-upload>
 		</div>
 		<div class="desktop" ng-if="newIteration.isDesktop()">
 			<desktop-upload></desktop-upload>

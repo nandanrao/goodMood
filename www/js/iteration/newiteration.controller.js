@@ -51,30 +51,6 @@ angular.module('goodMood')
     		$ionicLoading.hide()
     	})
 		}
-
-		var pictureOptions = {
-			destinationType: 0,
-			quality: 50,
-			targetWidth: 1600,
-			targetHeight: 1600
-		}
 		
-		this.fromDevice = function(){
-			pictureOptions.sourceType = 0
-			getPicture(pictureOptions)
-		}
-
-		this.takePicture = function(){
-			getPicture(pictureOptions)
-		}
-
-		function getPicture (options){
-			var pictureRecieved = $cordovaCamera.getPicture(pictureOptions)
-			var imageData = pictureRecieved.then(function(datURI){
-					return "data:image/jpeg;base64," + datURI
-				})
-			vm.createIteration(imageData)
-		}
-
 		$ionicLoading.hide()
 	})

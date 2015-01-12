@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.directive('desktopUpload', function ($q, $state, Picture, Iteration){
+	.directive('desktopUpload', function ($q){
 		return {
 			restrict: 'E',
 			templateUrl: 'iteration/desktopupload.html',
