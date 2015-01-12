@@ -10,8 +10,11 @@ describe('Factory: Picture', function(){
 			$q,
 			testUtils,
 			flushAll,
-			image,
-			imageResize;
+			image;
+
+	var imageResize = {
+		resize: null
+	}
 
 	beforeEach(function(){		
 
@@ -34,10 +37,7 @@ describe('Factory: Picture', function(){
 		$firebase = _$firebase_;
 		Picture = _Picture_;
 
-
-		imageResize = {
-			resize: sinon.stub().returns($q.when('uri'))
-		}
+		imageResize.resize =  sinon.stub().returns($q.when('uri'))
 	}))
 
 	describe(' :: Instance Methods', function(){

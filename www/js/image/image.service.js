@@ -29,11 +29,13 @@ angular.module('goodMood')
 
 				// Upload the information to the server
 				var imageUploaded = Picture.saveImageData(dataURI).then(function(id){
+					// console.log('hey')
 					self.original = id;
 					return
 				});
 
 				var imageSetCreated = Picture.createSmall(dataURI).then(function(s_id){
+					// console.log('hey')
 					self.small = s_id;
 					return self.$getSmall()
 				})
@@ -107,6 +109,7 @@ angular.module('goodMood')
 		 */
 		Picture.createSmall = function (dataURI){
 			return imageResize.resize(dataURI, 800).then(function(uri){
+				console.log('hey')
 				return Picture.saveImageData(uri)
 			})
 		}	
@@ -125,6 +128,7 @@ angular.module('goodMood')
 		 * 	Returns primitives, so image should be garbage collected
 		 */
 		Picture.saveImageData = function (dataURI){
+			// console.log('hey')
 			return $firebase(fb.imageData).$push(dataURI).then(function (ref){
 				return ref.key()
 			})
