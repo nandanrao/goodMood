@@ -7,10 +7,13 @@ angular.module('goodMood')
 
 				console.log('linking', scope.thread.drawing.x)
 
+				var x = scope.thread.drawing.x;
+				var y = scope.thread.drawing.y;
+
 				scope.imageLoaded.then(function(){
-					var x = scope.thread.drawing.x*scope.imageSize.width
-					var y = scope.thread.drawing.y*scope.imageSize.height
-					var point = new paper.Point(x, y)
+					pX = x*scope.imageSize.width
+					pY = y*scope.imageSize.height
+					var point = new paper.Point(pX, pY)
 
 					// Created shape automatically appended to paperjs 'view'
 					var shape = new paper.Path.Circle({
@@ -22,9 +25,9 @@ angular.module('goodMood')
 
 					// move position of circles on window resize!
 					scope.$watchCollection('imageSize', function(curr){
-						var x = scope.thread.drawing.x*curr.width;
-						var y = scope.thread.drawing.y*curr.height;
-						var point = new paper.Point(x,y);
+						var pX = x*curr.width;
+						var pY = y*curr.height;
+						var point = new paper.Point(pX,pY);
 						shape.position = point;
 						textItem.position = point;
 						paper.view.update()

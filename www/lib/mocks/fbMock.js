@@ -19,7 +19,10 @@ angular.module('fbMock', [])
 			},
 			images: {
 
-			}	
+			},
+			imageData: {
+
+			}		
 		})
 
 
@@ -30,6 +33,7 @@ angular.module('fbMock', [])
 		fb.collaborations = fbMock.child('collaborations');
 		fb.messages = fbMock.child('messages');
 		fb.images = fbMock.child('images');
+		fb.imageData = fbMock.child('imageData');
 		fb.ref = fbMock;
 
 		return fb;

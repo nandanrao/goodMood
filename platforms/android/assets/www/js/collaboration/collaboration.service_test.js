@@ -114,7 +114,7 @@ describe('Factory: Collaboration', function(){
 		})
 	})
 
-	describe('Instance Methods', function(){
+	xdescribe('Instance Methods', function(){
 		var collaboration;
 
 		beforeEach(function(done){
@@ -124,7 +124,11 @@ describe('Factory: Collaboration', function(){
 			})
 			flushAll()
 
-			Collaboration.create('name').then(function(obj){
+			Collaboration.create('name')
+			.then(function(collaboration){
+				return collaboration.$populate()
+			})
+			.then(function(obj){
 				collaboration = obj
 				done()
 			})

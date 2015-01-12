@@ -16,7 +16,8 @@
     "angular": "~1.3.6",
     "firebase-util.min": "https://cdn.firebase.com/libs/firebase-util/0.1.0/firebase-util.min.js",
     "paper": "~0.9.21",
-    "ngCordova": "~0.1.9-alpha"
+    "ngCordova": "~0.1.9-alpha",
+    "pica": "~1.0.7"
   },
   "resolutions": {
     "angular": "1.2.x || 1.3.x",

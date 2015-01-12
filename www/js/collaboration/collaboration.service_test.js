@@ -114,7 +114,7 @@ describe('Factory: Collaboration', function(){
 		})
 	})
 
-	describe('Instance Methods', function(){
+	xdescribe('Instance Methods', function(){
 		var collaboration;
 
 		beforeEach(function(done){

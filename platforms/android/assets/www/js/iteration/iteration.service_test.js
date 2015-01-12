@@ -142,8 +142,6 @@ describe('Factory: Iteration', function(){
 			it('resolves to an instantiated iteration instance', function(done){
 				Iteration.findById(iteration.$id).then(function(obj){
 					obj.$id.should.equal(iteration.$id)
-					obj._image.$id.should.equal(iteration._image.$id)
-					obj.should.have.property('$populate')
 					done()
 				})
 				flushAll()

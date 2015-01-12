@@ -1,6 +1,13 @@
 angular.module('goodMood')
-	.controller('MyCollaborationsCtrl', function ($scope, Auth, $state, $ionicLoading, Collaboration, User, collaborationDefaultBg){
+	.controller('MyCollaborationsCtrl', function ($scope, Auth, $state, $ionicLoading, Collaboration, User, collaborationDefaultBg, Picture){
 		
+		var start = Date.now()
+		var what = Picture.createThumbnail("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAIVCAYAAAD/Kqk6AAAgAElEQ…PmuarWf/r5l+brb76V0/kqh06RdwoYuujrHvGdd6W7l/8DWpW9UwmTCOQAAAAASUVORK5CYII=")
+		what.then(function(pic){
+			console.log('end', Date.now() - start)
+			console.log(pic.src)
+		})
+
 		var user,
 				collaborations,
 				resolve;

@@ -7254,7 +7254,8 @@ voice-message {
     height: 3em;
     position: absolute;
     top: 3%;
-    right: 3%; }
+    right: 3%;
+    text-text-anchor: middle !important; }
 
 #pg--thread div.messages {
   padding-top: 0.5rem;
