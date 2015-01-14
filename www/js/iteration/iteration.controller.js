@@ -7,6 +7,7 @@ angular.module('goodMood')
 				threads;
 
 		$scope.resolve;
+		$scope.imageSize = {};
 
 		function init(){
 			var collaborationResolve = Collaboration.findById($stateParams.c_id).then(function(_collaboration){
@@ -27,6 +28,7 @@ angular.module('goodMood')
 		  		return
 		  	})
 		  	var imageResolve = iteration.$getImage().then(function(image){
+		  		$scope.imageRatio = image.width/image.height;
 		  		image.$getSmall().then(function(uri){
 		  			$scope.imageURI = uri
 		  		})
@@ -42,11 +44,7 @@ angular.module('goodMood')
 			if (!$scope.resolve){
 				init()	
 				$scope.resolve.then(function(){
-					console.log('iteration resolved', Date.now())
-					$scope.imageLoaded.then(function(){
-						console.log('image size resolved', Date.now())
-						$ionicLoading.hide()
-					})
+					$ionicLoading.hide()		
 				})
 			}
 		})
