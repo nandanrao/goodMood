@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.factory('Picture', function ($q, fb, $firebase, $FirebaseObject, imageResize){
+	.factory('Picture', function ($q, fb, $firebase, $timeout, $FirebaseObject, imageResize, utils){
 	
 		var Picture = {};
 
@@ -17,40 +17,45 @@ angular.module('goodMood')
 					throw new Error('not')
 				}
 				var self = this;
-
-				// Set the newly taken data to be used immediately
-				this._original = dataURI;
 				this.image = true;
+
+				// Set original data!
+				var imageDataId = utils.uuid()
+				var imageUploaded = $firebase(fb.imageData).$set(imageDataId, dataURI)
+				this.original = imageDataId;
 
 				// Calculate and set dimensions
 				var dimensions = Picture.calculateDimensions(dataURI);
 				this.height = dimensions.height;
 				this.width = dimensions.width;
 
-				// Upload the information to the server
-				var imageUploaded = Picture.saveImageData(dataURI).then(function(id){
-					// console.log('hey')
-					self.original = id;
-					return
-				});
+				// Save these so they're available synchronously
+				this.$save()
 
-				var imageSetCreated = Picture.createSmall(dataURI).then(function(s_id){
-					// console.log('hey')
-					self.small = s_id;
-					return self.$getSmall()
-				})
-				.then(function(small){
-					return Picture.createThumbnail(small)
-				})
-				.then(function(t_id){
-					self.thumbnail = t_id;
-					return
-				})
+				// Wrap this in setTimeout to run on next tick 
+				// as it does not need to be synchronous
+				var imageSetCreated = $q.defer()
+				$timeout(function(){
+					Picture.createSmall(dataURI).then(function(s_id){
+						self.small = s_id;
+						return self.$getSmall()
+					})
+					.then(function(small){
+						return Picture.createThumbnail(small)
+					})
+					.then(function(t_id){
+						self.thumbnail = t_id;
+						imageSetCreated.resolve()
+					})
+					.catch(function(err){
+						imageSetCreated.reject(err)
+					})
+				},0)
 				
 				// resolves to itself when the data is saved to the server?
 				return $q.all([
 					imageUploaded,
-					imageSetCreated
+					imageSetCreated.promise
 				])
 				.then(function (ref){
 					self.$save()
@@ -62,28 +67,28 @@ angular.module('goodMood')
 
 			$getThumbnail: function(){
 				if (!this.thumbnail) {
-					// return original? 
+					return this.$getOriginal()
 				}
 				return getImageData(this.thumbnail)
 			},
 
 			$getOriginal: function(){
+				if (!this.original){
+					throw new Error('trying to get image data before original is set!')
+				}
 				return getImageData(this.original)
 			},
 
 			$getSmall: function(){
 				if (!this.small) {
-					console.log(this)
-					return $q.when(this._original)
+					return this.$getOriginal()
 				}
 				return getImageData(this.small)
 			}
-
 		})
 
-		// Helper function to get imageData for a given ID
+		// Helper function to get dataURI for an image with a given imageData ID.
 		function getImageData(id){
-			console.log(id)
 			var defer = $q.defer()
 			fb.imageData.child(id).on('value', function(snap){
 				defer.resolve(snap.val())
@@ -109,7 +114,6 @@ angular.module('goodMood')
 		 */
 		Picture.createSmall = function (dataURI){
 			return imageResize.resize(dataURI, 800).then(function(uri){
-				console.log('hey')
 				return Picture.saveImageData(uri)
 			})
 		}	
@@ -128,7 +132,6 @@ angular.module('goodMood')
 		 * 	Returns primitives, so image should be garbage collected
 		 */
 		Picture.saveImageData = function (dataURI){
-			// console.log('hey')
 			return $firebase(fb.imageData).$push(dataURI).then(function (ref){
 				return ref.key()
 			})

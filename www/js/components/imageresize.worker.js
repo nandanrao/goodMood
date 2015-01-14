@@ -1,85 +1,83 @@
-(function(){
+// (function(){
 
+//   self.addEventListener('message', function(e) {
+//     var data = e.data;
+//     var img = makeImage(data.dataURI)
+//     var scale = data.width/img.naturalWidth;
+//     var height = img.naturalHeight*scale
+//     resizeStep(img, data.width, height)
+//   }, false);
 
+//   function callback(results){
+//     self.postMessage(results)
+//   }
 
-  self.addEventListener('message', function(e) {
-    var data = e.data;
-    var img = makeImage(data.dataURI)
-    var scale = data.width/img.naturalWidth;
-    var height = img.naturalHeight*scale
-    resizeStep(img, data.width, height)
-  }, false);
+//   function makeImage(dataURI){
+//     console.log(self.angular)
+//     var i = new Image;
+//     i.src = dataURI;
+//     var el = angular.element(i)  
+//     return el;
+//   }
 
-  function callback(results){
-    self.postMessage(results)
-  }
+//   function resizeStep (img, width, height, callback) {
+//     var quality = 1.0
 
-  function makeImage(dataURI){
-    console.log(self.angular)
-    var i = new Image;
-    i.src = dataURI;
-    var el = angular.element(i)  
-    return el;
-  }
+//     var canvas  = document.createElement( 'canvas' )
+//     var context = getContext(canvas)
+//     var type = "image/png"
 
-  function resizeStep (img, width, height, callback) {
-    var quality = 1.0
+//     var cW = img.naturalWidth
+//     var cH = img.naturalHeight
 
-    var canvas  = document.createElement( 'canvas' )
-    var context = getContext(canvas)
-    var type = "image/png"
+//     var dst = new Image()
+//     var tmp = null
 
-    var cW = img.naturalWidth
-    var cH = img.naturalHeight
+//     //resultD.resolve(img)
+//     //return resultD.promise
 
-    var dst = new Image()
-    var tmp = null
+//     function stepDown () {
+//       cW = Math.max(cW / 2, width) | 0
+//       cH = Math.max(cH / 2, height) | 0
 
-    //resultD.resolve(img)
-    //return resultD.promise
+//       canvas.width  = cW
+//       canvas.height = cH
 
-    function stepDown () {
-      cW = Math.max(cW / 2, width) | 0
-      cH = Math.max(cH / 2, height) | 0
+//       context.drawImage(tmp || img, 0, 0, cW, cH)
 
-      canvas.width  = cW
-      canvas.height = cH
+//       dst.src = canvas.toDataURL(type, quality)
 
-      context.drawImage(tmp || img, 0, 0, cW, cH)
+//       if (cW <= width || cH <= height) {
+//         return callback(dst)
+//       }
 
-      dst.src = canvas.toDataURL(type, quality)
+//       if (!tmp) {
+//         tmp = new Image()
+//         tmp.onload = stepDown
+//       }
 
-      if (cW <= width || cH <= height) {
-        return callback(dst)
-      }
+//       tmp.src = dst.src
+//     }
 
-      if (!tmp) {
-        tmp = new Image()
-        tmp.onload = stepDown
-      }
+//     if (cW <= width || cH <= height || cW / 2 < width || cH / 2 < height) {
+//       canvas.width  = width
+//       canvas.height = height
+//       context.drawImage(img, 0, 0, width, height)
+//       dst.src = canvas.toDataURL(type, quality)
+//       callback(dst)
+//     } else {
+//       stepDown()
+//     }
+//   }
 
-      tmp.src = dst.src
-    }
+//   function getContext (canvas) {
+//     var context = canvas.getContext('2d')
 
-    if (cW <= width || cH <= height || cW / 2 < width || cH / 2 < height) {
-      canvas.width  = width
-      canvas.height = height
-      context.drawImage(img, 0, 0, width, height)
-      dst.src = canvas.toDataURL(type, quality)
-      callback(dst)
-    } else {
-      stepDown()
-    }
-  }
+//     context.imageSmoothingEnabled       = true
+//     context.mozImageSmoothingEnabled    = true
+//     context.oImageSmoothingEnabled      = true
+//     context.webkitImageSmoothingEnabled = true
 
-  function getContext (canvas) {
-    var context = canvas.getContext('2d')
-
-    context.imageSmoothingEnabled       = true
-    context.mozImageSmoothingEnabled    = true
-    context.oImageSmoothingEnabled      = true
-    context.webkitImageSmoothingEnabled = true
-
-    return context
-  }
-})()
+//     return context
+//   }
+// })()

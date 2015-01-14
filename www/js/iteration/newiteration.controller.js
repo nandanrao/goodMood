@@ -27,6 +27,9 @@ angular.module('goodMood')
     	.then(function(results){
     		dataURI = results.dataURI;
     		image = results.image;
+    		image.$addImage(dataURI).then(function(obj){
+    			console.log('image saved', Date.now())
+    		})
     		return Iteration.create({
     			image: results.image,
     			collaboration: collaboration
@@ -34,9 +37,6 @@ angular.module('goodMood')
 	    })
 	    .then(_.partialRight(collaboration.$addIteration.bind(collaboration)))
 	    .then(function(iteration){
-	    	image.$addImage(dataURI).then(function(obj){
-	    		console.log('image saved', Date.now())
-	    	})
 	    	$state.go('iteration', {
 	    		i_id: iteration.$id,
 	    		c_id: collaboration.$id

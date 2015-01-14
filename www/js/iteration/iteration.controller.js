@@ -27,7 +27,6 @@ angular.module('goodMood')
 		  	})
 		  	var imageResolve = iteration.$getImage().then(function(image){
 		  		image.$getSmall().then(function(uri){
-		  			console.log('uri', uri)
 		  			$scope.imageURI = uri
 		  		})
 		  		return

@@ -178,8 +178,8 @@ angular.module('goodMood')
           if (!snap.val()){
             return deferred.resolve(lastImage)
           }
-          Picture.findById(snap.val()).then(function(image){
-            image.$getThumbnail().then(function(uri){
+          Picture.findById(snap.val()).then(function(picture){
+            picture.$getThumbnail().then(function(uri){
               lastImage.imageURI = uri;  
             })
             deferred.resolve(lastImage)

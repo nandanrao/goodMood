@@ -1,10 +1,11 @@
 angular.module('goodMood')
-	.directive('desktopUpload', function ($cordovaCamera){
+	.directive('mobileUpload', function ($cordovaCamera){
 		return {
 			restrict: 'E',
 			templateUrl: 'iteration/mobileupload.html',
 			controllerAs: 'mobileUpload',
 			controller: function ($scope, $element){
+				var pictureOptions;
 
 				this.takePicture = function (){
 					pictureOptions.sourceType = 1

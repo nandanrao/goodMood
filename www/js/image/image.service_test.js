@@ -19,7 +19,7 @@ describe('Factory: Picture', function(){
 	beforeEach(function(){		
 
 		module('goodMood', function($provide){
-			imageResize: imageResize
+			$provide.value('imageResize', imageResize)
 		});
 		module('fbMock');
 		module('authMock');
@@ -36,6 +36,7 @@ describe('Factory: Picture', function(){
 		$q = _$q_;
 		$firebase = _$firebase_;
 		Picture = _Picture_;
+
 
 		imageResize.resize =  sinon.stub().returns($q.when('uri'))
 	}))
@@ -56,39 +57,36 @@ describe('Factory: Picture', function(){
 				picture.$addImage.should.Throw()
 			})
 
-			it.only('returns a promise that resolves to itself', function(done){
+			it('returns a promise that resolves to itself', function(done){
 				picture.$addImage(seedData).then(function(_picture){
 					_picture.$id.should.equal(picture.$id)
 					done()
 				})
+				// rediculous amount of flushing needed for all the image saves.
 				flushAll()
 				flushAll()
 				flushAll()
-			})
-
-			it('it adds the given image data to its local _original property', function(done){
-				picture.$addImage(seedData).then(function(_picture){
-					_picture._original.should.equal(seedData)
-					done()
-				})
 				flushAll()
 			})
 
-			it('it adds the height and width of the image to itsself', function(done){
-				picture.$addImage(seedData).then(function(_picture){
-					_picture.width.should.be.a('number')
-					_picture.height.should.be.a('number')
-					should.not.exist(_picture._full)
-					done()
-				})
-				flushAll()
+			it('it synchronously adds a oroginal property', function(){
+				picture.$addImage(seedData)
+				picture.original.should.exist()
 			})
 
-			it('uploads the data its given', function(){
-				var spy = sinon.spy(Picture, 'saveImageData')
+			it('it synchronously adds the height and width of the image to itsself', function(){
+				picture.$addImage(seedData)
+				picture.width.should.be.a('number')
+				picture.height.should.be.a('number')
+			})
+
+			it('uploads the data its given', function(done){
 				picture.$addImage('test')
+				fb.imageData.child(picture.original).on('value', function(snap){
+					snap.val().should.equal('test')
+					done()
+				})
 				flushAll()
-				spy.should.have.been.calledWith('test')
 			})
 		})
 	})
@@ -114,19 +112,17 @@ describe('Factory: Picture', function(){
 					key.should.be.a('string')
 					done()
 				})
+				flushAll()
 			})
 		})
 
 		describe('createThumbnail', function(){
-
-			it('returns an image', function (done){
-				
-				Picture.createThumbnail(seedData).then(function(a,b){
-					console.log(a,b)
+			it('returns an the id to the thumbnail', function (done){
+				Picture.createThumbnail(seedData).then(function(id){
+					id.should.contain('mock')
 					done()
 				})
 				flushAll()
-
 				flushAll()	
 			})
 		})
