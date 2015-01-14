@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.factory('Iteration', function(fb, $firebase, $FirebaseObject, $q, Thread, $timeout){
+	.factory('Iteration', function(fb, $firebase, $FirebaseObject, $q, Thread, $timeout, Picture){
 		var Iteration = {};
 
 		Iteration.ref = fb.iterations;
@@ -34,8 +34,7 @@ angular.module('goodMood')
       	if (!this.image){
       		throw new Error('we have an iteration without an image!')
       	}
-        var ref = fb.images.child(this.image)
-      	return $firebase(ref).$asObject().$loaded()
+        return Picture.findById(this.image)
       },
 
   		$getThreads: function(){  			

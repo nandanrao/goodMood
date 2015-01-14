@@ -35,6 +35,7 @@ angular.module('goodMood')
       },
 
       $getCollaborations: function(){
+        console.log('user get collabs')
         var collaborations = {};
         var ref = this.$inst().$ref().child('collaborations');
         var deferred = $q.defer();

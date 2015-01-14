@@ -4,8 +4,9 @@ angular.module('goodMood')
 		var vm = this;
 		var collaboration,
 				iteration,
-				threads,
-				resolve;
+				threads;
+
+		$scope.resolve;
 
 		function init(){
 			var collaborationResolve = Collaboration.findById($stateParams.c_id).then(function(_collaboration){
@@ -33,22 +34,26 @@ angular.module('goodMood')
 		  	})
 		  	return $q.all([threadsResolve, imageResolve])
 		  })
-		  resolve = $q.all([collaborationResolve, iterationResolve])
+		  $scope.resolve = $q.all([collaborationResolve, iterationResolve])
 		}
 
 		// Use 'enter' instead of 'loaded' so animation completes
 		$scope.$on('$ionicView.enter', function(){
-			if (!resolve){
+			if (!$scope.resolve){
 				init()	
-				resolve.then(function(){
-					$ionicLoading.hide()
+				$scope.resolve.then(function(){
+					console.log('iteration resolved', Date.now())
+					$scope.imageLoaded.then(function(){
+						console.log('image size resolved', Date.now())
+						$ionicLoading.hide()
+					})
 				})
 			}
 		})
 		
 	  $scope.$on('$ionicView.beforeEnter', function(){
-	  	if (resolve){
-	  		resolve.then(function(){
+	  	if ($scope.resolve){
+	  		$scope.resolve.then(function(){
 	  			$ionicLoading.hide()
 	  		})	
 	  	}
@@ -83,7 +88,7 @@ angular.module('goodMood')
 		}
 
 		$scope.$watch(function(){
-			console.count('iteration digest run')
+			// console.count('iteration digest run')
 		})
 				
 		$scope.instructionsRead = false;

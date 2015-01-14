@@ -107,7 +107,7 @@ module.run(["$templateCache", function($templateCache) {
     "			</svg>\n" +
     "		</button> -->\n" +
     "\n" +
-    "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ image.$value }}\" />\n" +
+    "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ imageURI }}\" />\n" +
     "		<canvas iteration-canvas></canvas>\n" +
     "		<drawing ng-repeat=\"thread in threads | threadHasDrawing\" id=\"{{ ::thread.$id }}\">\n" +
     "		</drawing>\n" +
@@ -141,6 +141,27 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("iteration/mobileupload.html",
+    "<button ng-click=\"mobileUpload.takePicture()\" class=\"take-picture\">\n" +
+    "	<div class=\"image\">\n" +
+    "		<img src=\"img/camera.svg\">\n" +
+    "	</div>\n" +
+    "	<p>toma una foto</p>\n" +
+    "</button>\n" +
+    "<div class=\"line\"></div>\n" +
+    "<button ng-click=\"mobileUpload.fromDevice()\" class=\"from-device\">\n" +
+    "	<div class=\"image\">\n" +
+    "		<img src=\"img/picture-file.svg\">\n" +
+    "	</div>\n" +
+    "	<p>elije una foto</p>\n" +
+    "</button>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/newiteration.html",
     "<ion-view id=\"pg--new-iteration\" view-title=\"{{ ::newIteration.getViewTitle() }}\">\n" +
     "\n" +
@@ -150,19 +171,7 @@ module.run(["$templateCache", function($templateCache) {
     "	</ion-nav-buttons>\n" +
     "	<ion-content scroll=\"false\">\n" +
     "		<div class=\"mobile\" ng-if=\"!newIteration.isDesktop()\">\n" +
-    "			<button ng-click=\"newIteration.takePicture()\" class=\"take-picture\">\n" +
-    "				<div class=\"image\">\n" +
-    "					<img src=\"img/camera.svg\">\n" +
-    "				</div>\n" +
-    "				<p>toma una foto</p>\n" +
-    "			</button>\n" +
-    "			<div class=\"line\"></div>\n" +
-    "			<button ng-click=\"newIteration.fromDevice()\" class=\"from-device\">\n" +
-    "				<div class=\"image\">\n" +
-    "					<img src=\"img/picture-file.svg\">\n" +
-    "				</div>\n" +
-    "				<p>elije una foto</p>\n" +
-    "			</button>\n" +
+    "			<mobile-upload></mobile-upload>\n" +
     "		</div>\n" +
     "		<div class=\"desktop\" ng-if=\"newIteration.isDesktop()\">\n" +
     "			<desktop-upload></desktop-upload>\n" +

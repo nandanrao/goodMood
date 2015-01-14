@@ -1,6 +1,6 @@
 angular.module('goodMood')
-	.controller('MyCollaborationsCtrl', function ($scope, Auth, $state, $ionicLoading, Collaboration, User, collaborationDefaultBg){
-		
+	.controller('MyCollaborationsCtrl', function ($scope, Auth, $state, $ionicLoading, Collaboration, User, collaborationDefaultBg, Picture){
+
 		var user,
 				collaborations,
 				resolve;
@@ -45,7 +45,7 @@ angular.module('goodMood')
 		}
 
 		this.setCollaborationBg = function(collaboration){
-			var imgURI = _.size(collaboration._lastImage) > 0 ? collaboration._lastImage.image.$value : collaborationDefaultBg
+			var imgURI = _.size(collaboration._lastImage) > 0 ? collaboration._lastImage.imageURI : collaborationDefaultBg
 			return { 
 				'background-image': 'url(' + imgURI + ')'
 			}

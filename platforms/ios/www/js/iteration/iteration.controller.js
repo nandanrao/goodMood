@@ -25,8 +25,10 @@ angular.module('goodMood')
 		  		$scope.threads = threads;
 		  		return
 		  	})
-		  	var imageResolve = iteration.$getImage().then(function(_image){
-		  		$scope.image = _image;
+		  	var imageResolve = iteration.$getImage().then(function(image){
+		  		image.$getSmall().then(function(uri){
+		  			$scope.imageURI = uri
+		  		})
 		  		return
 		  	})
 		  	return $q.all([threadsResolve, imageResolve])
@@ -39,7 +41,11 @@ angular.module('goodMood')
 			if (!resolve){
 				init()	
 				resolve.then(function(){
-					$ionicLoading.hide()
+					console.log('iteration resolved', Date.now())
+					$scope.imageLoaded.then(function(){
+						console.log('image size resolved', Date.now())
+						$ionicLoading.hide()
+					})
 				})
 			}
 		})

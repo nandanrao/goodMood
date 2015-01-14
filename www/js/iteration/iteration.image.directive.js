@@ -9,6 +9,7 @@ angular.module('goodMood')
 				var defer = $q.defer()
 				scope.imageLoaded = defer.promise
 				element.bind('load', function() {
+					console.log('image load on el bind', Date.now())
 					setImageSize()
 					element[0].style.visibility = 'visible';	
 					defer.resolve()

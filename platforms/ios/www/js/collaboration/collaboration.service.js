@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.factory('Collaboration', function(fb, $firebase, $FirebaseObject, $q, Auth, Iteration, Thread, Image, utils, $timeout){
+	.factory('Collaboration', function(fb, $firebase, $FirebaseObject, $q, Auth, Iteration, Thread, Picture, utils, $timeout){
 		var Collaboration = {};
 
 		Collaboration.ref = fb.collaborations;
@@ -178,8 +178,10 @@ angular.module('goodMood')
           if (!snap.val()){
             return deferred.resolve(lastImage)
           }
-          Image.findById(snap.val()).then(function(image){
-            lastImage.image = image;
+          Picture.findById(snap.val()).then(function(picture){
+            picture.$getThumbnail().then(function(uri){
+              lastImage.imageURI = uri;  
+            })
             deferred.resolve(lastImage)
           }, deferred.reject)
         })
