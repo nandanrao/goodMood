@@ -8,10 +8,10 @@ angular.module('goodMood')
 				// that they can start drawing themselves.
 				console.log('iteration image linking beginning', Date.now())
 				element.bind('load', function() {
+					setImageSize()
 					element[0].style.visibility = 'visible';	
 			  });	
 
-				setImageSize()
 				// When the view is cached we need this event to set image size
 				scope.$on('$ionicView.enter', function(){
 					setImageSize()					

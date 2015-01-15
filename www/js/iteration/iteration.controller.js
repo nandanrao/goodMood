@@ -8,6 +8,9 @@ angular.module('goodMood')
 
 		$scope.resolve;
 		$scope.imageSize = {};
+		$scope.canvasElements = {
+			drawings: [],
+		};
 
 		function init(){
 			var collaborationResolve = Collaboration.findById($stateParams.c_id).then(function(_collaboration){
@@ -47,29 +50,28 @@ angular.module('goodMood')
 					$ionicLoading.hide()		
 				})
 			}
+
+			_.forEach($scope.canvasElements.drawings, function(drawing){
+				drawing.activateStream();
+			})
 		})
-		
-	  $scope.$on('$ionicView.beforeEnter', function(){
-	  	if ($scope.resolve){
-	  		$scope.resolve.then(function(){
-	  			$ionicLoading.hide()
-	  		})	
-	  	}
-	  })
 
-	  $scope.$on('swipedown', function(){
-	  	if($scope.previous) {
-	  		$ionicLoading.show()
-	  		goToIteration($scope.previous)
-	  	}
-	  })
+		$scope.$on('$ionicView.beforeEnter', function(){
+			if ($scope.resolve){
+				$scope.resolve.then(function(){
+					$ionicLoading.hide()
+				})	
+			}
+			if ($scope.canvasElements.surface){
+				$scope.canvasElements.surface.activate()	
+			}
+		})
 
-	  $scope.$on('swipeup', function(){
-	  	if($scope.next) {
-	  		$ionicLoading.show()
-	  		goToIteration($scope.next)
-	  	}
-	  })
+		$scope.$on('$ionicView.unloaded', function(){
+			if ($scope.canvasElements.surface){
+				$scope.canvasElements.surface.destroy()
+			}
+		})
 
 		// Create iterations array for inter-iteration navigation
 		$scope.$watchCollection('iterations', function(curr, old){
