@@ -1,12 +1,5 @@
 angular.module('goodMood')
 	.controller('MyCollaborationsCtrl', function ($scope, Auth, $state, $ionicLoading, Collaboration, User, collaborationDefaultBg, Picture){
-		
-		var start = Date.now()
-		var what = Picture.createThumbnail("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAIVCAYAAAD/Kqk6AAAgAElEQ…PmuarWf/r5l+brb76V0/kqh06RdwoYuujrHvGdd6W7l/8DWpW9UwmTCOQAAAAASUVORK5CYII=")
-		what.then(function(pic){
-			console.log('end', Date.now() - start)
-			console.log(pic.src)
-		})
 
 		var user,
 				collaborations,
@@ -40,7 +33,7 @@ angular.module('goodMood')
 	  })
 
 		$scope.$watch(function(){
-			console.count('mycolaborations scope digest')
+			// console.count('mycolaborations scope digest')
 		})
 
 		this.getNewMessages = function(collaboration){
@@ -52,7 +45,7 @@ angular.module('goodMood')
 		}
 
 		this.setCollaborationBg = function(collaboration){
-			var imgURI = _.size(collaboration._lastImage) > 0 ? collaboration._lastImage.image.$value : collaborationDefaultBg
+			var imgURI = _.size(collaboration._lastImage) > 0 ? collaboration._lastImage.imageURI : collaborationDefaultBg
 			return { 
 				'background-image': 'url(' + imgURI + ')'
 			}

@@ -99,15 +99,14 @@ module.run(["$templateCache", function($templateCache) {
     "	 <button ng-click=\"iteration.goBack()\" nav-direction=\"back\" class=\"ion-chevron-left\">\n" +
     "	 </button>\n" +
     "	</ion-nav-buttons>\n" +
-    "	<div id=\"iterationBg\" class=\"{{ iteration.showAddIteration() ? 'add-iteration' : 'iteraton' }}\">\n" +
+    "	<div iteration-container id=\"iterationBg\" class=\"{{ iteration.showAddIteration() ? 'add-iteration' : 'iteraton' }}\">\n" +
     "		<!-- <button class=\"prev-iteration\" ng-if=\"previous\" ng-click=\"iteration.goPrevious()\">\n" +
     "			<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 104.2 17\" enable-background=\"new 0 0 104.2 17\" xml:space=\"preserve\">\n" +
     "			<polyline fill=\"#222222\" stroke=\"#FFFFFF\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" points=\"\n" +
     "				103,15.1 53.1,2.6 3.2,15.1 \"/>\n" +
     "			</svg>\n" +
     "		</button> -->\n" +
-    "\n" +
-    "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ image.$value }}\" />\n" +
+    "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ imageURI }}\" />\n" +
     "		<canvas iteration-canvas></canvas>\n" +
     "		<drawing ng-repeat=\"thread in threads | threadHasDrawing\" id=\"{{ ::thread.$id }}\">\n" +
     "		</drawing>\n" +
@@ -141,6 +140,27 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("iteration/mobileupload.html",
+    "<button ng-click=\"mobileUpload.takePicture()\" class=\"take-picture\">\n" +
+    "	<div class=\"image\">\n" +
+    "		<img src=\"img/camera.svg\">\n" +
+    "	</div>\n" +
+    "	<p>toma una foto</p>\n" +
+    "</button>\n" +
+    "<div class=\"line\"></div>\n" +
+    "<button ng-click=\"mobileUpload.fromDevice()\" class=\"from-device\">\n" +
+    "	<div class=\"image\">\n" +
+    "		<img src=\"img/picture-file.svg\">\n" +
+    "	</div>\n" +
+    "	<p>elije una foto</p>\n" +
+    "</button>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/newiteration.html",
     "<ion-view id=\"pg--new-iteration\" view-title=\"{{ ::newIteration.getViewTitle() }}\">\n" +
     "\n" +
@@ -150,59 +170,13 @@ module.run(["$templateCache", function($templateCache) {
     "	</ion-nav-buttons>\n" +
     "	<ion-content scroll=\"false\">\n" +
     "		<div class=\"mobile\" ng-if=\"!newIteration.isDesktop()\">\n" +
-    "			<button ng-click=\"newIteration.takePicture()\" class=\"take-picture\">\n" +
-    "				<div class=\"image\">\n" +
-    "					<img src=\"img/camera.svg\">\n" +
-    "				</div>\n" +
-    "				<p>toma una foto</p>\n" +
-    "			</button>\n" +
-    "			<div class=\"line\"></div>\n" +
-    "			<button ng-click=\"newIteration.fromDevice()\" class=\"from-device\">\n" +
-    "				<div class=\"image\">\n" +
-    "					<img src=\"img/picture-file.svg\">\n" +
-    "				</div>\n" +
-    "				<p>elije una foto</p>\n" +
-    "			</button>\n" +
+    "			<mobile-upload></mobile-upload>\n" +
     "		</div>\n" +
     "		<div class=\"desktop\" ng-if=\"newIteration.isDesktop()\">\n" +
     "			<desktop-upload></desktop-upload>\n" +
     "		</div>\n" +
     "	</ion-content>\n" +
     "</ion-view>");
-}]);
-})();
-
-(function(module) {
-try { module = angular.module("ngTemplates"); }
-catch(err) { module = angular.module("ngTemplates", []); }
-module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("sidemenu/sidemenu.html",
-    "<div id=\"pg--sidemenu\">\n" +
-    "	<div class=\"profile\">\n" +
-    "		<img ng-src=\"{{ user.picture }}\">\n" +
-    "		<h2>{{ user.displayName }}</h2>\n" +
-    "	</div>	\n" +
-    "\n" +
-    "\n" +
-    "	<ul class=\"options\">\n" +
-    "		<li>\n" +
-    "			<button ng-click=\"sidemenu.logout()\">\n" +
-    "				<span>logout</span>\n" +
-    "				<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
-    "					 viewBox=\"0 0 33.9 33.9\" enable-background=\"new 0 0 33.9 33.9\" xml:space=\"preserve\">\n" +
-    "				<g>\n" +
-    "					<circle fill=\"none\" stroke=\"#E85757\" stroke-width=\"3\" stroke-miterlimit=\"10\" cx=\"17\" cy=\"17\" r=\"15.5\"/>\n" +
-    "					<line fill=\"none\" stroke=\"#E85757\" stroke-width=\"3\" stroke-miterlimit=\"10\" x1=\"6\" y1=\"27.9\" x2=\"27.9\" y2=\"6\"/>\n" +
-    "				</g>\n" +
-    "				</svg>\n" +
-    "\n" +
-    "			</button>\n" +
-    "		</li>	\n" +
-    "	</ul>\n" +
-    "	\n" +
-    "</div>\n" +
-    "\n" +
-    "");
 }]);
 })();
 
@@ -255,6 +229,40 @@ module.run(["$templateCache", function($templateCache) {
     "		</form>\n" +
     "	</div>\n" +
     "</ion-content>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("sidemenu/sidemenu.html",
+    "<div id=\"pg--sidemenu\">\n" +
+    "	<div class=\"profile\">\n" +
+    "		<img ng-src=\"{{ user.picture }}\">\n" +
+    "		<h2>{{ user.displayName }}</h2>\n" +
+    "	</div>	\n" +
+    "\n" +
+    "\n" +
+    "	<ul class=\"options\">\n" +
+    "		<li>\n" +
+    "			<button ng-click=\"sidemenu.logout()\">\n" +
+    "				<span>logout</span>\n" +
+    "				<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
+    "					 viewBox=\"0 0 33.9 33.9\" enable-background=\"new 0 0 33.9 33.9\" xml:space=\"preserve\">\n" +
+    "				<g>\n" +
+    "					<circle fill=\"none\" stroke=\"#E85757\" stroke-width=\"3\" stroke-miterlimit=\"10\" cx=\"17\" cy=\"17\" r=\"15.5\"/>\n" +
+    "					<line fill=\"none\" stroke=\"#E85757\" stroke-width=\"3\" stroke-miterlimit=\"10\" x1=\"6\" y1=\"27.9\" x2=\"27.9\" y2=\"6\"/>\n" +
+    "				</g>\n" +
+    "				</svg>\n" +
+    "\n" +
+    "			</button>\n" +
+    "		</li>	\n" +
+    "	</ul>\n" +
+    "	\n" +
+    "</div>\n" +
+    "\n" +
+    "");
 }]);
 })();
 

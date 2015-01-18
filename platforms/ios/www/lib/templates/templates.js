@@ -99,14 +99,13 @@ module.run(["$templateCache", function($templateCache) {
     "	 <button ng-click=\"iteration.goBack()\" nav-direction=\"back\" class=\"ion-chevron-left\">\n" +
     "	 </button>\n" +
     "	</ion-nav-buttons>\n" +
-    "	<div id=\"iterationBg\" class=\"{{ iteration.showAddIteration() ? 'add-iteration' : 'iteraton' }}\">\n" +
+    "	<div iteration-container id=\"iterationBg\" class=\"{{ iteration.showAddIteration() ? 'add-iteration' : 'iteraton' }}\">\n" +
     "		<!-- <button class=\"prev-iteration\" ng-if=\"previous\" ng-click=\"iteration.goPrevious()\">\n" +
     "			<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 104.2 17\" enable-background=\"new 0 0 104.2 17\" xml:space=\"preserve\">\n" +
     "			<polyline fill=\"#222222\" stroke=\"#FFFFFF\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" points=\"\n" +
     "				103,15.1 53.1,2.6 3.2,15.1 \"/>\n" +
     "			</svg>\n" +
     "		</button> -->\n" +
-    "\n" +
     "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ imageURI }}\" />\n" +
     "		<canvas iteration-canvas></canvas>\n" +
     "		<drawing ng-repeat=\"thread in threads | threadHasDrawing\" id=\"{{ ::thread.$id }}\">\n" +

@@ -14,6 +14,7 @@ angular.module('goodMood')
 			.then(function(_messages){
 				messages = _messages;
 				$scope.messages = messages;
+				return
 			})	
 		}
 

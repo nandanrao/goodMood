@@ -9,7 +9,9 @@ angular.module('goodMood')
 				console.log('iteration image linking beginning', Date.now())
 				element.bind('load', function() {
 					setImageSize()
-					element[0].style.visibility = 'visible';	
+					$window.requestAnimationFrame(function(){
+						element[0].style.visibility = 'visible';
+					})	
 			  });	
 
 				// When the view is cached we need this event to set image size
@@ -28,7 +30,9 @@ angular.module('goodMood')
 				function setImageSize() {
 					scope.imageSize.width = element[0].clientWidth;
 					scope.imageSize.height = element[0].clientHeight;
-					element[0].style['margin-left'] = -scope.imageSize.width/2 + 'px'
+					$window.requestAnimationFrame(function(){
+						element[0].style['margin-left'] = -scope.imageSize.width/2 + 'px'	
+					})
 					scope.$apply();
 				}
 			}

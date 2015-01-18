@@ -4,8 +4,8 @@ angular.module('goodMood')
 			restrict: 'EA',
 			templateUrl: 'thread/voicemessagerecord.html',
 			controllerAs: 'record',
-            replace: true,
-            scope: true,
+      replace: true,
+      scope: true,
 			controller: function ($scope, $element){
 				var vm = this;				
 				var media, 
@@ -76,7 +76,6 @@ angular.module('goodMood')
     		}
 
         var timerInt;
-
         function startTimer(){
           timerInt = $interval(function(){
             $scope.recordTime.currently++
@@ -99,9 +98,6 @@ angular.module('goodMood')
 						cordovaRecord()
 					}
 				}
-			},
-			link: function (){
-
 			}
 		}
 	})

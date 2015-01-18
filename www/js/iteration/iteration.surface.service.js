@@ -11,7 +11,12 @@ angular.module('goodMood')
 		Surface.prototype.activate = function (){
 			this.project.activate()
 			this.tool.activate()
+			this.project.view.play()
 		};
+
+		Surface.prototype.pause = function (){
+			this.project.view.pause()
+		}
 
 		Surface.prototype.destroy = function (){
 			this.tool.remove();

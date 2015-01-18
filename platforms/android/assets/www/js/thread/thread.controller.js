@@ -56,7 +56,7 @@ angular.module('goodMood')
 		})
 
 		$scope.$watch(function(){
-			console.count('thread digest run')
+			// console.count('thread digest run')
 		})
 		// $destroy needs a short delay after $close, because $close modifies thread
 		// and it would appear that firebase can't deal with the rapidity

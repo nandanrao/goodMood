@@ -33,7 +33,7 @@ angular.module('goodMood')
 	  })
 
 		$scope.$watch(function(){
-			console.count('mycolaborations scope digest')
+			// console.count('mycolaborations scope digest')
 		})
 
 		this.getNewMessages = function(collaboration){

@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.controller('NewIterationCtrl', function($scope, $q, $window, $log, $state, collaboration, $cordovaCamera, $ionicLoading, $ionicHistory, utils, Iteration, Image){
+	.controller('NewIterationCtrl', function($scope, $q, $window, $log, $state, collaboration, $cordovaCamera, $ionicLoading, $ionicHistory, utils, Iteration, Picture){
 		var vm = this;
 		this.isDesktop = utils.isDesktop
 
@@ -19,7 +19,7 @@ angular.module('goodMood')
 		this.createIteration = function(imageDataLoaded){
 			$ionicLoading.show();
 			var image, DataURI;
-			var imageCreated = Image.create(false)
+			var imageCreated = Picture.create()
 	    $q.all({
 	    	image: imageCreated,
 	    	dataURI: imageDataLoaded
@@ -27,6 +27,9 @@ angular.module('goodMood')
     	.then(function(results){
     		dataURI = results.dataURI;
     		image = results.image;
+    		image.$addImage(dataURI).then(function(obj){
+    			console.log('image saved', Date.now())
+    		})
     		return Iteration.create({
     			image: results.image,
     			collaboration: collaboration
@@ -34,9 +37,6 @@ angular.module('goodMood')
 	    })
 	    .then(_.partialRight(collaboration.$addIteration.bind(collaboration)))
 	    .then(function(iteration){
-	    	image.$inst().$set(dataURI).then(function(obj){
-	    		console.log('image saved', Date.now())
-	    	})
 	    	$state.go('iteration', {
 	    		i_id: iteration.$id,
 	    		c_id: collaboration.$id
@@ -51,30 +51,6 @@ angular.module('goodMood')
     		$ionicLoading.hide()
     	})
 		}
-
-		var pictureOptions = {
-			destinationType: 0,
-			quality: 50,
-			targetWidth: 1600,
-			targetHeight: 1600
-		}
 		
-		this.fromDevice = function(){
-			pictureOptions.sourceType = 0
-			getPicture(pictureOptions)
-		}
-
-		this.takePicture = function(){
-			getPicture(pictureOptions)
-		}
-
-		function getPicture (options){
-			var pictureRecieved = $cordovaCamera.getPicture(pictureOptions)
-			var imageData = pictureRecieved.then(function(datURI){
-					return "data:image/jpeg;base64," + datURI
-				})
-			vm.createIteration(imageData)
-		}
-
 		$ionicLoading.hide()
 	})

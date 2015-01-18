@@ -1,5 +1,5 @@
 expect = require("chai").expect
-Bacon = require("../src/Bacon").Bacon
+Bacon = require("../dist/Bacon").Bacon
 Mocks = require( "./Mock")
 TickScheduler = require("./TickScheduler").TickScheduler
 mock = Mocks.mock
@@ -857,6 +857,16 @@ describe "EventStream.flatMapLatest", ->
 
         Bacon.combineAsArray(f, b).map(".0")
       ["f0,0","f1,1"])
+
+  it "Works with flatMap source spawning fromArrays", ->
+    result = []
+    array = [1,2,3]
+    Bacon.fromArray(array)
+      .map(array)
+      .flatMap(Bacon.fromArray)
+      .flatMapLatest(Bacon._.id)
+      .onValue (v) -> result.push v
+    expect(result).to.deep.equal([1,2,3,1,2,3,1,2,3])
 
 describe "Property.flatMapLatest", ->
   describe "spawns new streams but collects values from the latest spawned stream only", ->
@@ -2755,8 +2765,8 @@ describe "Bacon.when", ->
       ["cc"])
   describe "accepts constants instead of functions too", ->
     expectStreamEvents(
-      -> Bacon.when(Bacon.once(1), 2)
-      [2])
+      -> Bacon.when(Bacon.once(1), 2, Bacon.once(2), 3)
+      [2, 3])
   describe "works with synchronous sources", ->
     expectStreamEvents(
       ->
@@ -2993,6 +3003,14 @@ describe "Observable.subscribe and onValue", ->
     dispose()
     s.push "wut"
     expect(values).to.deep.equal(["lol"])
+  it "respects returned Bacon.noMore return value (#523)", ->
+    calls = 0
+    Bacon.once(1).merge(Bacon.interval(100, 2)).subscribe (event) ->
+      calls++
+      Bacon.noMore
+    expect(calls).to.equal(1)
+    # will hang if the underlying interval-stream isn't disposed correctly
+
 
 describe "Observable.onEnd", ->
   it "is called on stream end", ->
@@ -3143,6 +3161,9 @@ describe "Bacon.Bus", ->
     bus = new Bacon.Bus()
     bus.end()
 
+  it "throws if a non-observable is plugged", ->
+    expect(-> new Bacon.Bus().plug(undefined)).to.throw()
+
   describe "delivers pushed events and errors", ->
     expectStreamEvents(
       ->
@@ -3265,6 +3286,18 @@ describe "Bacon.fromBinder", ->
     timer.take(1).log()
     output "hello"
     expect(unbound).to.equal(1)
+  describe "unbind works in synchronous case", ->
+    expectStreamEvents( ->
+        Bacon.fromBinder (sink) ->
+          unsubTest = Bacon.scheduler.setInterval((->), 10)
+          sink("hello")
+          sink(new Bacon.End())
+          ->
+            # test hangs if any interval is left uncleared
+            Bacon.scheduler.clearInterval(unsubTest)
+      ,
+      ["hello"])
+
   it "toString", ->
     expect(Bacon.fromBinder(->).toString()).to.equal("Bacon.fromBinder(function,function)")
 
@@ -3352,6 +3385,7 @@ describe "Exceptions", ->
     b.take(1).onValue((x) -> values.push(x))
     b.push("after exception")
     expect(values).to.deep.equal(["after exception"])
+
 
 endlessly = (values...) ->
   index = 0

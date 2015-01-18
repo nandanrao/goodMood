@@ -42,19 +42,6 @@ angular.module('goodMood')
 		  $scope.resolve = $q.all([collaborationResolve, iterationResolve])
 		}
 
-		// Use 'enter' instead of 'loaded' so animation completes
-		$scope.$on('$ionicView.enter', function(){
-			if (!$scope.resolve){
-				init()	
-				$scope.resolve.then(function(){
-					$ionicLoading.hide()		
-				})
-			}
-
-			_.forEach($scope.canvasElements.drawings, function(drawing){
-				drawing.activateStream();
-			})
-		})
 
 		$scope.$on('$ionicView.beforeEnter', function(){
 			if ($scope.resolve){
@@ -62,9 +49,30 @@ angular.module('goodMood')
 					$ionicLoading.hide()
 				})	
 			}
+		})
+
+		$scope.$on('$ionicView.enter', function(){
+			if (!$scope.resolve){
+				init()	
+				$scope.resolve.then(function(){
+					$ionicLoading.hide()		
+				})
+			}
 			if ($scope.canvasElements.surface){
 				$scope.canvasElements.surface.activate()	
 			}
+			_.forEach($scope.canvasElements.drawings, function(drawing){
+				drawing.activateStream();
+			})
+		})
+
+		$scope.$on('$ionicView.leave', function(){
+			if ($scope.canvasElements.surface){
+				$scope.canvasElements.surface.pause()
+			}
+			_.forEach($scope.canvasElements.drawings, function(drawing){
+				drawing.deactivateStream();
+			})
 		})
 
 		$scope.$on('$ionicView.unloaded', function(){
