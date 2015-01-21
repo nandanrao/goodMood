@@ -106,9 +106,9 @@ module.run(["$templateCache", function($templateCache) {
     "				103,15.1 53.1,2.6 3.2,15.1 \"/>\n" +
     "			</svg>\n" +
     "		</button> -->\n" +
-    "		<img class=\"iteration-image\" iteration-image ng-src=\"{{ imageURI }}\" />\n" +
-    "		<canvas iteration-canvas></canvas>\n" +
-    "		<drawing ng-repeat=\"thread in threads | threadHasDrawing\" id=\"{{ ::thread.$id }}\">\n" +
+    "		<img ng-if=\"resolve\" class=\"iteration-image\" iteration-image ng-src=\"{{ imageURI }}\" />\n" +
+    "		<canvas ng-if=\"imageSize.height\" iteration-canvas></canvas>\n" +
+    "		<drawing ng-if=\"imageSize.height\"  ng-repeat=\"thread in threads | threadHasDrawing\" id=\"{{ ::thread.$id }}\">\n" +
     "		</drawing>\n" +
     "		<button check-button class=\"check\" ng-if=\"iteration.showCheck()\" ng-click=\"iteration.done()\"></button>\n" +
     "		<div ng-if=\"!iteration.hasThreads() && !instructionsRead\" class=\"instructions\">\n" +

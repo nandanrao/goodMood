@@ -43,15 +43,16 @@ angular.module('goodMood')
 		}
 
 
-		$scope.$on('$ionicView.beforeEnter', function(){
+		$scope.$on('$ionicView.beforeEnter', function iterationBeforeEnter (){
 			if ($scope.resolve){
+				console.log('already resolved')
 				$scope.resolve.then(function(){
 					$ionicLoading.hide()
 				})	
 			}
 		})
 
-		$scope.$on('$ionicView.enter', function(){
+		$scope.$on('$ionicView.enter', function iterationEnter (){
 			if (!$scope.resolve){
 				init()	
 				$scope.resolve.then(function(){
@@ -66,7 +67,7 @@ angular.module('goodMood')
 			})
 		})
 
-		$scope.$on('$ionicView.leave', function(){
+		$scope.$on('$ionicView.leave', function iterationLeave (){
 			if ($scope.canvasElements.surface){
 				$scope.canvasElements.surface.pause()
 			}
@@ -75,14 +76,14 @@ angular.module('goodMood')
 			})
 		})
 
-		$scope.$on('$ionicView.unloaded', function(){
+		$scope.$on('$ionicView.unloaded', function iterationUnloaded (){
 			if ($scope.canvasElements.surface){
 				$scope.canvasElements.surface.destroy()
 			}
 		})
 
 		// Create iterations array for inter-iteration navigation
-		$scope.$watchCollection('iterations', function(curr, old){
+		$scope.$watchCollection('iterations', function watchIterationArray (curr, old){
 			setIterationArray()
 		})
 		function setIterationArray(){

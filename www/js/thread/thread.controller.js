@@ -29,6 +29,7 @@ angular.module('goodMood')
 		
 	  $scope.$on('$ionicView.beforeEnter', function(){
 	  	if (threadResolve){
+	  		console.log('already resolved')
 	  		threadResolve.then(function(){
 	  			$ionicLoading.hide()
 	  		})	
