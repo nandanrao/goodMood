@@ -1,5 +1,10 @@
 angular.module('goodMood')
 	.controller('NewIterationCtrl', function($scope, $q, $window, $log, $state, collaboration, $cordovaCamera, $ionicLoading, $ionicHistory, utils, Iteration, Picture){
+		
+		$scope.$on('$ionicView.enter', function(){
+			$ionicLoading.hide()
+		})
+
 		var vm = this;
 		this.isDesktop = utils.isDesktop
 
@@ -52,5 +57,4 @@ angular.module('goodMood')
     	})
 		}
 		
-		$ionicLoading.hide()
 	})

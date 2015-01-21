@@ -6,29 +6,27 @@ angular.module('goodMood')
 				resolve;
 		
 		function init(){
-			resolve = User.getCurrentUser().then(function(_user){
+			return User.getCurrentUser().then(function(_user){
 				user = _user;
 				return user.$getCollaborations()
 			})
 			.then(function(_collaborations){
 		    collaborations = _collaborations;
 		    $scope.collaborations = collaborations;
+		    resolve = true;
 		    return
 		  })
 		}
 
 		$scope.$on('$ionicView.loaded', function(){
-			init()
-			resolve.then(function(){
+			init().then(function(){
 				$ionicLoading.hide()
 			})
 		})
 		
 	  $scope.$on('$ionicView.beforeEnter', function(){
 	  	if (resolve){
-	  		resolve.then(function(){
-	  			$ionicLoading.hide()
-	  		})	
+  			$ionicLoading.hide()
 	  	}
 	  })
 

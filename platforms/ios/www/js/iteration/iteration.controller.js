@@ -8,6 +8,9 @@ angular.module('goodMood')
 
 		$scope.resolve;
 		$scope.imageSize = {};
+		$scope.iterationFooter = {
+			exists: false
+		};
 		$scope.canvasElements = {
 			drawings: [],
 		};
@@ -25,6 +28,7 @@ angular.module('goodMood')
 
 		  var iterationResolve = Iteration.findById($stateParams.i_id).then(function(_iteration){
 		  	iteration = _iteration;
+		  	vm.iterationId = iteration.$id
 		  	var threadsResolve = iteration.$getThreads().then(function(_threads){
 		  		threads = _threads;
 		  		$scope.threads = threads;
@@ -39,43 +43,53 @@ angular.module('goodMood')
 		  	})
 		  	return $q.all([threadsResolve, imageResolve])
 		  })
-		  $scope.resolve = $q.all([collaborationResolve, iterationResolve])
+		  return $q.all([collaborationResolve, iterationResolve]).then(function(){
+		  	$scope.resolve = true;
+		  })
 		}
 
-		// Use 'enter' instead of 'loaded' so animation completes
-		$scope.$on('$ionicView.enter', function(){
+
+		$scope.$on('$ionicView.beforeEnter', function iterationBeforeEnter (){
+			if ($scope.resolve){
+				$ionicLoading.hide()
+			}
+		})
+
+		$scope.$on('$ionicView.enter', function iterationEnter (){
 			if (!$scope.resolve){
-				init()	
-				$scope.resolve.then(function(){
+				init().then(function(){
 					$ionicLoading.hide()		
 				})
 			}
-
+			if ($scope.canvasElements.surface){
+				$scope.canvasElements.surface.activate()	
+			}
 			_.forEach($scope.canvasElements.drawings, function(drawing){
 				drawing.activateStream();
 			})
 		})
 
-		$scope.$on('$ionicView.beforeEnter', function(){
-			if ($scope.resolve){
-				$scope.resolve.then(function(){
-					$ionicLoading.hide()
-				})	
-			}
+		$scope.$on('$ionicView.leave', function iterationLeave (){
 			if ($scope.canvasElements.surface){
-				$scope.canvasElements.surface.activate()	
+				$scope.canvasElements.surface.pause()
 			}
+			_.forEach($scope.canvasElements.drawings, function(drawing){
+				drawing.deactivateStream();
+			})
 		})
 
-		$scope.$on('$ionicView.unloaded', function(){
+		$scope.$on('$ionicView.unloaded', function iterationUnloaded (){
 			if ($scope.canvasElements.surface){
 				$scope.canvasElements.surface.destroy()
 			}
 		})
 
 		// Create iterations array for inter-iteration navigation
-		$scope.$watchCollection('iterations', function(curr, old){
+		$scope.$watchCollection('iterations', function watchIterationArray (curr, old){
 			setIterationArray()
+			if (!old){
+				$scope.iterationsLoaded	= true;
+			}
 		})
 		function setIterationArray(){
 			if (!iteration || !$scope.iterations){
@@ -94,8 +108,7 @@ angular.module('goodMood')
 		$scope.instructionsRead = false;
 
 		this.hasThreads = function(){
-			return true;
-			// return !!threads ? _.size(threads) > 0 : true
+			return !!threads && _.size(threads) > 0
 		}
 
 		this.readInstructions = function(){

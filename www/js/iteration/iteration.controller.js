@@ -8,6 +8,9 @@ angular.module('goodMood')
 
 		$scope.resolve;
 		$scope.imageSize = {};
+		$scope.iterationFooter = {
+			exists: false
+		};
 		$scope.canvasElements = {
 			drawings: [],
 		};
@@ -25,6 +28,7 @@ angular.module('goodMood')
 
 		  var iterationResolve = Iteration.findById($stateParams.i_id).then(function(_iteration){
 		  	iteration = _iteration;
+		  	vm.iterationId = iteration.$id
 		  	var threadsResolve = iteration.$getThreads().then(function(_threads){
 		  		threads = _threads;
 		  		$scope.threads = threads;
@@ -39,23 +43,21 @@ angular.module('goodMood')
 		  	})
 		  	return $q.all([threadsResolve, imageResolve])
 		  })
-		  $scope.resolve = $q.all([collaborationResolve, iterationResolve])
+		  return $q.all([collaborationResolve, iterationResolve]).then(function(){
+		  	$scope.resolve = true;
+		  })
 		}
 
 
 		$scope.$on('$ionicView.beforeEnter', function iterationBeforeEnter (){
 			if ($scope.resolve){
-				console.log('already resolved')
-				$scope.resolve.then(function(){
-					$ionicLoading.hide()
-				})	
+				$ionicLoading.hide()
 			}
 		})
 
 		$scope.$on('$ionicView.enter', function iterationEnter (){
 			if (!$scope.resolve){
-				init()	
-				$scope.resolve.then(function(){
+				init().then(function(){
 					$ionicLoading.hide()		
 				})
 			}
@@ -85,6 +87,9 @@ angular.module('goodMood')
 		// Create iterations array for inter-iteration navigation
 		$scope.$watchCollection('iterations', function watchIterationArray (curr, old){
 			setIterationArray()
+			if (!old){
+				$scope.iterationsLoaded	= true;
+			}
 		})
 		function setIterationArray(){
 			if (!iteration || !$scope.iterations){
@@ -103,8 +108,7 @@ angular.module('goodMood')
 		$scope.instructionsRead = false;
 
 		this.hasThreads = function(){
-			return true;
-			// return !!threads ? _.size(threads) > 0 : true
+			return !!threads && _.size(threads) > 0
 		}
 
 		this.readInstructions = function(){

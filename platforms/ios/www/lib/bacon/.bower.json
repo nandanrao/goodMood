@@ -1,15 +1,16 @@
 {
   "name": "bacon",
-  "version": "0.7.38",
+  "version": "0.7.42",
   "main": "dist/Bacon.js",
   "homepage": "https://github.com/raimohanska/bacon.js",
-  "_release": "0.7.38",
+  "_release": "0.7.42",
   "_resolution": {
     "type": "version",
-    "tag": "0.7.38",
-    "commit": "70379a693c02f5bf005b2979943576630cfe3e1d"
+    "tag": "0.7.42",
+    "commit": "c39a94ae7cf582dd262d9de8dc6aeb98ed2869a4"
   },
   "_source": "git://github.com/raimohanska/bacon.js.git",
-  "_target": "~0.7.37",
-  "_originalSource": "bacon"
+  "_target": "~0.7.42",
+  "_originalSource": "bacon",
+  "_direct": true
 }

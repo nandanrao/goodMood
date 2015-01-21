@@ -1,20 +1,17 @@
-Bacon = {
-  toString: -> "Bacon"
-}
-
-Bacon.version = '<version>'
-
-# Bacon has own Error
-Exception = (global ? this).Error
+# build-dependencies: _, scheduler
 
 # eventTransformer - should return one value or one or many events
 Bacon.fromBinder = (binder, eventTransformer = _.id) ->
   new EventStream describe(Bacon, "fromBinder", binder, eventTransformer), (sink) ->
     unbound = false
+    needsUnbind = false
     unbind = ->
-      if unbinder?
-        unbinder() unless unbound
-        unbound = true
+      if not unbound
+        if unbinder?
+          unbinder()
+          unbound = true
+        else
+          needsUnbind = true
     unbinder = binder (args...) ->
       value = eventTransformer.apply(this, args)
       unless isArray(value) and _.last(value) instanceof Event
@@ -25,9 +22,11 @@ Bacon.fromBinder = (binder, eventTransformer = _.id) ->
         reply = sink(event = toEvent(event))
         if reply == Bacon.noMore or event.isEnd()
           # defer if binder calls handler in sync before returning unbinder
-          if unbinder? then unbind() else Bacon.scheduler.setTimeout unbind, 0
+          unbind()
           return reply
       reply
+    if needsUnbind
+      unbind()
     unbind
 
 # eventTransformer - defaults to returning the first argument to handler
@@ -168,18 +167,24 @@ Bacon.once = (value) ->
 
 Bacon.fromArray = (values) ->
   assertArray values
-  i = 0
-  new EventStream describe(Bacon, "fromArray", values), (sink) ->
-    unsubd = false
-    reply = Bacon.more
-    while (reply != Bacon.noMore) and !unsubd
-      if i >= values.length
-        sink(end())
-        reply = Bacon.noMore
-      else
-        value = values[i++]
-        reply = sink(toEvent(value))
-    -> unsubd = true
+  if !values.length
+    withDescription(Bacon, "fromArray", values, Bacon.never())
+  else
+    i = 0
+    new EventStream describe(Bacon, "fromArray", values), (sink) ->
+      unsubd = false
+      reply = Bacon.more
+      push = ->
+        if (reply != Bacon.noMore) and !unsubd
+          value = values[i++]
+          reply = sink(toEvent(value))
+          if reply != Bacon.noMore
+            if i == values.length
+              sink(end())
+            else
+              UpdateBarrier.afterTransaction push
+      push()
+      -> unsubd = true
 
 Bacon.mergeAll = (streams...) ->
   if isArray streams[0]
@@ -817,6 +822,7 @@ class EventStream extends Observable
         else
           [data, stopper] = event.value()
           if stopper.length
+#            console.log(_.toString(data), "stopped by", _.toString(stopper))
             @push end()
           else
             reply = Bacon.more
@@ -1121,6 +1127,7 @@ class Bus extends EventStream
         return
 
   plug: (input) ->
+    assertObservable input
     return if @ended
     sub = { input: input }
     @subscriptions.push(sub)
@@ -1229,8 +1236,8 @@ Bacon.when = ->
     patterns[i] = arguments[i]
     patterns[i + 1] = arguments[i + 1]
     patSources = _.toArray arguments[i]
-    f = arguments[i + 1]
-    pat = {f: (if isFunction(f) then f else (-> f)), ixs: []}
+    f = constantToFunction(arguments[i + 1])
+    pat = {f, ixs: []}
     triggerFound = false
     for s in patSources
       index = _.indexOf(sources, s)
@@ -1486,7 +1493,9 @@ UpdateBarrier = (->
 
   wrappedSubscribe = (obs, sink) ->
     unsubd = false
+    shouldUnsub = false
     doUnsub = ->
+      shouldUnsub = true
     unsub = ->
       unsubd = true
       doUnsub()
@@ -1496,11 +1505,13 @@ UpdateBarrier = (->
           reply = sink event
           if reply == Bacon.noMore
             unsub()
+    if shouldUnsub
+      doUnsub()
     unsub
 
   hasWaiters = -> waiterObs.length > 0
 
-  { whenDoneWith, hasWaiters, inTransaction, currentEventId, wrappedSubscribe }
+  { whenDoneWith, hasWaiters, inTransaction, currentEventId, wrappedSubscribe, afterTransaction }
 )()
 
 Bacon.EventStream = EventStream
@@ -1523,6 +1534,7 @@ toEvent = (x) -> if x instanceof Event then x else next x
 cloneArray = (xs) -> xs.slice(0)
 assert = (message, condition) -> throw new Exception(message) unless condition
 assertEventStream = (event) -> throw new Exception("not an EventStream : " + event) unless event instanceof EventStream
+assertObservable = (event) -> throw new Exception("not an Observable : " + event) unless event instanceof Observable
 assertFunction = (f) -> assert "not a function : " + f, isFunction(f)
 isFunction = (f) -> typeof f == "function"
 isArray = (xs) -> xs instanceof Array
@@ -1550,6 +1562,12 @@ makeFunction_ = withMethodCallSupport (f, args...) ->
 
 makeFunction = (f, args) ->
   makeFunction_(f, args...)
+
+constantToFunction = (f) ->
+  if isFunction f
+    f
+  else
+    _.always(f)
 
 makeObservable = (x) ->
   if (isObservable(x))
@@ -1593,110 +1611,3 @@ toOption = (v) ->
     v
   else
     new Some(v)
-
-_ = {
-  indexOf: if Array :: indexOf
-    (xs, x) -> xs.indexOf(x)
-  else
-    (xs, x) ->
-      for y, i in xs
-        return i if x == y
-      -1
-  indexWhere: (xs, f) ->
-    for y, i in xs
-      return i if f(y)
-    -1
-  head: (xs) -> xs[0]
-  always: (x) -> (-> x)
-  negate: (f) -> (x) -> !f(x)
-  empty: (xs) -> xs.length == 0
-  tail: (xs) -> xs[1...xs.length]
-  filter: (f, xs) ->
-    filtered = []
-    for x in xs
-      filtered.push(x) if f(x)
-    filtered
-  map: (f, xs) ->
-    f(x) for x in xs
-  each: (xs, f) ->
-    for key, value of xs
-      f(key, value)
-    undefined
-  toArray: (xs) -> if isArray(xs) then xs else [xs]
-  contains: (xs, x) -> _.indexOf(xs, x) != -1
-  id: (x) -> x
-  last: (xs) -> xs[xs.length - 1]
-  all: (xs, f = _.id) ->
-    for x in xs
-      return false unless f(x)
-    return true
-  any: (xs, f = _.id) ->
-    for x in xs
-      return true if f(x)
-    return false
-  without: (x, xs) ->
-    _.filter(((y) -> y != x), xs)
-  remove: (x, xs) ->
-    i = _.indexOf(xs, x)
-    if i >= 0
-      xs.splice(i, 1)
-  fold: (xs, seed, f) ->
-    for x in xs
-      seed = f(seed, x)
-    seed
-  flatMap: (f, xs) ->
-    _.fold xs, [], ((ys, x) ->
-      ys.concat(f(x)))
-  cached: (f) ->
-    value = None
-    ->
-      if value == None
-        value = f()
-        f = undefined
-      value
-  toString: (obj) ->
-    try
-      recursionDepth++
-      unless obj?
-        "undefined"
-      else if isFunction(obj)
-        "function"
-      else if isArray(obj)
-        return "[..]" if recursionDepth > 5
-        "[" + _.map(_.toString, obj).toString() + "]"
-      else if obj?.toString? and obj.toString != Object.prototype.toString
-        obj.toString()
-      else if (typeof obj == "object")
-        return "{..}" if recursionDepth > 5
-        internals = for own key of obj
-          value = try
-            obj[key]
-          catch ex
-            ex
-          _.toString(key) + ":" + _.toString(value)
-        "{" + internals + "}"
-      else
-        obj
-    finally
-      recursionDepth--
-}
-
-recursionDepth = 0
-
-Bacon._ = _
-
-Bacon.scheduler = {
-  setTimeout: (f,d) -> setTimeout(f,d)
-  setInterval: (f, i) -> setInterval(f, i)
-  clearInterval: (id) -> clearInterval(id)
-  now: -> new Date().getTime()
-}
-
-if define? and define.amd?
-  define [], -> Bacon
-  @Bacon = Bacon
-else if module? and module.exports?
-  module.exports = Bacon # for Bacon = require 'baconjs'
-  Bacon.Bacon = Bacon # for {Bacon} = require 'baconjs'
-else
-  @Bacon = Bacon # otherwise for execution context

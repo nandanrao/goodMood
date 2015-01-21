@@ -1,0 +1,13 @@
+2015-01-20 21:37:00.162 GoodMood[5713:141702] Apache Cordova native platform version 3.7.0 is starting.
+2015-01-20 21:37:00.164 GoodMood[5713:141702] Multi-tasking -> Device: YES, App: YES
+2015-01-20 21:37:00.183 GoodMood[5713:141702] Unlimited access to network resources
+2015-01-20 21:37:00.619 GoodMood[5713:141702] [CDVTimer][keyboard] 0.063002ms
+2015-01-20 21:37:00.634 GoodMood[5713:141702] [CDVTimer][file] 14.470041ms
+2015-01-20 21:37:00.634 GoodMood[5713:141702] Init FacebookConnect Session
+2015-01-20 21:37:00.647 GoodMood[5713:141702] [CDVTimer][facebookconnectplugin] 13.125956ms
+2015-01-20 21:37:00.647 GoodMood[5713:141702] [CDVTimer][TotalPluginStartup] 28.165996ms
+2015-01-20 21:37:01.127 GoodMood[5713:141702] Resetting plugins due to page load.
+2015-01-20 21:37:02.155 GoodMood[5713:141702] Finished load of: http://10.0.1.12:8100/#/
+2015-01-20 21:37:02.920 GoodMood[5713:141702] Cookies cleared!
+2015-01-20 21:37:03.087 GoodMood[5713:141702] user get collabs
+2015-01-20 21:37:05.165 GoodMood[5713:141702] ele has ng-mousedown?

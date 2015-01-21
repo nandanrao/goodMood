@@ -1,3 +1,21 @@
+## 0.7.42
+
+- Fix #523: respect return value of subscribe function in synchronous case
+- Built using assemble.js
+- removed setTimeout from Bacon.fromBinder
+
+## 0.7.41
+
+- Fix #490: throw if non-observable plugged to bus
+
+## 0.7.40
+
+- Fix #491: takeUntil/flatMapLatest issues with sync sources
+
+## 0.7.39
+
+- Fix wrapping constants as functions in Bacon.when
+
 ## 0.7.38
 
 - Fix #488: exceptions catched and hidden

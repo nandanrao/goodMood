@@ -57,6 +57,7 @@ module.exports = function ( karma ) {
       'www/js/iteration/threadhasdrawing.filter.js',
       'www/js/iteration/newiteration.controller.js',
       'www/js/iteration/mobileupload.directive.js',
+      'www/js/iteration/iterationfooter.directive.js',
       'www/js/iteration/iterationcontainer.directive.js',
       'www/js/iteration/iteration.surface.service.js',
       'www/js/iteration/iteration.service.js',

@@ -14,6 +14,7 @@ angular.module('goodMood')
 			.then(function(_messages){
 				messages = _messages;
 				$scope.messages = messages;
+				return
 			})	
 		}
 
@@ -28,6 +29,7 @@ angular.module('goodMood')
 		
 	  $scope.$on('$ionicView.beforeEnter', function(){
 	  	if (threadResolve){
+	  		console.log('already resolved')
 	  		threadResolve.then(function(){
 	  			$ionicLoading.hide()
 	  		})	

@@ -11,7 +11,12 @@ angular.module('goodMood')
 		Surface.prototype.activate = function (){
 			this.project.activate()
 			this.tool.activate()
+			this.project.view.play()
 		};
+
+		Surface.prototype.pause = function (){
+			this.project.view.pause()
+		}
 
 		Surface.prototype.destroy = function (){
 			this.tool.remove();
@@ -25,6 +30,7 @@ angular.module('goodMood')
 			var surface = new Surface();
 			surface.project = paper.project
 			surface.tool = new paper.Tool();
+			surface.tool.activate();
 
 			var counting,
 					path,
@@ -33,6 +39,7 @@ angular.module('goodMood')
 					count
 
 			surface.tool.onMouseDown = function(e){
+				console.log(this)
 				position = e.point;
 				pathStart = position.add(new paper.Point(0,-50))
 				count = -45;

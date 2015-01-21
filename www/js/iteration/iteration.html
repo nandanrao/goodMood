@@ -10,19 +10,19 @@
 				103,15.1 53.1,2.6 3.2,15.1 "/>
 			</svg>
 		</button> -->
-		<img ng-if="resolve" class="iteration-image" iteration-image ng-src="{{ imageURI }}" />
+		<img ng-if="iterationsLoaded" class="iteration-image" iteration-image ng-src="{{ imageURI }}" />
 		<canvas ng-if="imageSize.height" iteration-canvas></canvas>
-		<drawing ng-if="imageSize.height"  ng-repeat="thread in threads | threadHasDrawing" id="{{ ::thread.$id }}">
+		<drawing ng-if="imageSize.height" ng-repeat="thread in threads | threadHasDrawing" id="{{ ::thread.$id }}">
 		</drawing>
 		<button check-button class="check" ng-if="iteration.showCheck()" ng-click="iteration.done()"></button>
-		<div ng-if="!iteration.hasThreads() && !instructionsRead" class="instructions">
+		<div ng-if="resolve && !iteration.hasThreads() && !instructionsRead" class="instructions">
 				<h2>instrucciones <span><button class="ion-close" ng-click="iteration.readInstructions()"></button> </span></h2>
 				<p>
 					Toca sobre la imagen para agregar un comentario, puedes agregar multiples comentarios a tu imagen tocando los diferentes puntos donde quieras agregarlos.
 				</p>
 		</div>
 	</div>
-	<div ng-if="iteration.showAddIteration()" class="bar bar-footer">
+	<div ng-if="iteration.showAddIteration()" iteration-footer class="bar bar-footer">
 		<button new-iteration-button class="addIteration" ng-click="iteration.addIteration()"></button>
 	</div>
 </ion-view> 
