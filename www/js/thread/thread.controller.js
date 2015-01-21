@@ -3,10 +3,10 @@ angular.module('goodMood')
 		var vm = this;
 		var thread,
 				messages,
-				threadResolve;
+				resolve;
 
 		function init(){
-			threadResolve = Thread.findById($stateParams.t_id).then(function(_thread){
+			return Thread.findById($stateParams.t_id).then(function(_thread){
 				thread = _thread;
 				thread.$open();
 				return thread.$getMessages()
@@ -14,25 +14,22 @@ angular.module('goodMood')
 			.then(function(_messages){
 				messages = _messages;
 				$scope.messages = messages;
+				resolve = true;
 				return
 			})	
 		}
 
 		$scope.$on('$ionicView.enter', function(){
-			if (!threadResolve){
-				init()	
-				threadResolve.then(function(){
+			if (!resolve){
+				init().then(function(){
 					$ionicLoading.hide()
 				})
 			}
 		})
 		
 	  $scope.$on('$ionicView.beforeEnter', function(){
-	  	if (threadResolve){
-	  		console.log('already resolved')
-	  		threadResolve.then(function(){
-	  			$ionicLoading.hide()
-	  		})	
+	  	if (resolve){
+  			$ionicLoading.hide()
 	  	}
 	  })
 
