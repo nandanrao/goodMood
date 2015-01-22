@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js/collaboration/collaboration.service.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">js/collaboration/collaboration.service.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">15.32% <small>(19 / 124)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 23)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">4.88% <small>(2 / 41)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">15.32% <small>(19 / 124)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">js/collaboration/</a> &#187; collaboration.service.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">angular.module('goodMood')
+	.factory('Collaboration', function(fb, $firebase, $FirebaseObject, $q, Auth, Iteration, Thread, Picture, utils, $timeout){
+		var Collaboration = {};
+&nbsp;
+		Collaboration.ref = fb.collaborations;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function maker(instance, destination){</span>
+    }
+&nbsp;
+    var CollaborationFactory = $FirebaseObject.$extendFactory({    
+			
+      $addUser: <span class="fstat-no" title="function not covered" >function(user){</span>
+<span class="cstat-no" title="statement not covered" >        if (!user || !user.$id) {</span>
+<span class="cstat-no" title="statement not covered" >          throw new TypeError('user must have id!')</span>
+        }
+<span class="cstat-no" title="statement not covered" >        var obj = {};</span>
+<span class="cstat-no" title="statement not covered" >        obj[user.$id] = true;        </span>
+<span class="cstat-no" title="statement not covered" >        return this.$inst().$update('users', obj)</span>
+      },
+&nbsp;
+      $removeUser: <span class="fstat-no" title="function not covered" >function(user){</span>
+<span class="cstat-no" title="statement not covered" >        if(!user.$id){</span>
+<span class="cstat-no" title="statement not covered" >          throw new Error('user must have id!')</span>
+        }
+<span class="cstat-no" title="statement not covered" >        var ref = this.$inst().$ref().child('users')</span>
+<span class="cstat-no" title="statement not covered" >        return $firebase(ref).$remove(user.$id)</span>
+      },
+&nbsp;
+      $getUsers: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >        var users = {};</span>
+<span class="cstat-no" title="statement not covered" >        var ref = this.$inst().$ref().child('users');</span>
+<span class="cstat-no" title="statement not covered" >        var deferred = $q.defer();</span>
+<span class="cstat-no" title="statement not covered" >        ref.once('value', <span class="fstat-no" title="function not covered" >function(snap){</span></span>
+<span class="cstat-no" title="statement not covered" >          var promises = {};</span>
+<span class="cstat-no" title="statement not covered" >          snap.forEach(<span class="fstat-no" title="function not covered" >function(snap){</span></span>
+<span class="cstat-no" title="statement not covered" >            var id = snap.key();</span>
+<span class="cstat-no" title="statement not covered" >            var ref = fb.users.child(id);</span>
+<span class="cstat-no" title="statement not covered" >            promises[id] = $firebase(ref).$asObject().$loaded()</span>
+          })
+<span class="cstat-no" title="statement not covered" >          $q.all(promises).then(<span class="fstat-no" title="function not covered" >function(results){</span></span>
+<span class="cstat-no" title="statement not covered" >            _.forEach(results, <span class="fstat-no" title="function not covered" >function(user){</span></span>
+<span class="cstat-no" title="statement not covered" >              users[user.$id] = user</span>
+            })
+<span class="cstat-no" title="statement not covered" >            deferred.resolve(users)</span>
+<span class="cstat-no" title="statement not covered" >            ref.on('child_added', <span class="fstat-no" title="function not covered" >function(snap){</span></span>
+<span class="cstat-no" title="statement not covered" >              var id = snap.key()</span>
+<span class="cstat-no" title="statement not covered" >              if(!users[id]){</span>
+<span class="cstat-no" title="statement not covered" >                var ref = fb.users.child(id)</span>
+<span class="cstat-no" title="statement not covered" >                $firebase(ref).$asObject().$loaded().then(<span class="fstat-no" title="function not covered" >function(obj){</span></span>
+<span class="cstat-no" title="statement not covered" >                  users[obj.$id] = obj</span>
+                })  
+              }
+              
+            })
+<span class="cstat-no" title="statement not covered" >            ref.on('child_removed', <span class="fstat-no" title="function not covered" >function(snap){</span></span>
+<span class="cstat-no" title="statement not covered" >              if (users[snap.key()]){</span>
+<span class="cstat-no" title="statement not covered" >               delete users[snap.key()] </span>
+              }
+            })    
+          }, deferred.reject)
+        })
+&nbsp;
+        // Hack so that it isn't discarded as an empty object,
+        // but still looks empty / has _.size of 0 
+<span class="cstat-no" title="statement not covered" >        Object.defineProperty(users, '_notEmpty', {</span>
+          value: true,
+          enumerable: false
+        })
+<span class="cstat-no" title="statement not covered" >        return deferred.promise</span>
+      },
+&nbsp;
+      /**
+       * Adds a current iteration instance to this collaboration
+       * @param {object} iteration An iteration instance
+       * @returns The iteration instance passed into it.
+       */
+      $addIteration: <span class="fstat-no" title="function not covered" >function(iteration){</span>
+<span class="cstat-no" title="statement not covered" >        if (!iteration || !iteration.$id || !iteration.image){</span>
+<span class="cstat-no" title="statement not covered" >          throw new TypeError('we need an iteration object')</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this.$inst().$set('lastImage', iteration.image)</span>
+<span class="cstat-no" title="statement not covered" >        var obj = {}</span>
+<span class="cstat-no" title="statement not covered" >        obj[iteration.$id] = true;</span>
+<span class="cstat-no" title="statement not covered" >        return this.$inst().$update('iterations', obj).then(<span class="fstat-no" title="function not covered" >function(obj){</span></span>
+<span class="cstat-no" title="statement not covered" >          return iteration</span>
+        })
+      },
+&nbsp;
+      $removeIteration: <span class="fstat-no" title="function not covered" >function(iteration){</span>
+<span class="cstat-no" title="statement not covered" >        if(!iteration || !iteration.$id){</span>
+<span class="cstat-no" title="statement not covered" >          throw new TypeError('iteration needs to be an instantiated object!')</span>
+        }
+        // remove reference on collaboration object
+<span class="cstat-no" title="statement not covered" >        var ref = this.$inst().$ref().child('iterations')</span>
+<span class="cstat-no" title="statement not covered" >        $firebase(ref).$remove(iteration.$id)</span>
+        // delete iteration globally
+<span class="cstat-no" title="statement not covered" >        return iteration.$remove()</span>
+      },
+&nbsp;
+      // error handling doesn't propogate here!!!??? 
+      $getIterations: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >        var iterations = {};</span>
+<span class="cstat-no" title="statement not covered" >        var ref = this.$inst().$ref();</span>
+<span class="cstat-no" title="statement not covered" >        var deferred = $q.defer()</span>
+<span class="cstat-no" title="statement not covered" >        ref.child('iterations').on('child_added', <span class="fstat-no" title="function not covered" >function(snap){</span></span>
+<span class="cstat-no" title="statement not covered" >          var id = snap.key()</span>
+<span class="cstat-no" title="statement not covered" >          Iteration.findById(id).then(<span class="fstat-no" title="function not covered" >function(iteration){</span></span>
+<span class="cstat-no" title="statement not covered" >            iterations[id] = iteration</span>
+          })
+        })
+<span class="cstat-no" title="statement not covered" >        ref.child('iterations').on('child_removed', <span class="fstat-no" title="function not covered" >function(snap){</span></span>
+<span class="cstat-no" title="statement not covered" >          if (iterations[snap.key()]){</span>
+<span class="cstat-no" title="statement not covered" >           delete iterations[snap.key()] </span>
+          }
+        })
+        // This just resolves when the first set of data is available.
+<span class="cstat-no" title="statement not covered" >        ref.once('value', <span class="fstat-no" title="function not covered" >function(snap){</span></span>
+<span class="cstat-no" title="statement not covered" >          deferred.resolve(iterations)</span>
+        })
+        // Hack so that it isn't discarded as an empty object,
+        // but still looks empty / has _.size of 0 
+<span class="cstat-no" title="statement not covered" >        Object.defineProperty(iterations, '_notEmpty', {</span>
+          value: true,
+          enumerable: false
+        })
+<span class="cstat-no" title="statement not covered" >        return deferred.promise</span>
+      },
+&nbsp;
+      $getThreads: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >        var threads = {};</span>
+<span class="cstat-no" title="statement not covered" >        var ref = fb.threads.startAt(this.$id).endAt(this.$id)</span>
+<span class="cstat-no" title="statement not covered" >        ref.on('child_added', <span class="fstat-no" title="function not covered" >function(snap){</span></span>
+<span class="cstat-no" title="statement not covered" >          $firebase(snap.ref()).$asObject().$loaded().then(<span class="fstat-no" title="function not covered" >function(obj){</span></span>
+<span class="cstat-no" title="statement not covered" >            threads[obj.$id] = obj</span>
+          })
+        })
+<span class="cstat-no" title="statement not covered" >        ref.on('child_removed', <span class="fstat-no" title="function not covered" >function(snap){</span></span>
+<span class="cstat-no" title="statement not covered" >          delete threads[snap.key()]</span>
+        })
+<span class="cstat-no" title="statement not covered" >        return $q.when(threads)</span>
+      },
+&nbsp;
+      // Note: this is where we attempt to convert the Bacon/FRP streams
+      // into a POJO that Angular can put on its scope and watch.
+      // TODO: should deferred.resolve here be AFTER the forEach loops? 
+      $getNewMessages: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >        var self = this;</span>
+<span class="cstat-no" title="statement not covered" >        var newMessages = {};</span>
+<span class="cstat-no" title="statement not covered" >        Object.defineProperty(newMessages, '_notEmpty', {</span>
+          value: true,
+          enumerable: false
+        })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var deferred = $q.defer();</span>
+<span class="cstat-no" title="statement not covered" >        var stream = Collaboration.getNewMessagesAsStream(this.$id)</span>
+<span class="cstat-no" title="statement not covered" >        stream.onValue(<span class="fstat-no" title="function not covered" >function(val){</span></span>
+<span class="cstat-no" title="statement not covered" >          deferred.resolve(newMessages)</span>
+<span class="cstat-no" title="statement not covered" >          _.forEach(newMessages, <span class="fstat-no" title="function not covered" >function(val, key, col){</span></span>
+<span class="cstat-no" title="statement not covered" >            delete col[key]</span>
+          })
+<span class="cstat-no" title="statement not covered" >          _.forEach(val, <span class="fstat-no" title="function not covered" >function(message){</span></span>
+<span class="cstat-no" title="statement not covered" >            newMessages[message.$id] = message</span>
+          })
+        })
+<span class="cstat-no" title="statement not covered" >        stream.onError(<span class="fstat-no" title="function not covered" >function(err){</span></span>
+<span class="cstat-no" title="statement not covered" >          deferred.reject(err)</span>
+<span class="cstat-no" title="statement not covered" >          throw new Error('get new message stream eerr:', err)</span>
+        })
+<span class="cstat-no" title="statement not covered" >        return deferred.promise</span>
+      },
+&nbsp;
+      $getLastImage: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >        var lastImage = {};</span>
+<span class="cstat-no" title="statement not covered" >        var deferred = $q.defer();</span>
+        
+<span class="cstat-no" title="statement not covered" >        var ref = this.$inst().$ref().child('lastImage')</span>
+<span class="cstat-no" title="statement not covered" >        ref.on('value', <span class="fstat-no" title="function not covered" >function(snap){</span></span>
+<span class="cstat-no" title="statement not covered" >          if (!snap.val()){</span>
+<span class="cstat-no" title="statement not covered" >            return deferred.resolve(lastImage)</span>
+          }
+<span class="cstat-no" title="statement not covered" >          Picture.findById(snap.val()).then(<span class="fstat-no" title="function not covered" >function(picture){</span></span>
+<span class="cstat-no" title="statement not covered" >            picture.$getThumbnail().then(<span class="fstat-no" title="function not covered" >function(uri){</span></span>
+<span class="cstat-no" title="statement not covered" >              lastImage.imageURI = uri;  </span>
+            })
+<span class="cstat-no" title="statement not covered" >            deferred.resolve(lastImage)</span>
+          }, deferred.reject)
+        })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        Object.defineProperty(lastImage, '_notEmpty', {</span>
+          value: true,
+          enumerable: false
+        })
+<span class="cstat-no" title="statement not covered" >        return deferred.promise</span>
+      },
+  	
+      $populate: <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >        var self = this;</span>
+<span class="cstat-no" title="statement not covered" >        return $q.all({</span>
+            lastImage: self.$getLastImage(),
+            newMessages: self.$getNewMessages()
+          })
+          .then(<span class="fstat-no" title="function not covered" >function(results){</span>
+<span class="cstat-no" title="statement not covered" >            self._lastImage = results.lastImage;</span>
+<span class="cstat-no" title="statement not covered" >            self._newMessages = results.newMessages;</span>
+<span class="cstat-no" title="statement not covered" >          	return self;</span>
+          })
+      }
+		})
+&nbsp;
+    // Helper function that returns a populated Collaboration object
+    var populate = <span class="fstat-no" title="function not covered" >function(obj){</span>
+<span class="cstat-no" title="statement not covered" >    	return obj.$populate();</span>
+    }
+&nbsp;
+    Collaboration.create = function(name){
+      var data = {};
+      data.users = {};
+      data.users[Auth.currentUser.$id] = true;
+      data.createdAt = Firebase.ServerValue.TIMESTAMP;
+      data.name = name;
+      // Create firebase object
+    	var ref = Collaboration.ref.push(data);
+    	var obj = $firebase(ref, {objectFactory: CollaborationFactory})
+    	return obj.$asObject().$loaded()
+    }
+&nbsp;
+		Collaboration.findById = <span class="fstat-no" title="function not covered" >function(id){</span>
+<span class="cstat-no" title="statement not covered" >			return $firebase(Collaboration.ref.child(id), {objectFactory: CollaborationFactory})</span>
+        .$asObject().$loaded()
+		}
+&nbsp;
+    Collaboration.getThreadsAsStream = <span class="fstat-no" title="function not covered" >function(id){</span>
+<span class="cstat-no" title="statement not covered" >      var ref = fb.threads.orderByChild('collaboration').equalTo(id)</span>
+<span class="cstat-no" title="statement not covered" >      return Bacon.fromEventTarget(ref, 'value')</span>
+        .map(<span class="fstat-no" title="function not covered" >function(snap){</span>
+<span class="cstat-no" title="statement not covered" >          return _.keys(snap.val())</span>
+        })
+    }
+&nbsp;
+    Collaboration.getNewMessagesAsStream = <span class="fstat-no" title="function not covered" >function(id){</span>
+<span class="cstat-no" title="statement not covered" >      return utils.gatherMessageStreams(</span>
+        Collaboration.getThreadsAsStream(id),
+        Thread.getNewMessagesAsStream
+      )
+    }
+&nbsp;
+		return Collaboration
+	})
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jan 22 2015 12:55:59 GMT-0500 (EST)</div>
+</div>
+
+<script src="../../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

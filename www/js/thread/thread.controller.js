@@ -6,12 +6,16 @@ angular.module('goodMood')
 				resolve;
 
 		function init(){
+			console.log('thread.findbyid called', Date.now())
 			return Thread.findById($stateParams.t_id).then(function(_thread){
+				console.log('findbyid returned', Date.now())
 				thread = _thread;
 				thread.$open();
+				console.log('getMessages called', Date.now())
 				return thread.$getMessages()
 			})
 			.then(function(_messages){
+				console.log('getMessages returned', Date.now())
 				messages = _messages;
 				$scope.messages = messages;
 				resolve = true;

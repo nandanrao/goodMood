@@ -204,6 +204,10 @@ angular.module('goodMood')
             self._newMessages = results.newMessages;
           	return self;
           })
+      },
+
+      $eliminate: function(){
+        return this.$inst().$remove()
       }
 		})
 

@@ -2,6 +2,10 @@ angular.module('goodMood')
 	.controller('NewCollaborationCtrl', function ($scope, $window, $log, $state, $ionicLoading, user, Collaboration){
 		$scope.name;
 
+		$scope.$on('$ionicView.beforeEnter', function(){
+			$ionicLoading.hide()
+		})
+
 		this.submit = function(){
 			if ($scope.newCollaborationForm.$valid){
 				$ionicLoading.show()
@@ -17,6 +21,4 @@ angular.module('goodMood')
 					})
 			}
 		}
-
-		$ionicLoading.hide()
 	})

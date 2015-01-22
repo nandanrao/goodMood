@@ -4,7 +4,7 @@ angular.module('goodMood')
 			restrict: 'A',
 			link: function(scope, el){
 				console.log('iteration footer linking', Date.now())
-				el.bind('load', function(){
+				el.ready(function(){
 					console.log('iteration footer element loaded', Date.now())
 					scope.iterationFooter.exists = true;
 				})

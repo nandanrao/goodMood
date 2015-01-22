@@ -55,7 +55,6 @@ module.run(["$templateCache", function($templateCache) {
     "				<span>Yo quiero</span>\n" +
     "				<input required class=\"newcollaboration\" ng-model=\"name\"></input>\n" +
     "			</div>\n" +
-    "			<!-- <button class=\"check\">&#10003;</button> -->\n" +
     "		</form> \n" +
     "	</ion-content>\n" +
     "</ion-view>");
@@ -176,12 +175,8 @@ module.run(["$templateCache", function($templateCache) {
     "		<new-iteration-cancel-button-mobile></new-iteration-cancel-button-mobile>\n" +
     "	</ion-nav-buttons>\n" +
     "	<ion-content scroll=\"false\">\n" +
-    "		<div class=\"mobile\" ng-if=\"!newIteration.isDesktop()\">\n" +
-    "			<mobile-upload></mobile-upload>\n" +
-    "		</div>\n" +
-    "		<div class=\"desktop\" ng-if=\"newIteration.isDesktop()\">\n" +
-    "			<desktop-upload></desktop-upload>\n" +
-    "		</div>\n" +
+    "			<mobile-upload ng-if=\"!newIteration.isDesktop()\"></mobile-upload>\n" +
+    "			<desktop-upload ng-if=\"newIteration.isDesktop()\"></desktop-upload>\n" +
     "	</ion-content>\n" +
     "</ion-view>");
 }]);
@@ -373,7 +368,7 @@ module.run(["$templateCache", function($templateCache) {
     "			<record-light ng-if=\"recording.currently\"></record-light>\n" +
     "			<span ng-if=\"recording.currently\" class=\"timer\">{{ thread.getRecordTime() }}</span>\n" +
     "		<div class=\"buttons\">\n" +
-    "			<voice-message-record-mobile ng-if=\"!writing.currently\"></voice-message-record>\n" +
+    "			<voice-message-record-mobile ng-if=\"!writing.currently\"></voice-message-record-mobile>\n" +
     "			<button class=\"send\" type=\"submit\" ng-if=\"writing.currently\" class=\"send\">SEND</button>\n" +
     "		</div>\n" +
     "		</form>	\n" +

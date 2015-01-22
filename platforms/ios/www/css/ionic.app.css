@@ -7074,6 +7074,15 @@ button {
   right: 30px;
   width: 75px;
   z-index: 2; }
+#pg--iteration navigate-iterations-button-mobile button {
+  display: inline-block;
+  position: absolute;
+  padding: 0;
+  width: 100px;
+  left: calc(50% - 50px);
+  z-index: 3; }
+#pg--iteration navigate-iterations-button-mobile[direction="next"] button {
+  bottom: -10px; }
 #pg--iteration div.instructions {
   z-index: 2;
   position: fixed;

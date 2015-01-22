@@ -1,6 +1,6 @@
 
 #pg--new-iteration {
-  ion-content > div {
+  ion-content > * {
     @include display(flex);
     @include flex-direction(column);
     @include justify-content(space-around);
@@ -12,8 +12,8 @@
     button {
       width: 100%;
       display: block;
+      @include flex-grow(2)
     }
-    
     .image {
       width: 20%;
       margin: auto auto;

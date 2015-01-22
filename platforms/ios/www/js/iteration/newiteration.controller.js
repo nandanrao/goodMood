@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.controller('NewIterationCtrl', function($scope, $q, $window, $log, $state, collaboration, $cordovaCamera, $ionicLoading, $ionicHistory, utils, Iteration, Picture){
+	.controller('NewIterationCtrl', function($scope, $q, $window, $log, $state, $ionicLoading, collaboration, utils, Iteration, Picture){
 		
 		$scope.$on('$ionicView.enter', function(){
 			$ionicLoading.hide()
@@ -7,10 +7,6 @@ angular.module('goodMood')
 
 		var vm = this;
 		this.isDesktop = utils.isDesktop
-
-		this.cancel = function(){
-			$ionicHistory.goBack()
-		}
 
 		this.getViewTitle = function(){
 			if (collaboration.iterations && _.size(collaboration.iterations) > 1){

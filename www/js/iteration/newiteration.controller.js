@@ -1,6 +1,8 @@
 angular.module('goodMood')
 	.controller('NewIterationCtrl', function($scope, $q, $window, $log, $state, $ionicLoading, collaboration, utils, Iteration, Picture){
 		
+		$scope.collaboration = collaboration;
+
 		$scope.$on('$ionicView.enter', function(){
 			$ionicLoading.hide()
 		})
@@ -9,12 +11,16 @@ angular.module('goodMood')
 		this.isDesktop = utils.isDesktop
 
 		this.getViewTitle = function(){
+			return this.isNewCollaboration() ? 'agrega una imagen' : 'nueva itereraction'
+		}
+
+		this.isNewCollaboration = function(){
 			if (collaboration.iterations && _.size(collaboration.iterations) > 1){
-				return 'nueva iteracion'
+				return false
 			}
 			else {
-				return 'agrega una imagen'
-			}
+				return true
+			}	
 		}
 
 		this.createIteration = function(imageDataLoaded){

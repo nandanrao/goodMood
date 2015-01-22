@@ -9,9 +9,8 @@ angular.module('goodMood')
 				element.bind('load', function() {
 					$timeout(function(){
 						scope.$watchCollection('iterationFooter', function(){
-							console.log('iteration footer changed')
 							setImageSize()
-						}, 0);
+						});
 					})
 			  });	
 

@@ -37,6 +37,8 @@ module.exports = function ( karma ) {
       'www/lib/mocks/testutils.js',
       'www/lib/templates/templates.js',
       'www/js/app.js',
+      'www/js/utils/utils.service.js',
+      'www/js/user/user.service.js',
       'www/js/thread/voicemessage.directive.js',
       'www/js/thread/voicemessage-record.directive.js',
       'www/js/thread/voicemessage-play.directive.js',
@@ -50,8 +52,6 @@ module.exports = function ( karma ) {
       'www/js/thread/newdaymessage.directive.js',
       'www/js/thread/messagedivider.directive.js',
       'www/js/thread/filesystemnormalization.js',
-      'www/js/utils/utils.service.js',
-      'www/js/user/user.service.js',
       'www/js/sidemenu/sidemenu.directive.js',
       'www/js/picture/picture.service.js',
       'www/js/login/login.controller.js',
@@ -72,6 +72,9 @@ module.exports = function ( karma ) {
       'www/js/iteration/drawing.service.js',
       'www/js/iteration/drawing.directive.js',
       'www/js/iteration/desktopupload.directive.js',
+      'www/js/facebook/fb.js',
+      'www/js/facebook/facebookConnectPlugin.service.js',
+      'www/js/facebook/facebook.service.js',
       'www/js/components/newiterationbutton.directive.js',
       'www/js/components/newcollaborationbutton.directive.js',
       'www/js/components/mediaapi.service.js',
@@ -79,16 +82,13 @@ module.exports = function ( karma ) {
       'www/js/components/imageresize.service.js',
       'www/js/components/fileinput.directive.js',
       'www/js/components/checkbutton.directive.js',
-      'www/js/audio/audio.service.js',
-      'www/js/facebook/fb.js',
-      'www/js/facebook/facebookConnectPlugin.service.js',
-      'www/js/facebook/facebook.service.js',
       'www/js/collaboration/timeline.controller.js',
       'www/js/collaboration/newcollaborationcancel.button.directive.js',
       'www/js/collaboration/newcollaboration.controller.js',
       'www/js/collaboration/myCollaborations.controller.js',
       'www/js/collaboration/collaboration.service.js',
       'www/js/collaboration/collaboration.defaultbackground.service.js',
+      'www/js/audio/audio.service.js',
       'www/js/Auth/Auth.service.js',
       'www/js/routes.js',
       'www/js/Auth/Auth.service_test.js',
@@ -105,9 +105,10 @@ module.exports = function ( karma ) {
       'www/js/login/localLogin.directive_test.js',
       'www/js/login/login.controller_test.js',
       'www/js/picture/picture.service_test.js',
+      'www/js/thread/thread.controller_test.js',
+      'www/js/thread/thread.service_test.js',
       'www/js/user/user.service_test.js',
-      'www/js/utils/utils.service_test.js',
-      'www/js/thread/thread.service_test.js'
+      'www/js/utils/utils.service_test.js'
       // endinject
       ,
       // 'www/**/*.html',
@@ -122,7 +123,7 @@ module.exports = function ( karma ) {
     /**
      * How to report, by default.
      */
-    reporters: ['progress'], 
+    reporters: ['progress' /* , 'coverage' */], 
 
     /**
      * Show colors in output?

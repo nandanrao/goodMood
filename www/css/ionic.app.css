@@ -7160,7 +7160,7 @@ voice-message {
     margin: auto auto;
     width: 100%; }
 
-#pg--new-iteration ion-content > div {
+#pg--new-iteration ion-content > * {
   display: -webkit-box;
   display: -moz-box;
   display: box;
@@ -7184,21 +7184,25 @@ voice-message {
   bottom: 0;
   right: 0;
   left: 0; }
-  #pg--new-iteration ion-content > div button {
+  #pg--new-iteration ion-content > * button {
     width: 100%;
-    display: block; }
-  #pg--new-iteration ion-content > div .image {
+    display: block;
+    -webkit-flex-grow: 2;
+    -moz-flex-grow: 2;
+    flex-grow: 2;
+    -ms-flex-positive: 2; }
+  #pg--new-iteration ion-content > * .image {
     width: 20%;
     margin: auto auto;
     display: block; }
-  #pg--new-iteration ion-content > div p {
+  #pg--new-iteration ion-content > * p {
     font-family: 'Futura-Bold';
     color: #277FE9;
     font-size: 1.75em;
     width: 100%;
     text-align: center;
     margin-top: 0.5em; }
-  #pg--new-iteration ion-content > div div.line {
+  #pg--new-iteration ion-content > * div.line {
     border-top: 3px dotted #277FE9;
     margin: 0 7%;
     height: 0px; }

@@ -3,37 +3,56 @@ angular.module('goodMood')
 		var vm = this;
 		var thread,
 				messages,
-				threadResolve;
+				resolve;
 
 		function init(){
-			threadResolve = Thread.findById($stateParams.t_id).then(function(_thread){
+			console.log('thread.findbyid called', Date.now())
+			return Thread.findById($stateParams.t_id).then(function(_thread){
+				console.log('findbyid returned', Date.now())
 				thread = _thread;
 				thread.$open();
+				console.log('getMessages called', Date.now())
 				return thread.$getMessages()
 			})
 			.then(function(_messages){
+				console.log('getMessages returned', Date.now())
 				messages = _messages;
 				$scope.messages = messages;
+				resolve = true;
 				return
 			})	
 		}
 
 		$scope.$on('$ionicView.enter', function(){
-			if (!threadResolve){
-				init()	
-				threadResolve.then(function(){
+			if (!resolve){
+				init().then(function(){
 					$ionicLoading.hide()
 				})
 			}
 		})
 		
 	  $scope.$on('$ionicView.beforeEnter', function(){
-	  	if (threadResolve){
-	  		console.log('already resolved')
-	  		threadResolve.then(function(){
-	  			$ionicLoading.hide()
-	  		})	
+	  	if (resolve){
+  			$ionicLoading.hide()
 	  	}
+	  })
+
+	  $scope.$on('$ionicView.enter', function(){
+	  	thread && thread.$open();
+	  })
+
+	  $scope.$on('$ionicView.leave', function(){
+	  	thread.$close()
+	  })
+
+	  // $destroy needs a short delay after $close, because $close modifies thread
+	  // and it would appear that firebase can't deal with the rapidity
+	  $scope.$on('$ionicView.afterLeave', function(){
+	  	thread.$destroy()
+	  })
+
+	  $scope.$watch(function(){
+	  	// console.count('thread digest run')
 	  })
 
 		$scope.writing = {
@@ -49,22 +68,6 @@ angular.module('goodMood')
 		$scope.textField = {
 			content: null
 		};
-
-		$scope.$on('$ionicView.enter', function(){
-			thread && thread.$open();
-		})
-		$scope.$on('$ionicView.leave', function(){
-			thread.$close()
-		})
-
-		$scope.$watch(function(){
-			// console.count('thread digest run')
-		})
-		// $destroy needs a short delay after $close, because $close modifies thread
-		// and it would appear that firebase can't deal with the rapidity
-		$scope.$on('$ionicView.afterLeave', function(){
-			thread.$destroy()
-		})
 
 		this.isPreviousSender = function(msg, i) {
 			if (i === 0){

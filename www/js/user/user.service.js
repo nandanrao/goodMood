@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.factory('User', function (fb, $FirebaseObject, $firebase, $q, Facebook, Collaboration, utils, Auth){
+	.factory('User', function (fb, $log, $FirebaseObject, $firebase, $q, Facebook, Collaboration, utils, Auth){
 
 		var User = {};
 
@@ -32,10 +32,11 @@ angular.module('goodMood')
 
       $removeCollaboration: function(id){
         delete this.collaborations[id]
+        return this.$save()
       },
 
       $getCollaborations: function(){
-        console.log('user get collabs')
+        var self = this;
         var collaborations = {};
         var ref = this.$inst().$ref().child('collaborations');
         var deferred = $q.defer();
@@ -43,31 +44,44 @@ angular.module('goodMood')
           var promises = {};
           snap.forEach(function(snap){
             var id = snap.key()
-            promises[id] = Collaboration.findById(id).then(function(collaboration){
-              return collaboration.$populate()
-            })
+            promises[id] = Collaboration.findById(id)
+              .then(function(collaboration){
+                console.log('found collaboration:', collaboration)
+                return collaboration.$populate()
+              })
           })
-          $q.all(promises).then(function(results){
-            _.forEach(results, function(collaboration){
-              collaborations[collaboration.$id] = collaboration
+          $q.all(promises)
+            .then(function(results){
+              _.forEach(results, function(collaboration){
+                if (!collaboration.iterations){
+                  // TODO: this has no recurse for failure! (low stakes, just db cruft)
+                  collaboration.$eliminate(); 
+                  delete self.collaborations[collaboration.$id]
+                }
+                else {
+                  collaborations[collaboration.$id] = collaboration  
+                }
+              })
+              ref.on('child_added', function(snap){
+                var id = snap.key()
+                if (!collaborations[id]){
+                  Collaboration.findById(id).then(function(collaboration){
+                    return collaboration.$populate()
+                  }).then(function(collaboration){
+                    collaborations[id] = collaboration
+                  })
+                }
+              })
+              ref.on('child_removed', function(snap){
+                if (collaborations[snap.key()]){
+                 delete collaborations[snap.key()] 
+                }
+              })
+              return self.$save().then(function(){
+                return collaborations
+              })
             })
-            deferred.resolve(collaborations)
-            ref.on('child_added', function(snap){
-              var id = snap.key()
-              if (!collaborations[id]){
-                Collaboration.findById(id).then(function(collaboration){
-                  return collaboration.$populate()
-                }).then(function(collaboration){
-                  collaborations[id] = collaboration
-                })
-              }
-            })
-            ref.on('child_removed', function(snap){
-              if (collaborations[snap.key()]){
-               delete collaborations[snap.key()] 
-              }
-            })
-          }, deferred.reject)
+            .then(deferred.resolve, deferred.reject)
         })
         Object.defineProperty(collaborations, '_notEmpty', {
           value: true,

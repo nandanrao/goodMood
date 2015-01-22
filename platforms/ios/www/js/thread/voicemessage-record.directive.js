@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.directive('voiceMessageRecord', function ($log, $window, $document, $interval, $ionicLoading, $cordovaMedia, $cordovaFile, Audio, utils){
+	.directive('voiceMessageRecordMobile', function ($log, $window, $document, $interval, $ionicLoading, $cordovaMedia, $cordovaFile, Audio, utils){
 		return {
 			restrict: 'EA',
 			templateUrl: 'thread/voicemessagerecord.html',
