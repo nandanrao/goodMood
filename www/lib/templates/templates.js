@@ -48,8 +48,7 @@ module.run(["$templateCache", function($templateCache) {
   $templateCache.put("collaboration/newcollaboration.html",
     "<ion-view id=\"pg--new-collaboration\" view-title=\"que deseas?\">\n" +
     "	<ion-nav-buttons side=\"secondary\">\n" +
-    "		<button ng-click=\"newCollaboration.cancel()\" class=\"ion-close\" nav-direction=\"back\">\n" +
-    "		</button>\n" +
+    "		<new-collaboration-cancel-button-mobile></new-collaboration-cancel-button-mobile>\n" +
     "	</ion-nav-buttons>\n" +
     "		<form class=\"newCollaborationForm\" name=\"newCollaborationForm\" novalidate ng-submit=\"newCollaboration.submit()\">\n" +
     "			<div class=\"iwant\">\n" +
@@ -94,22 +93,18 @@ try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/iteration.html",
-    "<ion-view id=\"pg--iteration\" title=\"{{ collaborationName }} - \">\n" +
+    "<ion-view id=\"pg--iteration\" title=\"{{ ::collaboration.name }} - \">\n" +
     "	<ion-nav-buttons side=\"primary\">\n" +
     "	 <button ng-click=\"iteration.goBack()\" nav-direction=\"back\" class=\"ion-chevron-left\">\n" +
     "	 </button>\n" +
     "	</ion-nav-buttons>\n" +
     "	<div iteration-container id=\"iterationBg\" class=\"{{ iteration.showAddIteration() ? 'add-iteration' : 'iteraton' }}\">\n" +
-    "		<!-- <button class=\"prev-iteration\" ng-if=\"previous\" ng-click=\"iteration.goPrevious()\">\n" +
-    "			<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 104.2 17\" enable-background=\"new 0 0 104.2 17\" xml:space=\"preserve\">\n" +
-    "			<polyline fill=\"#222222\" stroke=\"#FFFFFF\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" points=\"\n" +
-    "				103,15.1 53.1,2.6 3.2,15.1 \"/>\n" +
-    "			</svg>\n" +
-    "		</button> -->\n" +
     "		<img ng-if=\"iterationsLoaded\" class=\"iteration-image\" iteration-image ng-src=\"{{ imageURI }}\" />\n" +
     "		<canvas ng-if=\"imageSize.height\" iteration-canvas></canvas>\n" +
     "		<drawing ng-if=\"imageSize.height\" ng-repeat=\"thread in threads | threadHasDrawing\" id=\"{{ ::thread.$id }}\">\n" +
     "		</drawing>\n" +
+    "		<navigate-iterations-button-mobile ng-if=\"previous\" direction=\"previous\"></navigate-iterations-button-mobile>\n" +
+    "		<navigate-iterations-button-mobile ng-if=\"next\" direction=\"next\"></navigate-iterations-button-mobile>\n" +
     "		<button check-button class=\"check\" ng-if=\"iteration.showCheck()\" ng-click=\"iteration.done()\"></button>\n" +
     "		<div ng-if=\"resolve && !iteration.hasThreads() && !instructionsRead\" class=\"instructions\">\n" +
     "				<h2>instrucciones <span><button class=\"ion-close\" ng-click=\"iteration.readInstructions()\"></button> </span></h2>\n" +
@@ -161,12 +156,24 @@ module.run(["$templateCache", function($templateCache) {
 try { module = angular.module("ngTemplates"); }
 catch(err) { module = angular.module("ngTemplates", []); }
 module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("iteration/navigateiterationsbutton.html",
+    "<button ng-click=\"navigateIterations.go()\">\n" +
+    "	<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 180.1 87.4\" enable-background=\"new 0 0 180.1 87.4\" xml:space=\"preserve\">\n" +
+    "	<rect x=\"0\" y=\"0\" opacity=\"0.59\" fill=\"#383838\" width=\"180.1\" height=\"87.4\"/>\n" +
+    "	<polyline fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" ng-attr-points=\"{{ arrow }}\"/>\n" +
+    "	</svg>\n" +
+    "</button>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
   $templateCache.put("iteration/newiteration.html",
     "<ion-view id=\"pg--new-iteration\" view-title=\"{{ ::newIteration.getViewTitle() }}\">\n" +
-    "\n" +
     "	<ion-nav-buttons side=\"secondary\">\n" +
-    "		<button ng-click=\"newIteration.cancel()\" class=\"ion-close\" nav-direction=\"back\">\n" +
-    "		</button>\n" +
+    "		<new-iteration-cancel-button-mobile></new-iteration-cancel-button-mobile>\n" +
     "	</ion-nav-buttons>\n" +
     "	<ion-content scroll=\"false\">\n" +
     "		<div class=\"mobile\" ng-if=\"!newIteration.isDesktop()\">\n" +
@@ -177,6 +184,22 @@ module.run(["$templateCache", function($templateCache) {
     "		</div>\n" +
     "	</ion-content>\n" +
     "</ion-view>");
+}]);
+})();
+
+(function(module) {
+try { module = angular.module("ngTemplates"); }
+catch(err) { module = angular.module("ngTemplates", []); }
+module.run(["$templateCache", function($templateCache) {
+  $templateCache.put("iteration/nextiterationbutton.html",
+    "<button ng-click=\"nextIteration.next()\">\n" +
+    "	<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n" +
+    "		 viewBox=\"0 0 180.1 87.4\" enable-background=\"new 0 0 180.1 87.4\" xml:space=\"preserve\">\n" +
+    "	<rect x=\"0\" y=\"0\" opacity=\"0.59\" fill=\"#383838\" width=\"180.1\" height=\"87.4\"/>\n" +
+    "	<polyline fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" points=\"\n" +
+    "		40.2,37.4 90,49.9 139.9,37.4 \"/>\n" +
+    "	</svg>\n" +
+    "</button>");
 }]);
 })();
 
@@ -346,16 +369,15 @@ module.run(["$templateCache", function($templateCache) {
     "	</ion-content>\n" +
     "	<div class=\"bar bar-footer choose\">\n" +
     "		<form ng-submit=\"thread.sendMessage('text', textField.content)\">\n" +
-    "			<input ng-if=\"!recording.currently\" ng-blur=\"thread.notWriting()\" ng-focus=\"thread.writing()\"required ng-model=\"textField.content\" class=\"text\" placeholder=\"write a message\" />\n" +
+    "			<input thread-text-input ng-if=\"!recording.currently\" ng-blur=\"thread.notWriting()\" ng-focus=\"thread.writing()\"required ng-model=\"textField.content\" class=\"text\" placeholder=\"write a message\" />\n" +
     "			<record-light ng-if=\"recording.currently\"></record-light>\n" +
     "			<span ng-if=\"recording.currently\" class=\"timer\">{{ thread.getRecordTime() }}</span>\n" +
     "		<div class=\"buttons\">\n" +
-    "			<voice-message-record ng-if=\"!writing.currently\"></voice-message-record>\n" +
+    "			<voice-message-record-mobile ng-if=\"!writing.currently\"></voice-message-record>\n" +
     "			<button class=\"send\" type=\"submit\" ng-if=\"writing.currently\" class=\"send\">SEND</button>\n" +
     "		</div>\n" +
     "		</form>	\n" +
     "	</div>\n" +
-    "	\n" +
     "</ion-view>\n" +
     "");
 }]);

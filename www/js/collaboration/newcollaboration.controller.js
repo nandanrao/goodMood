@@ -1,5 +1,5 @@
 angular.module('goodMood')
-	.controller('NewCollaborationCtrl', function ($scope, $window, $log, $state, $ionicLoading, $ionicHistory, user, Collaboration){
+	.controller('NewCollaborationCtrl', function ($scope, $window, $log, $state, $ionicLoading, user, Collaboration){
 		$scope.name;
 
 		this.submit = function(){
@@ -16,13 +16,6 @@ angular.module('goodMood')
 						$window.alert('Sorry - we could not make this collaboration - try again?')
 					})
 			}
-		}
-
-		this.cancel = function(){
-			$ionicHistory.nextViewOptions({
-			  historyRoot: true
-			});
-			$state.go('home')
 		}
 
 		$ionicLoading.hide()

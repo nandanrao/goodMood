@@ -16,13 +16,10 @@ angular.module('goodMood')
 		};
 
 		function init(){
+			// Create collaboration and iterations object
 			var collaborationResolve = Collaboration.findById($stateParams.c_id).then(function(_collaboration){
 				collaboration = _collaboration;
-				$scope.collaborationName = collaboration.name;
-				return collaboration.$getIterations()	
-			})
-			.then(function(iterations){
-				$scope.iterations = iterations;
+				$scope.collaboration = collaboration;
 				return
 			})
 
@@ -43,6 +40,7 @@ angular.module('goodMood')
 		  	})
 		  	return $q.all([threadsResolve, imageResolve])
 		  })
+
 		  return $q.all([collaborationResolve, iterationResolve]).then(function(){
 		  	$scope.resolve = true;
 		  })
@@ -85,18 +83,20 @@ angular.module('goodMood')
 		})
 
 		// Create iterations array for inter-iteration navigation
-		$scope.$watchCollection('iterations', function watchIterationArray (curr, old){
+		$scope.$watchCollection('collaboration', function watchIterationArray (curr, old){
 			setIterationArray()
 			if (!old){
 				$scope.iterationsLoaded	= true;
 			}
 		})
+		
 		function setIterationArray(){
-			if (!iteration || !$scope.iterations){
+			if (!$scope.collaboration){
 				return
 			}
-			var iterationArray = _.keys($scope.iterations).sort();	
-			var currentIndex = iterationArray.indexOf(iteration.$id);	
+			var iterationArray = _.keys($scope.collaboration.iterations).sort();	
+			var currentIndex = iterationArray.indexOf($stateParams.i_id);	
+			console.log(iterationArray)
 			$scope.previous = iterationArray[currentIndex - 1];
 			$scope.next = iterationArray[currentIndex + 1];
 		}
@@ -136,13 +136,6 @@ angular.module('goodMood')
 			  historyRoot: true
 			});
 			$state.go('home')
-		}
-
-		function goToIteration(id){ 
-			$ionicHistory.nextViewOptions({
-				disableAnimate: true
-			})
-			$state.go('iteration', {c_id: collaboration.$id, i_id: id})
 		}
 
 		this.addThread = function(coords){

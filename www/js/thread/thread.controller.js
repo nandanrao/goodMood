@@ -33,6 +33,24 @@ angular.module('goodMood')
 	  	}
 	  })
 
+	  $scope.$on('$ionicView.enter', function(){
+	  	thread && thread.$open();
+	  })
+
+	  $scope.$on('$ionicView.leave', function(){
+	  	thread.$close()
+	  })
+
+	  // $destroy needs a short delay after $close, because $close modifies thread
+	  // and it would appear that firebase can't deal with the rapidity
+	  $scope.$on('$ionicView.afterLeave', function(){
+	  	thread.$destroy()
+	  })
+
+	  $scope.$watch(function(){
+	  	// console.count('thread digest run')
+	  })
+
 		$scope.writing = {
 			currently: false
 		}
@@ -46,22 +64,6 @@ angular.module('goodMood')
 		$scope.textField = {
 			content: null
 		};
-
-		$scope.$on('$ionicView.enter', function(){
-			thread && thread.$open();
-		})
-		$scope.$on('$ionicView.leave', function(){
-			thread.$close()
-		})
-
-		$scope.$watch(function(){
-			// console.count('thread digest run')
-		})
-		// $destroy needs a short delay after $close, because $close modifies thread
-		// and it would appear that firebase can't deal with the rapidity
-		$scope.$on('$ionicView.afterLeave', function(){
-			thread.$destroy()
-		})
 
 		this.isPreviousSender = function(msg, i) {
 			if (i === 0){

@@ -4,6 +4,7 @@ angular.module('goodMood')
 			restrict: 'E',
 			templateUrl: 'iteration/mobileupload.html',
 			controllerAs: 'mobileUpload',
+			replace: true,
 			controller: function ($scope, $element){
 				var pictureOptions;
 
