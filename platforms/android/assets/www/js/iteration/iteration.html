@@ -1,28 +1,24 @@
-<ion-view id="pg--iteration" title="{{ collaborationName }} - ">
+<ion-view id="pg--iteration" title="{{ ::collaboration.name }} - ">
 	<ion-nav-buttons side="primary">
 	 <button ng-click="iteration.goBack()" nav-direction="back" class="ion-chevron-left">
 	 </button>
 	</ion-nav-buttons>
 	<div iteration-container id="iterationBg" class="{{ iteration.showAddIteration() ? 'add-iteration' : 'iteraton' }}">
-		<!-- <button class="prev-iteration" ng-if="previous" ng-click="iteration.goPrevious()">
-			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 104.2 17" enable-background="new 0 0 104.2 17" xml:space="preserve">
-			<polyline fill="#222222" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-				103,15.1 53.1,2.6 3.2,15.1 "/>
-			</svg>
-		</button> -->
-		<img class="iteration-image" iteration-image ng-src="{{ imageURI }}" />
-		<canvas iteration-canvas></canvas>
-		<drawing ng-repeat="thread in threads | threadHasDrawing" id="{{ ::thread.$id }}">
+		<img ng-if="iterationsLoaded" class="iteration-image" iteration-image ng-src="{{ imageURI }}" />
+		<canvas ng-if="imageSize.height" iteration-canvas></canvas>
+		<drawing ng-if="imageSize.height" ng-repeat="thread in threads | threadHasDrawing" id="{{ ::thread.$id }}">
 		</drawing>
+		<navigate-iterations-button-mobile ng-if="previous" direction="previous"></navigate-iterations-button-mobile>
+		<navigate-iterations-button-mobile ng-if="next" direction="next"></navigate-iterations-button-mobile>
 		<button check-button class="check" ng-if="iteration.showCheck()" ng-click="iteration.done()"></button>
-		<div ng-if="!iteration.hasThreads() && !instructionsRead" class="instructions">
+		<div ng-if="resolve && !iteration.hasThreads() && !instructionsRead" class="instructions">
 				<h2>instrucciones <span><button class="ion-close" ng-click="iteration.readInstructions()"></button> </span></h2>
 				<p>
 					Toca sobre la imagen para agregar un comentario, puedes agregar multiples comentarios a tu imagen tocando los diferentes puntos donde quieras agregarlos.
 				</p>
 		</div>
 	</div>
-	<div ng-if="iteration.showAddIteration()" class="bar bar-footer">
+	<div ng-if="iteration.showAddIteration()" iteration-footer class="bar bar-footer">
 		<button new-iteration-button class="addIteration" ng-click="iteration.addIteration()"></button>
 	</div>
 </ion-view> 

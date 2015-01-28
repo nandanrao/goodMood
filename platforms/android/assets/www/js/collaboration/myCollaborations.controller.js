@@ -6,29 +6,32 @@ angular.module('goodMood')
 				resolve;
 		
 		function init(){
-			resolve = User.getCurrentUser().then(function(_user){
+			return User.getCurrentUser().then(function(_user){
 				user = _user;
 				return user.$getCollaborations()
 			})
 			.then(function(_collaborations){
 		    collaborations = _collaborations;
-		    $scope.collaborations = collaborations;
+		    $scope.collaborations = collaborations;	
+		    resolve = true;
 		    return
+		  })
+		  .catch(function(err){
+		  	console.log('ERR in the iNIT', err)
 		  })
 		}
 
 		$scope.$on('$ionicView.loaded', function(){
-			init()
-			resolve.then(function(){
+			console.log('mycollaborations loaded')
+			init().then(function(){
 				$ionicLoading.hide()
 			})
 		})
 		
 	  $scope.$on('$ionicView.beforeEnter', function(){
+	  	console.log('mycollaborations beoreenter, before resolve,', resolve)
 	  	if (resolve){
-	  		resolve.then(function(){
-	  			$ionicLoading.hide()
-	  		})	
+  			$ionicLoading.hide()
 	  	}
 	  })
 

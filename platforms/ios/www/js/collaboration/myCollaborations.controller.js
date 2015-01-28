@@ -12,19 +12,24 @@ angular.module('goodMood')
 			})
 			.then(function(_collaborations){
 		    collaborations = _collaborations;
-		    $scope.collaborations = collaborations;
+		    $scope.collaborations = collaborations;	
 		    resolve = true;
 		    return
+		  })
+		  .catch(function(err){
+		  	console.log('ERR in the iNIT', err)
 		  })
 		}
 
 		$scope.$on('$ionicView.loaded', function(){
+			console.log('mycollaborations loaded')
 			init().then(function(){
 				$ionicLoading.hide()
 			})
 		})
 		
 	  $scope.$on('$ionicView.beforeEnter', function(){
+	  	console.log('mycollaborations beoreenter, before resolve,', resolve)
 	  	if (resolve){
   			$ionicLoading.hide()
 	  	}

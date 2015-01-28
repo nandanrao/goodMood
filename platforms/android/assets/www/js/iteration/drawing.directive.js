@@ -11,7 +11,7 @@ angular.module('goodMood')
 				scope.thread.$destroy()						
 
 				// move position of circles on window resize!
-				scope.$watchCollection('imageSize', function(imageSize){
+				scope.$watchCollection('imageSize', function drawingWatchImageSize (imageSize){
 					drawing.resize(imageSize.width, imageSize.height)
 				})
 				

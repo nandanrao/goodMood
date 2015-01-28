@@ -99,7 +99,7 @@ module.run(["$templateCache", function($templateCache) {
     "	</ion-nav-buttons>\n" +
     "	<div iteration-container id=\"iterationBg\" class=\"{{ iteration.showAddIteration() ? 'add-iteration' : 'iteraton' }}\">\n" +
     "		<img ng-if=\"iterationsLoaded\" class=\"iteration-image\" iteration-image ng-src=\"{{ imageURI }}\" />\n" +
-    "		<canvas ng-if=\"imageSize.height\" iteration-canvas></canvas>\n" +
+    "		<canvas ng-if=\"imageSize.height\" height=\"imageSize.height\" width=\"imageSize.width\" iteration-canvas></canvas>\n" +
     "		<drawing ng-if=\"imageSize.height\" ng-repeat=\"thread in threads | threadHasDrawing\" id=\"{{ ::thread.$id }}\">\n" +
     "		</drawing>\n" +
     "		<navigate-iterations-button-mobile ng-if=\"previous\" direction=\"previous\"></navigate-iterations-button-mobile>\n" +

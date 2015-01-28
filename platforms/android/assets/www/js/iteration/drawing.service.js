@@ -22,7 +22,7 @@ angular.module('goodMood')
 
 		Drawing.prototype.activateStream = function(){
 			var self = this;
-			Thread.getNewMessagesAsStream(this.t_id).onValue(function(val){
+			self.deactivateStream = Thread.getNewMessagesAsStream(this.t_id).onValue(function(val){
 				var num = _.size(val)
 				if (num === self.textItem.content){
 					return

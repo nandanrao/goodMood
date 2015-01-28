@@ -14,6 +14,7 @@ angular.module('goodMood')
 		$scope.canvasElements = {
 			drawings: [],
 		};
+		$scope.active = false;
 
 		function init(){
 			// Create collaboration and iterations object
@@ -65,6 +66,9 @@ angular.module('goodMood')
 			_.forEach($scope.canvasElements.drawings, function(drawing){
 				drawing.activateStream();
 			})
+			// note: active MUST come before resize!
+			$scope.active = true;
+			$scope.imageSize.resize()	
 		})
 
 		$scope.$on('$ionicView.leave', function iterationLeave (){
@@ -74,6 +78,7 @@ angular.module('goodMood')
 			_.forEach($scope.canvasElements.drawings, function(drawing){
 				drawing.deactivateStream();
 			})
+			$scope.active = false;
 		})
 
 		$scope.$on('$ionicView.unloaded', function iterationUnloaded (){

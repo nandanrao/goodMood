@@ -518,6 +518,7 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/img/mic.svg \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/img/new-collaboration.svg \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/img/new-iteration.svg \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/img/next-iteration.svg \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/img/notifications.svg \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/img/picture-file.svg \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/img/prev-iteration.svg \
@@ -535,9 +536,9 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/collaboration \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/components \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/facebook \
-/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/image \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/login \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/picture \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/routes.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/sidemenu \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/thread \
@@ -556,6 +557,7 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/collaboration/newcollaboration.controller.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/collaboration/newcollaboration.controller_test.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/collaboration/newcollaboration.html \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/collaboration/newcollaborationcancel.button.directive.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/collaboration/timeline.controller.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/collaboration/timeline.controller_test.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/collaboration/timeline.html \
@@ -571,9 +573,6 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/facebook/facebook.service_mobile.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/facebook/facebookConnectPlugin.service.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/facebook/fb.js \
-/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/image/"use strict"; \
-/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/image/image.service.js \
-/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/image/image.service_test.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/desktopupload.directive.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/desktopupload.html \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/drawing.directive.js \
@@ -589,12 +588,18 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/iteration.surface.service.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/iteration.surface.service_test.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/iterationcontainer.directive.js \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/iterationfooter.directive.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/iterationparent.html \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/mobileupload.directive.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/mobileupload.html \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/navigateiterations.button.directive.js \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/navigateiterationsbutton.html \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/newiteration.controller.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/newiteration.controller_test.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/newiteration.html \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/newiterationcancel.button.directive.js \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/nextiterationbutton.html \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/previteration.button.directive.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/iteration/threadhasdrawing.filter.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/login/localLogin.directive.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/login/localLogin.directive_test.js \
@@ -602,6 +607,8 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/login/login.controller.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/login/login.controller_test.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/login/login.html \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/picture/picture.service.js \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/picture/picture.service_test.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/sidemenu/sidemenu.directive.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/sidemenu/sidemenu.html \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/thread/filesystemnormalization.js \
@@ -611,9 +618,11 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/thread/newdaymessage.html \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/thread/record-light.directive.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/thread/record-light.html \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/thread/textinput.directive.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/thread/textmessage.directive.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/thread/textmessage.html \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/thread/thread.controller.js \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/thread/thread.controller_test.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/thread/thread.html \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/thread/thread.service.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/js/thread/thread.service_test.js \
@@ -701,6 +710,7 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/angularfire/README.md \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/angularfire/dist/angularfire.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/angularfire/dist/angularfire.min.js \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/assemble.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/bower.json \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/browsertest \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/coffeelint.json \
@@ -743,8 +753,10 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/performance/browserperf \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/performance/compare-perf \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/performance/MemoryTest.coffee \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/performance/MemTestHelper.coffee \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/performance/performance.html \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/performance/PerformanceTest.coffee \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/performance/SmallMemoryTest.coffee \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/readme/common.coffee \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/readme/doc.coffee \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/readme/readme.coffee \
@@ -756,7 +768,12 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/spec/PromiseSpec.coffee \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/spec/SpecHelper.coffee \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/spec/TickScheduler.coffee \
-/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/src/Bacon.coffee \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/src/_.coffee \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/src/boilerplate \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/src/main.coffee \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/src/scheduler.coffee \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/src/boilerplate/exports.coffee \
+/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/bacon/src/boilerplate/object.coffee \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/collide/bower.json \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/collide/collide.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/lib/collide/package.json \
@@ -1076,5 +1093,4 @@
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media-capture/www/CaptureVideoOptions.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media-capture/www/MediaFile.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/plugins/org.apache.cordova.media-capture/www/MediaFileData.js \
-/Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/assets/www/vendor/stringview.js \
 /Users/nandanrao/Documents/Fullstack/goodMood/platforms/android/ant-build/AndroidManifest.xml \

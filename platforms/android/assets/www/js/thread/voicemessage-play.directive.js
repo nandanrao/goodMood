@@ -10,6 +10,18 @@ angular.module('goodMood')
 				var counter;
 
 				$scope.playing = false;
+
+				$scope.media.addEventListener('loadstart', function(){
+					console.log('audio loading started')
+				})
+
+				$scope.media.addEventListener('canplay', function(){
+					console.log('audio canplay')
+				})
+
+				$scope.media.addEventListener('canplaythrough', function(){
+					console.log('audio canplaythrough')
+				})
 				
 				this.play = function(){
 					if (!$scope.playing) {
@@ -22,6 +34,7 @@ angular.module('goodMood')
 						$scope.media.pause()
 						$interval.cancel(counter)
 						$scope.playing = false;
+						return;
 					}
 					$scope.media.addEventListener('ended', function(e){
 						$scope.playing = false;

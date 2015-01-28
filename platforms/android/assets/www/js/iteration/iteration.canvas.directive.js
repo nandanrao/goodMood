@@ -6,7 +6,7 @@ angular.module('goodMood')
 
 				scope.canvasElements.surface = IterationSurface.create(el[0], scope.iteration.addThread)
 
-				scope.$watchCollection('imageSize', function(imageSize){
+				scope.$watchCollection('imageSize', function surfaceWatchImageSize (imageSize){
 					resizeCanvas()	
 				})
 	

@@ -175,12 +175,8 @@ module.run(["$templateCache", function($templateCache) {
     "		<new-iteration-cancel-button-mobile></new-iteration-cancel-button-mobile>\n" +
     "	</ion-nav-buttons>\n" +
     "	<ion-content scroll=\"false\">\n" +
-    "		<div class=\"mobile\" ng-if=\"!newIteration.isDesktop()\">\n" +
-    "			<mobile-upload></mobile-upload>\n" +
-    "		</div>\n" +
-    "		<div class=\"desktop\" ng-if=\"newIteration.isDesktop()\">\n" +
-    "			<desktop-upload></desktop-upload>\n" +
-    "		</div>\n" +
+    "			<mobile-upload ng-if=\"!newIteration.isDesktop()\"></mobile-upload>\n" +
+    "			<desktop-upload ng-if=\"newIteration.isDesktop()\"></desktop-upload>\n" +
     "	</ion-content>\n" +
     "</ion-view>");
 }]);

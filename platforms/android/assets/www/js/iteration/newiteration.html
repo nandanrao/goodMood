@@ -1,15 +1,9 @@
 <ion-view id="pg--new-iteration" view-title="{{ ::newIteration.getViewTitle() }}">
-
 	<ion-nav-buttons side="secondary">
-		<button ng-click="newIteration.cancel()" class="ion-close" nav-direction="back">
-		</button>
+		<new-iteration-cancel-button-mobile></new-iteration-cancel-button-mobile>
 	</ion-nav-buttons>
 	<ion-content scroll="false">
-		<div class="mobile" ng-if="!newIteration.isDesktop()">
-			<mobile-upload></mobile-upload>
-		</div>
-		<div class="desktop" ng-if="newIteration.isDesktop()">
-			<desktop-upload></desktop-upload>
-		</div>
+			<mobile-upload ng-if="!newIteration.isDesktop()"></mobile-upload>
+			<desktop-upload ng-if="newIteration.isDesktop()"></desktop-upload>
 	</ion-content>
 </ion-view>
